@@ -966,6 +966,33 @@ function renderDream(){
 }
 
 /* ================= RÉCAP ================= */
+function printBilan(sel){
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  let g=null, body='';
+  sel.forEach(x=>{ if(x.g!==g){ if(g!==null) body+='</ul></section>'; body+='<section><h2>'+esc(x.g)+'</h2><ul>'; g=x.g; } body+='<li>'+esc(x.t)+'</li>'; });
+  if(g!==null) body+='</ul></section>';
+  if(!body) body='<p>Aucun élément sélectionné.</p>';
+  const doc=`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mon bilan Géomédiation – ${esc(date)}</title><style>
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:#241E14;max-width:720px;margin:32px auto;padding:0 20px;line-height:1.5}
+  header{border-bottom:3px solid #C9A227;padding-bottom:12px;margin-bottom:22px}
+  .brand{font-weight:800;letter-spacing:.16em;color:#1F3329;font-size:13px}
+  h1{font-size:26px;color:#1F3329;margin:6px 0 2px} .date{color:#857C62;font-size:13px}
+  section{break-inside:avoid;margin-bottom:18px} h2{font-size:16px;color:#B5654A;margin:0 0 6px}
+  ul{margin:0;padding-left:20px} li{margin:3px 0;font-size:14px}
+  footer{margin-top:28px;border-top:1px solid #DDD3BC;padding-top:10px;font-size:12px;color:#857C62}
+  .tip{background:#F6F1E7;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:20px}
+  @media print{.tip{display:none} body{margin:0}}
+  </style></head><body>
+  <p class="tip">Pour l'enregistrer en PDF : dans la fenêtre d'impression, choisissez <b>« Enregistrer au format PDF »</b> comme imprimante.</p>
+  <header><div class="brand">GÉOMÉDIATION</div><h1>Mon bilan</h1><div class="date">${esc(date)}</div></header>
+  ${body}
+  <footer>Géomédiation · La science de l'organisation, simplifiée pour tous · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
+  </body></html>`;
+  const w=window.open('','_blank');
+  if(!w){ const a=h('a',{href:URL.createObjectURL(new Blob([doc],{type:'text/html'})), download:'bilan-geomediation.html'}); document.body.appendChild(a); a.click(); a.remove(); return; }
+  w.document.open(); w.document.write(doc); w.document.close();
+  w.onload=null; setTimeout(()=>{ try{ w.focus(); w.print(); }catch(e){} },300);
+}
 function recapItems(){
   const it=[]; const push=(g,t)=>it.push({id:g+'|'+t,g,t});
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.cat+' · '+d.t;
@@ -1011,7 +1038,10 @@ function renderRecap(){
   const mail=h('a',{class:'mail-btn', href:'#'},'📬 Préparer l\'e-mail');
   mail.onclick=()=>{ const to=state.sendTo==='med'?CONTACT_MAIL:state.sendTo==='autre'?(state.sendAddr||'').trim():''; mail.href='mailto:'+to+'?subject='+encodeURIComponent('Mon récap Géomédiation')+'&body='+encodeURIComponent(body()); };
   const msg=h('div',{class:'msg'}); msg.hidden=true;
-  btns.append(mail, h('button',{class:'btn btn-soft', style:'padding:8px 14px;font-size:13px', onclick:()=>copyText(body(),msg)},'📋 Copier la sélection'));
+  const sm='padding:8px 14px;font-size:13px';
+  btns.append(mail, h('button',{class:'btn btn-soft', style:sm, onclick:()=>printBilan(items.filter(x=>state.sendSel[x.id]!==false))},'📄 Télécharger mon bilan (PDF)'));
+  if(navigator.share) btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>navigator.share({title:'Mon bilan Géomédiation', text:body()}).catch(()=>{})},'📤 Partager'));
+  btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>copyText(body(),msg)},'📋 Copier la sélection'));
   box.append(btns,msg);
   if(state.sendTo==='med') box.appendChild(h('p',{class:'small', style:'margin:10px 0 0'},`Adresse du médiateur : <b>${CONTACT_MAIL}</b>`));
   add(box);

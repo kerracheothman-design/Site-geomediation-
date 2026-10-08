@@ -689,7 +689,7 @@ const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 Je veux bien <b>pa
 const FORMATS = {k:'format', type:'chips', label:'Le format qui vous tente', opts:['Atelier','Formation','Accompagnement']};
 
 const DREAMS = [
-  {k:'entreprise', e:'💼', cat:'Management', dream:"que <b>votre entreprise</b> soit <b>mieux organisée</b>", t:"Votre entreprise, mieux organisée", levels:[
+  {k:'entreprise', e:'💼', cat:'Management', dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Votre entreprise, votre établissement…", levels:[
     L1({qui:'à mes collègues', intro:"Au travail, tout commence par <b>LA question</b>, posée à vos collègues. Puis on note les <b>attentes</b> et les <b>ressources</b> de chacun, dans l'objectif de <b>co-construire des projets</b>.",
         extra:[{k:'leviers', type:'chips', label:'Dans quels domaines ?', opts:LEVIERS}], labA:"Les attentes de l'équipe", labR:'Les ressources disponibles'}),
     L2('dans votre entreprise'),
@@ -702,7 +702,7 @@ const DREAMS = [
     L1({qui:'aux acteurs de mon territoire', intro:"Sur votre territoire, tout commence par <b>LA question</b>, posée à ses acteurs. Puis on relie les <b>besoins</b> et les <b>ressources</b> de chacun, dans l'objectif de <b>co-construire des projets</b> votés et évalués par les humains concernés.", labA:'Les besoins', labR:'Les ressources', extra:[{k:'echelle', type:'scales', label:'Quelles échelles territoriales ? Autant que vous voulez, ou aucune'},{k:'domaine', type:'chips', label:'Dans quels domaines ?', opts:THEMES.map(t=>t.e+' '+t.n)}]}),
     {intro:"Où en est l'organisation à chaque échelle choisie\u00a0? Pour chaque étape\u00a0: <b>0</b> = à lancer, <b>5</b> = bien en place.",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet'}], details:[STEPS_DETAIL]},
-    {intro:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin, et le <b>Sud-Ouest</b> a de sérieux atouts. Et pour faciliter la vie de chacun : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier.",
+    {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions, pour répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin, et le <b>Sud-Ouest</b> a de sérieux atouts. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
      details:[
       {sum:"+ Pourquoi une région, et pourquoi le Sud-Ouest", html:`<p><b>Les solutions existent déjà partout.</b> L'enjeu : les déployer à la bonne échelle, avec des <b>feuilles de route</b> et des <b>marchés intentionnels</b> validés par les acteurs, puis par les citoyens.</p>
         <p><b>Les expériences locales l'ont prouvé.</b> Collectivités de Catalogne en 1936, Chiapas au Mexique, Rojava en Syrie… Chacune a montré qu'on peut vivre autrement. Mais trop locales, elles ont eu du mal à s'étendre.</p>

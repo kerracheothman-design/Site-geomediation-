@@ -407,7 +407,7 @@
   .g-step{display:flex; flex-direction:column; align-items:center; text-align:center; gap:3px; font:inherit; border:none; cursor:pointer; border-radius:14px; padding:12px 6px; color:var(--cream); background:var(--forest); transition:transform .15s;}
   .g-step:hover{transform:translateY(-2px);}
   .g-step.s2{background:var(--forest-light);} .g-step.s3{background:var(--clay);}
-  .g-step .g-e{font-size:24px;} .g-step b{font:800 14.5px var(--display);} .g-t{display:flex; flex-direction:column; gap:2px;} .g-step small{font-size:11.5px; line-height:1.25; opacity:.9;}
+  .g-step .g-e{font-size:24px;} .g-step:first-child{box-shadow:0 0 0 3px var(--gold);} .g-step b{font:800 14.5px var(--display);} .g-t{display:flex; flex-direction:column; gap:2px;} .g-step small{font-size:11.5px; line-height:1.25; opacity:.9;}
   .g-arr{align-self:center; color:var(--gold); font-weight:800; font-size:18px;}
   .g-levels{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:12px; font-size:13px; color:var(--ink-soft);}
   .g-l{font:800 11.5px var(--body); border-radius:999px; padding:4px 10px; color:#fff; background:var(--forest);}
@@ -734,7 +734,7 @@ const COLLAB_GROUPS = [
   {label:"Médiation & coopération", e:"🤝", m:[["Antoine Valabergue","Synchronisation des initiatives locales"],["Renaud Alquier","Structuration de la participation citoyenne"],["Thomas Ndem (Civipedia)","Base de données territoriale collaborative"],["Cyrille Souche","Sensibilisation et accompagnement à la transition"]]},
   {label:"Santé & bien-être", e:"💛", m:[["Stéphanie Wünsche","Équilibre psycho-corporel et pratiques d'harmonisation"],["Fanny Walter","Bien-être et qualité de vie, réseau BNB (Bonheur National Brut)"]]}];
 const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 Je veux bien <b>partager mon témoignage</b> (vidéo ou écrit) pour soutenir les médiateurs"};
-const FORMATS = {k:'format', type:'chips', label:'Le format qui vous tente', opts:['Atelier','Formation','Accompagnement']};
+const FORMATS = {k:'format', type:'chips', label:'Le format qui vous conviendrait', opts:['Atelier','Formation','Accompagnement']};
 
 const DREAMS = [
   {k:'entreprise', e:'💼', cat:'Management', dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Votre entreprise, votre établissement…", levels:[
@@ -742,8 +742,7 @@ const DREAMS = [
         extra:[{k:'leviers', type:'chips', label:'Dans quels domaines ?', opts:LEVIERS}], labA:"Les attentes de l'équipe", labR:'Les ressources disponibles'}),
     L2('dans votre entreprise'),
     {intro:"Des <b>médiateurs</b>, généralistes ou spécialisés, adaptent la méthode à votre entreprise et à votre <b>filière</b>. Leur force : aider chacun à construire sa <b>feuille de route</b>, et faire circuler les bonnes idées entre les équipes.",
-     fields:[FORMATS,
-             {k:'besoinsPro', type:'area', label:'Ce qui vous aiderait au travail'}],
+     fields:[],
      parts:[{p:"Chaque équipe avance <b>à son rythme</b> : un progrès dans un service nourrit les autres, par petits <b>va-et-vient</b>."}]}
   ]},
   {k:'idees', e:'🗺️', cat:'Territoire', dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Votre territoire, à la bonne échelle", levels:[
@@ -770,7 +769,6 @@ const DREAMS = [
         <p><b>Geste 1 : participer</b> à la préparation de ce projet territorial.</p>
         <p><b>Geste 2 : une vidéo d'une minute</b>, par exemple : « J'ai compris que tout est lié. Je m'implique chez moi et au travail, et je soutiens les médiateurs territoriaux pour qu'ils préparent et animent cette concertation. » À partager avec les médiateurs, vos proches et vos collègues !</p>`}],
      fields:[{k:'role', type:'chips1', label:'Votre implication sur ce territoire', opts:['👀 Suivre','🙋 Participer','🎤 Animer']},
-             {k:'besoinsTerr', type:'area', label:'Ce qui ferait du bien à votre territoire'},
              {k:'preparer', type:'toggle', label:"Je veux <b>participer à la préparation</b> du projet territorial"},
              TEMOIGNAGE,
              {k:'mediateur', type:'toggle', label:"Devenir <b>médiateur</b> m'intéresse"}]}
@@ -783,8 +781,8 @@ const DREAMS = [
      fields:[{k:'indiv', type:'domainsEval'}, {k:'envie', type:'text', label:'Votre envie du moment', ph:'ex. mieux dormir, tenir mon budget…'}]},
     {intro:"Rien n'est injuste : tout est la conséquence de l'<b>intelligence de la vie</b>, qui opère en chacun de nous et en chaque situation. Votre <b>psychologie</b> est elle-même façonnée par votre environnement\u00a0: on avance sur les deux tableaux, <b>en même temps</b>.",
      parts:[{h:"Le féminin et le masculin en soi", p:"Le <b>féminin</b> accueille l'intelligence de la vie en toute chose\u00a0; le <b>masculin</b> pose un cadre pour créer de l'harmonie. L'<b>équilibre affectif</b> naît de leur dialogue."},
-            {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements sur mesure</b> : un médiateur vous oriente vers le bon professionnel, ou vous pouvez contacter directement celui avec qui vous aimeriez coopérer."}],
-     fields:[{k:'ecriture', type:'area', label:"✍️ Écriture intuitive : qui aimeriez-vous être ? Que voulez-vous vivre ? Dans quelle société ? Et pourquoi, à chaque fois ?"}, FORMATS]}
+            {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements sur mesure</b> : dites-le juste en dessous, et un médiateur vous oriente vers le bon professionnel."}],
+     fields:[{k:'ecriture', type:'area', label:"✍️ Écriture intuitive : qui aimeriez-vous être ? Que voulez-vous vivre ? Dans quelle société ? Et pourquoi, à chaque fois ?"}]}
   ]},
   {k:'maison', e:'🏡', cat:'Famille', dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Une vie de famille harmonieuse", levels:[
     L1({qui:'à mes proches', intro:"En famille, tout commence par <b>LA question</b>. Ensuite, chacun <b>propose ses idées</b>, et on met en place <b>ensemble</b> celles qui plaisent à tous.",
@@ -794,7 +792,7 @@ const DREAMS = [
     L2('en famille', 'Une idée à mettre en place ensemble'),
     {intro:"Chacun influence la famille autant qu'il en est influencé\u00a0: quand <b>chacun va bien</b>, toute la famille <b>rayonne</b>. Et à chaque idée mise en place, on <b>célèbre</b> ensemble.",
      parts:[{link:['pensee',"🧠 Faire le point sur vous →"]}],
-     fields:[FORMATS, {k:'besoinsPerso', type:'area', label:'Ce qui vous aiderait au quotidien'}]}
+     fields:[]}
   ]},
   {k:'reseau', e:'🌐', cat:'Réseau', star:true, dream:"rejoindre un <b>réseau commun</b> qui facilite la coopération entre les <b>échelles</b>, les <b>thématiques</b> et les <b>acteurs</b>", t:"Rejoindre le réseau", levels:[
     {intro:"Le réseau réunit tous les acteurs qui souhaitent <b>améliorer la société</b>. Chacun garde sa <b>casquette de spécialiste</b>… peut, en plus, <b>favoriser la coopération</b>, et gagne en <b>visibilité</b> tout en restant <b>indépendant</b>.",
@@ -856,7 +854,7 @@ document.addEventListener('input',()=>setTimeout(save,0));
 function A(dk){ return state.a[dk]||(state.a[dk]={}); }
 function go(view, dream){ state.hist=(state.hist||[]).concat({v:state.view,d:state.dream}).slice(-30); state.view=view; if(dream!==undefined) state.dream=dream; render(); window.scrollTo({top:0,behavior:'smooth'}); }
 function goBack(){ const p=(state.hist||[]).pop(); if(p){ state.view=p.v; state.dream=p.d; } else state.view='home'; render(); window.scrollTo({top:0,behavior:'smooth'}); }
-function answered(dk){ const a=state.a[dk]||{}; return Object.values(a).filter(v=>Array.isArray(v)?v.length:(v!==''&&v!==false&&v!=null&&!(typeof v==='object'&&!Object.keys(v).length))).length + (state.acc[dk]?1:0) + Object.values((state.dec||{})[dk]||{}).filter(Boolean).length; }
+function answered(dk){ const a=state.a[dk]||{}; return Object.values(a).filter(v=>Array.isArray(v)?v.length:(v!==''&&v!==false&&v!=null&&!(typeof v==='object'&&!Object.keys(v).length))).length + Object.values((state.dec||{})[dk]||{}).filter(Boolean).length; }
 
 /* ================= CHAMPS ================= */
 function mood(v){ return v<=1 ? 'je ne m\'en soucie pas' : v<=3 ? 'je m\'en soucie un peu' : 'je m\'en soucie beaucoup'; }
@@ -979,15 +977,13 @@ function guideBlock(){
   g.innerHTML=`<div class="guide-t">Comment ça marche\u00a0?</div>`;
   const flow=h('div',{class:'g-flow'});
   flow.append(
-    h('button',{class:'g-step', onclick:()=>go('dream','comprendre')},'<span class="g-e">🧭</span><span class="g-t"><b>1 · Comprendre</b><small>Le projet en images</small></span>'),
+    h('button',{class:'g-step', onclick:()=>go('dream','comprendre')},'<span class="g-e">🧭</span><span class="g-t"><b>1 · Comprendre</b><small>Le projet en images : les ondes, le toboggan…</small></span>'),
     h('i',{class:'g-arr','aria-hidden':'true'},'→'),
-    h('button',{class:'g-step s2', onclick:()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'<span class="g-e">🚀</span><span class="g-t"><b>2 · Agir</b><small>Je m\'évalue, je fixe mes objectifs</small></span>'),
+    h('button',{class:'g-step s2', onclick:()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'<span class="g-e">🚀</span><span class="g-t"><b>2 · Agir</b><small>Je m\'évalue, puis je choisis mon sujet</small></span>'),
     h('i',{class:'g-arr','aria-hidden':'true'},'→'),
-    h('button',{class:'g-step s3', onclick:()=>go('recap')},'<span class="g-e">📇</span><span class="g-t"><b>3 · Ma fiche</b><small>Mon récap, pour moi</small></span>'));
+    h('button',{class:'g-step s3', onclick:()=>go('recap')},'<span class="g-e">📇</span><span class="g-t"><b>3 · Ma fiche</b><small>Mes réponses et mes objectifs, pour moi</small></span>'));
   g.appendChild(flow);
-  g.appendChild(h('div',{class:'g-levels'},'Chaque rubrique s\'ouvre en 3 niveaux\u00a0: <span class="g-l">1 · L\'essentiel</span><span class="g-l l2">2 · La méthode</span><span class="g-l l3">3 · Pour aller plus loin</span>'));
-  g.appendChild(h('div',{class:'g-choices'},'À chaque niveau, vous choisissez\u00a0: <span>🤔 J\'y réfléchis</span><span>🚀 J\'agis</span><span>✨ J\'en veux plus</span><span>✅ Ça me suffit</span>'));
-  g.appendChild(h('p',{class:'g-note'},'📇 <b>Votre fiche, c\'est pour vous</b>\u00a0: gardez-la et utilisez-la quand vous voulez, avec vos proches, vos collaborateurs ou les acteurs de votre territoire. 💬 <b>Vos questions et remarques</b>, elles, partent au médiateur.'));
+  g.appendChild(h('p',{class:'g-note'},'Chaque sujet s\'ouvre en <b>3 niveaux</b>, à votre rythme. À chaque étape, vous décidez : <b>je réfléchis</b>, <b>j\'agis</b>, <b>j\'ai une question</b>, ou <b>ça me suffit pour l\'instant</b>. Votre fiche reste à vous ; vos questions partent au médiateur.'));
   return g;
 }
 function testBlock(){
@@ -1012,10 +1008,9 @@ function renderHome(){
   add(h('p',{class:'lead', style:'margin:-4px 0 14px'},"Plus un problème est grand, plus on peut évoluer. L'<b>intelligence</b>, c'est l'<b>adaptation</b>, et la capacité de <b>reconnaître ses limites et ses forces</b>."));
   add(h('div',{class:'badges', style:'justify-content:flex-start;margin:0 0 14px'},'<span class="badge">⏱️ 2 à 10 minutes</span><span class="badge">🔒 Vos réponses restent à vous</span>'));
   add(guideBlock());
-  add(h('button',{class:'compr', style:'margin:0 0 4px', onclick:()=>go('dream','comprendre')}, `<span class="ce">🧭</span><span><span class="ct">1 · Comprendre le projet en images</span><span class="cd">Les ondes, le cercle vertueux, les 5 domaines, le toboggan de la coopération…</span><span class="cm">J'aimerais en savoir plus →</span></span><span style="margin-left:auto;font-weight:800;color:var(--clay)">${answered('comprendre')||state.lvl.comprendre?'✓':'→'}</span>`));
-  add(h('h2',{class:'agir-h', id:'agir'},'🚀 2 · Agir'));
+  add(h('h2',{class:'agir-h', id:'agir'},'🚀 2 · Agir : par où commencer ?'));
   add(testBlock());
-  add(h('p',{class:'ask'},'Envie d\'agir\u00a0? Vous aimeriez…'));
+  add(h('p',{class:'ask'},'Ou choisissez directement votre sujet. Vous aimeriez…'));
   const list=h('div',{class:'dreams'});
   DREAMS.filter(d=>!d.hidden).forEach((d,i)=>{ const n=answered(d.k);
     list.appendChild(h('button',{class:'dream d'+i+(d.star?' star':''), onclick:()=>go('dream', d.k)}, `<span class="dream-e">${d.e}</span><span class="dream-cat">${d.cat}</span><span class="dream-t">…${d.dream} ?</span><span class="dream-go">${n?'✓ Continuer':'Découvrir'} →</span>`)); });
@@ -1031,29 +1026,32 @@ function renderHome(){
 
 /* ================= UNE PORTE D'ENTRÉE ================= */
 function openLevel(d, n){ const lv=state.lvl[d.k]||1; if(n>lv) state.lvl[d.k]=n; render(); setTimeout(()=>{ const el=$('lvl-'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
-const DEC=[{k:'reflechis', n:"🤔 J'y réfléchis"},{k:'agis', n:"🚀 J'agis"}];
-function decisionBar(d, n, lv){
-  state.dec=state.dec||{}; const cur=(state.dec[d.k]||{})[n]; const a=A(d.k);
+function decisionBar(d, lv){
+  state.dec=state.dec||{}; let D=state.dec[d.k]; if(!D||typeof D!=='object'||Array.isArray(D)||D[1]!==undefined||D[2]!==undefined||D[3]!==undefined) D=state.dec[d.k]={};
+  const a=A(d.k);
   const box=h('div',{class:'dec'}); box.appendChild(h('div',{class:'dec-t'},'Et maintenant\u00a0?'));
   const row=h('div',{class:'dec-row'});
-  DEC.forEach(o=>{ const label=(o.k==='agis'&&d.act)?d.act:o.n; const isOn=cur===o.k;
-    row.appendChild(h('button',{class:isOn?'on':'', 'aria-pressed':String(isOn), onclick:()=>{
-      if(o.k==='agis' && d.act){ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); return; }
-      (state.dec[d.k]=state.dec[d.k]||{})[n]=isOn?null:o.k; render(); }}, label)); });
-  if(n===lv && n<d.levels.length) row.appendChild(h('button',{class:'go', onclick:()=>openLevel(d,n+1)},`✨ Je veux en savoir plus <small style="display:block;font-weight:600;opacity:.75">Niveau ${n+1}</small>`));
-  row.appendChild(h('button',{class:'go', onclick:()=>go('recap')},'✅ Ça me suffit <small style="display:block;font-weight:600;opacity:.75">Je passe à ma fiche</small>'));
+  const tog=(k,v)=>{ D[k]=D[k]===v?null:v; render(); };
+  const btn=(on,label,fn,cls)=>h('button',{class:(on?'on ':'')+(cls||''), 'aria-pressed':String(!!on), onclick:fn}, label);
+  row.append(btn(D.choix==='reflechis','🤔 Je réfléchis',()=>tog('choix','reflechis')));
+  if(d.act) row.append(btn(false,d.act,()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }));
+  else row.append(btn(D.choix==='agis',"🚀 J'agis",()=>tog('choix','agis')));
+  row.append(btn(D.q,"💬 J'ai une question",()=>tog('q',true)));
+  if(!d.hidden) row.append(btn(D.pro,"🤝 J'aimerais connaître un professionnel dans ce domaine",()=>tog('pro',true)));
+  const row2=h('div',{class:'dec-row'});
+  if(lv<d.levels.length) row2.appendChild(h('button',{class:'go', onclick:()=>openLevel(d,lv+1)},`✨ Je veux en savoir plus <small style="display:block;font-weight:600;opacity:.75">Niveau ${lv+1} · ${d.levels[lv].name||LEVEL_NAMES[lv]}</small>`));
+  row2.appendChild(h('button',{class:'go', onclick:()=>go('recap')},'✅ Ça me suffit pour l\'instant <small style="display:block;font-weight:600;opacity:.75">Je passe à ma fiche</small>'));
   box.appendChild(row);
-  if(cur==='agis'||cur==='reflechis'){ const id='obj-'+d.k+'-'+n; const f=h('div',{class:'fld'}); f.append(h('label',{class:'fld-label',for:id}, cur==='agis'?'🎯 Mon objectif':'🎯 Mon objectif, quand je serai prêt')); const ta=h('textarea',{id, placeholder:'Écrivez-le en une phrase'}); ta.value=a['obj'+n]||''; ta.oninput=e=>{ a['obj'+n]=e.target.value; }; f.appendChild(ta); box.appendChild(f); }
+  if(D.choix){ const id='obj-'+d.k; const f=h('div',{class:'fld'}); f.append(h('label',{class:'fld-label',for:id}, D.choix==='agis'?'🎯 Mon objectif':'🎯 Mon objectif, quand je serai prêt')); const ta=h('textarea',{id, placeholder:'En une phrase, ce que je veux faire'}); ta.value=a.obj||''; ta.oninput=e=>{ a.obj=e.target.value; }; f.appendChild(ta); box.appendChild(f); }
+  if(D.pro){ box.appendChild(field(d.k, FORMATS)); }
+  if(D.q||D.pro){ const m=h('div',{class:'medi', style:'margin-top:0'});
+    m.appendChild(h('p',null, D.q ? (D.pro ? "💬 Votre question part au <b>médiateur</b>, qui vous répond et vous met en relation avec un professionnel du réseau." : "💬 Votre question part au <b>médiateur</b>, qui vous répond. Elle ne va pas dans votre fiche.") : "🤝 Le <b>médiateur</b> vous met en relation avec un professionnel du réseau."));
+    if(D.q){ const ta=h('textarea',{'aria-label':'Votre question', placeholder:'Votre question ou votre remarque…'}); ta.value=a.remarque||''; ta.oninput=e=>{ a.remarque=e.target.value; }; m.appendChild(ta); }
+    const mm=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
+    mm.onclick=()=>{ const L=['Bonjour,','']; if(D.pro) L.push(`J'aimerais connaître un professionnel dans ce domaine : ${d.cat}`+((a.format||[]).length?` (format : ${a.format.join(', ')})`:'')+'.',''); if(D.q&&a.remarque) L.push(a.remarque,''); L.push('Merci !'); mm.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation · '+d.cat)+'&body='+encodeURIComponent(L.join('\n')); };
+    m.appendChild(mm); box.appendChild(m); }
+  box.appendChild(row2);
   return box;
-}
-function mediBox(d){
-  const a=A(d.k); const b=h('section',{class:'medi'});
-  b.appendChild(h('h3',null,'💬 Une question, une remarque pour le médiateur\u00a0?'));
-  b.appendChild(h('p',null,"Elle ne va pas dans votre fiche\u00a0: elle part au médiateur, qui vous répond."));
-  const ta=h('textarea',{'aria-label':'Votre question ou remarque', placeholder:'Écrivez librement…'}); ta.value=a.remarque||''; ta.oninput=e=>{ a.remarque=e.target.value; };
-  const m=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
-  m.onclick=()=>{ m.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation · '+d.cat+' : ma question')+'&body='+encodeURIComponent((a.remarque||'')+'\n'); };
-  b.append(ta, m); return b;
 }
 function renderDream(){
   const d=DREAMS.find(x=>x.k===state.dream); if(!d){ state.view='home'; return renderHome(); }
@@ -1079,15 +1077,12 @@ function renderDream(){
       if(P.link){ const [k,t]=P.link; box.appendChild(h('button',{class:'btn btn-gold', style:'align-self:flex-start;padding:10px 18px;font-size:14px', onclick:()=>go('dream',k)},t)); }
       if(P.w) wires.push(()=>P.w(box));
       card.appendChild(box); });
-    L.fields.forEach(f=>card.appendChild(field(d.k,f)));
     (L.details||[]).forEach(D=>{ const det=h('details',{class:'more-box'}); det.innerHTML=`<summary>${D.sum}</summary>`+(typeof D.html==='function'?D.html():D.html); card.appendChild(det); });
-    card.appendChild(decisionBar(d, i+1, lv));
+    L.fields.forEach(f=>card.appendChild(field(d.k,f)));
+    if(i===lv-1) card.appendChild(decisionBar(d, lv));
     root.appendChild(card);
   }
   wires.forEach(f=>f());
-  const on=!!state.acc[d.k];
-  if(!d.hidden) add(h('button',{class:'acc'+(on?' on':''), 'aria-pressed':String(on), onclick:()=>{ state.acc[d.k]=!on; render(); }}, `<span class="box">${on?'✓':''}</span><span><b>🤝 Je m'engage à chercher un professionnel</b> qui correspond à mes besoins ou à mes attentes</span>`));
-  add(mediBox(d));
   add(h('p',{class:'hint center'},'✓ Vos réponses s\'ajoutent automatiquement à votre fiche'));
   const n=h('div',{class:'nav'});
   n.append(h('button',{class:'btn btn-ghost', onclick:()=>go('home')},'← Accueil'), h('button',{class:'btn btn-primary', onclick:()=>go('recap')},'📇 Ma fiche →'));
@@ -1142,8 +1137,9 @@ function recapItems(){
       else if(f.type==='cardsN' && v&&v.length) push(g, lab+' : '+v.join(', '));
       else if(f.type==='invite' && v) push(g, "J'ai partagé l'invitation autour de moi");
     }));
-    const dec=(state.dec||{})[d.k]||{}; d.levels.forEach((L,i)=>{ const n=i+1, v=dec[n], o=a['obj'+n]; if(v||o) push(g, `Niveau ${n} · `+(v==='agis'?'J\'agis':v==='reflechis'?'J\'y réfléchis':'Mon objectif')+(o?' · 🎯 '+o:'')); });
-    if(state.acc[d.k]) push(g, 'Je m\'engage à chercher un professionnel qui correspond à mes besoins ou à mes attentes');
+    const D=(state.dec||{})[d.k]||{};
+    if(D.choix||a.obj) push(g, (D.choix==='agis'?'J\'agis':D.choix==='reflechis'?'Je réfléchis':'Mon objectif')+(a.obj?' · 🎯 '+a.obj:''));
+    if(D.pro) push(g, 'J\'aimerais connaître un professionnel dans ce domaine'+((a.format||[]).length?' ('+a.format.join(', ')+')':''));
   });
   return it;
 }
@@ -1178,13 +1174,13 @@ function renderRecap(){
   box.appendChild(mail);
   add(box);
   }
-  const qs=DREAMS.map(d=>({d, t:((state.a[d.k]||{}).remarque||'').trim()})).filter(x=>x.t);
-  const mb=h('section',{class:'medi'}); mb.appendChild(h('h3',null,'💬 Mes questions et remarques pour le médiateur'));
+  const qs=DREAMS.map(d=>{ const D=(state.dec||{})[d.k]||{}, a=state.a[d.k]||{}; const t=[D.pro?'J\'aimerais connaître un professionnel dans ce domaine.':'', D.q?(a.remarque||'').trim():''].filter(Boolean).join(' '); return {d,t}; }).filter(x=>x.t);
+  const mb=h('section',{class:'medi'}); mb.appendChild(h('h3',null,'💬 Mes demandes au médiateur'));
   if(qs.length){ qs.forEach(x=>mb.appendChild(h('p',null,`<b>${x.d.e} ${x.d.cat}</b> · ${esc(x.t)}`)));
     const m=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
-    m.onclick=()=>{ m.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation : mes questions')+'&body='+encodeURIComponent('Bonjour,\n\n'+qs.map(x=>x.d.cat+' : '+x.t).join('\n\n')+'\n\nMerci !'); };
+    m.onclick=()=>{ m.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation : mes demandes')+'&body='+encodeURIComponent('Bonjour,\n\n'+qs.map(x=>x.d.cat+' : '+x.t).join('\n\n')+'\n\nMerci !'); };
     mb.appendChild(m); }
-  else mb.appendChild(h('p',null,`Écrivez-les dans n'importe quelle rubrique, ou directement à <b>${CONTACT_MAIL}</b>.`));
+  else mb.appendChild(h('p',null,`Une question, ou envie de connaître un professionnel ? Dites-le dans n'importe quelle rubrique, ou écrivez à <b>${CONTACT_MAIL}</b>.`));
   add(mb);
   const n=h('div',{class:'nav'});
   n.append(h('button',{class:'btn btn-ghost', onclick:goBack},'← Retour'), h('button',{class:'btn btn-soft', onclick:()=>go('home')},'Découvrir une autre carte →'));

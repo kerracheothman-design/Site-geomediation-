@@ -401,6 +401,62 @@
   .dom-top{display:flex; justify-content:space-between; gap:8px; font-size:14px; font-weight:700; color:var(--forest-dark);}
   .dom-tip{font-size:12.5px; line-height:1.4; color:var(--ink-soft);}
   @media (max-width:540px){ .lvl-nav span{font-size:11px;} .lvl-nav button{padding:7px 8px;} }
+  .guide{background:var(--paper); border:1.5px solid var(--line); border-radius:18px; padding:16px; margin:0 0 16px;}
+  .guide-t{font:800 12px var(--body); letter-spacing:.12em; text-transform:uppercase; color:var(--clay); margin:0 0 10px;}
+  .g-flow{display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:stretch; gap:6px;}
+  .g-step{display:flex; flex-direction:column; align-items:center; text-align:center; gap:3px; font:inherit; border:none; cursor:pointer; border-radius:14px; padding:12px 6px; color:var(--cream); background:var(--forest); transition:transform .15s;}
+  .g-step:hover{transform:translateY(-2px);}
+  .g-step.s2{background:var(--forest-light);} .g-step.s3{background:var(--clay);}
+  .g-step .g-e{font-size:24px;} .g-step b{font:800 14.5px var(--display);} .g-t{display:flex; flex-direction:column; gap:2px;} .g-step small{font-size:11.5px; line-height:1.25; opacity:.9;}
+  .g-arr{align-self:center; color:var(--gold); font-weight:800; font-size:18px;}
+  .g-levels{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:12px; font-size:13px; color:var(--ink-soft);}
+  .g-l{font:800 11.5px var(--body); border-radius:999px; padding:4px 10px; color:#fff; background:var(--forest);}
+  .g-l.l2{background:var(--gold); color:var(--forest-dark);} .g-l.l3{background:var(--clay);}
+  .g-choices{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; font-size:13px; color:var(--ink-soft); align-items:center;}
+  .g-choices span{background:var(--cream); border-radius:999px; padding:4px 10px; font-weight:700; color:var(--forest-dark); font-size:12.5px;}
+  .g-note{margin:12px 0 0; font-size:13px; line-height:1.5; color:var(--ink-soft);}
+  .card .g-note b{background:none; padding:0;}
+  .agir-h{font:800 clamp(22px,5vw,28px) var(--display); color:var(--forest-dark); margin:22px 0 8px; scroll-margin-top:16px;}
+  .test{background:var(--forest); color:var(--cream); border-radius:18px; padding:16px; margin:0 0 14px;}
+  .test h3{margin:0 0 4px; font:800 18px var(--display); line-height:1.3;}
+  .test .test-s{margin:0 0 12px; font-size:14px; line-height:1.5; opacity:.92;}
+  .card .test b{color:var(--gold-light); background:none; padding:0;}
+  .sph{background:rgba(246,241,231,.08); border:1px solid rgba(246,241,231,.2); border-radius:12px; padding:9px 12px; margin-top:8px;}
+  .sph-top{display:flex; justify-content:space-between; gap:8px; font-weight:700; font-size:14px;}
+  .sph input[type=range]{width:100%; accent-color:var(--gold);}
+  .test .scale{color:rgba(246,241,231,.75);}
+  .fb{margin-top:12px; border-radius:12px; padding:11px 13px; font-size:13.5px; line-height:1.5; background:var(--cream); color:var(--ink-soft);}
+  .fb.on{background:#FFF7DD; border:1.5px solid var(--gold); color:var(--forest-dark);}
+  .card .fb b{background:none; padding:0;}
+  .fb-tip{display:block; margin-top:4px;}
+  .fb .btn{margin-top:10px; padding:9px 16px; font-size:13.5px;}
+  .rico-wrap{text-align:center; margin:4px 0 0;}
+  .rico{width:100%; max-width:360px; height:auto;}
+  .rico-cap{margin:2px 0 0; font-size:14px; line-height:1.5; text-align:center;}
+  .dec{border-top:1.5px dashed var(--line); padding-top:12px; display:flex; flex-direction:column; gap:8px;}
+  .dec-t{font:800 12px var(--body); letter-spacing:.08em; text-transform:uppercase; color:var(--clay);}
+  .dec-row{display:grid; grid-template-columns:1fr 1fr; gap:6px;}
+  .dec-row button{font:700 13px var(--body); text-align:left; border:1.5px solid var(--line); background:#fff; color:var(--forest-dark); border-radius:12px; padding:10px 11px; cursor:pointer; line-height:1.25;}
+  .dec-row button:hover{border-color:var(--gold);}
+  .dec-row button.on{background:var(--forest); border-color:var(--forest); color:var(--cream);}
+  .dec-row button.go{background:var(--cream);}
+  .medi{background:var(--paper); border:1.5px solid var(--line); border-radius:16px; padding:14px 16px; margin-top:14px; display:flex; flex-direction:column; gap:8px;}
+  .medi h3{margin:0; font:800 16px var(--display); color:var(--forest-dark);}
+  .medi p{margin:0; font-size:13px; line-height:1.45; color:var(--ink-soft);}
+  .medi textarea{width:100%; min-height:80px; font:14px var(--body); padding:10px 12px; border:1.5px solid var(--line); border-radius:10px; resize:vertical;}
+  .medi .mail-btn{align-self:flex-start;}
+  .idea-w{display:flex; flex-direction:column; gap:5px;}
+  .react-mini{display:flex; gap:4px; justify-content:center;}
+  .react-mini button{flex:1; font-size:15px; padding:5px 0; border-radius:9px; border:1.5px solid var(--line); background:#fff; cursor:pointer;}
+  .react-mini button.on{background:var(--gold); border-color:var(--gold);}
+  .react-legend{font-size:12px; color:var(--ink-soft); margin:0 0 8px;}
+  .geo-tl{margin-top:4px;}
+  .compr .cm{display:block; margin-top:6px; font-size:12px; font-weight:700; color:var(--clay);}
+  .card .g-step b{background:none; padding:0; color:inherit;}
+  .test .fb b{color:var(--forest-dark);}
+  .react{display:grid; grid-template-columns:1fr 1fr;}
+  @media (max-width:560px){ .g-flow{grid-template-columns:1fr; gap:4px;} .g-step{flex-direction:row; text-align:left; gap:12px; padding:10px 14px;} .g-step .g-e{font-size:22px;} .g-step span.g-t{display:flex; flex-direction:column;} .g-arr{transform:rotate(90deg); justify-self:center; font-size:14px; line-height:1;} }
+  @media (max-width:420px){ .dec-row{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -415,13 +471,14 @@
 <script>
 const CYCLE = [
   {k:"sensibilisation", n:"Sensibilisation", d:"«\u00a0Envie d'une <b>meilleure organisation</b>\u00a0?\u00a0» LA question à poser en famille, dans son immeuble, son entreprise, son asso, son quartier, sa commune…"},
-  {k:"besoins", n:"Problèmes", d:"Repérer ensemble ce qui peut <b>s'améliorer</b>."},
+  {k:"besoins", n:"Besoins", d:"Écouter les <b>besoins</b> de chacun, sans jugement."},
   {k:"ressources", n:"Solutions", d:"<b>Qui fait quoi</b>, où, avec quels moyens\u00a0: les ressources sont souvent déjà là."},
   {k:"participation", n:"Projets", d:"Des <b>projets</b> et une <b>feuille de route</b> à court, moyen et long terme."},
   {k:"vote", n:"Votation", d:"<b>Chacun</b> donne sa voix."},
   {k:"evaluation", n:"Évaluation", d:"Les effets <b>humains</b>, <b>économiques</b> et <b>environnementaux</b>, pour ajuster en continu."},
   {k:"celebration", n:"Célébration", d:"On <b>fête les réussites</b>, on remercie chacun… et on repart pour un <b>nouveau tour</b>."}
 ];
+const CYCLE_TIPS = {"sensibilisation": "Posez LA question au prochain repas, à la prochaine réunion ou à l'apéro du quartier.", "besoins": "Faites un tour de table : chacun cite un besoin, sans débat.", "ressources": "Listez qui sait faire quoi, et ce qui existe déjà autour de vous.", "participation": "Choisissez une idée simple, avec un responsable et une date.", "vote": "Votez à main levée ou avec un sondage en ligne : chacun donne sa voix.", "evaluation": "Fixez une date pour faire le point : qu'est-ce qui a changé ?", "celebration": "Fêtez chaque réussite, même petite : un repas, un mot, un merci."};
 const CYCLE_COLS = ['#E0C15C','#CBB253','#A89A45','#7E8045','#5B6F3B','#3E5A38','#1F3329'];
 
 const INDIV_DOMAINS = [
@@ -533,15 +590,6 @@ function wireUntangle(scope){
   if(state.untangled) apply(true);
   $('untangleBtn').onclick=()=>{ state.untangled=!state.untangled; save(); apply(state.untangled); };
 }
-function syncSVG(){
-  const lanes=['Santé','Mobilité','Logement'], cols=[150,220,290], labels=['Court','Moyen','Long'];
-  let s=`<svg class="sync" viewBox="0 0 320 132" role="img" aria-label="Trois feuilles de route accordées sur les mêmes échéances : court, moyen et long terme">`;
-  cols.forEach((x,i)=>{ s+=`<line x1="${x}" y1="18" x2="${x}" y2="118" stroke="#C9A227" stroke-width="2" stroke-dasharray="4 4"/><text x="${x}" y="12" text-anchor="middle" font-family="Figtree,sans-serif" font-size="10" font-weight="700" fill="#857C62">${labels[i]}</text>`; });
-  lanes.forEach((n,j)=>{ const y=38+j*34, col=['#2F4A3C','#3E6350','#B5654A'][j];
-    s+=`<text x="0" y="${y+4}" font-family="Figtree,sans-serif" font-size="12" font-weight="700" fill="#1F3329">${n}</text><line x1="72" y1="${y}" x2="310" y2="${y}" stroke="${col}" stroke-width="3" stroke-linecap="round"/>`;
-    cols.forEach(x=>{ s+=`<circle cx="${x}" cy="${y}" r="7" fill="${col}" stroke="#F6F1E7" stroke-width="2"/>`; }); });
-  return s+`</svg>`;
-}
 function effortSVG(){
   return `<svg class="effort" viewBox="0 0 340 200" role="img" aria-label="Au début de la transition, l'effort est fort et la facilité faible ; ensuite, l'effort baisse et la vie devient plus simple pour tous">
     <line x1="30" y1="160" x2="325" y2="160" stroke="#DDD3BC" stroke-width="2"/>
@@ -559,7 +607,7 @@ const SLIDE_P=[[95,72],[230,72],[130,255],[315,255]];
 function slideBz(t){ const P=SLIDE_P, u=1-t; const a=u*u*u, b=3*u*u*t, c=3*u*t*t, d=t*t*t; return [a*P[0][0]+b*P[1][0]+c*P[2][0]+d*P[3][0], a*P[0][1]+b*P[1][1]+c*P[2][1]+d*P[3][1]]; }
 function stairsSVG(){
   const P=SLIDE_P, path=`M${P[0]} C${P[1]} ${P[2]} ${P[3]}`;
-  let s=`<svg class="slide" viewBox="0 0 340 300" role="img" aria-label="Le toboggan de la coopération : on grimpe l'échelle avec la sensibilisation, puis on glisse par les problèmes, les solutions, les projets, la votation, l'évaluation et la célébration, avant de remonter pour un nouveau tour">`;
+  let s=`<svg class="slide" viewBox="0 0 340 300" role="img" aria-label="Le toboggan de la coopération : on grimpe l'échelle avec la sensibilisation, puis on glisse par les besoins, les solutions, les projets, la votation, l'évaluation et la célébration, avant de remonter pour un nouveau tour">`;
   s+=`<text x="14" y="22" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="16" fill="#1F3329">Le toboggan de la coopération</text>`;
   // échelle = étape 1
   s+=`<g stroke="#6E7A42" stroke-width="4" stroke-linecap="round"><line x1="34" y1="274" x2="34" y2="72"/><line x1="62" y1="274" x2="62" y2="72"/>`;
@@ -623,15 +671,15 @@ function h(tag, attrs, html){
 function add(...els){ els.forEach(e=>root.appendChild(e)); }
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 const CONTACT_MAIL='geomediation@live.fr';
-const INVITATION="Bonjour ! J'ai découvert la Géomédiation : une méthode simple pour mieux s'organiser ensemble, du foyer au territoire. On part de ses attentes et de ses ressources, et un réseau facilite la coopération. On en parle autour d'un café ?";
+const INVITATION="Bonjour ! J'ai découvert la Géomédiation : une méthode simple pour faciliter la coopération, du foyer au territoire. On part des besoins et des ressources de chacun, et un réseau relie les acteurs entre eux. On en parle autour d'un café ? 👉 geomediation.fr";
 
 /* ================= LES PORTES D'ENTRÉE ================= */
 const DOM_NAMES = INDIV_DOMAINS.map(d=>d.e+' '+d.n);
 const ECH = ['Quartier','Commune','Agglomération','Département','Région','Pays','Monde'];
 const ECH_PH = {Quartier:'ex. Caudéran', Commune:'ex. Bordeaux', 'Agglomération':'ex. Bordeaux Métropole', 'Département':'ex. Gironde', 'Région':'ex. Nouvelle-Aquitaine', Pays:'ex. France', Monde:''};
 function echLabel(a,e){ const n=(a.lieux||{})[e]; return n ? e+' ('+n+')' : e; }
-function stepsRows(w, cur){ CYCLE.forEach((c,i)=>{ const row=h('div',{class:'mini-dim'}); const b=h('b',null,String(cur[c.k]||0));
-  const r=h('input',{type:'range',min:0,max:5,value:cur[c.k]||0,'aria-label':c.n}); r.oninput=e=>{ cur[c.k]=+e.target.value; b.textContent=e.target.value; };
+function stepsRows(w, cur, cb){ CYCLE.forEach((c,i)=>{ const row=h('div',{class:'mini-dim'}); const b=h('b',null,String(cur[c.k]||0));
+  const r=h('input',{type:'range',min:0,max:5,value:cur[c.k]||0,'aria-label':c.n}); r.oninput=e=>{ cur[c.k]=+e.target.value; b.textContent=e.target.value; if(cb) cb(); };
   row.append(h('span',null,`<i style="background:${CYCLE_COLS[i]}"></i>${c.n}`), r, b); w.appendChild(row); });
   w.appendChild(h('div',{class:'scale'},'<span>0 · à lancer</span><span>5 · bien en place</span>')); }
 const LEVIERS = ["🌿 Bien-être","Gouvernance","Finance éthique","Numérique, IA & open source","Intelligence collective","Éducation","Communication","Juridique"];
@@ -653,24 +701,24 @@ const DEGRES=[{t:'👀 Suivre',d:"Rester informé : newsletters et réseaux soci
 const MISSIONS=[
   {t:'Repérer', d:"<b>Qui agit autour de vous ?</b> Voisins, assos, entreprises, élus : chacun est une <b>pièce du puzzle</b>."},
   {t:'Écouter', d:"Poser <b>LA question</b> : envie d'une meilleure organisation ? La réponse est souvent un <b>grand oui</b>."},
-  {t:'Inviter', d:"Dire simplement qu'<b>un réseau existe</b> : on y met ses <b>talents en lumière</b> et on trouve vite des <b>réponses à ses besoins</b>."},
-  {t:'Co-créer & accorder', d:"Chacun construit sa <b>feuille de route</b>, puis on les <b>accorde</b> entre elles : c'est là que naît le <b>véritable impact</b>."}];
+  {t:'Inviter', d:"Dire simplement qu'<b>un réseau existe</b> (<b>geomediation.fr</b>) : on y met ses <b>talents en lumière</b> et on trouve vite des <b>réponses à ses besoins</b>."},
+  {t:'Co-créer & relier', d:"Chacun construit sa <b>feuille de route</b>, et on les relie au fil des <b>va-et-vient</b> : chaque avancée nourrit les autres."}];
 
 const PRINCIPLES = [
   {k:"p1", c:"", t:"Chacun à son rythme, dans l'intérêt de tous",
-   s:"Santé, environnement, économie, relations : chaque domaine <b>progresse</b> quand on avance <b>ensemble</b>. Le secret : <b>écouter</b> chacun, <b>relier</b> besoins et ressources, puis <b>décider</b> et <b>évaluer</b> collectivement.",
+   s:"Santé, environnement, économie, relations : un progrès sur un sujet <b>nourrit les autres</b>, quel que soit leur niveau. Le secret : <b>écouter</b> chacun, <b>relier</b> besoins et ressources, puis <b>décider</b> et <b>évaluer</b> collectivement.",
    l:"Rien n'est plus concret que l'organisation, car tout en découle. Accidents, maladies, tensions relationnelles, guerres, pollution, crises économiques : tous ces problèmes viennent de l'<b>organisation</b> de <b>notre société</b>, qui génère des tensions et rend l'accès aux solutions difficile. Une <b>bonne organisation</b>, c'est demander aux intéressés s'ils souhaitent une meilleure organisation, identifier ensemble les <b>besoins</b> et les <b>ressources</b>, puis développer des projets soumis à l'<b>approbation</b> et à l'<b>évaluation</b> des citoyens concernés."},
   {k:"p2", c:"c2", t:"Le déclic qui manquait",
    s:"<b>Quinze ans</b> de terrain le montrent : tout le monde comprend l'importance d'une <b>bonne organisation</b>, mais peu osent se lancer. Bonne nouvelle : <b>ça s'apprend</b>, et c'est tellement plus simple <b>à plusieurs</b>.",
    l:"Notre enquête de terrain, menée sur <b>quinze ans</b>, montre que presque tout le monde comprend l'importance de bien s'organiser, et la difficulté de le faire dans une société qui ne l'est pas. Mais peu se sentent <b>légitimes</b> pour s'en charger : parce que ce travail n'est pas rémunéré, parce que c'est complexe, parce qu'on ne fait pas assez <b>confiance</b> à la vie et aux autres, et parce qu'on croit que certains n'ont pas intérêt à ce que le système change (alors même que le système actuel expose chacun, quel que soit son patrimoine, à en perdre une grande partie)."},
-  {k:"p3", c:"c3", t:"Mon monde me ressemble",
-   s:"Mon <b>épanouissement</b> et mon <b>environnement</b> grandissent main dans la main. Je prends soin de moi, et <b>tout autour de moi en profite</b>.",
-   l:"On ne peut pas être totalement <b>épanoui</b> dans un monde mal organisé, et on ne peut pas améliorer l'organisation de notre société si on n'est pas suffisamment épanoui individuellement. La réponse : avancer sur les deux tableaux, <b>en même temps</b>."},
+  {k:"p3", c:"c3", t:"Notre monde nous ressemble",
+   s:"Notre <b>épanouissement</b> et notre <b>environnement</b> grandissent main dans la main. Prendre soin de soi, c'est aussi prendre soin de <b>tout ce qui nous entoure</b>.",
+   l:"Chaque pas compte : un mieux-être personnel nourrit l'organisation collective, et une meilleure organisation collective nourrit l'épanouissement de chacun. Pas besoin de tout faire avancer en même temps : ce sont des <b>va-et-vient</b> qui se renforcent, à votre rythme."},
   {k:"p4", c:"c4", t:"Une organisation adaptée à chaque situation",
    s:"Chaque situation est unique. Des <b>médiateurs</b> adaptent une <b>même méthode</b> à chaque thématique et à chaque échelle : la <b>coopération</b> devient naturelle, et chacun garde son <b>autonomie</b>.",
    l:"Géographie = politique = épanouissement individuel et collectif. Une <b>gestion territoriale optimale</b> favorise la <b>coopération</b> des acteurs, grâce à des <b>médiateurs territoriaux</b>. Sur chaque thématique et à chaque échelle territoriale, ce réseau connecté suit une <b>méthode scientifique</b> qui permet à chacun d'aller à son rythme, <b>au service de l'intérêt collectif</b>."}
 ];
-const REACTIONS = [{k:"accord_total", n:"💯 Totalement"}, {k:"accord", n:"👍 Plutôt oui"}, {k:"neutre", n:"🤔 J'y réfléchis"}, {k:"desaccord", n:"🤏 Plutôt non"}, {k:"desaccord_total", n:"🙅 Pas du tout"}];
+const REACTIONS = [{k:"oui", e:"💯", n:"💯 Tout à fait d'accord"}, {k:"plutot", e:"👍", n:"👍 Plutôt d'accord"}, {k:"moyen", e:"🤔", n:"🤔 Moyennement d'accord"}, {k:"non", e:"🙅", n:"🙅 Pas du tout d'accord"}];
 const TL = [
   ['1548','La Boétie','Le <i>Discours de la servitude volontaire</i> : un pouvoir ne tient que parce qu\'on l\'accepte. Son ami <b>Montaigne</b> en fait une leçon d\'esprit libre.'],
   ['1748','Montesquieu','<i>De l\'esprit des lois</i> : séparer les pouvoirs, et adapter les lois au climat et à la géographie de chaque pays.'],
@@ -693,10 +741,10 @@ const DREAMS = [
     L1({qui:'à mes collègues', intro:"Au travail, tout commence par <b>LA question</b>, posée à vos collègues. Puis on note les <b>attentes</b> et les <b>ressources</b> de chacun, dans l'objectif de <b>co-construire des projets</b>.",
         extra:[{k:'leviers', type:'chips', label:'Dans quels domaines ?', opts:LEVIERS}], labA:"Les attentes de l'équipe", labR:'Les ressources disponibles'}),
     L2('dans votre entreprise'),
-    {intro:"Des <b>médiateurs</b>, généralistes ou spécialisés, adaptent la méthode à votre entreprise et à votre <b>filière</b>. Leur force : aider chacun à construire sa <b>feuille de route</b>, puis les <b>accorder</b> entre elles.",
-     parts:[{v:syncSVG, p:"Des feuilles de route accordées sur les mêmes échéances, à court, moyen et long terme\u00a0: chaque service avance <b>à son rythme</b>, et tous vont <b>dans le même sens</b>."}],
+    {intro:"Des <b>médiateurs</b>, généralistes ou spécialisés, adaptent la méthode à votre entreprise et à votre <b>filière</b>. Leur force : aider chacun à construire sa <b>feuille de route</b>, et faire circuler les bonnes idées entre les équipes.",
      fields:[FORMATS,
-             {k:'besoinsPro', type:'area', label:'Ce qui vous aiderait au travail'}]}
+             {k:'besoinsPro', type:'area', label:'Ce qui vous aiderait au travail'}],
+     parts:[{p:"Chaque équipe avance <b>à son rythme</b> : un progrès dans un service nourrit les autres, par petits <b>va-et-vient</b>."}]}
   ]},
   {k:'idees', e:'🗺️', cat:'Territoire', dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Votre territoire, à la bonne échelle", levels:[
     L1({qui:'aux acteurs de mon territoire', intro:"Sur votre territoire, tout commence par <b>LA question</b>, posée à ses acteurs. Puis on relie les <b>besoins</b> et les <b>ressources</b> de chacun, dans l'objectif de <b>co-construire des projets</b> votés et évalués par les humains concernés.", labA:'Les besoins', labR:'Les ressources', extra:[{k:'echelle', type:'scales', label:'Quelles échelles territoriales ? Autant que vous voulez, ou aucune'},{k:'domaine', type:'chips', label:'Dans quels domaines ?', opts:THEMES.map(t=>t.e+' '+t.n)}]}),
@@ -730,8 +778,8 @@ const DREAMS = [
   {k:'pensee', e:'🧠', cat:'Psychologie', dream:"mieux comprendre le lien entre <b>tout ce que vous vivez</b> et <b>votre état d'esprit</b>", t:"Votre vie, votre état d'esprit", levels:[
     {intro:"Tout ce qui se passe dans votre existence est la <b>conséquence de votre état d'esprit</b>, et de l'<b>organisation</b> qui en découle. Premier pas\u00a0: voir où vous en êtes.",
      fields:[{k:'lien', type:'chips1', label:"Arrivez-vous à voir le lien entre votre façon de penser et ce que vous vivez\u00a0?", opts:['✨ Oui, clairement','🌿 En partie','🌱 Je le découvre']},
-             {k:'soi', type:'chips', label:'Les domaines de votre organisation à chouchouter', opts:DOM_NAMES}]},
-    {name:"Faire le point", intro:"Où en est votre organisation\u00a0? 8 domaines, un curseur chacun. Pas de note\u00a0: juste un <b>point de départ</b>, et une astuce pour chaque domaine.",
+             {k:'soi', type:'chips', label:'Les domaines dont vous aimeriez davantage prendre soin', opts:DOM_NAMES}]},
+    {name:"Faire le point", intro:"Quelle attention portez-vous à chaque domaine de votre vie\u00a0? Un curseur chacun. Pas de note\u00a0: juste un <b>point de départ</b>, avec une piste concrète pour chaque domaine.",
      fields:[{k:'indiv', type:'domainsEval'}, {k:'envie', type:'text', label:'Votre envie du moment', ph:'ex. mieux dormir, tenir mon budget…'}]},
     {intro:"Rien n'est injuste : tout est la conséquence de l'<b>intelligence de la vie</b>, qui opère en chacun de nous et en chaque situation. Votre <b>psychologie</b> est elle-même façonnée par votre environnement\u00a0: on avance sur les deux tableaux, <b>en même temps</b>.",
      parts:[{h:"Le féminin et le masculin en soi", p:"Le <b>féminin</b> accueille l'intelligence de la vie en toute chose\u00a0; le <b>masculin</b> pose un cadre pour créer de l'harmonie. L'<b>équilibre affectif</b> naît de leur dialogue."},
@@ -756,35 +804,34 @@ const DREAMS = [
     {name:"Votre implication", intro:"Chacun s'implique <b>à son rythme</b>. Choisissez votre degré d'implication, puis les missions qui vous parlent : une seule suffit pour démarrer.",
      fields:[{k:'degre', type:'cards1', label:"Votre degré d'implication", opts:DEGRES},
              {k:'missions', type:'cardsN', label:'Les missions qui vous parlent', opts:MISSIONS},
+             {k:'propose', type:'area', label:'🧰 Ce que vous proposez au réseau : une compétence, un outil, et la thématique concernée'},
              {k:'contacts', type:'text', label:'Les acteurs repérés autour de vous', ph:"ex. l'asso du quartier, ma mairie…"},
-             {k:'invite', type:'invite'}],
-     details:[{sum:"+ Co-créer & accorder, en image", html:()=>`${syncSVG()}<p>Santé, mobilité, logement : chaque filière a sa feuille de route. Accordées sur les mêmes échéances, elles se renforcent les unes les autres.</p>`}]},
+             {k:'invite', type:'invite'}]},
     {intro:"Il compte déjà des professionnels en <b>6 pôles</b> : géographie, intelligence collective, numérique, environnement, médiation, santé et bien-être. Chacun a une approche systémique : sa thématique n'est qu'une porte d'entrée. L'objectif : <b>5 à 10 médiateurs par région</b>.",
      details:[
       {sum:"+ Un effort au départ, une vie plus simple ensuite", html:()=>`<div style="background:#FFFDF8;border-radius:12px;padding:8px;margin-bottom:10px">${effortSVG()}</div>
-        <p><b>1 · La transition.</b> Médiateurs et acteurs se forment, sensibilisent autour d'eux et synchronisent leurs feuilles de route. C'est là que l'effort est le plus fort.</p>
+        <p><b>1 · La transition.</b> Médiateurs et acteurs se forment, sensibilisent autour d'eux et relient leurs feuilles de route. C'est là que l'effort est le plus fort.</p>
         <p><b>2 · Le rythme de croisière.</b> Des acteurs formés partout, un outil coopératif accessible à tous, des services mutualisés, des échelles et des pratiques qui se complètent. La vie de chacun devient plus simple.</p>
         <p><b>Deux voies pour devenir médiateur :</b> généraliste, pour orchestrer l'ensemble, ou spécialisé dans une thématique, en se formant directement au sein de l'équipe, sans passer par l'université.</p>`},
       {sum:"+ L'équipe, pôle par pôle", html:()=>COLLAB_GROUPS.map(g=>`<p style="margin:12px 0 4px"><b>${g.e} ${g.label}</b></p>${g.m.map(([n,r])=>`<div class="place"><b>${n}</b> · ${r}</div>`).join('')}`).join('')},
       {sum:"+ Qui est à l'origine du réseau ?", html:`<p>Depuis 2000, <b>Othman Kerrache</b> explore les liens entre psychologie, gouvernance et écologie humaine, nourri d'une double culture (allemande par sa mère, algérienne par son père) et d'un parcours marqué par le sport, les voyages et la philosophie. Convaincu que la politique, c'est <b>organiser la coopération</b>, il crée la Géomédiation en 2010.</p><p>📬 ${'geomediation@live.fr'}</p>`}],
-     fields:[{k:'competences', type:'area', label:'Vos talents et compétences'},
-             {k:'transiscope', type:'toggle', label:"Je suis déjà sur <a href=\"https://transiscope.gogocarto.fr/map#/carte/@46.33,2.50,5z?cat=all\" target=\"_blank\" rel=\"noopener\">Transiscope</a>, la carte des acteurs de la transition (ou sur une autre carte)"},
+     fields:[{k:'transiscope', type:'toggle', label:"Je suis déjà sur <a href=\"https://transiscope.gogocarto.fr/map#/carte/@46.33,2.50,5z?cat=all\" target=\"_blank\" rel=\"noopener\">Transiscope</a>, la carte des acteurs de la transition (ou sur une autre carte)"},
              TEMOIGNAGE,
              {k:'inscrire', type:'toggle', label:"Je veux <b>inscrire ma structure</b> ou mon projet dans le réseau"}]}
   ]},
-  {k:'comprendre', e:'🧭', cat:'Comprendre', hidden:true, t:"Comprendre la logique d'ensemble", levels:[
-    {intro:"Échelles, thématiques et acteurs : <b>tout est connecté</b>. Le défi : appréhender <b>simplement</b> la <b>complexité</b> de la réalité, pour s'y <b>adapter au mieux</b>, individuellement et collectivement.",
-     parts:[{v:ringsSVG, w:()=>wireWave()},
-            {h:"Comment améliorer notre organisation, individuelle et collective ?", v:loopSVG, p:"Produire <b>intelligemment</b> ce dont on a besoin, c'est de l'<b>énergie</b> et de l'<b>argent</b> bien utilisés. L'économie tourne, et chacun gagne du <b>temps</b> pour les autres, la planète et soi-même. Social, environnemental, géopolitique : <b>tout s'équilibre</b>."}],
+  {k:'comprendre', e:'🧭', cat:'Comprendre', hidden:true, act:'🚀 Je passe à la pratique', t:"Le projet en images", levels:[
+    {intro:"Échelles, thématiques et acteurs\u00a0: <b>tout est connecté</b>. Bonne nouvelle\u00a0: pas besoin de tout faire avancer en même temps. <b>Un effort sur un sujet aide forcément les autres</b>, quel que soit leur niveau.",
+     parts:[{h:"Les ondes\u00a0: nous façonnons ce qui nous façonne", v:ringsSVG, w:()=>wireWave()},
+            {h:"Le cercle vertueux", v:loopSVG, p:"Produire <b>intelligemment</b> ce dont on a besoin, c'est de l'<b>énergie</b> et de l'<b>argent</b> bien utilisés. L'économie tourne, et chacun gagne du <b>temps</b> pour les autres, la planète et soi-même."}],
      fields:[]},
     {intro:"Un <b>cadre commun</b>, valable du quartier à la planète, où chacun avance <b>à son rythme</b>.",
-     parts:[{h:"5 domaines, une même boussole", v:domainsSVG, w:c=>wireUntangle(c), slogan:"Chaque problème a sa solution. Le réseau vous y mène."},
-            {h:"Une question, et tout démarre", v:stairsSVG, w:()=>wireSlide(), p:"« Envie d'une <b>meilleure organisation</b> ? » Posez-la autour de vous : famille, immeuble, entreprise, asso, quartier… Et hop, <b>ça glisse tout seul</b>.", slogan:"Il y a un médiateur en chacun de nous."}],
+     parts:[{h:"5 domaines, une même boussole", v:domainsSVG, w:c=>wireUntangle(c), slogan:"Chaque besoin a sa solution. Le réseau vous y mène."},
+            {h:"Le toboggan de la coopération", v:stairsSVG, w:()=>wireSlide(), p:"«\u00a0Envie d'une <b>meilleure organisation</b>\u00a0?\u00a0» Posez-la autour de vous\u00a0: famille, immeuble, entreprise, asso, quartier… Et hop, <b>ça glisse tout seul</b>.", slogan:"Il y a un médiateur en chacun de nous."}],
      fields:[], details:[STEPS_DETAIL]},
     {intro:"Quand on regarde les problèmes <b>ensemble</b>, les <b>solutions deviennent faciles d'accès</b>.",
-     parts:[{h:"La géographie, une sagesse ancestrale", p:"Elle reprend des principes très anciens : relier la <b>nature</b>, l'<b>économie</b> qui produit ce dont on a besoin, et une <b>gouvernance</b> où chacun peut s'épanouir. Saisir ces liens, c'est comprendre à la fois l'<b>intérêt de chacun</b> et l'<b>intérêt de tous</b>. Simple à dire, plus délicat à mettre en place : c'est tout l'enjeu de la méthode."}],
-     fields:[{k:'adh', type:'principles', label:'4 principes · un clic pour réagir'}, {k:'idees', type:'ideas', label:"8 idées qui libèrent · touchez pour retourner"}],
-     details:[{sum:"+ Une histoire qui vient de loin", html:`<p style="font-family:var(--display);font-weight:700;color:var(--forest-dark)">On ne part pas de zéro : on hérite.</p><ol class="tl">${TL.map(([y,n,d])=>`<li><span class="tl-y">${y}</span><span><b>${n}</b><br>${d}</span></li>`).join('')}</ol>`}]}
+     parts:[{h:"La géographie, une sagesse ancestrale", p:"Elle reprend des principes très anciens\u00a0: relier la <b>nature</b>, l'<b>économie</b> qui produit ce dont on a besoin, et une <b>gouvernance</b> où chacun peut s'épanouir. Sa partie opérationnelle, l'<b>aménagement du territoire</b>, cherche à répartir équitablement populations, activités et services, pour répondre durablement aux besoins de chacun.",
+             html:()=>`<details class="more-box geo-tl" open><summary>Une histoire qui vient de loin</summary><p style="font-family:var(--display);font-weight:700;color:var(--forest-dark)">On ne part pas de zéro\u00a0: on hérite.</p><ol class="tl">${TL.map(([y,n,d])=>`<li><span class="tl-y">${y}</span><span><b>${n}</b><br>${d}</span></li>`).join('')}</ol></details>`}],
+     fields:[{k:'adh', type:'principles', label:"4 principes · êtes-vous d'accord\u00a0?"}, {k:'idees', type:'ideas', label:"8 idées qui libèrent · retournez-les, puis donnez votre avis"}]}
   ]}
 ];
 const IDEES = [
@@ -801,7 +848,7 @@ const LEVEL_NAMES=["L'essentiel","La méthode","Pour aller plus loin"];
 
 /* ================= ÉTAT ================= */
 const STORE='geomediation_reves_v1';
-function fresh(){ return {view:'home', dream:null, hist:[], lvl:{}, a:{}, acc:{}, sendSel:{}, sendTo:'med', sendAddr:''}; }
+function fresh(){ return {view:'home', dream:null, hist:[], lvl:{}, a:{}, acc:{}, dec:{}, test:{}, sendSel:{}, sendTo:'libre', sendAddr:''}; }
 let state=fresh();
 try{ const sv=JSON.parse(localStorage.getItem(STORE)||'null'); if(sv) state=Object.assign(fresh(),sv); }catch(e){}
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
@@ -809,13 +856,22 @@ document.addEventListener('input',()=>setTimeout(save,0));
 function A(dk){ return state.a[dk]||(state.a[dk]={}); }
 function go(view, dream){ state.hist=(state.hist||[]).concat({v:state.view,d:state.dream}).slice(-30); state.view=view; if(dream!==undefined) state.dream=dream; render(); window.scrollTo({top:0,behavior:'smooth'}); }
 function goBack(){ const p=(state.hist||[]).pop(); if(p){ state.view=p.v; state.dream=p.d; } else state.view='home'; render(); window.scrollTo({top:0,behavior:'smooth'}); }
-function answered(dk){ const a=state.a[dk]||{}; return Object.values(a).filter(v=>Array.isArray(v)?v.length:(v!==''&&v!==false&&v!=null&&!(typeof v==='object'&&!Object.keys(v).length))).length + (state.acc[dk]?1:0); }
+function answered(dk){ const a=state.a[dk]||{}; return Object.values(a).filter(v=>Array.isArray(v)?v.length:(v!==''&&v!==false&&v!=null&&!(typeof v==='object'&&!Object.keys(v).length))).length + (state.acc[dk]?1:0) + Object.values((state.dec||{})[dk]||{}).filter(Boolean).length; }
 
 /* ================= CHAMPS ================= */
-function mood(v){ return v<=1 ? '🌱 à chouchouter' : v<=3 ? '🌿 ça pousse' : '🌳 au top'; }
+function mood(v){ return v<=1 ? 'je ne m\'en soucie pas' : v<=3 ? 'je m\'en soucie un peu' : 'je m\'en soucie beaucoup'; }
+function paintFb(box, items, act){
+  const touched=items.some(x=>x.v>0);
+  if(!touched){ box.className='fb'; box.innerHTML='💡 Bougez les curseurs\u00a0: un conseil personnalisé s\'affiche ici.'; return null; }
+  const avg=items.reduce((t,x)=>t+x.v,0)/items.length, low=[...items].sort((a,b)=>a.v-b.v)[0];
+  const head= avg<2 ? "🌱 <b>Vous avez encore plein de choses à découvrir</b>, et c'est une chance\u00a0: chaque petit pas compte." : avg<4 ? "🌿 <b>Belle base\u00a0!</b> Vous êtes sur la bonne voie." : "🌳 <b>Bravo, vous avez fait beaucoup d'efforts\u00a0!</b>";
+  box.className='fb on'; box.innerHTML=`${head}<span class="fb-tip">👉 Piste\u00a0: <b>${low.n}</b> · ${low.tip}</span>`;
+  if(act) act(box, low);
+  return low;
+}
 function field(dk, f){
   const a=A(dk), w=h('div',{class:'fld'});
-  if(!['stepsEval','invite','domainsEval','stepsEvalMulti'].includes(f.type)) w.appendChild(h('div',{class:'fld-label'},f.label));
+  if(!['stepsEval','invite','domainsEval','stepsEvalMulti','ideas'].includes(f.type)) w.appendChild(h('div',{class:'fld-label'},f.label));
   if(f.type==='chips'||f.type==='chips1'){
     const row=h('div',{class:'chip-row'}); const cur=a[f.k]||(f.type==='chips'?[]:null);
     f.opts.forEach(o=>{ const on=f.type==='chips'?cur.includes(o):cur===o;
@@ -844,11 +900,8 @@ function field(dk, f){
     w.append(r, h('div',{class:'scale'},`<span>0 · ${f.lo}</span><span>5 · ${f.hi}</span>`)); w.firstChild.appendChild(val);
   }
   if(f.type==='stepsEval'){
-    const cur=a[f.k]||(a[f.k]={});
-    CYCLE.forEach((c,i)=>{ const row=h('div',{class:'mini-dim'}); const b=h('b',null,String(cur[c.k]||0));
-      const r=h('input',{type:'range',min:0,max:5,value:cur[c.k]||0,'aria-label':c.n}); r.oninput=e=>{ cur[c.k]=+e.target.value; b.textContent=e.target.value; };
-      row.append(h('span',null,`<i style="background:${CYCLE_COLS[i]}"></i>${c.n}`), r, b); w.appendChild(row); });
-    w.appendChild(h('div',{class:'scale'},'<span>0 · à lancer</span><span>5 · bien en place</span>'));
+    const cur=a[f.k]||(a[f.k]={}); const fb=h('div'); const upd=()=>paintFb(fb, CYCLE.map(c=>({n:c.n, v:cur[c.k]||0, tip:CYCLE_TIPS[c.k]})));
+    stepsRows(w, cur, upd); w.appendChild(fb); upd();
   }
   if(f.type==='cards1'||f.type==='cardsN'){
     const cur=a[f.k]||(f.type==='cardsN'?[]:null); const g=h('div',{class:'opt-grid'});
@@ -866,26 +919,35 @@ function field(dk, f){
   if(f.type==='stepsEvalMulti'){
     const all=a[f.k]||(a[f.k]={}); const sel=(a[f.src]||[]); const list=sel.length?sel:['Votre territoire'];
     if(!sel.length) w.appendChild(h('p',{class:'hint'},"Astuce\u00a0: choisissez une ou plusieurs échelles au niveau 1 pour les évaluer séparément."));
-    list.forEach(e=>{ const p=h('div',{class:'dom-row'}); p.appendChild(h('div',{class:'dom-top'},`<span>📍 ${esc(echLabel(a,e))}</span>`)); stepsRows(p, all[e]||(all[e]={})); w.appendChild(p); });
+    const fb=h('div'); const upd=()=>paintFb(fb, CYCLE.map(c=>({n:c.n, v:Math.max(0,...list.map(e=>(all[e]||{})[c.k]||0)), tip:CYCLE_TIPS[c.k]})));
+    list.forEach(e=>{ const p=h('div',{class:'dom-row'}); p.appendChild(h('div',{class:'dom-top'},`<span>📍 ${esc(echLabel(a,e))}</span>`)); stepsRows(p, all[e]||(all[e]={}), upd); w.appendChild(p); });
+    w.appendChild(fb); upd();
   }
   if(f.type==='domainsEval'){
-    const cur=a[f.k]||(a[f.k]={});
+    const cur=a[f.k]||(a[f.k]={}); const fb=h('div'); const upd=()=>paintFb(fb, INDIV_DOMAINS.map(d=>({n:d.e+' '+d.n, v:cur[d.k]||0, tip:d.tip})));
     INDIV_DOMAINS.forEach(d=>{ const row=h('div',{class:'dom-row'}); const v=cur[d.k]||0; const m=h('span',{class:'mood'},v+'/5 · '+mood(v));
       const top=h('div',{class:'dom-top'},`<span>${d.e} ${d.n}</span>`); top.appendChild(m);
-      const r=h('input',{type:'range',min:0,max:5,value:v,'aria-label':d.n}); r.oninput=e=>{ cur[d.k]=+e.target.value; m.textContent=cur[d.k]+'/5 · '+mood(cur[d.k]); };
+      const r=h('input',{type:'range',min:0,max:5,value:v,'aria-label':d.n}); r.oninput=e=>{ cur[d.k]=+e.target.value; m.textContent=cur[d.k]+'/5 · '+mood(cur[d.k]); upd(); };
       row.append(top, r, h('div',{class:'dom-tip'},'💡 '+d.tip)); w.appendChild(row); });
-    w.appendChild(h('div',{class:'scale'},'<span>0 · à chouchouter</span><span>5 · au top</span>'));
+    w.appendChild(h('div',{class:'scale'},'<span>0 · je ne m\'en soucie pas</span><span>5 · je m\'en soucie beaucoup</span>')); w.appendChild(fb); upd();
   }
   if(f.type==='principles'){
     const cur=a[f.k]||(a[f.k]={}); state.openMore=state.openMore||{};
     PRINCIPLES.forEach(p=>{ const box=h('div',{class:'principle '+p.c}, `<h3>${p.t}</h3><p>${p.s}</p>`);
-      const r=h('div',{class:'react'}); REACTIONS.forEach(o=>r.appendChild(h('button',{class:cur[p.k]===o.k?'active':'', onclick:()=>{ cur[p.k]=o.k; render(); }}, o.n))); box.appendChild(r);
+      const r=h('div',{class:'react'}); REACTIONS.forEach(o=>r.appendChild(h('button',{class:cur[p.k]===o.k?'active':'', onclick:()=>{ cur[p.k]=cur[p.k]===o.k?null:o.k; render(); }}, o.n))); box.appendChild(r);
       const open=!!state.openMore[p.k]; const mb=h('button',{class:'more'}, open?'− Réduire':'+ En savoir plus'); mb.onclick=()=>{ state.openMore[p.k]=!open; render(); }; box.appendChild(mb);
       if(open) box.appendChild(h('div',{class:'more-text'},p.l)); w.appendChild(box); });
   }
   if(f.type==='ideas'){
-    const g=h('div',{class:'ideas'}); state.flipped=state.flipped||{};
-    IDEES.forEach((x,k)=>{ const b=h('button',{class:'idea'}); const paint=()=>{ const on=!!state.flipped[k]; b.className='idea'+(on?' flipped':''); b.setAttribute('aria-pressed',String(on)); b.innerHTML = on ? `<span class="idea-d">${x.d}</span>` : `<span class="idea-n">${k+1}</span><span class="idea-s">${x.s}</span><span class="idea-hint">Retourner ↻</span>`; }; b.onclick=()=>{ state.flipped[k]=!state.flipped[k]; save(); paint(); }; paint(); g.appendChild(b); });
+    const cur=a[f.k]||(a[f.k]={}); state.flipped=state.flipped||{};
+    w.appendChild(h('div',{class:'fld-label'},f.label));
+    w.appendChild(h('p',{class:'react-legend'},REACTIONS.map(r=>r.n).join(' · ')));
+    const g=h('div',{class:'ideas'});
+    IDEES.forEach((x,k)=>{ const wr=h('div',{class:'idea-w'}); const b=h('button',{class:'idea'});
+      const paint=()=>{ const on=!!state.flipped[k]; b.className='idea'+(on?' flipped':''); b.setAttribute('aria-pressed',String(on)); b.innerHTML = on ? `<span class="idea-d">${x.d}</span>` : `<span class="idea-n">${k+1}</span><span class="idea-s">${x.s}</span><span class="idea-hint">Retourner ↻</span>`; };
+      b.onclick=()=>{ state.flipped[k]=!state.flipped[k]; save(); paint(); }; paint();
+      const rr=h('div',{class:'react-mini'}); REACTIONS.forEach(r=>rr.appendChild(h('button',{class:cur[k]===r.k?'on':'', title:r.n.slice(2).trim(), 'aria-label':r.n.slice(2).trim(), 'aria-pressed':String(cur[k]===r.k), onclick:()=>{ cur[k]=cur[k]===r.k?null:r.k; render(); }}, r.e)));
+      wr.append(b, rr); g.appendChild(wr); });
     w.appendChild(g);
   }
   if(f.type==='invite'){
@@ -897,38 +959,102 @@ function field(dk, f){
 }
 
 /* ================= ACCUEIL ================= */
+const SPHERES=[
+  {k:'soi', e:'🧠', n:'Moi', card:'pensee', tip:"faites le point sur les grands domaines de votre vie, en deux minutes."},
+  {k:'famille', e:'🏡', n:'Ma famille', card:'maison', tip:"posez LA question au prochain repas\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»"},
+  {k:'travail', e:'💼', n:'Mon travail', card:'entreprise', tip:"proposez à vos collègues de noter ensemble attentes et ressources."},
+  {k:'territoire', e:'🗺️', n:'Mon territoire', card:'idees', tip:"repérez les acteurs autour de vous et dites-leur qu'un réseau existe."}];
+function ricochetSVG(){
+  const N=[['🧠','Moi',62,48],['🏡','Famille',278,48],['💼','Travail',62,176],['🗺️','Territoire',278,176]], cols=['#2F4A3C','#3E6350','#5B6F3B','#B5654A'];
+  let s=`<svg class="rico" viewBox="0 0 340 224" role="img" aria-label="Un effort dans une sphère de vie aide les autres, dans les deux sens : moi, famille, travail, territoire"><defs><marker id="rh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E0C15C"/></marker></defs>`;
+  [0,1,2].forEach(i=>{ s+=`<circle cx="170" cy="112" r="38" fill="none" stroke="#E0C15C" stroke-width="2" opacity="0"><animate attributeName="r" from="38" to="100" dur="3.6s" begin="${i*1.2}s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.7" to="0" dur="3.6s" begin="${i*1.2}s" repeatCount="indefinite"/></circle>`; });
+  N.forEach(([e,n,x,y])=>{ const dx=x-170, dy=y-112, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
+    s+=`<line x1="${(170+ux*44).toFixed(1)}" y1="${(112+uy*44).toFixed(1)}" x2="${(x-ux*36).toFixed(1)}" y2="${(y-uy*36).toFixed(1)}" stroke="#E0C15C" stroke-width="2.5" marker-start="url(#rh)" marker-end="url(#rh)"/>`; });
+  N.forEach(([e,n,x,y],i)=>{ s+=`<circle cx="${x}" cy="${y}" r="31" fill="${cols[i]}" stroke="#F6F1E7" stroke-width="2"/><text x="${x}" y="${y-1}" text-anchor="middle" font-size="17">${e}</text><text x="${x}" y="${y+16}" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="10.5" fill="#F6F1E7">${n}</text>`; });
+  s+=`<circle cx="170" cy="112" r="40" fill="#E0C15C"/><text x="170" y="108" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="12" fill="#1F3329">Un effort</text><text x="170" y="124" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="12" fill="#1F3329">ici</text></svg>`;
+  return s;
+}
+function guideBlock(){
+  const g=h('section',{class:'guide'});
+  g.innerHTML=`<div class="guide-t">Comment ça marche\u00a0?</div>`;
+  const flow=h('div',{class:'g-flow'});
+  flow.append(
+    h('button',{class:'g-step', onclick:()=>go('dream','comprendre')},'<span class="g-e">🧭</span><span class="g-t"><b>1 · Comprendre</b><small>Le projet en images</small></span>'),
+    h('i',{class:'g-arr','aria-hidden':'true'},'→'),
+    h('button',{class:'g-step s2', onclick:()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'<span class="g-e">🚀</span><span class="g-t"><b>2 · Agir</b><small>Je m\'évalue, je fixe mes objectifs</small></span>'),
+    h('i',{class:'g-arr','aria-hidden':'true'},'→'),
+    h('button',{class:'g-step s3', onclick:()=>go('recap')},'<span class="g-e">📇</span><span class="g-t"><b>3 · Ma fiche</b><small>Mon récap, pour moi</small></span>'));
+  g.appendChild(flow);
+  g.appendChild(h('div',{class:'g-levels'},'Chaque rubrique s\'ouvre en 3 niveaux\u00a0: <span class="g-l">1 · L\'essentiel</span><span class="g-l l2">2 · La méthode</span><span class="g-l l3">3 · Pour aller plus loin</span>'));
+  g.appendChild(h('div',{class:'g-choices'},'À chaque niveau, vous choisissez\u00a0: <span>🤔 J\'y réfléchis</span><span>🚀 J\'agis</span><span>✨ J\'en veux plus</span><span>✅ Ça me suffit</span>'));
+  g.appendChild(h('p',{class:'g-note'},'📇 <b>Votre fiche, c\'est pour vous</b>\u00a0: gardez-la et utilisez-la quand vous voulez, avec vos proches, vos collaborateurs ou les acteurs de votre territoire. 💬 <b>Vos questions et remarques</b>, elles, partent au médiateur.'));
+  return g;
+}
+function testBlock(){
+  state.test=state.test||{};
+  const t=h('section',{class:'test'});
+  t.innerHTML=`<h3>Et si tous nos problèmes venaient de l'organisation\u00a0?</h3><p class="test-s">Comment mettre en place une <b>bonne organisation</b>\u00a0? Commencez par vous évaluer dans les différentes sphères de votre vie.</p>`;
+  const fb=h('div'); const btn=h('button',{class:'btn btn-gold'});
+  const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.cat} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });
+  SPHERES.forEach(x=>{ const v=state.test[x.k]||0; const row=h('div',{class:'sph'}); const val=h('span',null,v+'/5');
+    const top=h('div',{class:'sph-top'},`<span>${x.e} ${x.n}</span>`); top.appendChild(val);
+    const r=h('input',{type:'range',min:0,max:5,value:v,'aria-label':'Organisation · '+x.n}); r.oninput=e=>{ state.test[x.k]=+e.target.value; val.textContent=e.target.value+'/5'; upd(); save(); };
+    row.append(top, r); t.appendChild(row); });
+  t.appendChild(h('div',{class:'scale'},'<span>0 · à construire</span><span>5 · bien organisée</span>'));
+  t.appendChild(fb); upd();
+  t.appendChild(h('div',{class:'rico-wrap'},ricochetSVG()));
+  t.appendChild(h('p',{class:'rico-cap'},'Pas besoin de tout faire avancer en même temps\u00a0: <b>un effort sur une sphère aide forcément les autres</b>, quel que soit leur niveau.'));
+  return t;
+}
 function renderHome(){
   add(h('div',{class:'kicker'},'Bienvenue'));
-  add(h('h1',{class:'dream-h1'},'Plus un problème est grand, <em>plus on peut évoluer.</em>'));
-  add(h('p',{class:'lead', style:'margin:-4px 0 14px'},"L'<b>intelligence</b>, c'est l'<b>adaptation</b>, et la capacité de <b>reconnaître ses limites et ses forces</b>."));
-  add(h('div',{class:'badges', style:'justify-content:flex-start;margin:0 0 16px'},'<span class="badge">⏱️ 2 à 10 minutes</span><span class="badge">🪜 3 niveaux, à votre rythme</span><span class="badge">🔒 Vos réponses restent à vous</span>'));
+  add(h('h1',{class:'dream-h1'},'Nous façonnons <em>ce qui nous façonne.</em>'));
+  add(h('p',{class:'lead', style:'margin:-4px 0 14px'},"Plus un problème est grand, plus on peut évoluer. L'<b>intelligence</b>, c'est l'<b>adaptation</b>, et la capacité de <b>reconnaître ses limites et ses forces</b>."));
+  add(h('div',{class:'badges', style:'justify-content:flex-start;margin:0 0 14px'},'<span class="badge">⏱️ 2 à 10 minutes</span><span class="badge">🔒 Vos réponses restent à vous</span>'));
+  add(guideBlock());
+  add(h('button',{class:'compr', style:'margin:0 0 4px', onclick:()=>go('dream','comprendre')}, `<span class="ce">🧭</span><span><span class="ct">1 · Comprendre le projet en images</span><span class="cd">Les ondes, le cercle vertueux, les 5 domaines, le toboggan de la coopération…</span><span class="cm">J'aimerais en savoir plus →</span></span><span style="margin-left:auto;font-weight:800;color:var(--clay)">${answered('comprendre')||state.lvl.comprendre?'✓':'→'}</span>`));
+  add(h('h2',{class:'agir-h', id:'agir'},'🚀 2 · Agir'));
+  add(testBlock());
   add(h('p',{class:'ask'},'Envie d\'agir\u00a0? Vous aimeriez…'));
   const list=h('div',{class:'dreams'});
   DREAMS.filter(d=>!d.hidden).forEach((d,i)=>{ const n=answered(d.k);
-    list.appendChild(h('button',{class:'dream d'+i+(d.star?' star':''), onclick:()=>go('dream', d.k)}, `<span class="dream-e">${d.e}</span><span class="dream-cat">${d.cat}</span><span class="dream-t">…${d.dream} ?</span><span class="dream-go">${n?'✓ Continuer':'Découvrir'} →</span>`)); });
+    list.appendChild(h('button',{class:'dream d'+i+(d.star?' star':''), onclick:()=>go('dream', d.k)}, `<span class="dream-e">${d.e}</span><span class="dream-cat">${d.cat}</span><span class="dream-t">…${d.dream} ?</span><span class="dream-go">${n?'✓ Continuer':'Découvrir'} →</span>`)); });
   add(list);
   add(h('p',{class:'bon-endroit'},'Alors, vous êtes <em>au bon endroit.</em>'));
-  const how=h('ol',{class:'how'});
-  [['👆','Choisissez une carte'],['✍️','Répondez en quelques clics'],['📬','Analysez votre récap quand vous voulez, et avancez de manière autonome et connectée']].forEach(([e,t])=>how.appendChild(h('li',null,`<span class="how-e">${e}</span><span>${t}</span>`)));
-  add(how);
-
-  const HL=[null,{n:"L'origine commune"},{n:'Pour aller plus loin'}]; const lv=state.lvl.home||1;
-  if(lv>=2){ const L2=h('section',{class:'lvl l2', id:'lvl-2'}); L2.appendChild(h('div',{class:'lvl-badge'},'Niveau 2 · '+HL[1].n));
-    const key=h('div',{class:'key'});
-  key.innerHTML=`<p class="key-t">Et si tous nos problèmes avaient une même origine\u00a0: <b>l'organisation de notre société</b>\u00a0?</p>
-    <div class="chain"><span>🧠 Soi</span><i>→</i><span>🏡 Famille</span><i>→</i><span>💼 Entreprise</span><i>→</i><span>🗺️ Territoire</span></div>
-    <p class="key-s">Une bonne organisation <b>s'adapte à chaque niveau</b> et <b>stimule les autres</b>. Le réseau les relie tous. ↺</p>`;
-    key.style.margin='0'; L2.appendChild(key); add(L2); }
-  if(lv>=3){ const L3=h('section',{class:'lvl l3', id:'lvl-3'}); L3.appendChild(h('div',{class:'lvl-badge'},'Niveau 3 · '+HL[2].n));
-  L3.appendChild(h('div',{class:'principle c2', style:'margin:0'}, `<h3>❓ Les enfants, les salariés, les citoyens prendraient donc le pouvoir\u00a0?</h3><p>Ce n'est pas la question. Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>. Pas de règles préétablies\u00a0: une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p style="margin-top:8px">C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin)\u00a0: souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>prospère</b>, dans notre environnement proche comme lointain.</p>`));
-  L3.appendChild(h('button',{class:'compr', style:'margin:0', onclick:()=>go('dream','comprendre')}, `<span class="ce">🧭</span><span><span class="ct">Comprendre la logique d'ensemble</span><span class="cd">Tout est connecté : la méthode en images, en 3 niveaux.</span></span><span style="margin-left:auto;font-weight:800;color:var(--clay)">${answered('comprendre')||state.lvl.comprendre?'✓':'→'}</span>`));
-    add(L3); }
-  if(lv<3) add(h('button',{class:'btn btn-soft more-btn', onclick:()=>{ state.lvl.home=lv+1; render(); setTimeout(()=>{ const el=$('lvl-'+(lv+1)); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }},`✨ Je veux en savoir plus<span class="more-sub">Niveau ${lv+1} · ${HL[lv].n}</span>`));
-  if(Object.keys(state.a).length||Object.keys(state.acc).length) add(h('button',{class:'btn btn-primary btn-big', style:'width:100%;margin-top:16px', onclick:()=>go('recap')},'📬 Voir mon récap'));
+  const lv=state.lvl.home||1;
+  if(lv>=2){ const L2=h('section',{class:'lvl l2', id:'lvl-2'}); L2.appendChild(h('div',{class:'lvl-badge'},'Niveau 2 · Questions fréquentes'));
+    L2.appendChild(h('div',{class:'principle c2', style:'margin:0'}, `<h3>❓ Les enfants, les salariés, les citoyens prendraient donc le pouvoir\u00a0?</h3><p>Ce n'est pas la question. Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>. Pas de règles préétablies\u00a0: une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p style="margin-top:8px">C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin)\u00a0: souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>prospère</b>, dans notre environnement proche comme lointain.</p>`));
+    add(L2); }
+  else add(h('button',{class:'btn btn-soft more-btn', onclick:()=>{ state.lvl.home=2; render(); setTimeout(()=>{ const el=$('lvl-2'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }},'✨ Je veux en savoir plus<span class="more-sub">Niveau 2 · Questions fréquentes</span>'));
+  add(h('button',{class:'btn btn-primary btn-big', style:'width:100%;margin-top:16px', onclick:()=>go('recap')},'📇 3 · Voir ma fiche'));
 }
 
 /* ================= UNE PORTE D'ENTRÉE ================= */
 function openLevel(d, n){ const lv=state.lvl[d.k]||1; if(n>lv) state.lvl[d.k]=n; render(); setTimeout(()=>{ const el=$('lvl-'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
+const DEC=[{k:'reflechis', n:"🤔 J'y réfléchis"},{k:'agis', n:"🚀 J'agis"}];
+function decisionBar(d, n, lv){
+  state.dec=state.dec||{}; const cur=(state.dec[d.k]||{})[n]; const a=A(d.k);
+  const box=h('div',{class:'dec'}); box.appendChild(h('div',{class:'dec-t'},'Et maintenant\u00a0?'));
+  const row=h('div',{class:'dec-row'});
+  DEC.forEach(o=>{ const label=(o.k==='agis'&&d.act)?d.act:o.n; const isOn=cur===o.k;
+    row.appendChild(h('button',{class:isOn?'on':'', 'aria-pressed':String(isOn), onclick:()=>{
+      if(o.k==='agis' && d.act){ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); return; }
+      (state.dec[d.k]=state.dec[d.k]||{})[n]=isOn?null:o.k; render(); }}, label)); });
+  if(n===lv && n<d.levels.length) row.appendChild(h('button',{class:'go', onclick:()=>openLevel(d,n+1)},`✨ Je veux en savoir plus <small style="display:block;font-weight:600;opacity:.75">Niveau ${n+1}</small>`));
+  row.appendChild(h('button',{class:'go', onclick:()=>go('recap')},'✅ Ça me suffit <small style="display:block;font-weight:600;opacity:.75">Je passe à ma fiche</small>'));
+  box.appendChild(row);
+  if(cur==='agis'||cur==='reflechis'){ const id='obj-'+d.k+'-'+n; const f=h('div',{class:'fld'}); f.append(h('label',{class:'fld-label',for:id}, cur==='agis'?'🎯 Mon objectif':'🎯 Mon objectif, quand je serai prêt')); const ta=h('textarea',{id, placeholder:'Écrivez-le en une phrase'}); ta.value=a['obj'+n]||''; ta.oninput=e=>{ a['obj'+n]=e.target.value; }; f.appendChild(ta); box.appendChild(f); }
+  return box;
+}
+function mediBox(d){
+  const a=A(d.k); const b=h('section',{class:'medi'});
+  b.appendChild(h('h3',null,'💬 Une question, une remarque pour le médiateur\u00a0?'));
+  b.appendChild(h('p',null,"Elle ne va pas dans votre fiche\u00a0: elle part au médiateur, qui vous répond."));
+  const ta=h('textarea',{'aria-label':'Votre question ou remarque', placeholder:'Écrivez librement…'}); ta.value=a.remarque||''; ta.oninput=e=>{ a.remarque=e.target.value; };
+  const m=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
+  m.onclick=()=>{ m.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation · '+d.cat+' : ma question')+'&body='+encodeURIComponent((a.remarque||'')+'\n'); };
+  b.append(ta, m); return b;
+}
 function renderDream(){
   const d=DREAMS.find(x=>x.k===state.dream); if(!d){ state.view='home'; return renderHome(); }
   const lv=state.lvl[d.k]||1, a=A(d.k);
@@ -949,22 +1075,22 @@ function renderDream(){
       if(P.v) box.appendChild(h('div',{class:'visual'},P.v()));
       if(P.p) box.appendChild(h('p',null,P.p));
       if(P.slogan) box.appendChild(h('p',{class:'slogan-pill'},P.slogan));
+      if(P.html) box.insertAdjacentHTML('beforeend', typeof P.html==='function'?P.html():P.html);
       if(P.link){ const [k,t]=P.link; box.appendChild(h('button',{class:'btn btn-gold', style:'align-self:flex-start;padding:10px 18px;font-size:14px', onclick:()=>go('dream',k)},t)); }
       if(P.w) wires.push(()=>P.w(box));
       card.appendChild(box); });
     L.fields.forEach(f=>card.appendChild(field(d.k,f)));
     (L.details||[]).forEach(D=>{ const det=h('details',{class:'more-box'}); det.innerHTML=`<summary>${D.sum}</summary>`+(typeof D.html==='function'?D.html():D.html); card.appendChild(det); });
+    card.appendChild(decisionBar(d, i+1, lv));
     root.appendChild(card);
   }
   wires.forEach(f=>f());
-  if(lv<d.levels.length){ const nx=d.levels[lv]; add(h('button',{class:'btn btn-soft more-btn', onclick:()=>openLevel(d,lv+1)},`✨ Je veux en savoir plus<span class="more-sub">Niveau ${lv+1} · ${nx.name||LEVEL_NAMES[lv]}</span>`)); }
-  else add(h('p',{class:'all-done'},'🌟 Vous avez exploré les 3 niveaux.'));
-  add(h('div',{class:'lvl', style:'gap:8px'}, null)); root.lastChild.appendChild(field(d.k, {k:'remarque', type:'area', label:'💬 Une question, une remarque, une piste d\'amélioration\u00a0?', ph:'Écrivez librement : elle rejoint votre récap.'}));
   const on=!!state.acc[d.k];
-  add(h('button',{class:'acc'+(on?' on':''), 'aria-pressed':String(on), onclick:()=>{ state.acc[d.k]=!on; render(); }}, `<span class="box">${on?'✓':''}</span><span><b>🤝 Je souhaite être accompagné</b> par un professionnel sur ce sujet</span>`));
-  add(h('p',{class:'hint center'},'✓ Vos réponses s\'ajoutent automatiquement à votre récap'));
+  if(!d.hidden) add(h('button',{class:'acc'+(on?' on':''), 'aria-pressed':String(on), onclick:()=>{ state.acc[d.k]=!on; render(); }}, `<span class="box">${on?'✓':''}</span><span><b>🤝 Je m'engage à chercher un professionnel</b> qui correspond à mes besoins ou à mes attentes</span>`));
+  add(mediBox(d));
+  add(h('p',{class:'hint center'},'✓ Vos réponses s\'ajoutent automatiquement à votre fiche'));
   const n=h('div',{class:'nav'});
-  n.append(h('button',{class:'btn btn-ghost', onclick:()=>go('home')},'← Accueil'), h('button',{class:'btn btn-primary', onclick:()=>go('recap')},'Mon récap →'));
+  n.append(h('button',{class:'btn btn-ghost', onclick:()=>go('home')},'← Accueil'), h('button',{class:'btn btn-primary', onclick:()=>go('recap')},'📇 Ma fiche →'));
   add(n);
 }
 
@@ -975,7 +1101,7 @@ function printBilan(sel){
   sel.forEach(x=>{ if(x.g!==g){ if(g!==null) body+='</ul></section>'; body+='<section><h2>'+esc(x.g)+'</h2><ul>'; g=x.g; } body+='<li>'+esc(x.t)+'</li>'; });
   if(g!==null) body+='</ul></section>';
   if(!body) body='<p>Aucun élément sélectionné.</p>';
-  const doc=`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mon bilan Géomédiation – ${esc(date)}</title><style>
+  const doc=`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ma fiche Géomédiation – ${esc(date)}</title><style>
   body{font-family:'Segoe UI',system-ui,sans-serif;color:#241E14;max-width:720px;margin:32px auto;padding:0 20px;line-height:1.5}
   header{border-bottom:3px solid #C9A227;padding-bottom:12px;margin-bottom:22px}
   .brand{font-weight:800;letter-spacing:.16em;color:#1F3329;font-size:13px}
@@ -987,17 +1113,18 @@ function printBilan(sel){
   @media print{.tip{display:none} body{margin:0}}
   </style></head><body>
   <p class="tip">Pour l'enregistrer en PDF : dans la fenêtre d'impression, choisissez <b>« Enregistrer au format PDF »</b> comme imprimante.</p>
-  <header><div class="brand">GÉOMÉDIATION</div><h1>Mon bilan</h1><div class="date">${esc(date)}</div></header>
+  <header><div class="brand">GÉOMÉDIATION</div><h1>Ma fiche</h1><div class="date">${esc(date)}</div></header>
   ${body}
   <footer>Géomédiation · La science de l'organisation, simplifiée pour tous · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
   </body></html>`;
   const w=window.open('','_blank');
-  if(!w){ const a=h('a',{href:URL.createObjectURL(new Blob([doc],{type:'text/html'})), download:'bilan-geomediation.html'}); document.body.appendChild(a); a.click(); a.remove(); return; }
+  if(!w){ const a=h('a',{href:URL.createObjectURL(new Blob([doc],{type:'text/html'})), download:'fiche-geomediation.html'}); document.body.appendChild(a); a.click(); a.remove(); return; }
   w.document.open(); w.document.write(doc); w.document.close();
   w.onload=null; setTimeout(()=>{ try{ w.focus(); w.print(); }catch(e){} },300);
 }
 function recapItems(){
   const it=[]; const push=(g,t)=>it.push({id:g+'|'+t,g,t});
+  const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.cat+' · '+d.t;
     d.levels.forEach(L=>L.fields.forEach(f=>{ const v=a[f.k]; const lab=(f.label||'').replace(/<[^>]+>/g,'').replace(/ /g,' ');
       if(f.type==='chips' && v&&v.length) push(g, lab+' : '+v.join(', '));
@@ -1006,7 +1133,8 @@ function recapItems(){
       else if(f.type==='scales' && v&&v.length) push(g, 'Mes échelles : '+v.map(e=>echLabel(a,e)).join(', '));
       else if(f.type==='stepsEvalMulti' && v){ const sel=(a[f.src]||[]); (sel.length?sel:['Votre territoire']).forEach(e=>{ const x=v[e]; if(x && Object.values(x).some(n=>n>0)) push(g, 'Où en est l\'organisation · '+echLabel(a,e)+' : '+CYCLE.map(c=>c.n+' '+(x[c.k]||0)+'/5').join(', ')); }); }
       else if(f.type==='domainsEval' && v && Object.values(v).some(x=>x>0)) push(g, 'Mon point : '+INDIV_DOMAINS.map(x=>x.n+' '+(v[x.k]||0)+'/5').join(', '));
-      else if(f.type==='principles' && v) PRINCIPLES.forEach(p=>{ const o=REACTIONS.find(r=>r.k===v[p.k]); if(o) push(g, '« '+p.t+' » : '+o.n); });
+      else if(f.type==='principles' && v) PRINCIPLES.forEach(p=>{ const o=REACTIONS.find(r=>r.k===v[p.k]); if(o) push(g, '« '+p.t+' » : '+o.n.slice(2).trim()); });
+      else if(f.type==='ideas' && v) IDEES.forEach((x,k)=>{ const o=REACTIONS.find(r=>r.k===v[k]); if(o) push(g, '« '+x.s+' » : '+o.n.slice(2).trim()); });
       else if((f.type==='text'||f.type==='area') && v) push(g, (f.k==='ecriture'?'Mon écriture intuitive':lab.replace(/ ?\?$/,''))+' : '+v);
       else if(f.type==='slider' && v) push(g, lab+' : '+v+'/5');
       else if(f.type==='stepsEval' && v && Object.keys(v).length) push(g, 'Où en est l\'organisation : '+CYCLE.map(c=>c.n+' '+(v[c.k]||0)+'/5').join(', '));
@@ -1014,40 +1142,50 @@ function recapItems(){
       else if(f.type==='cardsN' && v&&v.length) push(g, lab+' : '+v.join(', '));
       else if(f.type==='invite' && v) push(g, "J'ai partagé l'invitation autour de moi");
     }));
-    if(a.remarque) push(g, 'Ma question / remarque : '+a.remarque);
-    const lv=state.lvl[d.k]||1; if(lv>1) push(g, 'Je veux en savoir plus (niveau '+lv+' exploré)');
-    if(state.acc[d.k]) push(g, 'Je souhaite être accompagné par un professionnel');
+    const dec=(state.dec||{})[d.k]||{}; d.levels.forEach((L,i)=>{ const n=i+1, v=dec[n], o=a['obj'+n]; if(v||o) push(g, `Niveau ${n} · `+(v==='agis'?'J\'agis':v==='reflechis'?'J\'y réfléchis':'Mon objectif')+(o?' · 🎯 '+o:'')); });
+    if(state.acc[d.k]) push(g, 'Je m\'engage à chercher un professionnel qui correspond à mes besoins ou à mes attentes');
   });
   return it;
 }
 function renderRecap(){
   confetti();
-  add(h('div',{class:'kicker'},'Mon récap'));
-  add(h('h2',null,'🌟 Vos actions prennent forme'));
+  state.sendTo = state.sendTo==='med' ? 'libre' : (state.sendTo||'libre');
+  add(h('div',{class:'kicker'},'Ma fiche'));
+  add(h('h2',null,'📇 Votre fiche prend forme'));
   const items=recapItems();
-  if(!items.length){ add(h('p',{class:'lead'},"Votre récap se remplit au fil de vos réponses. Choisissez où agir pour commencer !")); add(h('button',{class:'btn btn-primary', onclick:()=>go('home')},'Choisir où agir →')); return; }
-  add(h('p',{class:'lead'},"Tout ce que vous avez choisi est ici. <b>Cochez</b> ce que vous voulez partager, puis choisissez <b>à qui l'envoyer</b> : vous avancez de manière autonome et connectée, accompagné si vous le souhaitez."));
+  if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Commencez par le test, ou choisissez une carte\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }
+  else {
+  add(h('p',{class:'lead'},"<b>Votre fiche, c'est pour vous.</b> Gardez-la et utilisez-la quand vous voulez, dans votre vie\u00a0: avec vos proches, vos collaborateurs ou les acteurs de votre territoire. <b>Cochez</b> ce que vous voulez garder ou partager."));
   const box=h('div',{class:'send-box'}); let g0=null;
   items.forEach(x=>{ if(x.g!==g0){ box.appendChild(h('div',{class:'grp'},esc(x.g))); g0=x.g; }
     const lab=h('label',{class:'send-item'}); const cb=h('input',{type:'checkbox'}); cb.checked=state.sendSel[x.id]!==false; cb.onchange=()=>{ state.sendSel[x.id]=cb.checked; save(); };
     lab.append(cb, h('span',null,esc(x.t))); box.appendChild(lab); });
-  box.appendChild(h('div',{class:'grp', style:'margin-top:16px'},'À qui ?'));
+  const sel=()=>items.filter(x=>state.sendSel[x.id]!==false);
+  const body=()=>{ let g=null; const L=['Voici ma fiche Géomédiation :']; sel().forEach(x=>{ if(x.g!==g){ L.push('', x.g); g=x.g; } L.push('- '+x.t); }); L.push('','geomediation.fr'); return L.join('\n'); };
+  const msg=h('div',{class:'msg'}); msg.hidden=true; const sm='padding:8px 14px;font-size:13px';
+  const btns=h('div',{class:'row-inline', style:'margin-top:14px'});
+  btns.append(h('button',{class:'btn btn-gold', style:sm, onclick:()=>printBilan(sel())},'📄 Télécharger ma fiche (PDF)'));
+  if(navigator.share) btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>navigator.share({title:'Ma fiche Géomédiation', text:body()}).catch(()=>{})},'📤 Partager'));
+  btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>copyText(body(),msg)},'📋 Copier'));
+  box.append(btns,msg);
+  box.appendChild(h('div',{class:'grp', style:'margin-top:16px'},'Ou l\'envoyer par e-mail'));
   const row=h('div',{class:'chip-row'});
-  [{k:'med',n:'Un médiateur Géomédiation'},{k:'autre',n:'Une autre adresse'},{k:'libre',n:'Je choisis dans ma messagerie'}].forEach(r=>row.appendChild(h('button',{class:'chip sm'+(state.sendTo===r.k?' active':''), onclick:()=>{ state.sendTo=r.k; render(); }}, r.n)));
+  [{k:'libre',n:'Je choisis dans ma messagerie'},{k:'autre',n:'À une adresse précise'}].forEach(r=>row.appendChild(h('button',{class:'chip sm'+(state.sendTo===r.k?' active':''), onclick:()=>{ state.sendTo=r.k; render(); }}, r.n)));
   box.appendChild(row);
   if(state.sendTo==='autre'){ const f=h('div',{class:'fld'}); f.appendChild(h('label',{class:'fld-label',for:'sendAddr'},'Adresse e-mail')); const i=h('input',{id:'sendAddr',type:'text',placeholder:'ex. prenom@exemple.fr'}); i.value=state.sendAddr||''; i.oninput=e=>state.sendAddr=e.target.value; f.appendChild(i); box.appendChild(f); }
-  const body=()=>{ const sel=items.filter(x=>state.sendSel[x.id]!==false); let g=null; const L=['Bonjour,','','Voici mon récap Géomédiation :']; sel.forEach(x=>{ if(x.g!==g){ L.push('', x.g); g=x.g; } L.push('- '+x.t); }); L.push('','Merci !'); return L.join('\n'); };
-  const btns=h('div',{class:'row-inline', style:'margin-top:14px'});
-  const mail=h('a',{class:'mail-btn', href:'#'},'📬 Préparer l\'e-mail');
-  mail.onclick=()=>{ const to=state.sendTo==='med'?CONTACT_MAIL:state.sendTo==='autre'?(state.sendAddr||'').trim():''; mail.href='mailto:'+to+'?subject='+encodeURIComponent('Mon récap Géomédiation')+'&body='+encodeURIComponent(body()); };
-  const msg=h('div',{class:'msg'}); msg.hidden=true;
-  const sm='padding:8px 14px;font-size:13px';
-  btns.append(mail, h('button',{class:'btn btn-soft', style:sm, onclick:()=>printBilan(items.filter(x=>state.sendSel[x.id]!==false))},'📄 Télécharger mon bilan (PDF)'));
-  if(navigator.share) btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>navigator.share({title:'Mon bilan Géomédiation', text:body()}).catch(()=>{})},'📤 Partager'));
-  btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>copyText(body(),msg)},'📋 Copier la sélection'));
-  box.append(btns,msg);
-  if(state.sendTo==='med') box.appendChild(h('p',{class:'small', style:'margin:10px 0 0'},`Adresse du médiateur : <b>${CONTACT_MAIL}</b>`));
+  const mail=h('a',{class:'mail-btn', href:'#', style:'margin-top:10px'},'📬 Préparer l\'e-mail');
+  mail.onclick=()=>{ const to=state.sendTo==='autre'?(state.sendAddr||'').trim():''; mail.href='mailto:'+to+'?subject='+encodeURIComponent('Ma fiche Géomédiation')+'&body='+encodeURIComponent('Bonjour,\n\n'+body()); };
+  box.appendChild(mail);
   add(box);
+  }
+  const qs=DREAMS.map(d=>({d, t:((state.a[d.k]||{}).remarque||'').trim()})).filter(x=>x.t);
+  const mb=h('section',{class:'medi'}); mb.appendChild(h('h3',null,'💬 Mes questions et remarques pour le médiateur'));
+  if(qs.length){ qs.forEach(x=>mb.appendChild(h('p',null,`<b>${x.d.e} ${x.d.cat}</b> · ${esc(x.t)}`)));
+    const m=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
+    m.onclick=()=>{ m.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation : mes questions')+'&body='+encodeURIComponent('Bonjour,\n\n'+qs.map(x=>x.d.cat+' : '+x.t).join('\n\n')+'\n\nMerci !'); };
+    mb.appendChild(m); }
+  else mb.appendChild(h('p',null,`Écrivez-les dans n'importe quelle rubrique, ou directement à <b>${CONTACT_MAIL}</b>.`));
+  add(mb);
   const n=h('div',{class:'nav'});
   n.append(h('button',{class:'btn btn-ghost', onclick:goBack},'← Retour'), h('button',{class:'btn btn-soft', onclick:()=>go('home')},'Découvrir une autre carte →'));
   add(n);
@@ -1060,7 +1198,7 @@ function render(){
   if(state.view!=='home') slot.appendChild(h('button',{class:'back-btn', onclick:goBack},'← Retour'));
   root.innerHTML='';
   ({home:renderHome, dream:renderDream, recap:renderRecap}[state.view]||renderHome)();
-  add(h('p',{class:'small center', style:'margin-top:18px'}, `💬 ${state.view==='dream'?'':"Une question, une remarque, une piste d'amélioration\u00a0? "}Écrivez-nous à tout moment\u00a0: <a href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Géomédiation : ma question')}" style="color:var(--clay);font-weight:700">${CONTACT_MAIL}</a>`));
+  add(h('p',{class:'small center', style:'margin-top:18px'}, `💬 ${state.view==='dream'?'':"Une question, une remarque\u00a0? "}Écrivez au médiateur à tout moment\u00a0: <a href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Géomédiation : ma question')}" style="color:var(--clay);font-weight:700">${CONTACT_MAIL}</a>`));
   save();
 }
 $('brandBtn').onclick=()=>go('home');

@@ -457,6 +457,34 @@
   .react{display:grid; grid-template-columns:1fr 1fr;}
   @media (max-width:560px){ .g-flow{grid-template-columns:1fr; gap:4px;} .g-step{flex-direction:row; text-align:left; gap:12px; padding:10px 14px;} .g-step .g-e{font-size:22px;} .g-step span.g-t{display:flex; flex-direction:column;} .g-arr{transform:rotate(90deg); justify-self:center; font-size:14px; line-height:1;} }
   @media (max-width:420px){ .dec-row{grid-template-columns:1fr;} }
+  .fiches-h{margin:6px 0 0; font:800 15px var(--display); color:var(--forest-dark);}
+  .fiches{display:grid; grid-template-columns:1fr; gap:8px;}
+  .fiche{display:block; width:100%; text-align:left; font:inherit; cursor:pointer; border-radius:14px; padding:13px 15px; border:1.5px solid var(--line); background:var(--paper); color:var(--forest-dark); transition:transform .15s;}
+  .fiche:hover{transform:translateY(-1px); border-color:var(--gold);}
+  .fiche .f-front{display:flex; justify-content:space-between; align-items:center; gap:10px; font-weight:800; font-size:14.5px;}
+  .fiche .f-front i{font-style:normal; font-size:12px; font-weight:700; color:var(--clay); white-space:nowrap;}
+  .fiche.flipped{background:var(--forest); border-color:var(--forest); color:var(--cream); cursor:default;}
+  .fiche .f-back{font-size:13.5px; line-height:1.55;}
+  .fiche .f-back p{margin:0 0 8px; color:inherit;}
+  .card .fiche.flipped b{color:var(--gold-light); background:none; padding:0;}
+  .fiche .f-back .place{color:var(--ink-soft);}
+  .card .fiche .f-back .place b{color:var(--forest-dark);}
+  .fiche .f-back .slogan-pill{color:var(--forest-dark);}
+  .fiche .f-back ol{color:inherit; padding-left:18px;}
+  .fiche .f-close{display:inline-block; margin-top:4px; font-size:12px; font-weight:800; color:var(--gold-light); cursor:pointer;}
+  .fiche svg{max-width:100%; height:auto; background:#FFFDF8; border-radius:10px;}
+  .fab{position:fixed; right:14px; bottom:14px; z-index:40; display:flex; align-items:center; gap:6px; font:800 13.5px var(--body); border:none; border-radius:999px; padding:12px 16px; background:var(--gold); color:var(--forest-dark); box-shadow:0 8px 24px rgba(0,0,0,.28); cursor:pointer;}
+  .sheet-bg{position:fixed; inset:0; z-index:50; background:rgba(20,30,24,.45); display:flex; align-items:flex-end; justify-content:center;}
+  .sheet{width:100%; max-width:560px; background:var(--cream); border-radius:20px 20px 0 0; padding:18px 18px 22px; max-height:88vh; overflow:auto; animation:rise .3s ease both;}
+  .sheet h3{margin:0 0 4px; font:800 18px var(--display); color:var(--forest-dark);}
+  .sheet .tabs2{display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:10px 0 12px;}
+  .sheet .tabs2 button{font:800 13.5px var(--body); border:1.5px solid var(--line); background:var(--paper); border-radius:12px; padding:10px; cursor:pointer; color:var(--forest-dark);}
+  .sheet .tabs2 button.on{background:var(--forest); border-color:var(--forest); color:var(--cream);}
+  .sheet textarea{width:100%; min-height:90px; font:14px var(--body); padding:10px 12px; border:1.5px solid var(--line); border-radius:10px; resize:vertical; background:#fff;}
+  .sheet .row-inline{margin-top:10px;}
+  .sheet p{font-size:13.5px; color:var(--ink-soft); line-height:1.5; margin:0 0 6px;}
+  .sheet .done{background:#FFF7DD; border:1.5px solid var(--gold); border-radius:10px; padding:8px 12px; font-size:13.5px; color:var(--forest-dark); margin-top:10px;}
+  .shell{padding-bottom:70px;}
 </style>
 </head>
 <body>
@@ -733,6 +761,8 @@ const COLLAB_GROUPS = [
   {label:"Environnement & économie régénérative", e:"🌿", m:[["Charles Judes","Organisation des systèmes vivants et résilience"],["Pamela Deline","Relocalisation économique et sociale"],["Didier Loyens","Modèles économiques alternatifs et financement territorial"]]},
   {label:"Médiation & coopération", e:"🤝", m:[["Antoine Valabergue","Synchronisation des initiatives locales"],["Renaud Alquier","Structuration de la participation citoyenne"],["Thomas Ndem (Civipedia)","Base de données territoriale collaborative"],["Cyrille Souche","Sensibilisation et accompagnement à la transition"]]},
   {label:"Santé & bien-être", e:"💛", m:[["Stéphanie Wünsche","Équilibre psycho-corporel et pratiques d'harmonisation"],["Fanny Walter","Bien-être et qualité de vie, réseau BNB (Bonheur National Brut)"]]}];
+const PRO_POLES = {entreprise:["Intelligence collective & gouvernance","Médiation & coopération","Numérique & open source"], idees:["Géographie & territoire","Médiation & coopération","Environnement & économie régénérative"], pensee:["Santé & bien-être"], maison:["Santé & bien-être","Médiation & coopération"], reseau:["Médiation & coopération","Numérique & open source"]};
+function prosFor(dk){ return (PRO_POLES[dk]||[]).flatMap(l=>{ const g=COLLAB_GROUPS.find(x=>x.label===l); return g?g.m.map(([n,r])=>({t:n, d:g.e+' '+r})):[]; }); }
 const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 Je veux bien <b>partager mon témoignage</b> (vidéo ou écrit) pour soutenir les médiateurs"};
 const FORMATS = {k:'format', type:'chips', label:'Le format qui vous conviendrait', opts:['Atelier','Formation','Accompagnement']};
 
@@ -1043,15 +1073,32 @@ function decisionBar(d, lv){
   row2.appendChild(h('button',{class:'go', onclick:()=>go('recap')},'✅ Ça me suffit pour l\'instant <small style="display:block;font-weight:600;opacity:.75">Je passe à ma fiche</small>'));
   box.appendChild(row);
   if(D.choix){ const id='obj-'+d.k; const f=h('div',{class:'fld'}); f.append(h('label',{class:'fld-label',for:id}, D.choix==='agis'?'🎯 Mon objectif':'🎯 Mon objectif, quand je serai prêt')); const ta=h('textarea',{id, placeholder:'En une phrase, ce que je veux faire'}); ta.value=a.obj||''; ta.oninput=e=>{ a.obj=e.target.value; }; f.appendChild(ta); box.appendChild(f); }
-  if(D.pro){ box.appendChild(field(d.k, FORMATS)); }
+  if(D.pro){ box.appendChild(field(d.k, FORMATS)); const P=prosFor(d.k); if(P.length) box.appendChild(field(d.k, {k:'proQui', type:'cardsN', label:'Les professionnels du réseau sur ce sujet (facultatif)', opts:P})); }
   if(D.q||D.pro){ const m=h('div',{class:'medi', style:'margin-top:0'});
-    m.appendChild(h('p',null, D.q ? (D.pro ? "💬 Votre question part au <b>médiateur</b>, qui vous répond et vous met en relation avec un professionnel du réseau." : "💬 Votre question part au <b>médiateur</b>, qui vous répond. Elle ne va pas dans votre fiche.") : "🤝 Le <b>médiateur</b> vous met en relation avec un professionnel du réseau."));
+    m.appendChild(h('p',null, D.q ? (D.pro ? "💬 Votre question part au <b>médiateur</b>, qui vous répond et vous met en relation avec un professionnel du réseau." : "💬 Votre question part au <b>médiateur</b>, qui vous répond. Elle ne va pas dans votre fiche.") : "🤝 Le <b>médiateur</b> de cette thématique vous oriente vers les techniques et les acteurs qui vous correspondent le mieux."));
     if(D.q){ const ta=h('textarea',{'aria-label':'Votre question', placeholder:'Votre question ou votre remarque…'}); ta.value=a.remarque||''; ta.oninput=e=>{ a.remarque=e.target.value; }; m.appendChild(ta); }
     const mm=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
-    mm.onclick=()=>{ const L=['Bonjour,','']; if(D.pro) L.push(`J'aimerais connaître un professionnel dans ce domaine : ${d.cat}`+((a.format||[]).length?` (format : ${a.format.join(', ')})`:'')+'.',''); if(D.q&&a.remarque) L.push(a.remarque,''); L.push('Merci !'); mm.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation · '+d.cat)+'&body='+encodeURIComponent(L.join('\n')); };
+    mm.onclick=()=>{ const L=['Bonjour,','']; if(D.pro) L.push(`J'aimerais connaître un professionnel dans ce domaine : ${d.cat}`+((a.format||[]).length?` (format : ${a.format.join(', ')})`:'')+'.'+((a.proQui||[]).length?` Je pense à : ${a.proQui.join(', ')}.`:''),''); if(D.q&&a.remarque) L.push(a.remarque,''); L.push('Merci !'); mm.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation · '+d.cat)+'&body='+encodeURIComponent(L.join('\n')); };
     m.appendChild(mm); box.appendChild(m); }
   box.appendChild(row2);
   return box;
+}
+function fichesGroup(key, title, html){
+  const tmp=document.createElement('div'); tmp.innerHTML=html;
+  const items=[]; let cur=null;
+  [...tmp.children].forEach(el=>{ const first=el.firstChild;
+    const isHead = el.tagName==='P' && !el.classList.contains('slogan-pill') && first && first.nodeType===1 && first.tagName==='B';
+    if(isHead){ cur={t:first.textContent.replace(/[.:\s]+$/,''), html:el.outerHTML}; items.push(cur); }
+    else { if(!cur){ cur={t:'L\'essentiel', html:''}; items.push(cur); } cur.html+=el.outerHTML; } });
+  const wrap=h('div',{class:'lvl-part'}); wrap.appendChild(h('h4',{class:'fiches-h'},title));
+  const grid=h('div',{class:'fiches'}); state.fl=state.fl||{};
+  items.forEach((it,k)=>{ const id=key+'-'+k; const f=h('div',{class:'fiche', role:'button', tabindex:'0'});
+    const paint=()=>{ const on=!!state.fl[id]; f.className='fiche'+(on?' flipped':''); f.setAttribute('aria-expanded',String(on));
+      f.innerHTML= on ? `<div class="f-back">${it.html}<span class="f-close">↺ Retourner</span></div>` : `<div class="f-front"><span>${it.t}</span><i>Retourner ↻</i></div>`; };
+    const flip=e=>{ if(state.fl[id] && !(e.target.classList&&e.target.classList.contains('f-close'))) return; state.fl[id]=!state.fl[id]; save(); paint(); };
+    f.onclick=flip; f.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); state.fl[id]=!state.fl[id]; save(); paint(); } };
+    paint(); grid.appendChild(f); });
+  wrap.appendChild(grid); return wrap;
 }
 function renderDream(){
   const d=DREAMS.find(x=>x.k===state.dream); if(!d){ state.view='home'; return renderHome(); }
@@ -1077,7 +1124,7 @@ function renderDream(){
       if(P.link){ const [k,t]=P.link; box.appendChild(h('button',{class:'btn btn-gold', style:'align-self:flex-start;padding:10px 18px;font-size:14px', onclick:()=>go('dream',k)},t)); }
       if(P.w) wires.push(()=>P.w(box));
       card.appendChild(box); });
-    (L.details||[]).forEach(D=>{ const det=h('details',{class:'more-box'}); det.innerHTML=`<summary>${D.sum}</summary>`+(typeof D.html==='function'?D.html():D.html); card.appendChild(det); });
+    (L.details||[]).forEach((D,di)=>{ const html=typeof D.html==='function'?D.html():D.html; if(i===2){ card.appendChild(fichesGroup(d.k+'-'+di, D.sum.replace(/^\+\s*/,''), html)); return; } const det=h('details',{class:'more-box'}); det.innerHTML=`<summary>${D.sum}</summary>`+html; card.appendChild(det); });
     L.fields.forEach(f=>card.appendChild(field(d.k,f)));
     if(i===lv-1) card.appendChild(decisionBar(d, lv));
     root.appendChild(card);
@@ -1119,6 +1166,7 @@ function printBilan(sel){
 }
 function recapItems(){
   const it=[]; const push=(g,t)=>it.push({id:g+'|'+t,g,t});
+  (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.cat+' · '+d.t;
     d.levels.forEach(L=>L.fields.forEach(f=>{ const v=a[f.k]; const lab=(f.label||'').replace(/<[^>]+>/g,'').replace(/ /g,' ');
@@ -1139,7 +1187,7 @@ function recapItems(){
     }));
     const D=(state.dec||{})[d.k]||{};
     if(D.choix||a.obj) push(g, (D.choix==='agis'?'J\'agis':D.choix==='reflechis'?'Je réfléchis':'Mon objectif')+(a.obj?' · 🎯 '+a.obj:''));
-    if(D.pro) push(g, 'J\'aimerais connaître un professionnel dans ce domaine'+((a.format||[]).length?' ('+a.format.join(', ')+')':''));
+    if(D.pro) push(g, 'J\'aimerais connaître un professionnel dans ce domaine'+((a.format||[]).length?' ('+a.format.join(', ')+')':'')+((a.proQui||[]).length?' · '+a.proQui.join(', '):''));
   });
   return it;
 }
@@ -1174,7 +1222,8 @@ function renderRecap(){
   box.appendChild(mail);
   add(box);
   }
-  const qs=DREAMS.map(d=>{ const D=(state.dec||{})[d.k]||{}, a=state.a[d.k]||{}; const t=[D.pro?'J\'aimerais connaître un professionnel dans ce domaine.':'', D.q?(a.remarque||'').trim():''].filter(Boolean).join(' '); return {d,t}; }).filter(x=>x.t);
+  const qs0=(state.qs||[]).map(x=>({d:{e:'💬', cat:x.c.replace(/^\S+\s/,'')}, t:x.t}));
+  const qs=qs0.concat(DREAMS.map(d=>{ const D=(state.dec||{})[d.k]||{}, a=state.a[d.k]||{}; const t=[D.pro?'J\'aimerais connaître un professionnel dans ce domaine.':'', D.q?(a.remarque||'').trim():''].filter(Boolean).join(' '); return {d,t}; }).filter(x=>x.t));
   const mb=h('section',{class:'medi'}); mb.appendChild(h('h3',null,'💬 Mes demandes au médiateur'));
   if(qs.length){ qs.forEach(x=>mb.appendChild(h('p',null,`<b>${x.d.e} ${x.d.cat}</b> · ${esc(x.t)}`)));
     const m=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
@@ -1189,6 +1238,27 @@ function renderRecap(){
 }
 
 /* ================= RENDU ================= */
+function ctxLabel(){ if(state.view==='dream'){ const d=DREAMS.find(x=>x.k===state.dream); if(d) return d.e+' '+d.cat; } return state.view==='recap'?'📇 Ma fiche':'🏠 Accueil'; }
+function openSheet(tab){
+  const old=$('sheetBg'); if(old) old.remove();
+  let t=tab||'obj'; const bg=h('div',{class:'sheet-bg', id:'sheetBg'}); const sh=h('div',{class:'sheet', role:'dialog', 'aria-modal':'true', 'aria-label':'Objectif ou question'});
+  bg.onclick=e=>{ if(e.target===bg) bg.remove(); };
+  const paint=()=>{ sh.innerHTML=''; const ctx=ctxLabel();
+    sh.appendChild(h('h3',null,'Un objectif, une question ?'));
+    sh.appendChild(h('p',null,`À propos de : <b>${ctx}</b>`));
+    const tabs=h('div',{class:'tabs2'});
+    tabs.append(h('button',{class:t==='obj'?'on':'', onclick:()=>{ t='obj'; paint(); }},'🎯 Je note un objectif'), h('button',{class:t==='q'?'on':'', onclick:()=>{ t='q'; paint(); }},'💬 Je pose une question'));
+    sh.appendChild(tabs);
+    sh.appendChild(h('p',null, t==='obj' ? "Il s'ajoute à <b>votre fiche</b>, rien que pour vous." : "Elle part au <b>médiateur</b>, qui vous répond."));
+    const ta=h('textarea',{'aria-label': t==='obj'?'Mon objectif':'Ma question', placeholder: t==='obj'?'En une phrase, ce que je veux faire…':'Votre question ou votre remarque…'});
+    sh.appendChild(ta); const row=h('div',{class:'row-inline'}); const done=h('div',{class:'done'}); done.hidden=true;
+    if(t==='obj') row.appendChild(h('button',{class:'btn btn-primary', onclick:()=>{ const v=ta.value.trim(); if(!v) return; (state.objs=state.objs||[]).push({c:ctx, t:v}); save(); ta.value=''; done.hidden=false; done.innerHTML='✓ Ajouté à votre fiche.'; if(state.view==='recap') render(); }},'🎯 Ajouter à ma fiche'));
+    else { const m=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur'); m.onclick=()=>{ const v=ta.value.trim(); (state.qs=state.qs||[]); if(v) state.qs.push({c:ctx, t:v}); save(); m.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation · '+ctx.replace(/^\S+\s/,''))+'&body='+encodeURIComponent('Bonjour,\n\n'+v+'\n\nMerci !'); done.hidden=false; done.innerHTML='✓ Votre messagerie s\'ouvre avec la question prête à partir.'; }; row.appendChild(m); }
+    row.appendChild(h('button',{class:'btn btn-ghost', onclick:()=>bg.remove()},'Fermer'));
+    sh.append(row, done); setTimeout(()=>ta.focus(),50); };
+  paint(); bg.appendChild(sh); document.body.appendChild(bg);
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ const b=$('sheetBg'); if(b) b.remove(); } });
 function render(){
   const slot=$('homeSlot'); slot.innerHTML='';
   if(state.view!=='home') slot.appendChild(h('button',{class:'back-btn', onclick:goBack},'← Retour'));
@@ -1198,6 +1268,7 @@ function render(){
   save();
 }
 $('brandBtn').onclick=()=>go('home');
+{ const f=h('button',{class:'fab', 'aria-label':'Noter un objectif ou poser une question', onclick:()=>openSheet()},'🎯 Objectif · 💬 Question'); document.body.appendChild(f); }
 render();
 
 </script>

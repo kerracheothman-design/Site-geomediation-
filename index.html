@@ -485,6 +485,9 @@
   .sheet p{font-size:13.5px; color:var(--ink-soft); line-height:1.5; margin:0 0 6px;}
   .sheet .done{background:#FFF7DD; border:1.5px solid var(--gold); border-radius:10px; padding:8px 12px; font-size:13.5px; color:var(--forest-dark); margin-top:10px;}
   .shell{padding-bottom:70px;}
+  .reco-tag{display:none; font-style:normal; margin-left:8px; background:var(--gold); color:var(--forest-dark); border-radius:999px; padding:2px 8px; letter-spacing:0; text-transform:none; font-size:11px;}
+  .dream.suggest{box-shadow:0 0 0 3px var(--gold), 0 10px 24px rgba(31,51,41,.28);}
+  .dream.suggest .reco-tag{display:inline-block;}
 </style>
 </head>
 <body>
@@ -714,7 +717,7 @@ const LEVIERS = ["🌿 Bien-être","Gouvernance","Finance éthique","Numérique,
 const STEPS_DETAIL = {sum:"+ Les 7 étapes en détail", html:()=>`<ol class="steps7">${CYCLE.map((c,i)=>`<li><i style="background:${CYCLE_COLS[i]};color:${i<3?'#1F3329':'#fff'}">${i+1}</i><span><b>${c.n}</b> · ${c.d}</span></li>`).join('')}</ol>`};
 const DEPART={k:'depart', type:'chips1', label:"Où en êtes-vous ? Chacun avance à son rythme", opts:['🌱 Je découvre','🔥 Je suis motivé','🚀 J\'agis déjà','🎓 C\'est mon métier']};
 function L1(o){ return {intro:o.intro,
-  fields:[DEPART, {k:'question', type:'chips1', label:`LA question : l'avez-vous déjà posée ${o.qui} ?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Pas encore"]}, ...(o.extra||[]),
+  fields:[{k:'question', type:'chips1', label:`LA question : l'avez-vous déjà posée ${o.qui} ?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Pas encore"]}, ...(o.extra||[]),
           {k:'besoins', type:'area', label:o.labA+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phA||''}, {k:'ressources', type:'area', label:o.labR+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phR||''}]}; }
 function L2(ou, lab){ return {intro:`Où en est l'organisation ${ou} ? Pour chaque étape : <b>0</b> = à lancer, <b>5</b> = bien en place.`,
   fields:[{k:'eval', type:'stepsEval'}, {k:'projet', type:'area', label:lab||'Une idée de projet'}], details:[STEPS_DETAIL]}; }
@@ -826,7 +829,7 @@ const DREAMS = [
   ]},
   {k:'reseau', e:'🌐', cat:'Réseau', star:true, dream:"rejoindre un <b>réseau commun</b> qui facilite la coopération entre les <b>échelles</b>, les <b>thématiques</b> et les <b>acteurs</b>", t:"Rejoindre le réseau", levels:[
     {intro:"Le réseau réunit tous les acteurs qui souhaitent <b>améliorer la société</b>. Chacun garde sa <b>casquette de spécialiste</b>… peut, en plus, <b>favoriser la coopération</b>, et gagne en <b>visibilité</b> tout en restant <b>indépendant</b>.",
-     fields:[DEPART, {k:'acteur', type:'cardsN', label:'Vous êtes (plusieurs casquettes, c\'est permis)', opts:ACTEURS},
+     fields:[{k:'acteur', type:'cardsN', label:'Vous êtes (plusieurs casquettes, c\'est permis)', opts:ACTEURS},
              {k:'domaine', type:'chips', label:'Vos thématiques', opts:THEMES.map(t=>t.e+' '+t.n)},
              {k:'echelle', type:'chips', label:'Vos échelles territoriales', opts:ECH}, TEMOIGNAGE]},
     {name:"Votre implication", intro:"Chacun s'implique <b>à son rythme</b>. Choisissez votre degré d'implication, puis les missions qui vous parlent : une seule suffit pour démarrer.",
@@ -1020,7 +1023,7 @@ function testBlock(){
   const t=h('section',{class:'test'});
   t.innerHTML=`<h3>Et si tous nos problèmes venaient de l'organisation\u00a0?</h3><p class="test-s">Comment mettre en place une <b>bonne organisation</b>\u00a0? Commencez par vous évaluer dans les différentes sphères de votre vie.</p>`;
   const fb=h('div'); const btn=h('button',{class:'btn btn-gold'});
-  const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.cat} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });
+  const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); state.reco=d.k; document.querySelectorAll('.dream').forEach(el=>el.classList.toggle('suggest', el.dataset.k===d.k)); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.cat} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });
   SPHERES.forEach(x=>{ const v=state.test[x.k]||0; const row=h('div',{class:'sph'}); const val=h('span',null,v+'/5');
     const top=h('div',{class:'sph-top'},`<span>${x.e} ${x.n}</span>`); top.appendChild(val);
     const r=h('input',{type:'range',min:0,max:5,value:v,'aria-label':'Organisation · '+x.n}); r.oninput=e=>{ state.test[x.k]=+e.target.value; val.textContent=e.target.value+'/5'; upd(); save(); };
@@ -1038,11 +1041,14 @@ function renderHome(){
   add(h('div',{class:'badges', style:'justify-content:flex-start;margin:0 0 14px'},'<span class="badge">⏱️ 2 à 10 minutes</span><span class="badge">🔒 Vos réponses restent à vous</span>'));
   add(guideBlock());
   add(h('h2',{class:'agir-h', id:'agir'},'🚀 2 · Agir : par où commencer ?'));
+  const dep=h('div',{class:'fld', style:'margin:0 0 14px'}); dep.appendChild(h('div',{class:'fld-label'},DEPART.label));
+  const drow=h('div',{class:'chip-row'}); DEPART.opts.forEach(o=>{ const on=state.depart===o; drow.appendChild(h('button',{class:'chip'+(on?' active':''),'aria-pressed':String(on), onclick:()=>{ state.depart=on?null:o; render(); }}, o)); });
+  dep.appendChild(drow); add(dep);
   add(testBlock());
   add(h('p',{class:'ask'},'Ou choisissez directement votre sujet. Vous aimeriez…'));
   const list=h('div',{class:'dreams'});
   DREAMS.filter(d=>!d.hidden).forEach((d,i)=>{ const n=answered(d.k);
-    list.appendChild(h('button',{class:'dream d'+i+(d.star?' star':''), onclick:()=>go('dream', d.k)}, `<span class="dream-e">${d.e}</span><span class="dream-cat">${d.cat}</span><span class="dream-t">…${d.dream} ?</span><span class="dream-go">${n?'✓ Continuer':'Découvrir'} →</span>`)); });
+    list.appendChild(h('button',{class:'dream d'+i+(d.star?' star':'')+(state.reco===d.k&&SPHERES.some(x=>(state.test||{})[x.k])?' suggest':''), 'data-k':d.k, onclick:()=>go('dream', d.k)}, `<span class="dream-e">${d.e}</span><span class="dream-cat">${d.cat}<em class="reco-tag">👉 Conseillé pour commencer</em></span><span class="dream-t">…${d.dream} ?</span><span class="dream-go">${n?'✓ Continuer':'Découvrir'} →</span>`)); });
   add(list);
   add(h('p',{class:'bon-endroit'},'Alors, vous êtes <em>au bon endroit.</em>'));
   const lv=state.lvl.home||1;
@@ -1165,6 +1171,7 @@ function printBilan(sel){
 }
 function recapItems(){
   const it=[]; const push=(g,t)=>it.push({id:g+'|'+t,g,t});
+  if(state.depart) push('🧭 Mon point de départ', state.depart);
   (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.cat+' · '+d.t;

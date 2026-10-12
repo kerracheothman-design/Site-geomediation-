@@ -712,9 +712,10 @@ function stepsRows(w, cur, cb){ CYCLE.forEach((c,i)=>{ const row=h('div',{class:
   w.appendChild(h('div',{class:'scale'},'<span>0 · à lancer</span><span>5 · bien en place</span>')); }
 const LEVIERS = ["🌿 Bien-être","Gouvernance","Finance éthique","Numérique, IA & open source","Intelligence collective","Éducation","Communication","Juridique"];
 const STEPS_DETAIL = {sum:"+ Les 7 étapes en détail", html:()=>`<ol class="steps7">${CYCLE.map((c,i)=>`<li><i style="background:${CYCLE_COLS[i]};color:${i<3?'#1F3329':'#fff'}">${i+1}</i><span><b>${c.n}</b> · ${c.d}</span></li>`).join('')}</ol>`};
+const DEPART={k:'depart', type:'chips1', label:"Où en êtes-vous ? Chacun avance à son rythme", opts:['🌱 Je découvre','🔥 Je suis motivé','🚀 J\'agis déjà','🎓 C\'est mon métier']};
 function L1(o){ return {intro:o.intro,
-  fields:[{k:'question', type:'toggle', label:`Je pose la question ${o.qui} : « Envie d'une meilleure organisation ? »`}, ...(o.extra||[]),
-          {k:'besoins', type:'area', label:o.labA, ph:o.phA||''}, {k:'ressources', type:'area', label:o.labR, ph:o.phR||''}]}; }
+  fields:[DEPART, {k:'question', type:'chips1', label:`LA question : l'avez-vous déjà posée ${o.qui} ?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Pas encore"]}, ...(o.extra||[]),
+          {k:'besoins', type:'area', label:o.labA+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phA||''}, {k:'ressources', type:'area', label:o.labR+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phR||''}]}; }
 function L2(ou, lab){ return {intro:`Où en est l'organisation ${ou} ? Pour chaque étape : <b>0</b> = à lancer, <b>5</b> = bien en place.`,
   fields:[{k:'eval', type:'stepsEval'}, {k:'projet', type:'area', label:lab||'Une idée de projet'}], details:[STEPS_DETAIL]}; }
 
@@ -763,12 +764,12 @@ const COLLAB_GROUPS = [
   {label:"Santé & bien-être", e:"💛", m:[["Stéphanie Wünsche","Équilibre psycho-corporel et pratiques d'harmonisation"],["Fanny Walter","Bien-être et qualité de vie, réseau BNB (Bonheur National Brut)"]]}];
 const PRO_POLES = {entreprise:["Intelligence collective & gouvernance","Médiation & coopération","Numérique & open source"], idees:["Géographie & territoire","Médiation & coopération","Environnement & économie régénérative"], pensee:["Santé & bien-être"], maison:["Santé & bien-être","Médiation & coopération"], reseau:["Médiation & coopération","Numérique & open source"]};
 function prosFor(dk){ return (PRO_POLES[dk]||[]).flatMap(l=>{ const g=COLLAB_GROUPS.find(x=>x.label===l); return g?g.m.map(([n,r])=>({t:n, d:g.e+' '+r})):[]; }); }
-const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 Je veux bien <b>partager mon témoignage</b> (vidéo ou écrit) pour soutenir les médiateurs"};
+const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 <b>Je témoigne</b> (vidéo ou écrit)\u00a0: en tant qu'acteur, je souhaite qu'une telle organisation soit mise en place dans notre société et sur nos territoires"};
 const FORMATS = {k:'format', type:'chips', label:'Le format qui vous conviendrait', opts:['Atelier','Formation','Accompagnement']};
 
 const DREAMS = [
   {k:'entreprise', e:'💼', cat:'Management', dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Votre entreprise, votre établissement…", levels:[
-    L1({qui:'à mes collègues', intro:"Au travail, tout commence par <b>LA question</b>, posée à vos collègues. Puis on note les <b>attentes</b> et les <b>ressources</b> de chacun, dans l'objectif de <b>co-construire des projets</b>.",
+    L1({qui:'à vos collègues', intro:"Au travail, tout commence par une question simple, à poser à vos collègues\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on note ensemble les <b>attentes</b> et les <b>ressources</b> de chacun, pour <b>co-construire des projets</b>.",
         extra:[{k:'leviers', type:'chips', label:'Dans quels domaines ?', opts:LEVIERS}], labA:"Les attentes de l'équipe", labR:'Les ressources disponibles'}),
     L2('dans votre entreprise'),
     {intro:"Des <b>médiateurs</b>, généralistes ou spécialisés, adaptent la méthode à votre entreprise et à votre <b>filière</b>. Leur force : aider chacun à construire sa <b>feuille de route</b>, et faire circuler les bonnes idées entre les équipes.",
@@ -776,7 +777,7 @@ const DREAMS = [
      parts:[{p:"Chaque équipe avance <b>à son rythme</b> : un progrès dans un service nourrit les autres, par petits <b>va-et-vient</b>."}]}
   ]},
   {k:'idees', e:'🗺️', cat:'Territoire', dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Votre territoire, à la bonne échelle", levels:[
-    L1({qui:'aux acteurs de mon territoire', intro:"Sur votre territoire, tout commence par <b>LA question</b>, posée à ses acteurs. Puis on relie les <b>besoins</b> et les <b>ressources</b> de chacun, dans l'objectif de <b>co-construire des projets</b> votés et évalués par les humains concernés.", labA:'Les besoins', labR:'Les ressources', extra:[{k:'echelle', type:'scales', label:'Quelles échelles territoriales ? Autant que vous voulez, ou aucune'},{k:'domaine', type:'chips', label:'Dans quels domaines ?', opts:THEMES.map(t=>t.e+' '+t.n)}]}),
+    L1({qui:'aux acteurs de votre territoire', intro:"Sur votre territoire, tout commence par une question simple, à poser à ses acteurs\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on relie les <b>besoins</b> et les <b>ressources</b> de chacun, pour <b>co-construire des projets</b> votés et évalués par les humains concernés.", labA:'Les besoins', labR:'Les ressources', extra:[{k:'echelle', type:'scales', label:'Quelles échelles territoriales ? Autant que vous voulez, ou aucune'},{k:'domaine', type:'chips', label:'Dans quels domaines ?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
     {intro:"Où en est l'organisation à chaque échelle choisie\u00a0? Pour chaque étape\u00a0: <b>0</b> = à lancer, <b>5</b> = bien en place.",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet'}], details:[STEPS_DETAIL]},
     {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions, pour répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin, et le <b>Sud-Ouest</b> a de sérieux atouts. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
@@ -800,7 +801,6 @@ const DREAMS = [
         <p><b>Geste 2 : une vidéo d'une minute</b>, par exemple : « J'ai compris que tout est lié. Je m'implique chez moi et au travail, et je soutiens les médiateurs territoriaux pour qu'ils préparent et animent cette concertation. » À partager avec les médiateurs, vos proches et vos collègues !</p>`}],
      fields:[{k:'role', type:'chips1', label:'Votre implication sur ce territoire', opts:['👀 Suivre','🙋 Participer','🎤 Animer']},
              {k:'preparer', type:'toggle', label:"Je veux <b>participer à la préparation</b> du projet territorial"},
-             TEMOIGNAGE,
              {k:'mediateur', type:'toggle', label:"Devenir <b>médiateur</b> m'intéresse"}]}
   ]},
   {k:'pensee', e:'🧠', cat:'Psychologie', dream:"mieux comprendre le lien entre <b>tout ce que vous vivez</b> et <b>votre état d'esprit</b>", t:"Votre vie, votre état d'esprit", levels:[
@@ -815,7 +815,7 @@ const DREAMS = [
      fields:[{k:'ecriture', type:'area', label:"✍️ Écriture intuitive : qui aimeriez-vous être ? Que voulez-vous vivre ? Dans quelle société ? Et pourquoi, à chaque fois ?"}]}
   ]},
   {k:'maison', e:'🏡', cat:'Famille', dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Une vie de famille harmonieuse", levels:[
-    L1({qui:'à mes proches', intro:"En famille, tout commence par <b>LA question</b>. Ensuite, chacun <b>propose ses idées</b>, et on met en place <b>ensemble</b> celles qui plaisent à tous.",
+    L1({qui:'à vos proches', intro:"En famille, tout commence par une question simple\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, chacun <b>propose ses idées</b>, et on met en place <b>ensemble</b> celles qui plaisent à tous.",
         extra:[{k:'cercle', type:'chips', label:'Avec qui\u00a0?', opts:['En couple','Avec les enfants','En famille élargie','En colocation']},
                {k:'sujets', type:'chips', label:'Sur quels sujets\u00a0?', opts:['Repas','Tâches du quotidien','Budget','Agenda','Loisirs','Vacances']}],
         labA:'Les idées à proposer', labR:'Ce que chacun peut apporter'}),
@@ -826,9 +826,9 @@ const DREAMS = [
   ]},
   {k:'reseau', e:'🌐', cat:'Réseau', star:true, dream:"rejoindre un <b>réseau commun</b> qui facilite la coopération entre les <b>échelles</b>, les <b>thématiques</b> et les <b>acteurs</b>", t:"Rejoindre le réseau", levels:[
     {intro:"Le réseau réunit tous les acteurs qui souhaitent <b>améliorer la société</b>. Chacun garde sa <b>casquette de spécialiste</b>… peut, en plus, <b>favoriser la coopération</b>, et gagne en <b>visibilité</b> tout en restant <b>indépendant</b>.",
-     fields:[{k:'acteur', type:'cardsN', label:'Vous êtes (plusieurs casquettes, c\'est permis)', opts:ACTEURS},
+     fields:[DEPART, {k:'acteur', type:'cardsN', label:'Vous êtes (plusieurs casquettes, c\'est permis)', opts:ACTEURS},
              {k:'domaine', type:'chips', label:'Vos thématiques', opts:THEMES.map(t=>t.e+' '+t.n)},
-             {k:'echelle', type:'chips', label:'Vos échelles territoriales', opts:ECH}]},
+             {k:'echelle', type:'chips', label:'Vos échelles territoriales', opts:ECH}, TEMOIGNAGE]},
     {name:"Votre implication", intro:"Chacun s'implique <b>à son rythme</b>. Choisissez votre degré d'implication, puis les missions qui vous parlent : une seule suffit pour démarrer.",
      fields:[{k:'degre', type:'cards1', label:"Votre degré d'implication", opts:DEGRES},
              {k:'missions', type:'cardsN', label:'Les missions qui vous parlent', opts:MISSIONS},
@@ -844,7 +844,6 @@ const DREAMS = [
       {sum:"+ L'équipe, pôle par pôle", html:()=>COLLAB_GROUPS.map(g=>`<p style="margin:12px 0 4px"><b>${g.e} ${g.label}</b></p>${g.m.map(([n,r])=>`<div class="place"><b>${n}</b> · ${r}</div>`).join('')}`).join('')},
       {sum:"+ Qui est à l'origine du réseau ?", html:`<p>Depuis 2000, <b>Othman Kerrache</b> explore les liens entre psychologie, gouvernance et écologie humaine, nourri d'une double culture (allemande par sa mère, algérienne par son père) et d'un parcours marqué par le sport, les voyages et la philosophie. Convaincu que la politique, c'est <b>organiser la coopération</b>, il crée la Géomédiation en 2010.</p><p>📬 ${'geomediation@live.fr'}</p>`}],
      fields:[{k:'transiscope', type:'toggle', label:"Je suis déjà sur <a href=\"https://transiscope.gogocarto.fr/map#/carte/@46.33,2.50,5z?cat=all\" target=\"_blank\" rel=\"noopener\">Transiscope</a>, la carte des acteurs de la transition (ou sur une autre carte)"},
-             TEMOIGNAGE,
              {k:'inscrire', type:'toggle', label:"Je veux <b>inscrire ma structure</b> ou mon projet dans le réseau"}]}
   ]},
   {k:'comprendre', e:'🧭', cat:'Comprendre', hidden:true, act:'🚀 Je passe à la pratique', t:"Le projet en images", levels:[
@@ -1169,9 +1168,9 @@ function recapItems(){
   (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.cat+' · '+d.t;
-    d.levels.forEach(L=>L.fields.forEach(f=>{ const v=a[f.k]; const lab=(f.label||'').replace(/<[^>]+>/g,'').replace(/ /g,' ');
+    d.levels.forEach(L=>L.fields.forEach(f=>{ const v=a[f.k]; const lab=(f.label||'').replace(/<span[^>]*>.*?<\/span>/g,'').replace(/<[^>]+>/g,'').trim().replace(/ /g,' ');
       if(f.type==='chips' && v&&v.length) push(g, lab+' : '+v.join(', '));
-      else if(f.type==='chips1' && v) push(g, lab.replace(/ ?\?$/,'')+' : '+v);
+      else if(f.type==='chips1' && typeof v==='string') push(g, (f.k==='question'?'LA question':f.k==='depart'?'Mon point de départ':lab.replace(/ ?\?$/,''))+' : '+v);
       else if(f.type==='toggle' && v) push(g, f.k==='question' ? 'J\'ai posé LA question' : lab.replace(/^\S+\s(?=Je)/,''));
       else if(f.type==='scales' && v&&v.length) push(g, 'Mes échelles : '+v.map(e=>echLabel(a,e)).join(', '));
       else if(f.type==='stepsEvalMulti' && v){ const sel=(a[f.src]||[]); (sel.length?sel:['Votre territoire']).forEach(e=>{ const x=v[e]; if(x && Object.values(x).some(n=>n>0)) push(g, 'Où en est l\'organisation · '+echLabel(a,e)+' : '+CYCLE.map(c=>c.n+' '+(x[c.k]||0)+'/5').join(', ')); }); }

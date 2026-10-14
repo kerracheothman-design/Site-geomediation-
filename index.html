@@ -491,6 +491,13 @@
   .intro-video{margin:0 0 16px; border-radius:18px; overflow:hidden; background:var(--forest-dark);}
   .intro-video video{display:block; width:100%; height:auto; aspect-ratio:1/1; background:var(--forest-dark);}
   .intro-video figcaption{font:800 13px var(--body); color:var(--gold-light); padding:9px 14px; letter-spacing:.02em;}
+  .qa-row{display:flex; align-items:flex-start; justify-content:space-between; gap:8px;}
+  .qa-row > h3, .qa-row > .lvl-badge{min-width:0;}
+  .qa{display:inline-flex; gap:4px; flex-shrink:0;}
+  .qa-b{width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line); background:var(--paper); font-size:15px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;}
+  .qa-b:hover{border-color:var(--gold); transform:scale(1.06);}
+  .qa.dark .qa-b{background:rgba(246,241,231,.12); border-color:rgba(246,241,231,.35);}
+  .qa-note{background:var(--cream); border-radius:12px; padding:8px 12px;}
 </style>
 </head>
 <body>
@@ -966,7 +973,7 @@ function field(dk, f){
   }
   if(f.type==='principles'){
     const cur=a[f.k]||(a[f.k]={}); state.openMore=state.openMore||{};
-    PRINCIPLES.forEach(p=>{ const box=h('div',{class:'principle '+p.c}, `<h3>${p.t}</h3><p>${p.s}</p>`);
+    PRINCIPLES.forEach(p=>{ const box=h('div',{class:'principle '+p.c}, `<div class="qa-row"><h3>${p.t}</h3></div><p>${p.s}</p>`); box.firstChild.appendChild(qa('Principe · '+p.t, true));
       const r=h('div',{class:'react'}); REACTIONS.forEach(o=>r.appendChild(h('button',{class:cur[p.k]===o.k?'active':'', onclick:()=>{ cur[p.k]=cur[p.k]===o.k?null:o.k; render(); }}, o.n))); box.appendChild(r);
       const open=!!state.openMore[p.k]; const mb=h('button',{class:'more'}, open?'− Réduire':'+ En savoir plus'); mb.onclick=()=>{ state.openMore[p.k]=!open; render(); }; box.appendChild(mb);
       if(open) box.appendChild(h('div',{class:'more-text'},p.l)); w.appendChild(box); });
@@ -1019,12 +1026,14 @@ function guideBlock(){
     h('button',{class:'g-step s3', onclick:()=>go('recap')},'<span class="g-e">📇</span><span class="g-t"><b>3 · Ma fiche</b><small>Mes réponses et mes objectifs, pour moi</small></span>'));
   g.appendChild(flow);
   g.appendChild(h('p',{class:'g-note'},'Chaque sujet s\'ouvre en <b>3 niveaux</b>, à votre rythme. À chaque étape, vous décidez : <b>je réfléchis</b>, <b>j\'agis</b>, <b>j\'ai une question</b>, ou <b>ça me suffit pour l\'instant</b>. Votre fiche reste à vous ; vos questions partent au médiateur.'));
+  g.appendChild(h('p',{class:'g-note qa-note'},'Partout sur le site, à chaque rubrique et à chaque information\u00a0: touchez <b>🎯</b> pour noter un objectif, ou <b>💬</b> pour poser une question.'));
   return g;
 }
 function testBlock(){
   state.test=state.test||{};
   const t=h('section',{class:'test'});
-  t.innerHTML=`<h3>Et si tous nos problèmes venaient de l'organisation\u00a0?</h3><p class="test-s">Comment mettre en place une <b>bonne organisation</b>\u00a0? Commencez par vous évaluer dans les différentes sphères de votre vie.</p>`;
+  t.innerHTML=`<div class="qa-row"><h3>Et si tous nos problèmes venaient de l'organisation\u00a0?</h3></div><p class="test-s">Comment mettre en place une <b>bonne organisation</b>\u00a0? Commencez par vous évaluer dans les différentes sphères de votre vie.</p>`;
+  t.firstChild.appendChild(qa('🧭 Mon test d\'organisation', true));
   const fb=h('div'); const btn=h('button',{class:'btn btn-gold'});
   const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); state.reco=d.k; document.querySelectorAll('.dream').forEach(el=>el.classList.toggle('suggest', el.dataset.k===d.k)); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.cat} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });
   SPHERES.forEach(x=>{ const v=state.test[x.k]||0; const row=h('div',{class:'sph'}); const val=h('span',null,v+'/5');
@@ -1105,7 +1114,7 @@ function fichesGroup(key, title, html){
   const grid=h('div',{class:'fiches'}); state.fl=state.fl||{};
   items.forEach((it,k)=>{ const id=key+'-'+k; const f=h('div',{class:'fiche', role:'button', tabindex:'0'});
     const paint=()=>{ const on=!!state.fl[id]; f.className='fiche'+(on?' flipped':''); f.setAttribute('aria-expanded',String(on));
-      f.innerHTML= on ? `<div class="f-back">${it.html}<span class="f-close">↺ Retourner</span></div>` : `<div class="f-front"><span>${it.t}</span><i>Retourner ↻</i></div>`; };
+      f.innerHTML= on ? `<div class="f-back">${it.html}<div class="qa-row"><span class="f-close">↺ Retourner</span><span class="qa-slot"></span></div></div>` : `<div class="f-front"><span>${it.t}</span><i>Retourner ↻</i></div>`;  const sl=f.querySelector('.qa-slot'); if(sl) sl.appendChild(qa(it.t, true)); };
     const flip=e=>{ if(state.fl[id] && !(e.target.classList&&e.target.classList.contains('f-close'))) return; state.fl[id]=!state.fl[id]; save(); paint(); };
     f.onclick=flip; f.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); state.fl[id]=!state.fl[id]; save(); paint(); } };
     paint(); grid.appendChild(f); });
@@ -1124,10 +1133,10 @@ function renderDream(){
   const wires=[];
   for(let i=0;i<lv;i++){
     const L=d.levels[i]; const card=h('section',{class:'lvl l'+(i+1), id:'lvl-'+(i+1)});
-    card.appendChild(h('div',{class:'lvl-badge'},`Niveau ${i+1} · ${L.name||LEVEL_NAMES[i]}`));
+    { const r=h('div',{class:'qa-row'}); r.append(h('div',{class:'lvl-badge'},`Niveau ${i+1} · ${L.name||LEVEL_NAMES[i]}`), qa(`${d.e} ${d.cat} · Niveau ${i+1}`)); card.appendChild(r); }
     if(L.intro) card.appendChild(h('p',{class:'lvl-intro'},L.intro));
     (L.parts||[]).forEach(P=>{ const box=h('div',{class:'lvl-part'});
-      if(P.h) box.appendChild(h('h3',null,P.h));
+      if(P.h){ const r=h('div',{class:'qa-row'}); r.append(h('h3',null,P.h), qa(`${d.e} ${d.cat} · ${P.h.replace(/<[^>]+>/g,'')}`)); box.appendChild(r); }
       if(P.v) box.appendChild(h('div',{class:'visual'},P.v()));
       if(P.p) box.appendChild(h('p',null,P.p));
       if(P.slogan) box.appendChild(h('p',{class:'slogan-pill'},P.slogan));
@@ -1251,11 +1260,14 @@ function renderRecap(){
 
 /* ================= RENDU ================= */
 function ctxLabel(){ if(state.view==='dream'){ const d=DREAMS.find(x=>x.k===state.dream); if(d) return d.e+' '+d.cat; } return state.view==='recap'?'📇 Ma fiche':'🏠 Accueil'; }
-function openSheet(tab){
+function qa(ctx, dark){ const w=h('span',{class:'qa'+(dark?' dark':'')});
+  w.append(h('button',{class:'qa-b', title:'Noter un objectif', 'aria-label':'Noter un objectif · '+ctx, onclick:e=>{ e.stopPropagation(); openSheet('obj',ctx); }},'🎯'), h('button',{class:'qa-b', title:'Poser une question', 'aria-label':'Poser une question · '+ctx, onclick:e=>{ e.stopPropagation(); openSheet('q',ctx); }},'💬'));
+  return w; }
+function openSheet(tab, ctxOver){
   const old=$('sheetBg'); if(old) old.remove();
   let t=tab||'obj'; const bg=h('div',{class:'sheet-bg', id:'sheetBg'}); const sh=h('div',{class:'sheet', role:'dialog', 'aria-modal':'true', 'aria-label':'Objectif ou question'});
   bg.onclick=e=>{ if(e.target===bg) bg.remove(); };
-  const paint=()=>{ sh.innerHTML=''; const ctx=ctxLabel();
+  const paint=()=>{ sh.innerHTML=''; const ctx=ctxOver||ctxLabel();
     sh.appendChild(h('h3',null,'Un objectif, une question ?'));
     sh.appendChild(h('p',null,`À propos de : <b>${ctx}</b>`));
     const tabs=h('div',{class:'tabs2'});

@@ -1006,12 +1006,12 @@ const SPHERES=[
   {k:'territoire', e:'🗺️', n:'Mon territoire', card:'idees', tip:"repérez les acteurs autour de vous et dites-leur qu'un réseau existe."}];
 function ricochetSVG(){
   const N=[['🧠','Moi',62,48],['🏡','Famille',278,48],['💼','Travail',62,176],['🗺️','Territoire',278,176]], cols=['#2F4A3C','#3E6350','#5B6F3B','#B5654A'];
-  let s=`<svg class="rico" viewBox="0 0 340 224" role="img" aria-label="Une progression dans une sphère de vie aide les autres, dans les deux sens : moi, famille, travail, territoire"><defs><marker id="rh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E0C15C"/></marker></defs>`;
+  let s=`<svg class="rico" viewBox="0 0 340 224" role="img" aria-label="Une bonne organisation dans un niveau apaise et inspire les autres : moi, famille, travail, territoire"><defs><marker id="rh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E0C15C"/></marker></defs>`;
   [0,1,2].forEach(i=>{ s+=`<circle cx="170" cy="112" r="38" fill="none" stroke="#E0C15C" stroke-width="2" opacity="0"><animate attributeName="r" from="38" to="100" dur="3.6s" begin="${i*1.2}s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.7" to="0" dur="3.6s" begin="${i*1.2}s" repeatCount="indefinite"/></circle>`; });
   N.forEach(([e,n,x,y])=>{ const dx=x-170, dy=y-112, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
     s+=`<line x1="${(170+ux*44).toFixed(1)}" y1="${(112+uy*44).toFixed(1)}" x2="${(x-ux*36).toFixed(1)}" y2="${(y-uy*36).toFixed(1)}" stroke="#E0C15C" stroke-width="2.5" marker-start="url(#rh)" marker-end="url(#rh)"/>`; });
   N.forEach(([e,n,x,y],i)=>{ s+=`<circle cx="${x}" cy="${y}" r="31" fill="${cols[i]}" stroke="#F6F1E7" stroke-width="2"/><text x="${x}" y="${y-1}" text-anchor="middle" font-size="17">${e}</text><text x="${x}" y="${y+16}" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="10.5" fill="#F6F1E7">${n}</text>`; });
-  s+=`<circle cx="170" cy="112" r="40" fill="#E0C15C"/><text x="170" y="108" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="12" fill="#1F3329">Une</text><text x="170" y="124" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="11.5" fill="#1F3329">progression</text></svg>`;
+  s+=`<circle cx="170" cy="112" r="40" fill="#E0C15C"/><text x="170" y="116" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="11.5" fill="#1F3329">Organisation</text></svg>`;
   return s;
 }
 function guideBlock(){
@@ -1043,7 +1043,7 @@ function testBlock(){
   t.appendChild(h('div',{class:'scale'},'<span>0 · à construire</span><span>5 · bien organisée</span>'));
   t.appendChild(fb); upd();
   t.appendChild(h('div',{class:'rico-wrap'},ricochetSVG()));
-  t.appendChild(h('p',{class:'rico-cap'},'Pas besoin de tout faire avancer en même temps\u00a0: <b>un effort sur une sphère aide forcément les autres</b>, quel que soit leur niveau.'));
+  t.appendChild(h('p',{class:'rico-cap'},'Une <b>bonne organisation</b> dans un niveau apaise, et donne de l\'énergie pour <b>inspirer les autres niveaux</b>. Quelle que soit l\'échelle, nous pouvons tous adopter un <b>état d\'esprit de médiateur</b>.'));
   return t;
 }
 function renderHome(){

@@ -327,6 +327,8 @@
   .card .dream-t b{color:var(--gold-light); background:none; padding:0; font-weight:800;}
   .dream-go{font-size:12.5px; font-weight:800; color:var(--gold-light); margin-top:6px;}
   .bon-endroit{font-family:var(--display); font-weight:800; font-size:clamp(22px,5vw,28px); color:var(--forest-dark); text-align:center; margin:22px 0 4px;}
+  .hero-sub{font-family:var(--display); font-weight:700; font-size:clamp(19px,4.6vw,24px); line-height:1.3; color:var(--forest-dark); margin:-4px 0 12px;}
+  .hero-sub em{font-style:normal; color:var(--clay);}
   .bon-endroit em{font-style:normal; color:var(--clay);}
   .center{text-align:center; margin-inline:auto;}
   .dream-h1 em{font-style:normal; color:var(--clay);}
@@ -1049,7 +1051,8 @@ function testBlock(){
 }
 function renderHome(){
   add(h('div',{class:'kicker'},'Bienvenue'));
-  add(h('h1',{class:'dream-h1'},'Nous façonnons <em>ce qui nous façonne.</em>'));
+  add(h('h1',{class:'dream-h1'},'Envie de <em>booster</em> notre société\u00a0?'));
+  add(h('p',{class:'hero-sub'},"Pour la rendre <b>équitable</b> et <b>durable</b>, dans l'intérêt de tous\u00a0? Vous êtes <em>au bon endroit.</em>"));
   add(h('p',{class:'lead', style:'margin:-4px 0 14px'},"Plus un problème est grand, plus on peut évoluer. L'<b>intelligence</b>, c'est l'<b>adaptation</b>, et la capacité de <b>reconnaître ses limites et ses forces</b>."));
   add(h('div',{class:'badges', style:'justify-content:flex-start;margin:0 0 14px'},'<span class="badge">⏱️ 2 à 10 minutes</span><span class="badge">🔒 Vos réponses restent à vous</span>'));
   const vw=h('figure',{class:'intro-video'});
@@ -1066,13 +1069,13 @@ function renderHome(){
   DREAMS.filter(d=>!d.hidden).forEach((d,i)=>{ const n=answered(d.k);
     list.appendChild(h('button',{class:'dream d'+i+(d.star?' star':'')+(state.reco===d.k&&SPHERES.some(x=>(state.test||{})[x.k])?' suggest':''), 'data-k':d.k, onclick:()=>go('dream', d.k)}, `<span class="dream-e">${d.e}</span><span class="dream-cat">${d.cat}<em class="reco-tag">👉 Conseillé pour commencer</em></span><span class="dream-t">…${d.dream} ?</span><span class="dream-go">${n?'✓ Continuer':'Découvrir'} →</span>`)); });
   add(list);
-  add(h('p',{class:'bon-endroit'},'Alors, vous êtes <em>au bon endroit.</em>'));
   const lv=state.lvl.home||1;
   if(lv>=2){ const L2=h('section',{class:'lvl l2', id:'lvl-2'}); L2.appendChild(h('div',{class:'lvl-badge'},'Niveau 2 · Questions fréquentes'));
     L2.appendChild(h('div',{class:'principle c2', style:'margin:0'}, `<h3>❓ Les enfants, les salariés, les citoyens prendraient donc le pouvoir\u00a0?</h3><p>Ce n'est pas la question. Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>. Pas de règles préétablies\u00a0: une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p style="margin-top:8px">C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin)\u00a0: souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>prospère</b>, dans notre environnement proche comme lointain.</p>`));
     add(L2); }
   else add(h('button',{class:'btn btn-soft more-btn', onclick:()=>{ state.lvl.home=2; render(); setTimeout(()=>{ const el=$('lvl-2'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }},'✨ Je veux en savoir plus<span class="more-sub">Niveau 2 · Questions fréquentes</span>'));
   add(h('button',{class:'btn btn-primary btn-big', style:'width:100%;margin-top:16px', onclick:()=>go('recap')},'📇 3 · Voir ma fiche'));
+  add(h('p',{class:'bon-endroit', style:'margin-top:30px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
 }
 
 /* ================= UNE PORTE D'ENTRÉE ================= */

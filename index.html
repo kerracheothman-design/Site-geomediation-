@@ -387,6 +387,13 @@
   .lvl-nav button span{font-size:12.5px; line-height:1.25;}
   .lvl-nav button.open{background:var(--forest); border-color:var(--forest); color:var(--cream);}
   .lvl-nav button.open b{color:var(--gold-light);}
+  .back-top{font:700 13px var(--body); color:var(--forest); background:none; border:0; padding:4px 0; margin:0 0 8px; cursor:pointer;}
+  .explore{margin:22px 0 0; padding:16px; border-radius:16px; background:var(--paper); border:1.5px solid var(--line);}
+  .explore-h{font:800 15px var(--display); color:var(--forest-dark); margin:0 0 10px;}
+  .explore-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:8px;}
+  .explore-btn{font:inherit; display:flex; align-items:center; gap:8px; text-align:left; border:1.5px solid var(--line); background:var(--cream); border-radius:12px; padding:10px 12px; cursor:pointer; color:var(--forest-dark);}
+  .explore-btn span{font-size:20px;} .explore-btn b{font-size:13.5px; flex:1; background:none; padding:0;} .explore-btn em{font-style:normal; color:var(--forest); font-weight:800;}
+  .explore-btn:hover{border-color:var(--gold);}
   .lvl-nav-cap{font:700 13px var(--body); color:var(--forest-dark); margin:22px 0 4px;}
   .lvl-nav button.next{border-style:dashed; border-color:var(--gold);}
   .lvl-cap{font-size:13px; color:var(--ink-soft); margin:0 0 4px; text-align:center;}
@@ -1128,6 +1135,7 @@ function fichesGroup(key, title, html){
 function renderDream(){
   const d=DREAMS.find(x=>x.k===state.dream); if(!d){ state.view='home'; return renderHome(); }
   const lv=state.lvl[d.k]||1, a=A(d.k);
+  add(h('button',{class:'back-top', onclick:()=>go('home')},'← Tous les sujets'));
   add(h('div',{class:'kicker'},d.cat));
   add(h('h2',null,`${d.e} ${d.t}`));
   const mkNav=()=>{ const nav=h('div',{class:'lvl-nav'});
@@ -1159,6 +1167,10 @@ function renderDream(){
   add(h('p',{class:'lvl-nav-cap'},'📍 Vos niveaux : touchez pour y revenir ou continuer'));
   add(mkNav());
   add(h('p',{class:'hint center'},'✓ Vos réponses s\'ajoutent automatiquement à votre fiche'));
+  const others=DREAMS.filter(x=>!x.hidden&&x.k!==d.k);
+  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'🧭 Explorer un autre sujet'));
+    const g=h('div',{class:'explore-grid'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'explore-btn', onclick:()=>go('dream',x.k)},`<span>${x.e}</span><b>${x.cat}</b>${done?'<em>✓</em>':''}`)); });
+    ex.appendChild(g); add(ex); }
   const n=h('div',{class:'nav'});
   n.append(h('button',{class:'btn btn-ghost', onclick:()=>go('home')},'← Accueil'), h('button',{class:'btn btn-primary', onclick:()=>go('recap')},'📇 Ma fiche →'));
   add(n);

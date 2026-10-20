@@ -387,6 +387,7 @@
   .lvl-nav button span{font-size:12.5px; line-height:1.25;}
   .lvl-nav button.open{background:var(--forest); border-color:var(--forest); color:var(--cream);}
   .lvl-nav button.open b{color:var(--gold-light);}
+  .lvl-nav-cap{font:700 13px var(--body); color:var(--forest-dark); margin:22px 0 4px;}
   .lvl-nav button.next{border-style:dashed; border-color:var(--gold);}
   .lvl-cap{font-size:13px; color:var(--ink-soft); margin:0 0 4px; text-align:center;}
   .lvl-part{display:flex; flex-direction:column; gap:8px;}
@@ -1129,10 +1130,11 @@ function renderDream(){
   const lv=state.lvl[d.k]||1, a=A(d.k);
   add(h('div',{class:'kicker'},d.cat));
   add(h('h2',null,`${d.e} ${d.t}`));
-  const nav=h('div',{class:'lvl-nav'});
-  d.levels.forEach((L,i)=>{ const n=i+1, st=n<=lv?'open':(n===lv+1?'next':'');
-    nav.appendChild(h('button',{class:st, 'aria-label':`Niveau ${n} : ${L.name||LEVEL_NAMES[i]}`, onclick:()=>openLevel(d,n)}, `<b>${n<=lv?'✓ ':''}Niveau ${n}</b><span>${L.name||LEVEL_NAMES[i]}</span>`)); });
-  add(nav);
+  const mkNav=()=>{ const nav=h('div',{class:'lvl-nav'});
+    d.levels.forEach((L,i)=>{ const n=i+1, st=n<=lv?'open':(n===lv+1?'next':'');
+      nav.appendChild(h('button',{class:st, 'aria-label':`Niveau ${n} : ${L.name||LEVEL_NAMES[i]}`, onclick:()=>openLevel(d,n)}, `<b>${n<=lv?'✓ ':''}Niveau ${n}</b><span>${L.name||LEVEL_NAMES[i]}</span>`)); });
+    return nav; };
+  add(mkNav());
   if(lv===1) add(h('p',{class:'lvl-cap'},"L'essentiel d'abord. La suite, quand vous en avez envie."));
   const wires=[];
   for(let i=0;i<lv;i++){
@@ -1154,6 +1156,8 @@ function renderDream(){
     root.appendChild(card);
   }
   wires.forEach(f=>f());
+  add(h('p',{class:'lvl-nav-cap'},'📍 Vos niveaux : touchez pour y revenir ou continuer'));
+  add(mkNav());
   add(h('p',{class:'hint center'},'✓ Vos réponses s\'ajoutent automatiquement à votre fiche'));
   const n=h('div',{class:'nav'});
   n.append(h('button',{class:'btn btn-ghost', onclick:()=>go('home')},'← Accueil'), h('button',{class:'btn btn-primary', onclick:()=>go('recap')},'📇 Ma fiche →'));

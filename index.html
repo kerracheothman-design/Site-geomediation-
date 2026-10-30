@@ -687,12 +687,12 @@ function wireUntangle(scope){
   $('untangleBtn').onclick=()=>{ state.untangled=!state.untangled; save(); apply(state.untangled); };
 }
 function effortSVG(){
-  return `<svg class="effort" viewBox="0 0 340 200" role="img" aria-label="Au début de la transition, l'effort est fort et la facilité faible ; ensuite, l'effort baisse et la vie devient plus simple pour tous">
+  return `<svg class="effort" viewBox="0 0 340 200" role="img" aria-label="Au début, une mise en route très active ; ensuite, la vie devient plus simple pour tous">
     <line x1="30" y1="160" x2="325" y2="160" stroke="#DDD3BC" stroke-width="2"/>
     <line x1="172" y1="22" x2="172" y2="160" stroke="#C9A227" stroke-width="2" stroke-dasharray="4 4"/>
     <path d="M30,42 C115,42 165,140 322,148" fill="none" stroke="#B5654A" stroke-width="4" stroke-linecap="round"/>
     <path d="M30,148 C140,148 190,50 322,40" fill="none" stroke="#2F4A3C" stroke-width="4" stroke-linecap="round"/>
-    <text x="34" y="32" font-family="Figtree,sans-serif" font-weight="800" font-size="12" fill="#B5654A">Effort</text>
+    <text x="34" y="32" font-family="Figtree,sans-serif" font-weight="800" font-size="12" fill="#B5654A">Mise en route</text>
     <text x="322" y="30" text-anchor="end" font-family="Figtree,sans-serif" font-weight="800" font-size="12" fill="#2F4A3C">Vie plus simple pour tous</text>
     <text x="100" y="182" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="700" font-size="11.5" fill="#4A4433">1 · La transition</text>
     <text x="250" y="182" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="700" font-size="11.5" fill="#4A4433">2 · Le rythme de croisière</text>
@@ -777,14 +777,14 @@ function echLabel(a,e){ const n=(a.lieux||{})[e]; return n ? e+' ('+n+')' : e; }
 function stepsRows(w, cur, cb){ CYCLE.forEach((c,i)=>{ const row=h('div',{class:'mini-dim'}); const b=h('b',null,String(cur[c.k]||0));
   const r=h('input',{type:'range',min:0,max:5,value:cur[c.k]||0,'aria-label':c.n}); r.oninput=e=>{ cur[c.k]=+e.target.value; b.textContent=e.target.value; if(cb) cb(); };
   row.append(h('span',null,`<i style="background:${CYCLE_COLS[i]}"></i>${c.n}`), r, b); w.appendChild(row); });
-  w.appendChild(h('div',{class:'scale'},'<span>0 · à lancer</span><span>5 · bien en place</span>')); }
+  w.appendChild(h('div',{class:'scale'},'<span>0 · à imaginer</span><span>5 · bien en place</span>')); }
 const LEVIERS = ["🌿 Bien-être","Gouvernance","Finance éthique","Numérique, IA & open source","Intelligence collective","Éducation","Communication","Juridique"];
 const STEPS_DETAIL = {sum:"+ Les 7 étapes en détail", html:()=>`<ol class="steps7">${CYCLE.map((c,i)=>`<li><i style="background:${CYCLE_COLS[i]};color:${i<3?'#1F3329':'#fff'}">${i+1}</i><span><b>${c.n}</b> · ${c.d}</span></li>`).join('')}</ol>`};
 const DEPART={k:'depart', type:'chips1', label:"Où en êtes-vous ? Chacun avance à son rythme", opts:['🌱 Je découvre','🔥 Je suis motivé','🚀 J\'agis déjà','🎓 C\'est mon métier']};
 function L1(o){ return {intro:o.intro,
-  fields:[{k:'question', type:'chips1', label:`LA question : l'avez-vous déjà posée ${o.qui} ?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Pas encore"]}, ...(o.extra||[]),
+  fields:[{k:'question', type:'chips1', label:`LA question : l'avez-vous déjà posée ${o.qui} ?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Bientôt"]}, ...(o.extra||[]),
           {k:'besoins', type:'area', label:o.labA+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phA||''}, {k:'ressources', type:'area', label:o.labR+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phR||''}]}; }
-function L2(ou, lab){ return {intro:`Où en est l'organisation ${ou} ? Pour chaque étape : <b>0</b> = à lancer, <b>5</b> = bien en place.`,
+function L2(ou, lab){ return {intro:`Où en est l'organisation ${ou} ? Pour chaque étape : <b>0</b> = à imaginer, <b>5</b> = bien en place.`,
   fields:[{k:'eval', type:'stepsEval'}, {k:'projet', type:'area', label:lab||'Une idée de projet'}], details:[STEPS_DETAIL]}; }
 
 const ACTEURS=[
@@ -804,10 +804,10 @@ const MISSIONS=[
 const PRINCIPLES = [
   {k:"p1", c:"", t:"Chacun à son rythme, dans l'intérêt de tous",
    s:"Santé, environnement, économie, relations : un progrès sur un sujet <b>nourrit les autres</b>, quel que soit leur niveau. Le secret : <b>écouter</b> chacun, <b>relier</b> besoins et ressources, puis <b>décider</b> et <b>évaluer</b> collectivement.",
-   l:"Rien n'est plus concret que l'organisation, car tout en découle. Accidents, maladies, tensions relationnelles, guerres, pollution, crises économiques : tous ces problèmes viennent de l'<b>organisation</b> de <b>notre société</b>, qui génère des tensions et rend l'accès aux solutions difficile. Une <b>bonne organisation</b>, c'est demander aux intéressés s'ils souhaitent une meilleure organisation, identifier ensemble les <b>besoins</b> et les <b>ressources</b>, puis développer des projets soumis à l'<b>approbation</b> et à l'<b>évaluation</b> des citoyens concernés."},
-  {k:"p2", c:"c2", t:"Le déclic qui manquait",
-   s:"<b>Quinze ans</b> de terrain le montrent : tout le monde comprend l'importance d'une <b>bonne organisation</b>, mais peu osent se lancer. Bonne nouvelle : <b>ça s'apprend</b>, et c'est tellement plus simple <b>à plusieurs</b>.",
-   l:"Notre enquête de terrain, menée sur <b>quinze ans</b>, montre que presque tout le monde comprend l'importance de bien s'organiser, et la difficulté de le faire dans une société qui ne l'est pas. Mais peu se sentent <b>légitimes</b> pour s'en charger : parce que ce travail n'est pas rémunéré, parce que c'est complexe, parce qu'on ne fait pas assez <b>confiance</b> à la vie et aux autres, et parce qu'on croit que certains n'ont pas intérêt à ce que le système change (alors même que le système actuel expose chacun, quel que soit son patrimoine, à en perdre une grande partie)."},
+   l:"Rien n'est plus concret que l'organisation, car tout en découle : <b>santé</b>, <b>relations</b>, <b>environnement</b>, <b>prospérité</b>, <b>paix</b>. Une <b>bonne organisation</b>, c'est demander aux intéressés s'ils souhaitent une meilleure organisation, identifier ensemble les <b>besoins</b> et les <b>ressources</b>, puis développer des projets soumis à l'<b>approbation</b> et à l'<b>évaluation</b> des citoyens concernés."},
+  {k:"p2", c:"c2", t:"Le déclic",
+   s:"<b>Quinze ans</b> de terrain le montrent : tout le monde comprend l'importance d'une <b>bonne organisation</b>. Bonne nouvelle : <b>ça s'apprend</b>, et c'est tellement plus simple <b>à plusieurs</b>.",
+   l:"Notre enquête de terrain, menée sur <b>quinze ans</b>, montre que presque tout le monde comprend l'importance de bien s'organiser. Le déclic : se sentir <b>légitime</b> pour se lancer, gagner en <b>confiance</b> en la vie et dans les autres, et voir qu'un système plus viable <b>profite à chacun</b>, quel que soit son patrimoine."},
   {k:"p3", c:"c3", t:"Notre monde nous ressemble",
    s:"Notre <b>épanouissement</b> et notre <b>environnement</b> grandissent main dans la main. Prendre soin de soi, c'est aussi prendre soin de <b>tout ce qui nous entoure</b>.",
    l:"Chaque pas compte : un mieux-être personnel nourrit l'organisation collective, et une meilleure organisation collective nourrit l'épanouissement de chacun. Pas besoin de tout faire avancer en même temps : ce sont des <b>va-et-vient</b> qui se renforcent, à votre rythme."},
@@ -846,7 +846,7 @@ const DREAMS = [
   ]},
   {k:'idees', e:'🗺️', cat:'Territoire', pick:"Mon organisation territoriale", sub:"Mon quartier, ma commune, ma région", dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Mon organisation territoriale", levels:[
     L1({qui:'aux acteurs de votre territoire', intro:"Sur votre territoire, tout commence par une question simple, à poser à ses acteurs\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on relie les <b>besoins</b> et les <b>ressources</b> de chacun, pour <b>co-construire des projets</b> votés et évalués par les humains concernés.", labA:'Les besoins', labR:'Les ressources', extra:[{k:'echelle', type:'scales', label:'Quelles échelles territoriales ? Autant que vous voulez, ou aucune'},{k:'domaine', type:'chips', label:'Dans quels domaines ?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
-    {intro:"Où en est l'organisation à chaque échelle choisie\u00a0? Pour chaque étape\u00a0: <b>0</b> = à lancer, <b>5</b> = bien en place.",
+    {intro:"Où en est l'organisation à chaque échelle choisie\u00a0? Pour chaque étape\u00a0: <b>0</b> = à imaginer, <b>5</b> = bien en place.",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet'}], details:[STEPS_DETAIL]},
     {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions, pour répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin, et le <b>Sud-Ouest</b> a de sérieux atouts. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
      details:[
@@ -907,8 +907,8 @@ const DREAMS = [
              {k:'invite', type:'invite'}]},
     {intro:"Il compte déjà des professionnels en <b>6 pôles</b> : géographie, intelligence collective, numérique, environnement, médiation, santé et bien-être. Chacun a une approche systémique : sa thématique n'est qu'une porte d'entrée. L'objectif : <b>5 à 10 médiateurs par région</b>.",
      details:[
-      {sum:"+ Un effort au départ, une vie plus simple ensuite", html:()=>`<div style="background:#FFFDF8;border-radius:12px;padding:8px;margin-bottom:10px">${effortSVG()}</div>
-        <p><b>1 · La transition.</b> Médiateurs et acteurs se forment, sensibilisent autour d'eux et relient leurs feuilles de route. C'est là que l'effort est le plus fort.</p>
+      {sum:"+ Une belle avancée au départ, une vie plus simple ensuite", html:()=>`<div style="background:#FFFDF8;border-radius:12px;padding:8px;margin-bottom:10px">${effortSVG()}</div>
+        <p><b>1 · La transition.</b> Médiateurs et acteurs se forment, sensibilisent autour d'eux et relient leurs feuilles de route. C'est la phase la plus active, et la plus enthousiasmante.</p>
         <p><b>2 · Le rythme de croisière.</b> Des acteurs formés partout, un outil coopératif accessible à tous, des services mutualisés, des échelles et des pratiques qui se complètent. La vie de chacun devient plus simple.</p>
         <p><b>Deux voies pour devenir médiateur :</b> généraliste, pour orchestrer l'ensemble, ou spécialisé dans une thématique, en se formant directement au sein de l'équipe, sans passer par l'université.</p>`},
       {sum:"+ L'équipe, pôle par pôle", html:()=>COLLAB_GROUPS.map(g=>`<p style="margin:12px 0 4px"><b>${g.e} ${g.label}</b></p>${g.m.map(([n,r])=>`<div class="place"><b>${n}</b> · ${r}</div>`).join('')}`).join('')},
@@ -917,7 +917,7 @@ const DREAMS = [
              {k:'inscrire', type:'toggle', label:"Je veux <b>inscrire ma structure</b> ou mon projet dans le réseau"}]}
   ]},
   {k:'comprendre', e:'🧭', cat:'Comprendre', hidden:true, act:'🚀 Je passe à la pratique', t:"Le projet en images", levels:[
-    {intro:"Échelles, thématiques et acteurs\u00a0: <b>tout est connecté</b>. Bonne nouvelle\u00a0: pas besoin de tout faire avancer en même temps. <b>Un effort sur un sujet aide forcément les autres</b>, quel que soit leur niveau.",
+    {intro:"Échelles, thématiques et acteurs\u00a0: <b>tout est connecté</b>. Bonne nouvelle\u00a0: pas besoin de tout faire avancer en même temps. <b>Une avancée sur un sujet inspire les autres</b>, quel que soit leur niveau.",
      parts:[{h:"Les ondes\u00a0: nous façonnons ce qui nous façonne", v:ringsSVG, w:()=>wireWave()},
             {h:"Le cercle vertueux", v:loopSVG, p:"Produire <b>intelligemment</b> ce dont on a besoin, c'est de l'<b>énergie</b> et de l'<b>argent</b> bien utilisés. L'économie tourne, et chacun gagne du <b>temps</b> pour les autres, la planète et soi-même."}],
      fields:[]},
@@ -925,7 +925,7 @@ const DREAMS = [
      parts:[{h:"5 domaines, une même boussole", v:domainsSVG, w:c=>wireUntangle(c), slogan:"Chaque besoin a sa solution. Le réseau vous y mène."},
             {h:"Le toboggan de la coopération", v:stairsSVG, w:()=>wireSlide(), p:"«\u00a0Envie d'une <b>meilleure organisation</b>\u00a0?\u00a0» Posez-la autour de vous\u00a0: famille, immeuble, entreprise, asso, quartier… Et hop, <b>ça glisse tout seul</b>.", slogan:"Il y a un médiateur en chacun de nous."}],
      fields:[], details:[STEPS_DETAIL]},
-    {intro:"Quand on regarde les problèmes <b>ensemble</b>, les <b>solutions deviennent faciles d'accès</b>.",
+    {intro:"Quand on avance <b>ensemble</b>, les <b>solutions deviennent faciles d'accès</b>.",
      parts:[{h:"La géographie, une sagesse ancestrale", p:"Elle reprend des principes très anciens\u00a0: relier la <b>nature</b>, l'<b>économie</b> qui produit ce dont on a besoin, et une <b>gouvernance</b> où chacun peut s'épanouir. Sa partie opérationnelle, l'<b>aménagement du territoire</b>, cherche à répartir équitablement populations, activités et services, pour répondre durablement aux besoins de chacun.",
              html:()=>`<details class="more-box geo-tl" open><summary>Une histoire qui vient de loin</summary><p style="font-family:var(--display);font-weight:700;color:var(--forest-dark)">On ne part pas de zéro\u00a0: on hérite.</p><ol class="tl">${TL.map(([y,n,d])=>`<li><span class="tl-y">${y}</span><span><b>${n}</b><br>${d}</span></li>`).join('')}</ol></details>`}],
      fields:[{k:'adh', type:'principles', label:"4 principes · êtes-vous d'accord\u00a0?"}, {k:'idees', type:'ideas', label:"8 idées qui libèrent · retournez-les, puis donnez votre avis"}]}
@@ -938,7 +938,7 @@ const IDEES = [
   {s:"Le vrai pouvoir, c'est la coopération.", d:"Plus on monte en autorité, plus on dépend des autres. Le pouvoir grandit quand on le partage."},
   {s:"On a tout le temps.", d:"Pas de course : on glisse, on célèbre chaque réussite, puis on remonte pour un nouveau tour, encore plus fluide."},
   {s:"L'énergie grandit quand on la transmet.", d:"Il y a un esprit de coach, de médiateur, en chacun de nous. Transmettre, c'est aussi se nourrir."},
-  {s:"Aucun effort, juste y croire.", d:"Pour grimper dans le toboggan, il suffit de poser LA question autour de soi, et de dire qu'un réseau existe."},
+  {s:"Tout commence par y croire.", d:"Pour grimper dans le toboggan, il suffit de poser LA question autour de soi, et de dire qu'un réseau existe."},
   {s:"Plus on coopère, mieux on vit. C'est prouvé.", d:"Elinor Ostrom, prix Nobel d'économie 2009, l'a démontré : des communautés soudées gèrent durablement leurs ressources communes, souvent mieux que le marché seul ou l'État seul. La coopération n'est pas qu'une belle idée, c'est une méthode qui marche."}
 ];
 const LEVEL_NAMES=["L'essentiel","La méthode","Pour aller plus loin"];
@@ -956,12 +956,12 @@ function goBack(){ const p=(state.hist||[]).pop(); if(p){ state.view=p.v; state.
 function answered(dk){ const a=state.a[dk]||{}; return Object.values(a).filter(v=>Array.isArray(v)?v.length:(v!==''&&v!==false&&v!=null&&!(typeof v==='object'&&!Object.keys(v).length))).length + Object.values((state.dec||{})[dk]||{}).filter(Boolean).length; }
 
 /* ================= CHAMPS ================= */
-function mood(v){ return v<=1 ? 'je ne m\'en soucie pas' : v<=3 ? 'je m\'en soucie un peu' : 'je m\'en soucie beaucoup'; }
+function mood(v){ return v<=1 ? 'à découvrir' : v<=3 ? 'en bonne voie' : 'j\'en prends grand soin'; }
 function paintFb(box, items, act){
   const touched=items.some(x=>x.v>0);
   if(!touched){ box.className='fb'; box.innerHTML='💡 Bougez les curseurs\u00a0: un conseil personnalisé s\'affiche ici.'; return null; }
   const avg=items.reduce((t,x)=>t+x.v,0)/items.length, low=[...items].sort((a,b)=>a.v-b.v)[0];
-  const head= avg<2 ? "🌱 <b>Vous avez encore plein de choses à découvrir</b>, et c'est une chance\u00a0: chaque petit pas compte." : avg<4 ? "🌿 <b>Belle base\u00a0!</b> Vous êtes sur la bonne voie." : "🌳 <b>Bravo, vous avez fait beaucoup d'efforts\u00a0!</b>";
+  const head= avg<2 ? "🌱 <b>Plein de belles avancées en vue\u00a0!</b> Chaque petit pas compte." : avg<4 ? "🌿 <b>Belle base\u00a0!</b> Vous êtes sur la bonne voie." : "🌳 <b>Bravo, vous avez déjà bien avancé\u00a0!</b>";
   box.className='fb on'; box.innerHTML=`${head}<span class="fb-tip">👉 Piste\u00a0: <b>${low.n}</b> · ${low.tip}</span>`;
   if(act) act(box, low);
   return low;
@@ -1026,7 +1026,7 @@ function field(dk, f){
       const top=h('div',{class:'dom-top'},`<span>${d.e} ${d.n}</span>`); top.appendChild(m);
       const r=h('input',{type:'range',min:0,max:5,value:v,'aria-label':d.n}); r.oninput=e=>{ cur[d.k]=+e.target.value; m.textContent=cur[d.k]+'/5 · '+mood(cur[d.k]); upd(); };
       row.append(top, r, h('div',{class:'dom-tip'},'💡 '+d.tip)); w.appendChild(row); });
-    w.appendChild(h('div',{class:'scale'},'<span>0 · je ne m\'en soucie pas</span><span>5 · je m\'en soucie beaucoup</span>')); w.appendChild(fb); upd();
+    w.appendChild(h('div',{class:'scale'},'<span>0 · à découvrir</span><span>5 · j\'en prends grand soin</span>')); w.appendChild(fb); upd();
   }
   if(f.type==='principles'){
     const cur=a[f.k]||(a[f.k]={}); state.openMore=state.openMore||{};
@@ -1082,7 +1082,7 @@ function testBlock(){
     const top=h('div',{class:'sph-top'},`<span>${x.e} ${x.n}</span>`); top.appendChild(val);
     const r=h('input',{type:'range',min:0,max:5,value:v,'aria-label':'Organisation · '+x.n}); r.oninput=e=>{ state.test[x.k]=+e.target.value; val.textContent=e.target.value+'/5'; upd(); save(); };
     row.append(top, r); t.appendChild(row); });
-  t.appendChild(h('div',{class:'scale'},'<span>0 · à construire</span><span>5 · bien organisée</span>'));
+  t.appendChild(h('div',{class:'scale'},'<span>0 · à imaginer</span><span>5 · bien organisée</span>'));
   t.appendChild(fb); upd();
   t.appendChild(h('div',{class:'rico-wrap'},ricochetSVG()));
   t.appendChild(h('p',{class:'rico-cap'},'Une <b>bonne organisation</b> dans un niveau apaise, et donne de l\'énergie pour <b>inspirer les autres niveaux</b>. Quelle que soit l\'échelle, nous pouvons tous adopter un <b>état d\'esprit de médiateur</b>.'));
@@ -1096,7 +1096,7 @@ function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Tout part de <em>l'organisation.</em>"));
-  add(h('p',{class:'hero-lead'},"Accidents, maladies, tensions, guerres, pollution… Ces problèmes ont une <b>origine commune</b> : l'<b>organisation de la société</b>. Bonne nouvelle : une organisation, <b>ça s'améliore</b>. De soi au territoire, avec <b>une même méthode</b>."));
+  add(h('p',{class:'hero-lead'},"Santé, relations, environnement, prospérité, paix… Tout a une <b>origine commune</b> : l'<b>organisation de la société</b>. Et une organisation, <b>ça s'améliore</b>, de soi au territoire, avec <b>une même méthode</b>."));
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   add(stepH(2,'Évaluer mon organisation'));
@@ -1114,7 +1114,7 @@ function renderHome(){
   const more=h('div',{class:'more-row'});
   more.append(h('button',{onclick:()=>go('dream','comprendre')},'🧭 Le projet en images'), h('button',{onclick:()=>go('dream','reseau')},'🌐 Rejoindre le réseau'), h('button',{onclick:()=>go('recap')},'📇 Ma fiche'));
   add(more);
-  add(acc('faq','❓ Les citoyens prendraient donc le pouvoir ?', b=>{ b.innerHTML=`<p>Ce n'est pas la question. Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>. Pas de règles préétablies : une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p>C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin) : souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>prospère</b>, dans notre environnement proche comme lointain.</p>`; }));
+  add(acc('faq','❓ Et qui décide, alors ?', b=>{ b.innerHTML=`<p><b>Chacun, à sa place.</b> Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>. Pas de règles préétablies : une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p>C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin) : souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>prospère</b>, dans notre environnement proche comme lointain.</p>`; }));
   add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
 }
 

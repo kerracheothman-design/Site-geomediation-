@@ -309,7 +309,8 @@
   #confetti{position:fixed; inset:0; pointer-events:none; z-index:10;}
 
   @media (max-width:540px){
-    .card{padding:24px 18px 20px; border-radius:18px;}
+    .card{padding:22px 14px 20px; border-radius:18px;}
+
     .grid2,.tiles,.steps8{grid-template-columns:1fr;}
     .tile{min-height:0;}
     .mini-dim{grid-template-columns:96px 1fr 20px;}
@@ -396,11 +397,15 @@
   .explore-btn{font:inherit; display:flex; align-items:center; gap:8px; text-align:left; border:1.5px solid var(--line); background:var(--cream); border-radius:12px; padding:10px 12px; cursor:pointer; color:var(--forest-dark);}
   .explore-btn span{font-size:20px;} .explore-btn b{font-size:13.5px; flex:1; background:none; padding:0;} .explore-btn em{font-style:normal; color:var(--forest); font-weight:800;}
   .explore-btn:hover{border-color:var(--gold);}
+  .step-h{display:flex; align-items:center; gap:10px; font:800 clamp(19px,5vw,23px) var(--display); color:var(--forest-dark); margin:22px 0 10px;}
+  .step-h span{flex:0 0 30px; width:30px; height:30px; border-radius:50%; background:var(--gold); color:var(--forest-dark); font-size:16px; display:flex; align-items:center; justify-content:center;}
+  .bonus-h{font:800 18px var(--display); color:var(--forest-dark); margin:24px 0 10px;}
+  .intro-video{margin:0;}
   .hero-lead{font-size:16.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 18px;}
   .hero-lead b{background:none; padding:0; color:var(--forest-dark);}
   .pick-h{font:800 clamp(22px,5.5vw,28px) var(--display); color:var(--forest-dark); margin:4px 0 12px; letter-spacing:-.01em;}
   .picks{display:flex; flex-direction:column; gap:10px;}
-  .pick{position:relative; display:grid; grid-template-columns:34px 1fr auto; align-items:center; gap:12px; text-align:left; font:inherit; border:none; border-radius:18px; padding:14px 16px; cursor:pointer; color:var(--cream); background:var(--forest); transition:transform .15s, box-shadow .15s; animation:rise .45s cubic-bezier(.2,.8,.2,1) both;}
+  .pick{position:relative; display:grid; grid-template-columns:40px minmax(0,1fr); align-items:center; gap:12px; text-align:left; font:inherit; border:none; border-radius:18px; padding:14px 16px; cursor:pointer; color:var(--cream); background:var(--forest); transition:transform .15s, box-shadow .15s; animation:rise .45s cubic-bezier(.2,.8,.2,1) both;}
   .pick:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(31,51,41,.28);}
   .pick.p1{background:#3E6350; animation-delay:.05s;} .pick.p2{background:#6E7A42; animation-delay:.1s;} .pick.p3{background:#9A4E36; animation-delay:.15s;}
   .pick-n{width:34px; height:34px; border-radius:50%; background:var(--gold); color:var(--forest-dark); font:800 17px var(--display); display:flex; align-items:center; justify-content:center;}
@@ -409,7 +414,7 @@
   .pick-b small{font-size:13px; opacity:.85; line-height:1.3;}
   .pick-p{display:flex; align-items:center; gap:8px; margin-top:6px; font-size:12.5px; font-weight:800; color:var(--gold-light);}
   .dots{display:inline-flex; gap:4px;} .dots i{width:9px; height:9px; border-radius:50%; border:1.5px solid var(--gold-light);} .dots i.on{background:var(--gold-light);}
-  .pick-e{font-size:28px;}
+  .pick-e{font-size:30px; text-align:center;}
   .pick .reco-tag{position:absolute; top:-9px; right:12px; margin:0;}
   .pick.suggest{box-shadow:0 0 0 3px var(--gold), 0 10px 24px rgba(31,51,41,.28);} .pick.suggest .reco-tag{display:inline-block;}
   .pick-note{font-size:13px; color:var(--muted); margin:10px 2px 14px; line-height:1.5;}
@@ -460,7 +465,7 @@
   .agir-h{font:800 clamp(22px,5vw,28px) var(--display); color:var(--forest-dark); margin:22px 0 8px; scroll-margin-top:16px;}
   .test{background:var(--forest); color:var(--cream); border-radius:18px; padding:16px; margin:0 0 14px;}
   .test h3{margin:0 0 4px; font:800 18px var(--display); line-height:1.3;}
-  .test .test-s{margin:0 0 12px; font-size:14px; line-height:1.5; opacity:.92;}
+  .test .test-s{flex:1; margin:0 0 6px; font-size:14px; line-height:1.5; opacity:.92;}
   .card .test b{color:var(--gold-light); background:none; padding:0;}
   .sph{background:rgba(246,241,231,.08); border:1px solid rgba(246,241,231,.2); border-radius:12px; padding:9px 12px; margin-top:8px;}
   .sph-top{display:flex; justify-content:space-between; gap:8px; font-weight:700; font-size:14px;}
@@ -529,7 +534,7 @@
   .reco-tag{display:none; font-style:normal; margin-left:8px; background:var(--gold); color:var(--forest-dark); border-radius:999px; padding:2px 8px; letter-spacing:0; text-transform:none; font-size:11px;}
   .dream.suggest{box-shadow:0 0 0 3px var(--gold), 0 10px 24px rgba(31,51,41,.28);}
   .dream.suggest .reco-tag{display:inline-block;}
-  .intro-video{margin:0 0 16px; border-radius:18px; overflow:hidden; background:var(--forest-dark);}
+  .intro-video{margin:0 0 16px; border-radius:18px; overflow:hidden; background:#F6F1E7;}
   .intro-video video{display:block; width:100%; height:auto; aspect-ratio:1/1; background:var(--forest-dark);}
   .intro-video figcaption{font:800 13px var(--body); color:var(--gold-light); padding:9px 14px; letter-spacing:.02em;}
   .qa-row{display:flex; align-items:flex-start; justify-content:space-between; gap:8px;}
@@ -539,6 +544,15 @@
   .qa-b:hover{border-color:var(--gold); transform:scale(1.06);}
   .qa.dark .qa-b{background:rgba(246,241,231,.12); border-color:rgba(246,241,231,.35);}
   .qa-note{background:var(--cream); border-radius:12px; padding:8px 12px;}
+  @media (max-width:540px){
+    .lvl{padding:14px 12px 16px;}
+    .lvl-badge{font-size:10.5px; letter-spacing:.05em; border-radius:10px; line-height:1.35;}
+    .fiche{padding:12px 13px;} .fiche .f-front i{font-size:0;} .fiche .f-front i::after{content:'↻'; font-size:18px;}
+    .fab{padding:0 14px; height:48px;} .fab .fab-t{display:none;}
+    .fab-home{padding:0 14px; height:48px;}
+    .test{padding:14px 12px;}
+    .acc summary{padding:10px 12px;}
+  }
 </style>
 </head>
 <body>
@@ -1060,7 +1074,7 @@ function ricochetSVG(){
 function testBlock(){
   state.test=state.test||{};
   const t=h('section',{class:'test'});
-  t.innerHTML=`<div class="qa-row"><h3>Où en est votre organisation\u00a0?</h3></div><p class="test-s">Un curseur par sphère. On vous suggère par où commencer.</p>`;
+  t.innerHTML=`<div class="qa-row"><p class="test-s">Notez la <b>qualité de votre organisation</b> à chaque niveau, de 0 à 5. On vous suggère par où commencer.</p></div>`;
   t.firstChild.appendChild(qa('🧭 Mon test d\'organisation', true));
   const fb=h('div'); const btn=h('button',{class:'btn btn-gold'});
   const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); state.reco=d.k; document.querySelectorAll('.pick').forEach(el=>el.classList.toggle('suggest', el.dataset.k===d.k)); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.t} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });
@@ -1079,28 +1093,29 @@ function progressOf(k){ const d=DREAMS.find(x=>x.k===k); const lv=state.lvl[k]||
 function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',{class:'acc'}); if(state.accH[id]) det.open=true;
   det.innerHTML=`<summary>${title}</summary>`; const b=h('div',{class:'acc-b'}); fill(b); det.appendChild(b);
   det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
+function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Tout part de <em>l'organisation.</em>"));
-  add(h('p',{class:'hero-lead'},"Accidents, maladies, tensions relationnelles, guerres, pollution… Tous ces problèmes ont une <b>origine commune</b> : l'<b>organisation de la société</b>, qui peut les générer et rendre difficile l'accès aux solutions. Bonne nouvelle : une organisation, <b>ça s'améliore</b>."));
-  add(h('h2',{class:'pick-h', id:'agir'},'Je souhaite améliorer…'));
-  const list=h('div',{class:'picks'});
+  add(h('p',{class:'hero-lead'},"Accidents, maladies, tensions, guerres, pollution… Ces problèmes ont une <b>origine commune</b> : l'<b>organisation de la société</b>. Bonne nouvelle : une organisation, <b>ça s'améliore</b>. De soi au territoire, avec <b>une même méthode</b>."));
+  add(stepH(1,'Découvrir en 1 minute'));
+  const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
+  add(stepH(2,'Évaluer mon organisation'));
+  add(testBlock());
+  add(stepH(3,'Je souhaite améliorer…'));
+  const list=h('div',{class:'picks', id:'agir'});
   PICKS.forEach((k,i)=>{ const d=DREAMS.find(x=>x.k===k), p=progressOf(k);
     const dots=Array.from({length:p.max},(_,j)=>`<i class="${j<p.lv?'on':''}"></i>`).join('');
     const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
     list.appendChild(h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
-      `<span class="pick-n">${i+1}</span><span class="pick-b"><b>${d.pick}</b><small>${d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><span class="pick-e">${d.e}</span><em class="reco-tag">👉 Conseillé</em>`)); });
+      `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${d.pick}</b><small>${d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`)); });
   add(list);
-  add(h('p',{class:'pick-note'},'3 niveaux par sujet, à votre rythme. Touchez <b>🎯</b> ou <b>💬</b> à tout moment pour noter un objectif ou poser une question.'));
+  add(h('p',{class:'pick-note'},'3 niveaux par sujet, à votre rythme. <b>🎯</b> objectif et <b>💬</b> question, à tout moment.'));
+  add(h('h2',{class:'bonus-h'},'🎁 Bonus'));
   const more=h('div',{class:'more-row'});
-  more.append(h('button',{onclick:()=>go('dream','reseau')},'🌐 Rejoindre le réseau'), h('button',{onclick:()=>go('dream','comprendre')},'🧭 Le projet en images'), h('button',{onclick:()=>go('recap')},'📇 Ma fiche'));
+  more.append(h('button',{onclick:()=>go('dream','comprendre')},'🧭 Le projet en images'), h('button',{onclick:()=>go('dream','reseau')},'🌐 Rejoindre le réseau'), h('button',{onclick:()=>go('recap')},'📇 Ma fiche'));
   add(more);
-  add(acc('test','🧭 Pas sûr ? Faites le point en 1 minute', b=>{
-    const dep=h('div',{class:'fld', style:'margin:0 0 12px'}); dep.appendChild(h('div',{class:'fld-label'},DEPART.label));
-    const drow=h('div',{class:'chip-row'}); DEPART.opts.forEach(o=>{ const on=state.depart===o; drow.appendChild(h('button',{class:'chip'+(on?' active':''),'aria-pressed':String(on), onclick:()=>{ state.depart=on?null:o; render(); }}, o)); });
-    dep.appendChild(drow); b.append(dep, testBlock()); }));
-  add(acc('video','▶ La Géomédiation en 1 minute', b=>{ b.innerHTML='<figure class="intro-video" style="margin:0"><video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video></figure>'; }));
   add(acc('faq','❓ Les citoyens prendraient donc le pouvoir ?', b=>{ b.innerHTML=`<p>Ce n'est pas la question. Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>. Pas de règles préétablies : une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p>C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin) : souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>prospère</b>, dans notre environnement proche comme lointain.</p>`; }));
-  add(h('p',{class:'bon-endroit', style:'margin-top:28px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
+  add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
 }
 
 /* ================= UNE PORTE D'ENTRÉE ================= */
@@ -1331,7 +1346,7 @@ function render(){
 }
 $('brandBtn').onclick=()=>go('home');
 { const fh=h('button',{class:'fab-home', id:'fabHome', 'aria-label':'Retour au menu principal', onclick:()=>go('home')},'🏠 Menu'); fh.style.display=state.view==='home'?'none':'flex'; document.body.appendChild(fh); }
-{ const f=h('button',{class:'fab', 'aria-label':'Noter un objectif ou poser une question', onclick:()=>openSheet()},'🎯 Objectif · 💬 Question'); document.body.appendChild(f); }
+{ const f=h('button',{class:'fab', 'aria-label':'Noter un objectif ou poser une question', onclick:()=>openSheet()},'<span>🎯</span><span class="fab-t">Objectif ·</span><span>💬</span><span class="fab-t">Question</span>'); document.body.appendChild(f); }
 render();
 
 </script>

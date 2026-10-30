@@ -399,6 +399,8 @@
   .explore-btn:hover{border-color:var(--gold);}
   .step-h{display:flex; align-items:center; gap:10px; font:800 clamp(19px,5vw,23px) var(--display); color:var(--forest-dark); margin:22px 0 10px;}
   .step-h span{flex:0 0 30px; width:30px; height:30px; border-radius:50%; background:var(--gold); color:var(--forest-dark); font-size:16px; display:flex; align-items:center; justify-content:center;}
+  .defi{background:#FFF7DD; border:1.5px solid var(--gold); border-radius:14px; padding:10px 14px; font-size:14.5px; line-height:1.45; color:var(--forest-dark); font-weight:600;}
+  .defi span{display:block; font:800 11.5px var(--body); letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin-bottom:2px;}
   .bonus-card{margin:22px auto 0; max-width:420px; border-radius:16px; border:1.5px dashed var(--gold); background:linear-gradient(135deg,#FFFBEF,#F6F1E7); cursor:pointer; transition:transform .25s; perspective:600px;}
   .bonus-card:hover{transform:translateY(-2px) rotate(-.4deg);}
   .bonus-card.on{border-style:solid; cursor:default; animation:flipIn .35s ease;}
@@ -850,7 +852,7 @@ const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 <b>Je témoigne</b
 const FORMATS = {k:'format', type:'chips', label:'Le format qui vous conviendrait', opts:['Atelier','Formation','Accompagnement']};
 
 const DREAMS = [
-  {k:'entreprise', e:'💼', cat:'Travail & association', pick:"Mon organisation professionnelle", sub:"Mon entreprise, mon établissement, mon association", dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Mon organisation professionnelle", levels:[
+  {k:'entreprise', e:'💼', cat:'Travail & association', defi:"Posez LA question à la prochaine réunion : 5 minutes suffisent.", pick:"Mon organisation professionnelle", sub:"Mon entreprise, mon établissement, mon association", dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Mon organisation professionnelle", levels:[
     L1({qui:'à vos collègues ou aux membres', intro:"Une équipe bien organisée, c'est des <b>rôles clairs</b>, des <b>réunions efficaces</b> et des <b>projets qui avancent</b>. Tout commence par une question à poser autour de vous\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on note ensemble les <b>attentes</b> et les <b>ressources</b>, et on <b>co-construit les projets</b>.",
         extra:[{k:'leviers', type:'chips', label:'Dans quels domaines ?', opts:LEVIERS}], labA:"Les attentes de l'équipe", labR:'Les ressources disponibles'}),
     L2('dans votre entreprise'),
@@ -858,7 +860,7 @@ const DREAMS = [
      fields:[],
      parts:[{p:"Chaque équipe avance <b>à son rythme</b>\u00a0: une avancée dans un service <b>inspire</b> les autres."}]}
   ]},
-  {k:'idees', e:'🗺️', cat:'Territoire', pick:"Mon organisation territoriale", sub:"Mon quartier, ma commune, ma région", dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Mon organisation territoriale", levels:[
+  {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"Mon organisation territoriale", sub:"Mon quartier, ma commune, ma région", dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Mon organisation territoriale", levels:[
     L1({qui:'aux acteurs de votre territoire', intro:"Un territoire bien organisé, c'est des <b>services à deux pas</b>, des <b>projets utiles</b> et des acteurs qui <b>travaillent ensemble</b>. Tout commence par une question à ses acteurs\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on relie les <b>besoins</b> et les <b>ressources</b>, pour <b>co-construire des projets</b> votés et évalués par les habitants.", labA:'Les besoins', labR:'Les ressources', extra:[{k:'echelle', type:'scales', label:'Quelles échelles territoriales ? Autant que vous voulez, ou aucune'},{k:'domaine', type:'chips', label:'Dans quels domaines ?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
     {intro:"Où en est l'organisation à chaque échelle choisie\u00a0? Pour chaque étape\u00a0: <b>0</b> = à imaginer, <b>5</b> = bien en place.",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet'}], details:[STEPS_DETAIL]},
@@ -887,7 +889,7 @@ const DREAMS = [
              {k:'preparer', type:'toggle', label:"Je veux <b>participer à la préparation</b> du projet territorial"},
              {k:'mediateur', type:'toggle', label:"Devenir <b>médiateur</b> m'intéresse"}]}
   ]},
-  {k:'pensee', e:'🧠', cat:'Personnel', pick:"Mon organisation personnelle", sub:"Mon état d'esprit, ma santé, mon temps, mon budget", dream:"mieux comprendre le lien entre <b>tout ce que vous vivez</b> et <b>votre état d'esprit</b>", t:"Mon organisation personnelle", levels:[
+  {k:'pensee', e:'🧠', cat:'Personnel', defi:"Choisissez un domaine ci-dessous et testez sa piste pendant 7 jours.", pick:"Mon organisation personnelle", sub:"Mon état d'esprit, ma santé, mon temps, mon budget", dream:"mieux comprendre le lien entre <b>tout ce que vous vivez</b> et <b>votre état d'esprit</b>", t:"Mon organisation personnelle", levels:[
     {intro:"Tout ce qui se passe dans votre existence est la <b>conséquence de votre état d'esprit</b>, et de l'<b>organisation</b> qui en découle. Premier pas\u00a0: voir où vous en êtes.",
      fields:[{k:'lien', type:'chips1', label:"Arrivez-vous à voir le lien entre votre façon de penser et ce que vous vivez\u00a0?", opts:['✨ Oui, clairement','🌿 En partie','🌱 Je le découvre']},
              {k:'soi', type:'chips', label:'Les domaines dont vous aimeriez davantage prendre soin', opts:DOM_NAMES}]},
@@ -898,7 +900,7 @@ const DREAMS = [
             {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements sur mesure</b> : dites-le juste en dessous, et un médiateur vous oriente vers le bon professionnel."}],
      fields:[{k:'ecriture', type:'area', label:"✍️ Écriture intuitive : qui aimeriez-vous être ? Que voulez-vous vivre ? Dans quelle société ? Et pourquoi, à chaque fois ?"}]}
   ]},
-  {k:'maison', e:'🏡', cat:'Famille & proches', pick:"Mon organisation familiale", sub:"Avec mes proches : couple, enfants, colocation", dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Mon organisation familiale", levels:[
+  {k:'maison', e:'🏡', cat:'Famille & proches', defi:"Posez LA question au prochain repas, et notez les idées de chacun.", pick:"Mon organisation familiale", sub:"Avec mes proches : couple, enfants, colocation", dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Mon organisation familiale", levels:[
     L1({qui:'à vos proches', intro:"Une famille bien organisée, c'est des <b>repas</b>, des <b>tâches</b> et un <b>budget</b> qui roulent tout seuls, et plus de <b>temps pour profiter</b> ensemble. Tout commence par une question simple\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, chacun <b>propose ses idées</b>, et on met en place <b>ensemble</b> celles qui plaisent à tous.",
         extra:[{k:'cercle', type:'chips', label:'Avec qui\u00a0?', opts:['En couple','Avec les enfants','En famille élargie','En colocation']},
                {k:'sujets', type:'chips', label:'Sur quels sujets\u00a0?', opts:['Repas','Tâches du quotidien','Budget','Agenda','Loisirs','Vacances']}],
@@ -908,7 +910,7 @@ const DREAMS = [
      parts:[{link:['pensee',"🧠 Mon organisation personnelle →"]}],
      fields:[]}
   ]},
-  {k:'reseau', e:'🌐', cat:'Réseau', star:true, dream:"rejoindre un <b>réseau commun</b> qui facilite la coopération entre les <b>échelles</b>, les <b>thématiques</b> et les <b>acteurs</b>", t:"Rejoindre le réseau", levels:[
+  {k:'reseau', e:'🌐', cat:'Réseau', defi:"Invitez un contact à découvrir le réseau, avec le message tout prêt du niveau 2.", star:true, dream:"rejoindre un <b>réseau commun</b> qui facilite la coopération entre les <b>échelles</b>, les <b>thématiques</b> et les <b>acteurs</b>", t:"Rejoindre le réseau", levels:[
     {intro:"Le réseau relie tous ceux qui veulent <b>faire avancer la société</b>. Vous gardez votre <b>casquette de spécialiste</b>, vous gagnez en <b>visibilité</b>, et vous restez <b>indépendant</b>.",
      fields:[{k:'acteur', type:'cardsN', label:'Vous êtes (plusieurs casquettes, c\'est permis)', opts:ACTEURS},
              {k:'domaine', type:'chips', label:'Vos thématiques', opts:THEMES.map(t=>t.e+' '+t.n)},
@@ -947,7 +949,7 @@ const DREAMS = [
 ];
 const IDEES = [
   {s:"Le paradis n'est pas un lieu, c'est une construction.", d:"Attendre un paradis tout fait nous en éloigne. Voir ce qui peut s'améliorer, c'est déjà avancer. Le paradis, c'est un état d'esprit, une discipline : une co-construction de tous les jours."},
-  {s:"Place à la construction.", d:"Sans clés pour comprendre le monde (philosophie, géographie), on cherche l'équilibre hors de soi : argent, relations, sport, animaux, croyances… et on dépense beaucoup d'énergie à réparer ici et là. Comprendre la logique d'ensemble libère cette énergie, pour soi et pour la société."},
+  {s:"Place à la construction.", d:"Comprendre la logique d'ensemble (philosophie, géographie) libère une énergie folle, pour soi et pour la société. Fini de réparer ici et là\u00a0: on construit."},
   {s:"Un pied dans l'ancien, un pied dans le nouveau.", d:"Tout se construit en douceur : on peut vivre dans le système actuel tout en imaginant le suivant. Croyant ou non, modeste ou fortuné, chacun a intérêt à un système plus viable. On avance au fur et à mesure, dans l'intérêt de tous."},
   {s:"Le vrai pouvoir, c'est la coopération.", d:"Plus on monte en autorité, plus on dépend des autres. Le pouvoir grandit quand on le partage."},
   {s:"On a tout le temps.", d:"Pas de course : on glisse, on célèbre chaque réussite, puis on remonte pour un nouveau tour, encore plus fluide."},
@@ -1109,13 +1111,13 @@ function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',
   det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
-  add(h('h1',{class:'dream-h1'},"Tout part de <em>l'organisation.</em>"));
-  add(h('p',{class:'hero-lead'},"Bien-être, relations, travail, cadre de vie\u00a0: <b>tout en découle</b>. Et une organisation, <b>ça s'améliore</b>\u00a0! De soi au territoire, avec <b>une méthode simple</b>, à votre rythme."));
+  add(h('h1',{class:'dream-h1'},"Tout dépend de <em>l'organisation.</em>"));
+  add(h('p',{class:'hero-lead'},"Votre bien-être, votre famille, votre travail, votre territoire. Bonne nouvelle\u00a0: une organisation, <b>ça s'améliore</b>. En 3 étapes, à votre rythme."));
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   add(stepH(2,'Faire le point en 1 minute'));
   add(testBlock());
-  add(stepH(3,'Je souhaite améliorer…'));
+  add(stepH(3,'Passer à l\'action\u00a0: je souhaite améliorer…'));
   const list=h('div',{class:'picks', id:'agir'});
   PICKS.forEach((k,i)=>{ const d=DREAMS.find(x=>x.k===k), p=progressOf(k);
     const dots=Array.from({length:p.max},(_,j)=>`<i class="${j<p.lv?'on':''}"></i>`).join('');
@@ -1200,6 +1202,7 @@ function renderDream(){
     { const r=h('div',{class:'qa-row'}); r.append(h('div',{class:'lvl-badge'},`Niveau ${i+1} · ${L.name||LEVEL_NAMES[i]}`), qa(`${d.e} ${d.cat} · Niveau ${i+1}`)); card.appendChild(r); }
     if(i===0 && d.tuto){ const f=h('figure',{class:'intro-video tuto'}); f.innerHTML=`<video controls playsinline preload="none" aria-label="Tuto ${d.t}"><source src="${d.tuto}" type="video/mp4"></video><figcaption>🎬 Le tuto en 1 minute</figcaption>`; card.appendChild(f); }
     if(L.intro) card.appendChild(h('p',{class:'lvl-intro'},L.intro));
+    if(i===0 && d.defi) card.appendChild(h('div',{class:'defi'},`<span>🎯 Défi de la semaine</span>${d.defi}`));
     (L.parts||[]).forEach(P=>{ const box=h('div',{class:'lvl-part'});
       if(P.h){ const r=h('div',{class:'qa-row'}); r.append(h('h3',null,P.h), qa(`${d.e} ${d.cat} · ${P.h.replace(/<[^>]+>/g,'')}`)); box.appendChild(r); }
       if(P.v) box.appendChild(h('div',{class:'visual'},P.v()));

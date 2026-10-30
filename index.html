@@ -808,7 +808,7 @@ const ACTEURS=[
   {t:'🏭 Entreprise', d:"Produit, innove, crée des emplois."},
   {t:'📣 Média', d:"Informe et fait circuler les idées."},
   {t:'🔬 Scientifique', d:"Éclaire par la connaissance."}];
-const DEGRES=[{t:'👀 Suivre',d:"Rester informé : newsletters et réseaux sociaux."},{t:'🙋 Participer',d:"Donner son avis, contribuer aux projets."},{t:'🎤 Animer',d:"Sonder, inviter, faire vivre des échanges, physiques et numériques."},{t:'🧭 Devenir médiateur',d:"Orchestrer la coopération sur une thématique ou un territoire."}];
+const DEGRES=[{t:'👀 Suivre',d:"Rester informé : newsletters et réseaux sociaux."},{t:'🙋 Participer',d:"Donner son avis, contribuer aux projets."},{t:'🎤 Animer',d:"Sonder, inviter, faire vivre des échanges, physiques et numériques."},{t:'🧭 Devenir médiateur',d:"Redonner le pouvoir à chacun, sur une thématique ou un territoire."}];
 const MISSIONS=[
   {t:'Repérer', d:"<b>Qui agit autour de vous ?</b> Voisins, assos, entreprises, élus : chacun est une <b>pièce du puzzle</b>."},
   {t:'Écouter', d:"Poser <b>LA question</b> : envie d'une meilleure organisation ? La réponse est souvent un <b>grand oui</b>."},
@@ -826,7 +826,7 @@ const PRINCIPLES = [
    s:"Notre <b>épanouissement</b> et notre <b>environnement</b> grandissent main dans la main. Prendre soin de soi, c'est aussi prendre soin de <b>tout ce qui nous entoure</b>.",
    l:"Chaque pas compte : un mieux-être personnel nourrit l'organisation collective, et une meilleure organisation collective nourrit l'épanouissement de chacun. Pas besoin de tout faire avancer en même temps : ce sont des <b>va-et-vient</b> qui se renforcent, à votre rythme."},
   {k:"p4", c:"c4", t:"Une organisation adaptée à chaque situation",
-   s:"Chaque situation est unique. Des <b>médiateurs</b> adaptent une <b>même méthode</b> à chaque thématique et à chaque échelle : la <b>coopération</b> devient naturelle, et chacun garde son <b>autonomie</b>.",
+   s:"Chaque situation est unique. Des <b>médiateurs</b> redonnent le <b>pouvoir</b> à chacun, en adaptant une <b>même méthode</b> à chaque thématique et à chaque échelle : la <b>coopération</b> devient naturelle, et chacun garde son <b>autonomie</b>.",
    l:"Géographie = politique = épanouissement individuel et collectif. Une <b>gestion territoriale optimale</b> favorise la <b>coopération</b> des acteurs, grâce à des <b>médiateurs territoriaux</b>. Sur chaque thématique et à chaque échelle territoriale, ce réseau connecté suit une <b>méthode scientifique</b> qui permet à chacun d'aller à son rythme, <b>au service de l'intérêt collectif</b>."}
 ];
 const REACTIONS = [{k:"oui", e:"💯", n:"💯 Tout à fait d'accord"}, {k:"plutot", e:"👍", n:"👍 Plutôt d'accord"}, {k:"moyen", e:"🤔", n:"🤔 Moyennement d'accord"}, {k:"non", e:"🙅", n:"🙅 Pas du tout d'accord"}];
@@ -854,7 +854,7 @@ const DREAMS = [
     L1({qui:'à vos collègues ou aux membres', intro:"Une équipe bien organisée, c'est plus de <b>sens</b>, plus d'<b>énergie</b> et du <b>temps gagné</b>. Tout commence par une question à poser autour de vous\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on note ensemble les <b>attentes</b> et les <b>ressources</b>, et on <b>co-construit les projets</b>.",
         extra:[{k:'leviers', type:'chips', label:'Dans quels domaines ?', opts:LEVIERS}], labA:"Les attentes de l'équipe", labR:'Les ressources disponibles'}),
     L2('dans votre entreprise'),
-    {intro:"Des <b>médiateurs</b> adaptent la méthode à votre structure et à votre <b>filière</b>. Leur super-pouvoir\u00a0: aider chacun à tracer sa <b>feuille de route</b>, et faire circuler les bonnes idées entre les équipes.",
+    {intro:"Des <b>médiateurs</b> adaptent la méthode à votre structure et à votre <b>filière</b>. Leur mission\u00a0: <b>redonner le pouvoir</b> à chacun, à chaque organisation et à chaque territoire. Concrètement, ils aident chacun à tracer sa <b>feuille de route</b>, et font circuler les bonnes idées entre les équipes.",
      fields:[],
      parts:[{p:"Chaque équipe avance <b>à son rythme</b>\u00a0: une avancée dans un service <b>inspire</b> les autres."}]}
   ]},
@@ -919,7 +919,7 @@ const DREAMS = [
              {k:'propose', type:'area', label:'🧰 Ce que vous proposez au réseau : une compétence, un outil, et la thématique concernée'},
              {k:'contacts', type:'text', label:'Les acteurs repérés autour de vous', ph:"ex. l'asso du quartier, ma mairie…"},
              {k:'invite', type:'invite'}]},
-    {intro:"Il compte déjà des professionnels en <b>6 pôles</b> : géographie, intelligence collective, numérique, environnement, médiation, santé et bien-être. Chacun a une approche systémique : sa thématique n'est qu'une porte d'entrée. Objectif : <b>au moins 10 médiateurs par région</b>, dans chaque thématique.",
+    {intro:"La mission des médiateurs\u00a0: <b>redonner le pouvoir à chacun</b>, à chaque organisation et à chaque territoire. Le réseau compte déjà des professionnels en <b>6 pôles</b> : géographie, intelligence collective, numérique, environnement, médiation, santé et bien-être. Chacun a une approche systémique : sa thématique n'est qu'une porte d'entrée. Objectif : <b>au moins 10 médiateurs par région</b>, dans chaque thématique.",
      details:[
       {sum:"+ Une belle avancée au départ, une vie plus simple ensuite", html:()=>`<div style="background:#FFFDF8;border-radius:12px;padding:8px;margin-bottom:10px">${effortSVG()}</div>
         <p><b>1 · La transition.</b> Médiateurs et acteurs se forment, sensibilisent autour d'eux et relient leurs feuilles de route. C'est la phase la plus active, et la plus enthousiasmante.</p>

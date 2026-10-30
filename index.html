@@ -401,6 +401,12 @@
   .step-h span{flex:0 0 30px; width:30px; height:30px; border-radius:50%; background:var(--gold); color:var(--forest-dark); font-size:16px; display:flex; align-items:center; justify-content:center;}
   .defi{background:#FFF7DD; border:1.5px solid var(--gold); border-radius:14px; padding:10px 14px; font-size:14.5px; line-height:1.45; color:var(--forest-dark); font-weight:600;}
   .defi span{display:block; font:800 11.5px var(--body); letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin-bottom:2px;}
+  .link-list{display:flex; flex-direction:column; gap:8px;}
+  .link-btn{font:inherit; display:flex; align-items:center; gap:10px; text-align:left; border:1.5px solid var(--line); background:var(--cream); border-radius:14px; padding:10px 12px; cursor:pointer; color:var(--forest-dark);}
+  .link-btn:hover{border-color:var(--gold);}
+  .lk-e{font-size:22px; flex:0 0 26px; text-align:center;} .lk-t{flex:1; min-width:0; display:flex; flex-direction:column; gap:1px;}
+  .card .lk-t b{font-size:14px; background:none; padding:0;} .lk-t small{font-size:12.5px; color:var(--ink-soft); line-height:1.35;}
+  .link-btn i{font-style:normal; font-weight:800; color:var(--clay);}
   .bonus-card{margin:22px auto 0; max-width:420px; border-radius:16px; border:1.5px dashed var(--gold); background:linear-gradient(135deg,#FFFBEF,#F6F1E7); cursor:pointer; transition:transform .25s; perspective:600px;}
   .bonus-card:hover{transform:translateY(-2px) rotate(-.4deg);}
   .bonus-card.on{border-style:solid; cursor:default; animation:flipIn .35s ease;}
@@ -1079,7 +1085,7 @@ const SPHERES=[
   {k:'territoire', e:'🗺️', n:'Mon territoire', card:'idees', tip:"repérez les acteurs autour de vous et dites-leur qu'un réseau existe."}];
 function ricochetSVG(){
   const N=[['🧠','Moi',62,48],['🏡','Famille',278,48],['💼','Travail',62,176],['🗺️','Territoire',278,176]], cols=['#2F4A3C','#3E6350','#5B6F3B','#B5654A'];
-  let s=`<svg class="rico" viewBox="0 0 340 224" role="img" aria-label="Une bonne organisation dans un niveau apaise et inspire les autres : moi, famille, travail, territoire"><defs><marker id="rh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E0C15C"/></marker></defs>`;
+  let s=`<svg class="rico" viewBox="0 0 340 224" role="img" aria-label="Moi, famille, travail, territoire : tout est relié par l'organisation"><defs><marker id="rh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E0C15C"/></marker></defs>`;
   [0,1,2].forEach(i=>{ s+=`<circle cx="170" cy="112" r="38" fill="none" stroke="#E0C15C" stroke-width="2" opacity="0"><animate attributeName="r" from="38" to="100" dur="3.6s" begin="${i*1.2}s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.7" to="0" dur="3.6s" begin="${i*1.2}s" repeatCount="indefinite"/></circle>`; });
   N.forEach(([e,n,x,y])=>{ const dx=x-170, dy=y-112, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
     s+=`<line x1="${(170+ux*44).toFixed(1)}" y1="${(112+uy*44).toFixed(1)}" x2="${(x-ux*36).toFixed(1)}" y2="${(y-uy*36).toFixed(1)}" stroke="#E0C15C" stroke-width="2.5" marker-start="url(#rh)" marker-end="url(#rh)"/>`; });
@@ -1101,10 +1107,17 @@ function testBlock(){
   t.appendChild(h('div',{class:'scale'},'<span>0 · à imaginer</span><span>5 · bien organisée</span>'));
   t.appendChild(fb); upd();
   t.appendChild(h('div',{class:'rico-wrap'},ricochetSVG()));
-  t.appendChild(h('p',{class:'rico-cap'},'Une <b>bonne organisation</b> dans un niveau apaise, et donne de l\'énergie pour <b>inspirer les autres niveaux</b>. Quelle que soit l\'échelle, nous pouvons tous adopter un <b>état d\'esprit de médiateur</b>.'));
+  t.appendChild(h('p',{class:'rico-cap'},'<b>Tout est relié.</b> Quand vous avancez à un niveau, les autres en profitent\u00a0: <b>dans les deux sens</b>, et à <b>toutes les échelles</b>. Il y a un <b>médiateur</b> en chacun de nous\u00a0!'));
   return t;
 }
 const PICKS=['pensee','maison','entreprise','idees'];
+const LINKS={
+  pensee:{maison:"Plus serein, plus de temps pour vos proches", entreprise:"Les idées claires, c'est plus d'efficacité au travail", idees:"Bien dans vos baskets, envie d'agir près de chez vous", reseau:"Un médiateur vous accompagne, à votre rythme"},
+  maison:{pensee:"Une maison qui roule, c'est du temps pour soi", entreprise:"Ce qui marche en famille marche aussi en équipe", idees:"Des familles organisées, un quartier qui s'entraide", reseau:"Un médiateur vous accompagne, à votre rythme"},
+  entreprise:{pensee:"Des rôles clairs, plus de temps pour soi", maison:"Des horaires bien calés, plus de temps en famille", idees:"Votre structure coopère avec tout le territoire", reseau:"Trouvez les pros et les partenaires qu'il vous faut"},
+  idees:{pensee:"Des services à deux pas, plus de temps pour soi", maison:"Un quartier vivant, des familles épaulées", entreprise:"Des filières qui se complètent, des emplois utiles", reseau:"Des médiateurs relient toutes les échelles"},
+  reseau:{pensee:"Commencez par vous : c'est le premier niveau", maison:"Testez la méthode avec vos proches", entreprise:"Faites-la vivre dans votre structure", idees:"Reliez les acteurs de votre territoire"},
+  comprendre:{pensee:"Passez à la pratique : votre organisation", maison:"Testez avec vos proches", entreprise:"Lancez-vous avec votre équipe", idees:"Agissez sur votre territoire"}};
 function progressOf(k){ const d=DREAMS.find(x=>x.k===k); const lv=state.lvl[k]||(answered(k)?1:0); return {lv, max:d.levels.length}; }
 function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',{class:'acc'}); if(state.accH[id]) det.open=true;
   det.innerHTML=`<summary>${title}</summary>`; const b=h('div',{class:'acc-b'}); fill(b); det.appendChild(b);
@@ -1221,8 +1234,8 @@ function renderDream(){
   add(h('p',{class:'lvl-nav-cap'},'📍 Vos niveaux'));
   add(mkNav());
   const others=[...PICKS,'reseau'].map(k=>DREAMS.find(x=>x.k===k)).filter(x=>x.k!==d.k);
-  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'🧭 Améliorer aussi…'));
-    const g=h('div',{class:'explore-grid'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'explore-btn', onclick:()=>go('dream',x.k)},`<span>${x.e}</span><b>${x.cat}</b>${done?'<em>✓</em>':''}`)); });
+  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'🔗 Tout est relié\u00a0: et ensuite\u00a0?'));
+    const L=LINKS[d.k]||{}; const g=h('div',{class:'link-list'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'link-btn', onclick:()=>go('dream',x.k)},`<span class="lk-e">${x.e}</span><span class="lk-t"><b>${x.pick||x.t}${done?' ✓':''}</b><small>${L[x.k]||''}</small></span><i>→</i>`)); });
     ex.appendChild(g); add(ex); }
   const n=h('div',{class:'nav'});
   n.append(h('button',{class:'btn btn-soft', onclick:()=>go('home')},'🏠 Menu'), h('button',{class:'btn btn-primary', onclick:()=>go('recap')},'📇 Ma fiche →'));

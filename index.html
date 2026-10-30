@@ -1112,7 +1112,7 @@ function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Tout dépend de <em>l'organisation.</em>"));
-  add(h('p',{class:'hero-lead'},"Votre bien-être, votre famille, votre travail, votre territoire. Bonne nouvelle\u00a0: une organisation, <b>ça s'améliore</b>. En 3 étapes, à votre rythme."));
+  add(h('p',{class:'hero-lead'},"Votre bien-être, votre famille, votre travail, votre territoire. Bonne nouvelle\u00a0: une organisation, <b>ça s'améliore</b>, et <b>tout le monde peut y participer</b>, quelle que soit sa situation, quelle que soit l'échelle. En 3 étapes, à votre rythme."));
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   add(stepH(2,'Faire le point en 1 minute'));

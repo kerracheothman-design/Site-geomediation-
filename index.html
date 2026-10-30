@@ -399,6 +399,19 @@
   .explore-btn:hover{border-color:var(--gold);}
   .step-h{display:flex; align-items:center; gap:10px; font:800 clamp(19px,5vw,23px) var(--display); color:var(--forest-dark); margin:22px 0 10px;}
   .step-h span{flex:0 0 30px; width:30px; height:30px; border-radius:50%; background:var(--gold); color:var(--forest-dark); font-size:16px; display:flex; align-items:center; justify-content:center;}
+  .bonus-card{margin:22px auto 0; max-width:420px; border-radius:16px; border:1.5px dashed var(--gold); background:linear-gradient(135deg,#FFFBEF,#F6F1E7); cursor:pointer; transition:transform .25s; perspective:600px;}
+  .bonus-card:hover{transform:translateY(-2px) rotate(-.4deg);}
+  .bonus-card.on{border-style:solid; cursor:default; animation:flipIn .35s ease;}
+  @keyframes flipIn{from{transform:rotateY(90deg);} to{transform:none;}}
+  .bc-front{display:flex; justify-content:space-between; align-items:center; padding:14px 18px; font-size:16px; color:var(--forest-dark);}
+  .card .bc-front b{background:none; padding:0;}
+  .bc-front i{font-style:normal; font-size:12.5px; font-weight:800; color:var(--clay);}
+  .bc-back{padding:14px 16px 12px;}
+  .bc-links{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;}
+  .bc-links button{font:800 13px var(--body); border:1.5px solid var(--line); background:#fff; color:var(--forest-dark); border-radius:999px; padding:8px 12px; cursor:pointer;}
+  .bc-links button:hover{border-color:var(--gold);}
+  .bc-back p{font-size:13.5px; line-height:1.5; color:var(--ink-soft); margin:0 0 6px;}
+  .bc-close{font-size:12px; font-weight:800; color:var(--clay); cursor:pointer;}
   .bonus-h{font:800 18px var(--display); color:var(--forest-dark); margin:24px 0 10px;}
   .intro-video{margin:0;}
   .hero-lead{font-size:16.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 18px;}
@@ -932,7 +945,7 @@ const DREAMS = [
   ]}
 ];
 const IDEES = [
-  {s:"Le paradis n'est pas un lieu, c'est un chantier.", d:"Attendre un paradis tout fait nous en éloigne. Voir ce qui peut s'améliorer, c'est déjà avancer. Le paradis, c'est un état d'esprit, une discipline : une co-construction de tous les jours."},
+  {s:"Le paradis n'est pas un lieu, c'est une construction.", d:"Attendre un paradis tout fait nous en éloigne. Voir ce qui peut s'améliorer, c'est déjà avancer. Le paradis, c'est un état d'esprit, une discipline : une co-construction de tous les jours."},
   {s:"Place à la construction.", d:"Sans clés pour comprendre le monde (philosophie, géographie), on cherche l'équilibre hors de soi : argent, relations, sport, animaux, croyances… et on dépense beaucoup d'énergie à réparer ici et là. Comprendre la logique d'ensemble libère cette énergie, pour soi et pour la société."},
   {s:"Un pied dans l'ancien, un pied dans le nouveau.", d:"Tout se construit en douceur : on peut vivre dans le système actuel tout en imaginant le suivant. Croyant ou non, modeste ou fortuné, chacun a intérêt à un système plus viable. On avance au fur et à mesure, dans l'intérêt de tous."},
   {s:"Le vrai pouvoir, c'est la coopération.", d:"Plus on monte en autorité, plus on dépend des autres. Le pouvoir grandit quand on le partage."},
@@ -1110,11 +1123,14 @@ function renderHome(){
       `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${d.pick}</b><small>${d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`)); });
   add(list);
   add(h('p',{class:'pick-note'},'3 niveaux par sujet, à votre rythme. <b>🎯</b> objectif et <b>💬</b> question, à tout moment.'));
-  add(h('h2',{class:'bonus-h'},'🎁 Bonus'));
-  const more=h('div',{class:'more-row'});
-  more.append(h('button',{onclick:()=>go('dream','comprendre')},'🧭 Le projet en images'), h('button',{onclick:()=>go('dream','reseau')},'🌐 Rejoindre le réseau'), h('button',{onclick:()=>go('recap')},'📇 Ma fiche'));
-  add(more);
-  add(acc('faq','❓ Et qui décide, alors ?', b=>{ b.innerHTML=`<p><b>Chacun, à sa place.</b> Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>. Pas de règles préétablies : une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p>C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin) : souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>prospère</b>, dans notre environnement proche comme lointain.</p>`; }));
+  const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
+  const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
+    bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button><button data-go="reseau">🌐 Rejoindre le réseau</button><button data-go="recap">📇 Ma fiche</button></div><p><b>Et qui décide, alors ?</b> Chacun, à sa place, selon sa <b>responsabilité</b> et ses <b>connaissances</b>. C'est l'<b>esprit girondin</b> : souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b>, pour une société plus <b>prospère</b>.</p><span class="bc-close">↺ Retourner</span></div>`
+      : `<div class="bc-front"><span>🎁 <b>Bonus</b></span><i>Retourner ↻</i></div>`;
+    bc.querySelectorAll('[data-go]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); const k=b.dataset.go; k==='recap'?go('recap'):go('dream',k); }); };
+  bc.onclick=e=>{ if(state.bonusOpen && !(e.target.classList&&e.target.classList.contains('bc-close'))) return; state.bonusOpen=!state.bonusOpen; save(); paintB(); };
+  bc.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); state.bonusOpen=!state.bonusOpen; save(); paintB(); } };
+  paintB(); add(bc);
   add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
 }
 

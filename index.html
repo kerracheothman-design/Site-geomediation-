@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Géomédiation : la science de l'organisation des territoires. Envie d'agir ? Découvrez comment, en quelques clics.">
+<meta name="description" content="La Géomédiation, inspirée de la géographie, science de l'organisation des territoires. Envie d'agir ? Découvrez comment, en quelques clics.">
 <title>Géomédiation, envie d'agir</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -545,7 +545,7 @@
 <canvas id="confetti" aria-hidden="true"></canvas>
 <div class="shell">
   <div class="top">
-    <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">La science de l'organisation des territoires</span></button>
+    <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
     <div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
@@ -1214,7 +1214,7 @@ function printBilan(sel){
   <p class="tip">Pour l'enregistrer en PDF : dans la fenêtre d'impression, choisissez <b>« Enregistrer au format PDF »</b> comme imprimante.</p>
   <header><div class="brand">GÉOMÉDIATION</div><h1>Ma fiche</h1><div class="date">${esc(date)}</div></header>
   ${body}
-  <footer>Géomédiation · La science de l'organisation des territoires · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
+  <footer>Géomédiation · Inspirée de la géographie, science de l'organisation des territoires · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
   </body></html>`;
   const w=window.open('','_blank');
   if(!w){ const a=h('a',{href:URL.createObjectURL(new Blob([doc],{type:'text/html'})), download:'fiche-geomediation.html'}); document.body.appendChild(a); a.click(); a.remove(); return; }

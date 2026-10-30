@@ -408,7 +408,8 @@
   .bc-front i{font-style:normal; font-size:12.5px; font-weight:800; color:var(--clay);}
   .bc-back{padding:14px 16px 12px;}
   .bc-links{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;}
-  .bc-links button{font:800 13px var(--body); border:1.5px solid var(--line); background:#fff; color:var(--forest-dark); border-radius:999px; padding:8px 12px; cursor:pointer;}
+  .bc-links button{font:800 12.5px var(--body); border:1.5px solid var(--line); background:#fff; color:var(--forest-dark); border-radius:999px; padding:6px 10px; cursor:pointer;}
+  .card .bc-back b{background:none; padding:0; color:var(--forest-dark);}
   .bc-links button:hover{border-color:var(--gold);}
   .bc-back p{font-size:13.5px; line-height:1.5; color:var(--ink-soft); margin:0 0 6px;}
   .bc-close{font-size:12px; font-weight:800; color:var(--clay); cursor:pointer;}
@@ -1125,7 +1126,7 @@ function renderHome(){
   add(h('p',{class:'pick-note'},'3 niveaux par sujet, à votre rythme. <b>🎯</b> objectif et <b>💬</b> question, à tout moment.'));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
-    bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button><button data-go="reseau">🌐 Rejoindre le réseau</button><button data-go="recap">📇 Ma fiche</button></div><p><b>Et qui décide, alors ?</b> Chacun, à sa place, selon sa <b>responsabilité</b> et ses <b>connaissances</b>. C'est l'<b>esprit girondin</b> : souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b>, pour une société plus <b>prospère</b>.</p><span class="bc-close">↺ Retourner</span></div>`
+    bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button><button data-go="reseau">🌐 Rejoindre le réseau</button><button data-go="recap">📇 Ma fiche</button></div><p><b>Et qui décide, alors ?</b> Chacun, à sa place, selon sa responsabilité et ses connaissances. C'est l'esprit girondin : souple, pragmatique et serein.</p><span class="bc-close">↺ Retourner</span></div>`
       : `<div class="bc-front"><span>🎁 <b>Bonus</b></span><i>Retourner ↻</i></div>`;
     bc.querySelectorAll('[data-go]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); const k=b.dataset.go; k==='recap'?go('recap'):go('dream',k); }); };
   bc.onclick=e=>{ if(state.bonusOpen && !(e.target.classList&&e.target.classList.contains('bc-close'))) return; state.bonusOpen=!state.bonusOpen; save(); paintB(); };

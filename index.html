@@ -405,7 +405,7 @@
   .link-btn{font:inherit; display:flex; align-items:center; gap:10px; text-align:left; border:1.5px solid var(--line); background:var(--cream); border-radius:14px; padding:10px 12px; cursor:pointer; color:var(--forest-dark);}
   .link-btn:hover{border-color:var(--gold);}
   .lk-e{font-size:22px; flex:0 0 26px; text-align:center;} .lk-t{flex:1; min-width:0; display:flex; flex-direction:column; gap:1px;}
-  .card .lk-t b{font-size:14px; background:none; padding:0;} .lk-t small{font-size:12.5px; color:var(--ink-soft); line-height:1.35;}
+  .card .lk-t b{font-size:14px; background:none; padding:0;} .lk-t small{font-size:12.5px; color:var(--ink-soft); line-height:1.35;} .card .lk-t small b{font-size:12.5px; background:none; padding:0; color:var(--forest-dark);}
   .link-btn i{font-style:normal; font-weight:800; color:var(--clay);}
   .bonus-card{margin:22px auto 0; max-width:420px; border-radius:16px; border:1.5px dashed var(--gold); background:linear-gradient(135deg,#FFFBEF,#F6F1E7); cursor:pointer; transition:transform .25s; perspective:600px;}
   .bonus-card:hover{transform:translateY(-2px) rotate(-.4deg);}
@@ -1107,24 +1107,18 @@ function testBlock(){
   t.appendChild(h('div',{class:'scale'},'<span>0 · à imaginer</span><span>5 · bien organisée</span>'));
   t.appendChild(fb); upd();
   t.appendChild(h('div',{class:'rico-wrap'},ricochetSVG()));
-  t.appendChild(h('p',{class:'rico-cap'},'<b>Tout est relié.</b> Quand vous avancez à un niveau, les autres en profitent\u00a0: <b>dans les deux sens</b>, et à <b>toutes les échelles</b>. Il y a un <b>médiateur</b> en chacun de nous\u00a0!'));
+  t.appendChild(h('p',{class:'rico-cap'},'<b>TOUT est relié.</b> Quand vous avancez à un niveau, les autres en profitent\u00a0: <b>dans les deux sens</b>, et à <b>toutes les échelles</b>. Il y a un <b>médiateur</b> en chacun de nous\u00a0!'));
   return t;
 }
 const PICKS=['pensee','maison','entreprise','idees'];
-const LINKS={
-  pensee:{maison:"Plus serein, plus de temps pour vos proches", entreprise:"Les idées claires, c'est plus d'efficacité au travail", idees:"Bien dans vos baskets, envie d'agir près de chez vous", reseau:"Un médiateur vous accompagne, à votre rythme"},
-  maison:{pensee:"Une maison qui roule, c'est du temps pour soi", entreprise:"Ce qui marche en famille marche aussi en équipe", idees:"Des familles organisées, un quartier qui s'entraide", reseau:"Un médiateur vous accompagne, à votre rythme"},
-  entreprise:{pensee:"Des rôles clairs, plus de temps pour soi", maison:"Des horaires bien calés, plus de temps en famille", idees:"Votre structure coopère avec tout le territoire", reseau:"Trouvez les pros et les partenaires qu'il vous faut"},
-  idees:{pensee:"Des services à deux pas, plus de temps pour soi", maison:"Un quartier vivant, des familles épaulées", entreprise:"Des filières qui se complètent, des emplois utiles", reseau:"Des médiateurs relient toutes les échelles"},
-  reseau:{pensee:"Commencez par vous : c'est le premier niveau", maison:"Testez la méthode avec vos proches", entreprise:"Faites-la vivre dans votre structure", idees:"Reliez les acteurs de votre territoire"},
-  comprendre:{pensee:"Passez à la pratique : votre organisation", maison:"Testez avec vos proches", entreprise:"Lancez-vous avec votre équipe", idees:"Agissez sur votre territoire"}};
+const LINKS={"pensee": {"maison": "Plus <b>serein</b>, plus de <b>temps</b> pour vos proches", "entreprise": "Les <b>idées claires</b>, c'est plus d'<b>efficacité</b> au travail", "idees": "Bien dans vos baskets, <b>envie d'agir</b> près de chez vous", "reseau": "Un <b>médiateur</b> vous accompagne, à votre rythme"}, "maison": {"pensee": "Une maison qui roule, c'est du <b>temps pour soi</b>", "entreprise": "Ce qui <b>marche en famille</b> marche aussi <b>en équipe</b>", "idees": "Des familles organisées, un quartier qui <b>s'entraide</b>", "reseau": "Un <b>médiateur</b> vous accompagne, à votre rythme"}, "entreprise": {"pensee": "Des <b>rôles clairs</b>, plus de <b>temps pour soi</b>", "maison": "Des <b>horaires</b> bien calés, plus de <b>temps en famille</b>", "idees": "Votre structure <b>coopère</b> avec tout le territoire", "reseau": "Trouvez les <b>pros</b> et les <b>partenaires</b> qu'il vous faut"}, "idees": {"pensee": "Des <b>services à deux pas</b>, plus de <b>temps pour soi</b>", "maison": "Un <b>quartier vivant</b>, des familles <b>épaulées</b>", "entreprise": "Des <b>filières</b> qui se complètent, des <b>emplois utiles</b>", "reseau": "Des <b>médiateurs</b> relient <b>toutes les échelles</b>"}, "reseau": {"pensee": "Commencez par <b>vous</b> : c'est le premier niveau", "maison": "Testez la méthode avec vos <b>proches</b>", "entreprise": "Faites-la vivre dans votre <b>structure</b>", "idees": "Reliez les <b>acteurs</b> de votre territoire"}, "comprendre": {"pensee": "Passez à la <b>pratique</b> : votre organisation", "maison": "Testez avec vos <b>proches</b>", "entreprise": "Lancez-vous avec votre <b>équipe</b>", "idees": "Agissez sur votre <b>territoire</b>"}};
 function progressOf(k){ const d=DREAMS.find(x=>x.k===k); const lv=state.lvl[k]||(answered(k)?1:0); return {lv, max:d.levels.length}; }
 function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',{class:'acc'}); if(state.accH[id]) det.open=true;
   det.innerHTML=`<summary>${title}</summary>`; const b=h('div',{class:'acc-b'}); fill(b); det.appendChild(b);
   det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
-  add(h('h1',{class:'dream-h1'},"Tout dépend de <em>l'organisation.</em>"));
+  add(h('h1',{class:'dream-h1'},"TOUT dépend de <em>l'organisation.</em>"));
   add(h('p',{class:'hero-lead'},"Votre bien-être, votre famille, votre travail, votre territoire. Bonne nouvelle\u00a0: une organisation, <b>ça s'améliore</b>, et <b>tout le monde peut y participer</b>, quelle que soit sa situation, quelle que soit l'échelle. En 3 étapes, à votre rythme."));
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
@@ -1234,7 +1228,7 @@ function renderDream(){
   add(h('p',{class:'lvl-nav-cap'},'📍 Vos niveaux'));
   add(mkNav());
   const others=[...PICKS,'reseau'].map(k=>DREAMS.find(x=>x.k===k)).filter(x=>x.k!==d.k);
-  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'🔗 Tout est relié\u00a0: et ensuite\u00a0?'));
+  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'🔗 TOUT est relié\u00a0: et ensuite\u00a0?'));
     const L=LINKS[d.k]||{}; const g=h('div',{class:'link-list'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'link-btn', onclick:()=>go('dream',x.k)},`<span class="lk-e">${x.e}</span><span class="lk-t"><b>${x.pick||x.t}${done?' ✓':''}</b><small>${L[x.k]||''}</small></span><i>→</i>`)); });
     ex.appendChild(g); add(ex); }
   const n=h('div',{class:'nav'});

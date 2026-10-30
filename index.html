@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Géomédiation : la science de l'organisation, simplifiée pour tous. Envie d'agir ? Découvrez comment, en quelques clics.">
+<meta name="description" content="Géomédiation : la science de l'organisation des territoires. Envie d'agir ? Découvrez comment, en quelques clics.">
 <title>Géomédiation, envie d'agir</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -396,6 +396,35 @@
   .explore-btn{font:inherit; display:flex; align-items:center; gap:8px; text-align:left; border:1.5px solid var(--line); background:var(--cream); border-radius:12px; padding:10px 12px; cursor:pointer; color:var(--forest-dark);}
   .explore-btn span{font-size:20px;} .explore-btn b{font-size:13.5px; flex:1; background:none; padding:0;} .explore-btn em{font-style:normal; color:var(--forest); font-weight:800;}
   .explore-btn:hover{border-color:var(--gold);}
+  .hero-lead{font-size:16.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 18px;}
+  .hero-lead b{background:none; padding:0; color:var(--forest-dark);}
+  .pick-h{font:800 clamp(22px,5.5vw,28px) var(--display); color:var(--forest-dark); margin:4px 0 12px; letter-spacing:-.01em;}
+  .picks{display:flex; flex-direction:column; gap:10px;}
+  .pick{position:relative; display:grid; grid-template-columns:34px 1fr auto; align-items:center; gap:12px; text-align:left; font:inherit; border:none; border-radius:18px; padding:14px 16px; cursor:pointer; color:var(--cream); background:var(--forest); transition:transform .15s, box-shadow .15s; animation:rise .45s cubic-bezier(.2,.8,.2,1) both;}
+  .pick:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(31,51,41,.28);}
+  .pick.p1{background:#3E6350; animation-delay:.05s;} .pick.p2{background:#6E7A42; animation-delay:.1s;} .pick.p3{background:#9A4E36; animation-delay:.15s;}
+  .pick-n{width:34px; height:34px; border-radius:50%; background:var(--gold); color:var(--forest-dark); font:800 17px var(--display); display:flex; align-items:center; justify-content:center;}
+  .pick-b{display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .card .pick-b b{font:800 17px var(--display); background:none; padding:0; color:var(--cream);}
+  .pick-b small{font-size:13px; opacity:.85; line-height:1.3;}
+  .pick-p{display:flex; align-items:center; gap:8px; margin-top:6px; font-size:12.5px; font-weight:800; color:var(--gold-light);}
+  .dots{display:inline-flex; gap:4px;} .dots i{width:9px; height:9px; border-radius:50%; border:1.5px solid var(--gold-light);} .dots i.on{background:var(--gold-light);}
+  .pick-e{font-size:28px;}
+  .pick .reco-tag{position:absolute; top:-9px; right:12px; margin:0;}
+  .pick.suggest{box-shadow:0 0 0 3px var(--gold), 0 10px 24px rgba(31,51,41,.28);} .pick.suggest .reco-tag{display:inline-block;}
+  .pick-note{font-size:13px; color:var(--muted); margin:10px 2px 14px; line-height:1.5;}
+  .card .pick-note b{background:none; padding:0;}
+  .more-row{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 16px;}
+  .more-row button{font:800 13.5px var(--body); border:1.5px solid var(--line); background:var(--paper); color:var(--forest-dark); border-radius:999px; padding:9px 14px; cursor:pointer;}
+  .more-row button:hover{border-color:var(--gold);}
+  .acc{border:1.5px solid var(--line); border-radius:14px; background:var(--paper); margin:0 0 10px; overflow:hidden;}
+  .acc summary{cursor:pointer; list-style:none; padding:10px 14px; font:800 15px var(--display); color:var(--forest-dark); display:flex; justify-content:space-between; align-items:center; gap:10px;}
+  .acc summary::-webkit-details-marker{display:none;} .acc summary::after{content:'+'; font-size:20px; color:var(--clay);} .acc[open] summary::after{content:'–';}
+  .acc-b{padding:0 14px 14px;} .acc-b p{font-size:14.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 8px;}
+  .acc-b .test{margin:0;}
+  .lvl-prog{height:6px; border-radius:99px; background:var(--line); overflow:hidden; margin:2px 0 10px;} .lvl-prog i{display:block; height:100%; background:linear-gradient(90deg,var(--gold),var(--forest)); border-radius:99px; transition:width .5s;}
+  .toast{position:fixed; left:50%; top:18px; transform:translateX(-50%); z-index:60; background:var(--forest-dark); color:var(--cream); font:800 14.5px var(--body); padding:12px 18px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.3); transition:opacity .4s; max-width:92vw; text-align:center;}
+  .toast.out{opacity:0;}
   .lvl-nav-cap{font:700 13px var(--body); color:var(--forest-dark); margin:22px 0 4px;}
   .lvl-nav button.next{border-style:dashed; border-color:var(--gold);}
   .lvl-cap{font-size:13px; color:var(--ink-soft); margin:0 0 4px; text-align:center;}
@@ -516,7 +545,7 @@
 <canvas id="confetti" aria-hidden="true"></canvas>
 <div class="shell">
   <div class="top">
-    <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">La science de l'organisation, simplifiée pour tous</span></button>
+    <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">La science de l'organisation des territoires</span></button>
     <div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
@@ -793,15 +822,15 @@ const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 <b>Je témoigne</b
 const FORMATS = {k:'format', type:'chips', label:'Le format qui vous conviendrait', opts:['Atelier','Formation','Accompagnement']};
 
 const DREAMS = [
-  {k:'entreprise', e:'💼', cat:'Management', dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Votre entreprise, votre établissement…", levels:[
-    L1({qui:'à vos collègues', intro:"Au travail, tout commence par une question simple, à poser à vos collègues\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on note ensemble les <b>attentes</b> et les <b>ressources</b> de chacun, pour <b>co-construire des projets</b>.",
+  {k:'entreprise', e:'💼', cat:'Travail & association', pick:"Mon organisation professionnelle", sub:"Mon entreprise, mon établissement, mon association", dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Mon organisation professionnelle", levels:[
+    L1({qui:'à vos collègues ou aux membres', intro:"Au travail comme en association, tout commence par une question simple, à poser autour de vous\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on note ensemble les <b>attentes</b> et les <b>ressources</b> de chacun, pour <b>co-construire des projets</b>.",
         extra:[{k:'leviers', type:'chips', label:'Dans quels domaines ?', opts:LEVIERS}], labA:"Les attentes de l'équipe", labR:'Les ressources disponibles'}),
     L2('dans votre entreprise'),
     {intro:"Des <b>médiateurs</b>, généralistes ou spécialisés, adaptent la méthode à votre entreprise et à votre <b>filière</b>. Leur force : aider chacun à construire sa <b>feuille de route</b>, et faire circuler les bonnes idées entre les équipes.",
      fields:[],
      parts:[{p:"Chaque équipe avance <b>à son rythme</b> : un progrès dans un service nourrit les autres, par petits <b>va-et-vient</b>."}]}
   ]},
-  {k:'idees', e:'🗺️', cat:'Territoire', dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Votre territoire, à la bonne échelle", levels:[
+  {k:'idees', e:'🗺️', cat:'Territoire', pick:"Mon organisation territoriale", sub:"Mon quartier, ma commune, ma région", dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Mon organisation territoriale", levels:[
     L1({qui:'aux acteurs de votre territoire', intro:"Sur votre territoire, tout commence par une question simple, à poser à ses acteurs\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on relie les <b>besoins</b> et les <b>ressources</b> de chacun, pour <b>co-construire des projets</b> votés et évalués par les humains concernés.", labA:'Les besoins', labR:'Les ressources', extra:[{k:'echelle', type:'scales', label:'Quelles échelles territoriales ? Autant que vous voulez, ou aucune'},{k:'domaine', type:'chips', label:'Dans quels domaines ?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
     {intro:"Où en est l'organisation à chaque échelle choisie\u00a0? Pour chaque étape\u00a0: <b>0</b> = à lancer, <b>5</b> = bien en place.",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet'}], details:[STEPS_DETAIL]},
@@ -830,7 +859,7 @@ const DREAMS = [
              {k:'preparer', type:'toggle', label:"Je veux <b>participer à la préparation</b> du projet territorial"},
              {k:'mediateur', type:'toggle', label:"Devenir <b>médiateur</b> m'intéresse"}]}
   ]},
-  {k:'pensee', e:'🧠', cat:'Psychologie', dream:"mieux comprendre le lien entre <b>tout ce que vous vivez</b> et <b>votre état d'esprit</b>", t:"Votre vie, votre état d'esprit", levels:[
+  {k:'pensee', e:'🧠', cat:'Personnel', pick:"Mon organisation personnelle", sub:"Mon état d'esprit, ma santé, mon temps, mon budget", dream:"mieux comprendre le lien entre <b>tout ce que vous vivez</b> et <b>votre état d'esprit</b>", t:"Mon organisation personnelle", levels:[
     {intro:"Tout ce qui se passe dans votre existence est la <b>conséquence de votre état d'esprit</b>, et de l'<b>organisation</b> qui en découle. Premier pas\u00a0: voir où vous en êtes.",
      fields:[{k:'lien', type:'chips1', label:"Arrivez-vous à voir le lien entre votre façon de penser et ce que vous vivez\u00a0?", opts:['✨ Oui, clairement','🌿 En partie','🌱 Je le découvre']},
              {k:'soi', type:'chips', label:'Les domaines dont vous aimeriez davantage prendre soin', opts:DOM_NAMES}]},
@@ -841,14 +870,14 @@ const DREAMS = [
             {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements sur mesure</b> : dites-le juste en dessous, et un médiateur vous oriente vers le bon professionnel."}],
      fields:[{k:'ecriture', type:'area', label:"✍️ Écriture intuitive : qui aimeriez-vous être ? Que voulez-vous vivre ? Dans quelle société ? Et pourquoi, à chaque fois ?"}]}
   ]},
-  {k:'maison', e:'🏡', cat:'Famille', dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Une vie de famille harmonieuse", levels:[
+  {k:'maison', e:'🏡', cat:'Famille & proches', pick:"Mon organisation familiale", sub:"Avec mes proches : couple, enfants, colocation", dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Mon organisation familiale", levels:[
     L1({qui:'à vos proches', intro:"En famille, tout commence par une question simple\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, chacun <b>propose ses idées</b>, et on met en place <b>ensemble</b> celles qui plaisent à tous.",
         extra:[{k:'cercle', type:'chips', label:'Avec qui\u00a0?', opts:['En couple','Avec les enfants','En famille élargie','En colocation']},
                {k:'sujets', type:'chips', label:'Sur quels sujets\u00a0?', opts:['Repas','Tâches du quotidien','Budget','Agenda','Loisirs','Vacances']}],
         labA:'Les idées à proposer', labR:'Ce que chacun peut apporter'}),
     L2('en famille', 'Une idée à mettre en place ensemble'),
     {intro:"Chacun influence la famille autant qu'il en est influencé\u00a0: quand <b>chacun va bien</b>, toute la famille <b>rayonne</b>. Et à chaque idée mise en place, on <b>célèbre</b> ensemble.",
-     parts:[{link:['pensee',"🧠 Faire le point sur vous →"]}],
+     parts:[{link:['pensee',"🧠 Mon organisation personnelle →"]}],
      fields:[]}
   ]},
   {k:'reseau', e:'🌐', cat:'Réseau', star:true, dream:"rejoindre un <b>réseau commun</b> qui facilite la coopération entre les <b>échelles</b>, les <b>thématiques</b> et les <b>acteurs</b>", t:"Rejoindre le réseau", levels:[
@@ -1028,28 +1057,13 @@ function ricochetSVG(){
   s+=`<circle cx="170" cy="112" r="40" fill="#E0C15C"/><text x="170" y="116" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="11.5" fill="#1F3329">Organisation</text></svg>`;
   return s;
 }
-function guideBlock(){
-  const g=h('section',{class:'guide'});
-  g.innerHTML=`<div class="guide-t">Comment ça marche\u00a0?</div>`;
-  const flow=h('div',{class:'g-flow'});
-  flow.append(
-    h('button',{class:'g-step', onclick:()=>go('dream','comprendre')},'<span class="g-e">🧭</span><span class="g-t"><b>1 · Comprendre</b><small>Le projet en images : les ondes, le toboggan…</small></span>'),
-    h('i',{class:'g-arr','aria-hidden':'true'},'→'),
-    h('button',{class:'g-step s2', onclick:()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'<span class="g-e">🚀</span><span class="g-t"><b>2 · Agir</b><small>Je m\'évalue, puis je choisis mon sujet</small></span>'),
-    h('i',{class:'g-arr','aria-hidden':'true'},'→'),
-    h('button',{class:'g-step s3', onclick:()=>go('recap')},'<span class="g-e">📇</span><span class="g-t"><b>3 · Ma fiche</b><small>Mes réponses et mes objectifs, pour moi</small></span>'));
-  g.appendChild(flow);
-  g.appendChild(h('p',{class:'g-note'},'Chaque sujet s\'ouvre en <b>3 niveaux</b>, à votre rythme. À chaque étape, vous décidez : <b>je réfléchis</b>, <b>j\'agis</b>, <b>j\'ai une question</b>, ou <b>ça me suffit pour l\'instant</b>. Votre fiche reste à vous ; vos questions partent au médiateur.'));
-  g.appendChild(h('p',{class:'g-note qa-note'},'Partout sur le site, à chaque rubrique et à chaque information\u00a0: touchez <b>🎯</b> pour noter un objectif, ou <b>💬</b> pour poser une question.'));
-  return g;
-}
 function testBlock(){
   state.test=state.test||{};
   const t=h('section',{class:'test'});
-  t.innerHTML=`<div class="qa-row"><h3>Et si tous nos problèmes venaient de l'organisation\u00a0?</h3></div><p class="test-s">Comment mettre en place une <b>bonne organisation</b>\u00a0? Commencez par vous évaluer dans les différentes sphères de votre vie.</p>`;
+  t.innerHTML=`<div class="qa-row"><h3>Où en est votre organisation\u00a0?</h3></div><p class="test-s">Un curseur par sphère. On vous suggère par où commencer.</p>`;
   t.firstChild.appendChild(qa('🧭 Mon test d\'organisation', true));
   const fb=h('div'); const btn=h('button',{class:'btn btn-gold'});
-  const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); state.reco=d.k; document.querySelectorAll('.dream').forEach(el=>el.classList.toggle('suggest', el.dataset.k===d.k)); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.cat} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });
+  const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); state.reco=d.k; document.querySelectorAll('.pick').forEach(el=>el.classList.toggle('suggest', el.dataset.k===d.k)); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.t} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });
   SPHERES.forEach(x=>{ const v=state.test[x.k]||0; const row=h('div',{class:'sph'}); const val=h('span',null,v+'/5');
     const top=h('div',{class:'sph-top'},`<span>${x.e} ${x.n}</span>`); top.appendChild(val);
     const r=h('input',{type:'range',min:0,max:5,value:v,'aria-label':'Organisation · '+x.n}); r.oninput=e=>{ state.test[x.k]=+e.target.value; val.textContent=e.target.value+'/5'; upd(); save(); };
@@ -1060,37 +1074,38 @@ function testBlock(){
   t.appendChild(h('p',{class:'rico-cap'},'Une <b>bonne organisation</b> dans un niveau apaise, et donne de l\'énergie pour <b>inspirer les autres niveaux</b>. Quelle que soit l\'échelle, nous pouvons tous adopter un <b>état d\'esprit de médiateur</b>.'));
   return t;
 }
+const PICKS=['pensee','maison','entreprise','idees'];
+function progressOf(k){ const d=DREAMS.find(x=>x.k===k); const lv=state.lvl[k]||(answered(k)?1:0); return {lv, max:d.levels.length}; }
+function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',{class:'acc'}); if(state.accH[id]) det.open=true;
+  det.innerHTML=`<summary>${title}</summary>`; const b=h('div',{class:'acc-b'}); fill(b); det.appendChild(b);
+  det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
 function renderHome(){
-  add(h('div',{class:'kicker'},'Bienvenue'));
-  add(h('h1',{class:'dream-h1'},'Envie de <em>booster</em> notre société\u00a0?'));
-  add(h('p',{class:'hero-sub'},"Pour la rendre <b>équitable</b> et <b>durable</b>, dans l'intérêt de tous\u00a0? Vous êtes <em>au bon endroit.</em>"));
-  add(h('p',{class:'lead', style:'margin:-4px 0 14px'},"Plus un problème est grand, plus on peut évoluer. L'<b>intelligence</b>, c'est l'<b>adaptation</b>, et la capacité de <b>reconnaître ses limites et ses forces</b>."));
-  add(h('div',{class:'badges', style:'justify-content:flex-start;margin:0 0 14px'},'<span class="badge">⏱️ 2 à 10 minutes</span><span class="badge">🔒 Vos réponses restent à vous</span>'));
-  const vw=h('figure',{class:'intro-video'});
-  vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video><figcaption>▶ La Géomédiation en 1 minute</figcaption>';
-  add(vw);
-  add(guideBlock());
-  add(h('h2',{class:'agir-h', id:'agir'},'🚀 2 · Agir : par où commencer ?'));
-  const dep=h('div',{class:'fld', style:'margin:0 0 14px'}); dep.appendChild(h('div',{class:'fld-label'},DEPART.label));
-  const drow=h('div',{class:'chip-row'}); DEPART.opts.forEach(o=>{ const on=state.depart===o; drow.appendChild(h('button',{class:'chip'+(on?' active':''),'aria-pressed':String(on), onclick:()=>{ state.depart=on?null:o; render(); }}, o)); });
-  dep.appendChild(drow); add(dep);
-  add(testBlock());
-  add(h('p',{class:'ask'},'Ou choisissez directement votre sujet. Vous aimeriez…'));
-  const list=h('div',{class:'dreams'});
-  DREAMS.filter(d=>!d.hidden).forEach((d,i)=>{ const n=answered(d.k);
-    list.appendChild(h('button',{class:'dream d'+i+(d.star?' star':'')+(state.reco===d.k&&SPHERES.some(x=>(state.test||{})[x.k])?' suggest':''), 'data-k':d.k, onclick:()=>go('dream', d.k)}, `<span class="dream-e">${d.e}</span><span class="dream-cat">${d.cat}<em class="reco-tag">👉 Conseillé pour commencer</em></span><span class="dream-t">…${d.dream} ?</span><span class="dream-go">${n?'✓ Continuer':'Découvrir'} →</span>`)); });
+  add(h('h1',{class:'dream-h1'},"Tout part de <em>l'organisation.</em>"));
+  add(h('p',{class:'hero-lead'},"Accidents, maladies, tensions relationnelles, guerres, pollution… Tous ces problèmes ont une <b>origine commune</b> : l'<b>organisation de la société</b>, qui peut les générer et rendre difficile l'accès aux solutions. Bonne nouvelle : une organisation, <b>ça s'améliore</b>."));
+  add(h('h2',{class:'pick-h', id:'agir'},'Je souhaite améliorer…'));
+  const list=h('div',{class:'picks'});
+  PICKS.forEach((k,i)=>{ const d=DREAMS.find(x=>x.k===k), p=progressOf(k);
+    const dots=Array.from({length:p.max},(_,j)=>`<i class="${j<p.lv?'on':''}"></i>`).join('');
+    const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
+    list.appendChild(h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
+      `<span class="pick-n">${i+1}</span><span class="pick-b"><b>${d.pick}</b><small>${d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><span class="pick-e">${d.e}</span><em class="reco-tag">👉 Conseillé</em>`)); });
   add(list);
-  const lv=state.lvl.home||1;
-  if(lv>=2){ const L2=h('section',{class:'lvl l2', id:'lvl-2'}); L2.appendChild(h('div',{class:'lvl-badge'},'Niveau 2 · Questions fréquentes'));
-    L2.appendChild(h('div',{class:'principle c2', style:'margin:0'}, `<h3>❓ Les enfants, les salariés, les citoyens prendraient donc le pouvoir\u00a0?</h3><p>Ce n'est pas la question. Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>. Pas de règles préétablies\u00a0: une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p style="margin-top:8px">C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin)\u00a0: souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>prospère</b>, dans notre environnement proche comme lointain.</p>`));
-    add(L2); }
-  else add(h('button',{class:'btn btn-soft more-btn', onclick:()=>{ state.lvl.home=2; render(); setTimeout(()=>{ const el=$('lvl-2'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }},'✨ Je veux en savoir plus<span class="more-sub">Niveau 2 · Questions fréquentes</span>'));
-  add(h('button',{class:'btn btn-primary btn-big', style:'width:100%;margin-top:16px', onclick:()=>go('recap')},'📇 3 · Voir ma fiche'));
-  add(h('p',{class:'bon-endroit', style:'margin-top:30px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
+  add(h('p',{class:'pick-note'},'3 niveaux par sujet, à votre rythme. Touchez <b>🎯</b> ou <b>💬</b> à tout moment pour noter un objectif ou poser une question.'));
+  const more=h('div',{class:'more-row'});
+  more.append(h('button',{onclick:()=>go('dream','reseau')},'🌐 Rejoindre le réseau'), h('button',{onclick:()=>go('dream','comprendre')},'🧭 Le projet en images'), h('button',{onclick:()=>go('recap')},'📇 Ma fiche'));
+  add(more);
+  add(acc('test','🧭 Pas sûr ? Faites le point en 1 minute', b=>{
+    const dep=h('div',{class:'fld', style:'margin:0 0 12px'}); dep.appendChild(h('div',{class:'fld-label'},DEPART.label));
+    const drow=h('div',{class:'chip-row'}); DEPART.opts.forEach(o=>{ const on=state.depart===o; drow.appendChild(h('button',{class:'chip'+(on?' active':''),'aria-pressed':String(on), onclick:()=>{ state.depart=on?null:o; render(); }}, o)); });
+    dep.appendChild(drow); b.append(dep, testBlock()); }));
+  add(acc('video','▶ La Géomédiation en 1 minute', b=>{ b.innerHTML='<figure class="intro-video" style="margin:0"><video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video></figure>'; }));
+  add(acc('faq','❓ Les citoyens prendraient donc le pouvoir ?', b=>{ b.innerHTML=`<p>Ce n'est pas la question. Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>. Pas de règles préétablies : une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p>C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin) : souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>prospère</b>, dans notre environnement proche comme lointain.</p>`; }));
+  add(h('p',{class:'bon-endroit', style:'margin-top:28px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
 }
 
 /* ================= UNE PORTE D'ENTRÉE ================= */
-function openLevel(d, n){ const lv=state.lvl[d.k]||1; if(n>lv) state.lvl[d.k]=n; render(); setTimeout(()=>{ const el=$('lvl-'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
+function toast(msg){ const t=h('div',{class:'toast'},msg); document.body.appendChild(t); setTimeout(()=>t.classList.add('out'),1800); setTimeout(()=>t.remove(),2300); }
+function openLevel(d, n){ const lv=state.lvl[d.k]||1; if(n>lv){ state.lvl[d.k]=n; toast(n>=d.levels.length?`🏆 Niveau ${n} débloqué : vous avez tout exploré !`:`🎉 Niveau ${n} débloqué`); if(n>=d.levels.length) confetti(); } render(); setTimeout(()=>{ const el=$('lvl-'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
 function decisionBar(d, lv){
   state.dec=state.dec||{}; let D=state.dec[d.k]; if(!D||typeof D!=='object'||Array.isArray(D)||D[1]!==undefined||D[2]!==undefined||D[3]!==undefined) D=state.dec[d.k]={};
   const a=A(d.k);
@@ -1138,15 +1153,15 @@ function fichesGroup(key, title, html){
 function renderDream(){
   const d=DREAMS.find(x=>x.k===state.dream); if(!d){ state.view='home'; return renderHome(); }
   const lv=state.lvl[d.k]||1, a=A(d.k);
-  add(h('button',{class:'back-top', onclick:()=>go('home')},'🏠 Menu principal · tous les sujets'));
+  add(h('button',{class:'back-top', onclick:()=>go('home')},'🏠 Menu principal'));
   add(h('div',{class:'kicker'},d.cat));
   add(h('h2',null,`${d.e} ${d.t}`));
   const mkNav=()=>{ const nav=h('div',{class:'lvl-nav'});
     d.levels.forEach((L,i)=>{ const n=i+1, st=n<=lv?'open':(n===lv+1?'next':'');
       nav.appendChild(h('button',{class:st, 'aria-label':`Niveau ${n} : ${L.name||LEVEL_NAMES[i]}`, onclick:()=>openLevel(d,n)}, `<b>${n<=lv?'✓ ':''}Niveau ${n}</b><span>${L.name||LEVEL_NAMES[i]}</span>`)); });
     return nav; };
+  add(h('div',{class:'lvl-prog', 'aria-hidden':'true'},`<i style="width:${Math.round(lv/d.levels.length*100)}%"></i>`));
   add(mkNav());
-  if(lv===1) add(h('p',{class:'lvl-cap'},"L'essentiel d'abord. La suite, quand vous en avez envie."));
   const wires=[];
   for(let i=0;i<lv;i++){
     const L=d.levels[i]; const card=h('section',{class:'lvl l'+(i+1), id:'lvl-'+(i+1)});
@@ -1167,11 +1182,10 @@ function renderDream(){
     root.appendChild(card);
   }
   wires.forEach(f=>f());
-  add(h('p',{class:'lvl-nav-cap'},'📍 Vos niveaux : touchez pour y revenir ou continuer'));
+  add(h('p',{class:'lvl-nav-cap'},'📍 Vos niveaux'));
   add(mkNav());
-  add(h('p',{class:'hint center'},'✓ Vos réponses s\'ajoutent automatiquement à votre fiche'));
-  const others=DREAMS.filter(x=>!x.hidden&&x.k!==d.k);
-  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'🧭 Explorer un autre sujet'));
+  const others=[...PICKS,'reseau'].map(k=>DREAMS.find(x=>x.k===k)).filter(x=>x.k!==d.k);
+  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'🧭 Améliorer aussi…'));
     const g=h('div',{class:'explore-grid'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'explore-btn', onclick:()=>go('dream',x.k)},`<span>${x.e}</span><b>${x.cat}</b>${done?'<em>✓</em>':''}`)); });
     ex.appendChild(g); add(ex); }
   const n=h('div',{class:'nav'});
@@ -1200,7 +1214,7 @@ function printBilan(sel){
   <p class="tip">Pour l'enregistrer en PDF : dans la fenêtre d'impression, choisissez <b>« Enregistrer au format PDF »</b> comme imprimante.</p>
   <header><div class="brand">GÉOMÉDIATION</div><h1>Ma fiche</h1><div class="date">${esc(date)}</div></header>
   ${body}
-  <footer>Géomédiation · La science de l'organisation, simplifiée pour tous · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
+  <footer>Géomédiation · La science de l'organisation des territoires · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
   </body></html>`;
   const w=window.open('','_blank');
   if(!w){ const a=h('a',{href:URL.createObjectURL(new Blob([doc],{type:'text/html'})), download:'fiche-geomediation.html'}); document.body.appendChild(a); a.click(); a.remove(); return; }
@@ -1212,7 +1226,7 @@ function recapItems(){
   if(state.depart) push('🧭 Mon point de départ', state.depart);
   (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
-  DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.cat+' · '+d.t;
+  DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.t;
     d.levels.forEach(L=>L.fields.forEach(f=>{ const v=a[f.k]; const lab=(f.label||'').replace(/<span[^>]*>.*?<\/span>/g,'').replace(/<[^>]+>/g,'').trim().replace(/ /g,' ');
       if(f.type==='chips' && v&&v.length) push(g, lab+' : '+v.join(', '));
       else if(f.type==='chips1' && typeof v==='string') push(g, (f.k==='question'?'LA question':f.k==='depart'?'Mon point de départ':lab.replace(/ ?\?$/,''))+' : '+v);
@@ -1241,7 +1255,7 @@ function renderRecap(){
   add(h('div',{class:'kicker'},'Ma fiche'));
   add(h('h2',null,'📇 Votre fiche prend forme'));
   const items=recapItems();
-  if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Commencez par le test, ou choisissez une carte\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }
+  if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Choisissez d'abord ce que vous souhaitez améliorer\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }
   else {
   add(h('p',{class:'lead'},"<b>Votre fiche, c'est pour vous.</b> Gardez-la et utilisez-la quand vous voulez, dans votre vie\u00a0: avec vos proches, vos collaborateurs ou les acteurs de votre territoire. <b>Cochez</b> ce que vous voulez garder ou partager."));
   const box=h('div',{class:'send-box'}); let g0=null;
@@ -1276,7 +1290,7 @@ function renderRecap(){
   else mb.appendChild(h('p',null,`Une question, ou envie de connaître un professionnel ? Dites-le dans n'importe quelle rubrique, ou écrivez à <b>${CONTACT_MAIL}</b>.`));
   add(mb);
   const n=h('div',{class:'nav'});
-  n.append(h('button',{class:'btn btn-ghost', onclick:goBack},'← Retour'), h('button',{class:'btn btn-soft', onclick:()=>go('home')},'Découvrir une autre carte →'));
+  n.append(h('button',{class:'btn btn-ghost', onclick:goBack},'← Retour'), h('button',{class:'btn btn-soft', onclick:()=>go('home')},'🏠 Menu principal'));
   add(n);
   add(h('p',{class:'small center', style:'margin-top:14px'},"🔒 Vos réponses restent sur votre appareil. Une fois transmises, vous pouvez en demander la suppression à tout moment (RGPD)."));
 }

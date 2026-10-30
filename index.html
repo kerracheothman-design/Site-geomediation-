@@ -319,7 +319,7 @@
   }
   @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
 
-  .dream-h1{text-transform:uppercase; font-family:var(--display); font-size:clamp(27px,7.6vw,50px); font-weight:800; letter-spacing:-0.03em; color:var(--forest-dark); margin:2px 0 14px; line-height:1;}
+  .dream-h1{font-family:var(--display); font-size:clamp(34px,8vw,52px); font-weight:800; letter-spacing:-0.03em; color:var(--forest-dark); margin:2px 0 14px; line-height:1;}
   .dreams{display:flex; flex-direction:column; gap:10px;}
   .dream{display:grid; grid-template-columns:44px 1fr; grid-template-rows:auto auto auto; column-gap:12px; text-align:left; font:inherit; border:none; border-radius:18px; padding:14px 16px; cursor:pointer; color:var(--cream); background:var(--forest); transition:transform .15s, box-shadow .15s; animation:rise .5s cubic-bezier(.2,.8,.2,1) both;}
   .dream:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(31,51,41,.28);}
@@ -1118,7 +1118,7 @@ function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',
   det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
-  add(h('h1',{class:'dream-h1'},"TOUT dépend de <em>l'organisation.</em>"));
+  add(h('h1',{class:'dream-h1'},"<em>TOUT</em> dépend de l'organisation."));
   add(h('p',{class:'hero-lead'},"Votre bien-être, votre famille, votre travail, votre territoire. Bonne nouvelle\u00a0: une organisation, <b>ça s'améliore</b>, et <b>tout le monde peut y participer</b>, quelle que soit sa situation, quelle que soit l'échelle. En 3 étapes, à votre rythme."));
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);

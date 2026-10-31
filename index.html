@@ -1096,7 +1096,7 @@ function ricochetSVG(){
 function testBlock(){
   state.test=state.test||{};
   const t=h('section',{class:'test'});
-  t.innerHTML=`<div class="qa-row"><p class="test-s">Notez votre <b>organisation</b> à chaque niveau, de 0 à 5. On vous dit par où commencer.</p></div>`;
+  t.innerHTML=`<div class="qa-row"><p class="test-s">Notez chaque niveau de 0 à 5 : on vous dit par où commencer.</p></div>`;
   t.firstChild.appendChild(qa('🧭 Mon test d\'organisation', true));
   const fb=h('div'); const btn=h('button',{class:'btn btn-gold'});
   const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); state.reco=d.k; document.querySelectorAll('.pick').forEach(el=>el.classList.toggle('suggest', el.dataset.k===d.k)); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.t} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });
@@ -1119,7 +1119,7 @@ function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"<em>TOUT</em> dépend de l'organisation."));
-  add(h('p',{class:'hero-lead'},"Votre bien-être, votre famille, votre travail, votre territoire. Bonne nouvelle\u00a0: une organisation, <b>ça s'améliore</b>, et <b>tout le monde peut y participer</b>, quelle que soit sa situation, quelle que soit l'échelle. En 3 étapes, à votre rythme."));
+  add(h('p',{class:'hero-lead'},"Bien-être, famille, travail, territoire\u00a0: une organisation, <b>ça s'améliore</b>. <b>Chacun peut y participer</b>, quelles que soient la situation et l'échelle."));
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   add(stepH(2,'Faire le point en 1 minute'));
@@ -1132,7 +1132,7 @@ function renderHome(){
     list.appendChild(h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
       `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${d.pick}</b><small>${d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`)); });
   add(list);
-  add(h('p',{class:'pick-note'},'3 niveaux par sujet, à votre rythme. <b>🎯</b> objectif et <b>💬</b> question, à tout moment.'));
+  add(h('p',{class:'pick-note'},'3 niveaux par sujet. <b>🎯</b> objectif, <b>💬</b> question : à tout moment.'));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button><button data-go="reseau">🌐 Rejoindre le réseau</button><button data-go="recap">📇 Ma fiche</button></div><p><b>Et qui décide, alors ?</b> Chacun, à sa place, selon sa responsabilité et ses connaissances. C'est l'esprit girondin : souple, pragmatique et serein.</p><span class="bc-close">↺ Retourner</span></div>`

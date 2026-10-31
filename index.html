@@ -450,6 +450,15 @@
   .accomp p{margin:0 0 12px; line-height:1.55; color:var(--ink-soft);}
   .accomp .btn{padding:8px 14px; font-size:13px;}
   .accomp .row-inline{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
+  .optx{margin:22px 0 0; border:1.5px solid #E7DCC4; border-radius:16px; background:var(--paper);}
+  .optx>summary{list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 16px; font-size:15px; color:var(--forest-dark);}
+  .optx>summary::-webkit-details-marker{display:none;}
+  .optx>summary b{background:none; padding:0;}
+  .optx>summary i{font-style:normal; font-weight:800; font-size:13px; color:var(--clay); white-space:nowrap;}
+  .optx[open]>summary i{visibility:hidden;}
+  .optx-b{padding:0 16px 16px;}
+  .optx-lead{margin:0 0 12px; line-height:1.55; color:var(--ink-soft);}
+  .optx-b .picks{margin-top:14px;}
   .pick-note{font-size:13px; color:var(--muted); margin:10px 2px 14px; line-height:1.5;}
   .card .pick-note b{background:none; padding:0;}
   .more-row{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 16px;}
@@ -996,7 +1005,7 @@ function paintFb(box, items, act){
   if(!touched){ box.className='fb'; box.innerHTML='💡 Bougez les curseurs\u00a0: un conseil personnalisé s\'affiche ici.'; return null; }
   const avg=items.reduce((t,x)=>t+x.v,0)/items.length, low=[...items].sort((a,b)=>a.v-b.v)[0];
   const head= avg<2 ? "🌱 <b>Plein de belles avancées en vue\u00a0!</b> Chaque petit pas compte." : avg<4 ? "🌿 <b>Belle base\u00a0!</b> Vous êtes sur la bonne voie." : "🌳 <b>Bravo, vous avez déjà bien avancé\u00a0!</b>";
-  box.className='fb on'; box.innerHTML=`${head}<span class="fb-tip">👉 Piste\u00a0: <b>${low.n}</b> · ${low.tip}</span>`;
+  box.className='fb on'; box.innerHTML=`${head}<span class="fb-tip">👉 Conseil\u00a0: <b>${low.n}</b> · ${low.tip}</span>`;
   if(act) act(box, low);
   return low;
 }
@@ -1091,10 +1100,9 @@ function field(dk, f){
 
 /* ================= ACCUEIL ================= */
 const SPHERES=[
-  {k:'soi', e:'🧠', n:'Moi', card:'pensee', tip:"faites le point sur les grands domaines de votre vie, en deux minutes."},
-  {k:'famille', e:'🏡', n:'Ma famille', card:'maison', tip:"posez LA question au prochain repas\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»"},
   {k:'travail', e:'💼', n:'Mon travail', card:'entreprise', tip:"posez LA question à vos collaborateurs\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»"},
-  {k:'territoire', e:'🗺️', n:'Mon territoire', card:'idees', tip:"repérez les acteurs autour de vous et dites-leur qu'un réseau existe."}];
+  {k:'famille', e:'🏡', n:'Ma famille', card:'maison', tip:"posez LA question au prochain repas\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»"},
+  {k:'soi', e:'🧠', n:'Moi', card:'pensee', tip:"faites le point sur les grands domaines de votre vie, en deux minutes."}];
 function ricochetSVG(){
   const N=[['🧠','Moi',62,48],['🏡','Famille',278,48],['💼','Travail',62,176],['🗺️','Territoire',278,176]], cols=['#2F4A3C','#3E6350','#5B6F3B','#B5654A'];
   let s=`<svg class="rico" viewBox="0 0 340 224" role="img" aria-label="Moi, famille, travail, territoire : tout est relié par l'organisation"><defs><marker id="rh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E0C15C"/></marker></defs>`;
@@ -1127,31 +1135,39 @@ function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',
   det.innerHTML=`<summary>${title}</summary>`; const b=h('div',{class:'acc-b'}); fill(b); det.appendChild(b);
   det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
+function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k);
+  const dots=Array.from({length:p.max},(_,j)=>`<i class="${j<p.lv?'on':''}"></i>`).join('');
+  const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
+  return h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
+    `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${title||d.pick}</b><small>${sub||d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`); }
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>contribuer</em> à une meilleure organisation."));
-  add(h('p',{class:'hero-lead'},"<b>Quelle que soit la situation ou l'échelle</b>\u00a0: pour soi, en famille, au travail ou dans son quartier. Un petit pas suffit pour démarrer, et <b>on vous accompagne</b> jusqu'à vos objectifs."));
+  add(h('p',{class:'hero-lead'},"<b>Quelle que soit la situation ou l'échelle</b> : quartier, commune, région… Un petit pas suffit pour démarrer, et <b>on vous accompagne</b> jusqu'à vos objectifs."));
   const path=h('div',{class:'path'});
-  [['👀','Je découvre'],['🧭','Je fais le point'],['🚀','J\'avance'],['🤝','Je suis guidé']].forEach(([e,t],i)=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
+  [['👀','Je découvre'],['🧭','Je fais le point'],['🚀','J\'avance'],['🤝','Je suis guidé']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
-  add(stepH(2,'Prendre une minute pour évaluer son organisation'));
-  add(testBlock());
-  add(stepH(3,'Choisir par où commencer'));
+  add(stepH(2,'Agir sur son territoire'));
   const list=h('div',{class:'picks', id:'agir'});
-  PICKS.forEach((k,i)=>{ const d=DREAMS.find(x=>x.k===k), p=progressOf(k);
-    const dots=Array.from({length:p.max},(_,j)=>`<i class="${j<p.lv?'on':''}"></i>`).join('');
-    const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
-    list.appendChild(h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
-      `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${d.pick}</b><small>${d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`)); });
+  list.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Citoyen, élu, association, entreprise : chacun a sa place'));
   add(list);
-  add(h('p',{class:'pick-note'},'3 niveaux par sujet, à explorer quand vous voulez. Un <b>🎯</b> objectif ou une <b>💬</b> question\u00a0? Un clic suffit.'));
-  add(stepH(4,'Être accompagné, à votre rythme'));
+  add(h('p',{class:'pick-note'},'3 niveaux par sujet, à explorer quand vous voulez. Un <b>🎯</b> objectif ou une <b>💬</b> question ? Un clic suffit.'));
+  add(stepH(3,'Être accompagné, à votre rythme'));
   const ac=h('div',{class:'accomp'});
-  ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à fixer vos objectifs, puis vous oriente vers les bons interlocuteurs. <b>Pas de pression</b>\u00a0: vous avancez quand vous voulez, comme vous voulez.</p>`;
+  ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à fixer vos objectifs, puis vous oriente vers les bons interlocuteurs. <b>Pas de pression</b> : vous avancez quand vous voulez, comme vous voulez.</p>`;
   const ar=h('div',{class:'row-inline'});
-  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Envie d'être accompagné")},'✉️ Parler à un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('dream','reseau')},'🌐 Rejoindre le réseau'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche'));
+  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Envie d'être accompagné")},'✉️ Parler à un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche'));
   ac.appendChild(ar); add(ac);
+  const opt=h('details',{class:'optx'}); if(state.optOpen) opt.open=true;
+  opt.innerHTML='<summary><span>✨ <b>En option</b> : la méthode au travail et à la maison</span><i>Voir +</i></summary>';
+  opt.addEventListener('toggle',()=>{ state.optOpen=opt.open; save(); });
+  const ob=h('div',{class:'optx-b'});
+  ob.appendChild(h('p',{class:'optx-lead'},"La même méthode s'adapte à votre structure, à votre famille ou à votre quotidien. <b>Seulement si vous en avez envie.</b>"));
+  ob.appendChild(testBlock());
+  const ol=h('div',{class:'picks'});
+  [['entreprise',2],['maison',1],['pensee',0]].forEach(([k,i])=>ol.appendChild(pickBtn(k,i)));
+  ob.appendChild(ol); opt.appendChild(ob); add(opt);
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>💪 On a un vrai pouvoir quand on apprend à le partager. Intelligemment.</b></p><p>Chacun y contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`

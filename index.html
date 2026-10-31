@@ -940,7 +940,7 @@ const DREAMS = [
              {k:'inscrire', type:'toggle', label:"Je veux <b>inscrire ma structure</b> ou mon projet dans le réseau"}]}
   ]},
   {k:'comprendre', e:'🧭', cat:'Comprendre', hidden:true, act:'🚀 Je passe à la pratique', t:"Le projet en images", levels:[
-    {intro:"La méthode en images, en <b>3 minutes</b>.",
+    {intro:"Thématiques, échelles et acteurs\u00a0: <b>tout est connecté</b>.",
      parts:[{h:"Les ondes\u00a0: nous façonnons ce qui nous façonne", v:ringsSVG, w:()=>wireWave()},
             {h:"Le cercle vertueux", v:loopSVG, p:"Produire <b>intelligemment</b> ce dont on a besoin, c'est de l'<b>énergie</b> et de l'<b>argent</b> bien utilisés. L'économie tourne, et chacun gagne du <b>temps</b> pour les autres, la planète et soi-même."}],
      fields:[]},
@@ -1108,7 +1108,7 @@ function testBlock(){
   t.appendChild(h('div',{class:'scale'},'<span>0 · à imaginer</span><span>5 · bien organisée</span>'));
   t.appendChild(fb); upd();
   t.appendChild(h('div',{class:'rico-wrap'},ricochetSVG()));
-  t.appendChild(h('p',{class:'rico-cap'},'Quand vous avancez à un niveau, les autres en profitent\u00a0: <b>dans les deux sens</b>, et à <b>toutes les échelles</b>.'));
+  t.appendChild(h('p',{class:'rico-cap'},'<b>TOUT est relié.</b> Quand vous avancez à un niveau, les autres en profitent\u00a0: <b>dans les deux sens</b>, et à <b>toutes les échelles</b>.'));
   return t;
 }
 const PICKS=['pensee','maison','entreprise','idees'];
@@ -1120,7 +1120,7 @@ function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"<em>TOUT</em> dépend de l'organisation."));
-  add(h('p',{class:'hero-lead'},"Thématiques, échelles et acteurs\u00a0: <b>tout est connecté</b>."));
+  add(h('p',{class:'hero-lead'},"Bien-être, famille, travail, territoire\u00a0: <b>chacun peut participer</b> à améliorer l'organisation, <b>quelle que soit la situation ou l'échelle</b>."));
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   add(stepH(2,'Faire le point en 1 minute'));

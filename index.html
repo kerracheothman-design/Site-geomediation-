@@ -905,7 +905,7 @@ const DREAMS = [
              {k:'preparer', type:'toggle', label:"J'aimerais <b>mettre la main à la pâte</b> pour le projet de mon territoire"},
              {k:'mediateur', type:'toggle', label:"Devenir <b>médiateur</b> m'intéresse"}]}
   ]},
-  {k:'pensee', e:'🧠', cat:'Personnel', defi:"Choisissez un domaine ci-dessous et testez les actions suggérées pendant 7 jours.", pick:"Mon organisation personnelle", sub:"Mon état d'esprit, ma santé, mon temps, mon budget", dream:"mieux comprendre le lien entre <b>tout ce que vous vivez</b> et <b>votre état d'esprit</b>", t:"Mon organisation personnelle", levels:[
+  {k:'pensee', e:'🧠', cat:'Personnel', defi:"Choisissez un domaine, puis testez pendant 7 jours l'action suggérée au niveau 2.", pick:"Mon organisation personnelle", sub:"Mon état d'esprit, ma santé, mon temps, mon budget", dream:"mieux comprendre le lien entre <b>tout ce que vous vivez</b> et <b>votre état d'esprit</b>", t:"Mon organisation personnelle", levels:[
     {intro:"Notre <b>état d'esprit</b> colore tout ce qu'on vit, et la façon dont on <b>s'organise</b>. Premier pas\u00a0: voir où vous en êtes, tout simplement.",
      fields:[{k:'lien', type:'chips1', label:"Voyez-vous le lien entre votre façon de penser et ce que vous vivez\u00a0?", opts:['✨ Oui, clairement','🌿 En partie','🌱 Je le découvre']},
              {k:'soi', type:'chips', label:'Les domaines dont vous aimeriez davantage prendre soin', opts:DOM_NAMES}]},
@@ -913,7 +913,7 @@ const DREAMS = [
      fields:[{k:'indiv', type:'domainsEval'}, {k:'envie', type:'text', label:'Votre envie du moment', ph:'ex. mieux dormir, tenir mon budget…'}]},
     {intro:"La vie a son <b>intelligence</b>, en chacun de nous et dans chaque situation. Et notre <b>psychologie</b> se nourrit de notre environnement\u00a0: on prend soin des deux, <b>en même temps</b>.",
      parts:[{h:"Le féminin et le masculin en soi", p:"Le <b>féminin</b> accueille l'intelligence de la vie en toute chose\u00a0; le <b>masculin</b> pose un cadre pour créer de l'harmonie. L'<b>équilibre affectif</b> naît de leur dialogue."},
-            {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements adaptés à chaque situation</b> : dites-le juste en dessous, et un médiateur vous oriente vers le bon professionnel."}],
+            {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements adaptés à chaque situation</b>\u00a0: cliquez plus bas sur «\u00a0J'aimerais connaître un professionnel\u00a0», et un médiateur vous oriente."}],
      fields:[{k:'ecriture', type:'area', label:"✍️ Écriture intuitive : qui aimeriez-vous être ? Que voulez-vous vivre ? Dans quelle société ? Et pourquoi, à chaque fois ?"}]}
   ]},
   {k:'maison', e:'🏡', cat:'Famille & proches', defi:"Posez LA question au prochain repas, et notez les idées de chacun.", pick:"Mon organisation familiale", sub:"Avec mes proches : couple, enfants, colocation", dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Mon organisation familiale", levels:[
@@ -932,7 +932,7 @@ const DREAMS = [
     {intro:"Le réseau relie tous ceux qui veulent <b>faire avancer la société</b>. Vous gardez votre <b>casquette de spécialiste</b>, vous gagnez en <b>visibilité</b>, et vous restez <b>indépendant</b>.",
      fields:[{k:'acteur', type:'cardsN', label:'Vous êtes (plusieurs casquettes, c\'est permis)', opts:ACTEURS},
              {k:'domaine', type:'chips', label:'Vos thématiques', opts:THEMES.map(t=>t.e+' '+t.n)},
-             {k:'echelle', type:'chips', label:'Où aimez-vous agir\u00a0?', opts:ECH}, TEMOIGNAGE]},
+             {k:'echelle', type:'chips', label:'Quelle échelle territoriale vous intéresserait\u00a0?', opts:ECH}, TEMOIGNAGE]},
     {name:"Je m'implique", intro:"Chacun s'implique <b>à son rythme</b>. Une seule mission suffit pour démarrer.",
      fields:[{k:'degre', type:'cards1', label:"Comment aimeriez-vous vous impliquer\u00a0?", opts:DEGRES},
              {k:'missions', type:'cardsN', label:'Les missions qui vous parlent', opts:MISSIONS},
@@ -960,7 +960,7 @@ const DREAMS = [
             {h:"Le toboggan de la coopération", v:stairsSVG, w:()=>wireSlide(), p:"<b>Posez la question autour de vous\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> En famille, dans l'immeuble, au travail, en asso, dans le quartier… Et hop, <b>ça glisse tout seul</b>\u00a0!", slogan:"Il y a un esprit de médiateur en chacun de nous."}],
      fields:[], details:[STEPS_DETAIL]},
     {intro:"Quand on avance <b>ensemble</b>, les <b>solutions deviennent faciles d'accès</b>.",
-     parts:[{h:"La géographie, une sagesse ancestrale", p:"Elle reprend des principes très anciens\u00a0: relier les <b>écosystèmes</b>, la capacité d'un territoire à <b>produire</b> et celle de ses acteurs à <b>coopérer</b>. Sa partie opérationnelle, l'<b>aménagement du territoire</b>, cherche à répartir équitablement populations, activités et services, pour répondre durablement aux besoins de chacun.",
+     parts:[{h:"La géographie, une sagesse ancestrale", p:"Elle reprend des principes très anciens\u00a0: relier les <b>écosystèmes</b>, la capacité d'un territoire à <b>produire</b> et celle de ses acteurs à <b>coopérer</b>.",
              html:()=>`<details class="more-box geo-tl" open><summary>Une histoire qui vient de loin</summary><p style="font-family:var(--display);font-weight:700;color:var(--forest-dark)">On ne part pas de zéro\u00a0: on hérite.</p><ol class="tl">${TL.map(([y,n,d])=>`<li><span class="tl-y">${y}</span><span><b>${n}</b><br>${d}</span></li>`).join('')}</ol></details>`}],
      fields:[]}
   ]}

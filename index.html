@@ -588,7 +588,7 @@
 </div>
 <script>
 const CYCLE = [
-  {k:"sensibilisation", n:"Sensibilisation", d:"«\u00a0Envie d'une <b>meilleure organisation</b>\u00a0?\u00a0» LA question à poser en famille, dans son immeuble, son entreprise, son asso, son quartier, sa commune…"},
+  {k:"sensibilisation", n:"Sensibilisation", d:"<b>Posez la question autour de vous\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> En famille, dans l'immeuble, au travail, en asso, dans le quartier, la commune…"},
   {k:"besoins", n:"Besoins", d:"Écouter les <b>besoins</b> de chacun, sans jugement."},
   {k:"ressources", n:"Solutions", d:"<b>Qui fait quoi</b>, où, avec quels moyens\u00a0: les ressources sont souvent déjà là."},
   {k:"participation", n:"Projets", d:"Des <b>projets</b> et une <b>feuille de route</b> à court, moyen et long terme."},
@@ -725,8 +725,7 @@ const SLIDE_P=[[95,72],[230,72],[130,255],[315,255]];
 function slideBz(t){ const P=SLIDE_P, u=1-t; const a=u*u*u, b=3*u*u*t, c=3*u*t*t, d=t*t*t; return [a*P[0][0]+b*P[1][0]+c*P[2][0]+d*P[3][0], a*P[0][1]+b*P[1][1]+c*P[2][1]+d*P[3][1]]; }
 function stairsSVG(){
   const P=SLIDE_P, path=`M${P[0]} C${P[1]} ${P[2]} ${P[3]}`;
-  let s=`<svg class="slide" viewBox="0 0 340 300" role="img" aria-label="Le toboggan de la coopération : on grimpe l'échelle avec la sensibilisation, puis on glisse par les besoins, les solutions, les projets, la votation, l'évaluation et la célébration, avant de remonter pour un nouveau tour">`;
-  s+=`<text x="14" y="22" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="16" fill="#1F3329">Le toboggan de la coopération</text>`;
+  let s=`<svg class="slide" viewBox="0 0 340 300" role="img" aria-label="Le toboggan de la coopération : on grimpe l'échelle avec la sensibilisation, puis on glisse par les besoins, les solutions, les projets, le vote, l'évaluation et la célébration, avant de remonter pour un nouveau tour">`;
   // échelle = étape 1
   s+=`<g stroke="#6E7A42" stroke-width="4" stroke-linecap="round"><line x1="34" y1="274" x2="34" y2="72"/><line x1="62" y1="274" x2="62" y2="72"/>`;
   for(let y=252;y>80;y-=26) s+=`<line x1="34" y1="${y}" x2="62" y2="${y}"/>`;
@@ -737,7 +736,7 @@ function stairsSVG(){
   s+=`<path d="${path}" fill="none" stroke="#B5654A" stroke-width="26" stroke-linecap="round"/><path d="${path}" fill="none" stroke="#E0C15C" stroke-width="16" stroke-linecap="round"/>`;
   for(let i=1;i<CYCLE.length;i++){ const [x,y]=slideBz((i-0.5)/(CYCLE.length-1)); s+=`<g class="sp" data-i="${i}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="11" fill="${CYCLE_COLS[i]}" stroke="#FFFDF8" stroke-width="2"/><text x="${x.toFixed(1)}" y="${(y+4).toFixed(1)}" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="11" fill="${i<3?'#1F3329':'#fff'}">${i+1}</text></g>`; }
   // étiquette vivante
-  s+=`<text class="slide-cap" x="14" y="48" text-anchor="start" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="18" fill="#B5654A">1 · ${CYCLE[0].n}</text>`;
+  s+=`<text class="slide-cap" x="14" y="34" text-anchor="start" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="18" fill="#B5654A">1 · ${CYCLE[0].n}</text>`;
   // retour
   s+=`<defs><marker id="ret" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#857C62"/></marker></defs>`;
   s+=`<path d="M298,270 Q180,286 72,274" fill="none" stroke="#857C62" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#ret)"/><text x="186" y="297" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="700" font-size="10.5" fill="#857C62">↺ et on remonte pour un nouveau tour</text>`;
@@ -945,7 +944,7 @@ const DREAMS = [
      fields:[]},
     {intro:"Un <b>cadre commun</b>, valable du quartier à la planète, où chacun avance <b>à son rythme</b>.",
      parts:[{h:"5 domaines, une même boussole", v:domainsSVG, w:c=>wireUntangle(c), slogan:"Chaque besoin a sa solution. Le réseau vous y mène."},
-            {h:"Le toboggan de la coopération", v:stairsSVG, w:()=>wireSlide(), p:"«\u00a0Envie d'une <b>meilleure organisation</b>\u00a0?\u00a0» Posez-la autour de vous\u00a0: famille, immeuble, entreprise, asso, quartier… Et hop, <b>ça glisse tout seul</b>.", slogan:"Il y a un médiateur en chacun de nous."}],
+            {h:"Le toboggan de la coopération", v:stairsSVG, w:()=>wireSlide(), p:"<b>Posez la question autour de vous\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> En famille, dans l'immeuble, au travail, en asso, dans le quartier… Et hop, <b>ça glisse tout seul</b>\u00a0!", slogan:"Il y a un médiateur en chacun de nous."}],
      fields:[], details:[STEPS_DETAIL]},
     {intro:"Quand on avance <b>ensemble</b>, les <b>solutions deviennent faciles d'accès</b>.",
      parts:[{h:"La géographie, une sagesse ancestrale", p:"Elle reprend des principes très anciens\u00a0: relier la <b>nature</b>, l'<b>économie</b> qui produit ce dont on a besoin, et une <b>gouvernance</b> où chacun peut s'épanouir. Sa partie opérationnelle, l'<b>aménagement du territoire</b>, cherche à répartir équitablement populations, activités et services, pour répondre durablement aux besoins de chacun.",
@@ -1107,7 +1106,7 @@ function testBlock(){
   t.appendChild(h('div',{class:'scale'},'<span>0 · à imaginer</span><span>5 · bien organisée</span>'));
   t.appendChild(fb); upd();
   t.appendChild(h('div',{class:'rico-wrap'},ricochetSVG()));
-  t.appendChild(h('p',{class:'rico-cap'},'<b>TOUT est relié.</b> Quand vous avancez à un niveau, les autres en profitent\u00a0: <b>dans les deux sens</b>, et à <b>toutes les échelles</b>. Il y a un <b>médiateur</b> en chacun de nous\u00a0!'));
+  t.appendChild(h('p',{class:'rico-cap'},'<b>TOUT est relié.</b> Quand vous avancez à un niveau, les autres en profitent\u00a0: <b>dans les deux sens</b>, et à <b>toutes les échelles</b>.'));
   return t;
 }
 const PICKS=['pensee','maison','entreprise','idees'];

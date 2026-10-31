@@ -442,6 +442,14 @@
   .pick-e{font-size:30px; text-align:center;}
   .pick .reco-tag{position:absolute; top:-9px; right:12px; margin:0;}
   .pick.suggest{box-shadow:0 0 0 3px var(--gold), 0 10px 24px rgba(31,51,41,.28);} .pick.suggest .reco-tag{display:inline-block;}
+  .path{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 6px;}
+  .path-i{display:inline-flex; align-items:center; gap:6px; font:700 13px var(--body); color:var(--forest-dark); background:#F6F1E7; border:1px solid #E7DCC4; border-radius:999px; padding:5px 11px;}
+  .path-i i{font-style:normal;}
+  .path-i+.path-i::before{content:'›'; color:var(--gold); margin-right:2px; font-weight:800;}
+  .accomp{background:linear-gradient(135deg,#FFFBEF,#F6F1E7); border:1.5px solid var(--gold); border-radius:16px; padding:14px 16px;}
+  .accomp p{margin:0 0 12px; line-height:1.55; color:var(--ink-soft);}
+  .accomp .btn{padding:8px 14px; font-size:13px;}
+  .accomp .row-inline{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
   .pick-note{font-size:13px; color:var(--muted); margin:10px 2px 14px; line-height:1.5;}
   .card .pick-note b{background:none; padding:0;}
   .more-row{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 16px;}
@@ -1120,13 +1128,16 @@ function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',
   det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
-  add(h('h1',{class:'dream-h1'},"<em>TOUT</em> dépend de l'organisation."));
-  add(h('p',{class:'hero-lead'},"Bien-être, famille, travail, territoire\u00a0: <b>chacun peut participer</b> à améliorer l'organisation, <b>quelle que soit la situation ou l'échelle</b>."));
+  add(h('h1',{class:'dream-h1'},"Tout le monde peut <em>améliorer</em> son organisation."));
+  add(h('p',{class:'hero-lead'},"Pour soi, en famille, au travail ou dans son quartier. <b>Un petit pas suffit</b> pour démarrer, et <b>on vous accompagne</b> jusqu'à vos objectifs."));
+  const path=h('div',{class:'path'});
+  [['👀','Je découvre'],['🧭','Je fais le point'],['🚀','J\'avance'],['🤝','Je suis guidé']].forEach(([e,t],i)=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
+  add(path);
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
-  add(stepH(2,'Faire le point en 1 minute'));
+  add(stepH(2,'Faire le point, sans jugement'));
   add(testBlock());
-  add(stepH(3,'Passer à l\'action\u00a0: je souhaite améliorer…'));
+  add(stepH(3,'Choisir par où commencer'));
   const list=h('div',{class:'picks', id:'agir'});
   PICKS.forEach((k,i)=>{ const d=DREAMS.find(x=>x.k===k), p=progressOf(k);
     const dots=Array.from({length:p.max},(_,j)=>`<i class="${j<p.lv?'on':''}"></i>`).join('');
@@ -1134,10 +1145,16 @@ function renderHome(){
     list.appendChild(h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
       `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${d.pick}</b><small>${d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`)); });
   add(list);
-  add(h('p',{class:'pick-note'},'3 niveaux par sujet. <b>🎯</b> objectif, <b>💬</b> question : à tout moment.'));
+  add(h('p',{class:'pick-note'},'3 niveaux par sujet, à explorer quand vous voulez. Un <b>🎯</b> objectif ou une <b>💬</b> question\u00a0? Un clic suffit.'));
+  add(stepH(4,'Être accompagné, à votre rythme'));
+  const ac=h('div',{class:'accomp'});
+  ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à fixer vos objectifs, puis vous oriente vers les bons interlocuteurs. <b>Pas de pression</b>\u00a0: vous avancez quand vous voulez, comme vous voulez.</p>`;
+  const ar=h('div',{class:'row-inline'});
+  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Envie d'être accompagné")},'✉️ Parler à un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('dream','reseau')},'🌐 Rejoindre le réseau'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche'));
+  ac.appendChild(ar); add(ac);
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
-    bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button><button data-go="reseau">🌐 Rejoindre le réseau</button><button data-go="recap">📇 Ma fiche</button></div><p><b>❓ Les enfants, les salariés, les citoyens prendraient donc le pouvoir ?</b></p><p>Ce n'est pas la question. Chacun contribue aux différentes étapes de l'organisation selon son <b>niveau de responsabilité</b> et de <b>connaissance</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles préétablies : une <b>structure philosophique commune</b>, valable pour chaque situation.</p><p>C'est l'<b>esprit girondin</b> (qui tempère l'esprit hiérarchique, jacobin) : souple, pragmatique et serein. On <b>anticipe</b> et on <b>se concerte</b> pour mieux vivre et participer à une société plus <b>épanouie</b>, dans notre environnement proche comme lointain.</p><p><b>Chaque défi, une chance.</b> Tout le monde aimerait une société bien organisée, dans l'<b>intérêt de tous</b>. Faute de pouvoir agir vraiment dans ce sens, on préfère parfois le déni, ou l'on garde pour soi ce dont on n'est pas sûr. La <b>confiance</b> libère la parole.</p><p>L'environnement ? Plutôt que débattre des responsabilités, parlons <b>solutions</b> : chercher ensemble, ça rassemble. Avec la bonne <b>attitude</b>, la bonne <b>méthode</b> et la bonne <b>stratégie</b>, chaque défi devient une <b>chance d'évoluer</b>.</p></details><span class="bc-close">↺ Retourner</span></div>`
+    bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>❓ Les enfants, les salariés, les citoyens prendraient le pouvoir ?</b></p><p>Ce n'est pas la question. Chacun contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`
       : `<div class="bc-front"><span>🎁 <b>Bonus</b></span><i>Retourner ↻</i></div>`;
     bc.querySelectorAll('[data-go]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); const k=b.dataset.go; k==='recap'?go('recap'):go('dream',k); }); };
   bc.onclick=e=>{ if(state.bonusOpen && !(e.target.classList&&e.target.classList.contains('bc-close'))) return; state.bonusOpen=!state.bonusOpen; save(); paintB(); };

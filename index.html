@@ -614,7 +614,7 @@ const INDIV_DOMAINS = [
   {k:"respiration", n:"Respiration", e:"🌬️", tip:"Respiration Ujjayi, le soir et au réveil\u00a0: détente assurée."},
   {k:"sommeil", n:"Sommeil", e:"😴", tip:"Des heures de coucher stables pour un sommeil qui recharge."},
   {k:"agenda", n:"Agenda", e:"🗓️", tip:"Un agenda tenu, et vos projets perso et pro avancent sereinement."},
-  {k:"budget", n:"Budget", e:"💰", tip:"Suivre ses recettes et dépenses, pour mieux les maîtriser."},
+  {k:"budget", n:"Budget", e:"💰", tip:"Un œil sur ses dépenses, et l'esprit plus léger pour ses projets."},
   {k:"physique", n:"Activité physique", e:"🏃", tip:"Marche, sport, yoga, arts martiaux, massage : ce qui vous fait du bien."},
   {k:"nutrition", n:"Nutrition", e:"🥕", tip:"Produits locaux, bien mâcher, fruits et légumes crus ou vapeur. Le secret : manger détendu."},
   {k:"affectif", n:"Équilibre affectif", e:"💞", tip:"Le yin et le yang en soi : délicatesse et accueil d'un côté, autorité bienveillante de l'autre."},
@@ -845,7 +845,7 @@ const PRINCIPLES = [
    l:"Chaque pas compte : un mieux-être personnel nourrit l'organisation collective, et une meilleure organisation collective nourrit l'épanouissement de chacun. Pas besoin de tout faire avancer en même temps : ce sont des <b>va-et-vient</b> qui se renforcent, à votre rythme."},
   {k:"p4", c:"c4", t:"Une organisation adaptée à chaque situation",
    s:"Chaque situation est unique. Des <b>médiateurs</b> redonnent le <b>pouvoir</b> à chacun, en adaptant une <b>même méthode</b> à chaque thématique et à chaque échelle : la <b>coopération</b> devient naturelle, et chacun garde son <b>autonomie</b>.",
-   l:"Géographie = politique = épanouissement individuel et collectif. Une <b>gestion territoriale optimale</b> favorise la <b>coopération</b> des acteurs, grâce à des <b>médiateurs territoriaux</b>. Sur chaque thématique et à chaque échelle territoriale, ce réseau connecté suit une <b>méthode scientifique</b> qui permet à chacun d'aller à son rythme, <b>au service de l'intérêt collectif</b>."}
+   l:"Bien organiser son territoire, c'est aider chacun à <b>s'épanouir</b>. Des <b>médiateurs</b> relient les acteurs, du quartier à la région, sur chaque sujet. Leur boussole\u00a0: une <b>méthode éprouvée</b>, où chacun avance à son pas, et où <b>tout le monde y gagne</b>."}
 ];
 const REACTIONS = [{k:"oui", e:"💯", n:"💯 Tout à fait d'accord"}, {k:"plutot", e:"👍", n:"👍 Plutôt d'accord"}, {k:"moyen", e:"🤔", n:"🤔 Moyennement d'accord"}, {k:"non", e:"🙅", n:"🙅 Pas du tout d'accord"}];
 const TL = [
@@ -870,13 +870,13 @@ const FORMATS = {k:'format', type:'chips', label:'Le format qui vous conviendrai
 const DREAMS = [
   {k:'entreprise', e:'💼', cat:'Travail & association', defi:"Posez LA question à la prochaine réunion : 5 minutes suffisent.", pick:"Mon organisation professionnelle", sub:"Mon entreprise, mon établissement, mon association", dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Mon organisation professionnelle", levels:[
     L1({qui:'à vos collègues ou aux membres', intro:"Une équipe bien organisée\u00a0: des <b>rôles clairs</b>, des <b>réunions efficaces</b>, des <b>résultats concrets</b>. <b>Posez la question autour de vous\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on note ensemble les <b>attentes</b> et les <b>ressources</b>, et on <b>co-construit les projets</b>.",
-        extra:[{k:'leviers', type:'chips', label:'Dans quels domaines ?', opts:LEVIERS}], labA:"Les attentes de l'équipe", labR:'Les ressources disponibles'}),
+        extra:[{k:'leviers', type:'chips', label:'Par quoi aimeriez-vous commencer ?', opts:LEVIERS}], labA:"Vos besoins, pour vous ou pour l'équipe", labR:'Vos ressources, les vôtres ou celles de la structure'}),
     L2('dans votre entreprise'),
-    {intro:"Des <b>médiateurs</b> adaptent la méthode à votre structure et à votre <b>filière</b>. Leur mission\u00a0: <b>redonner le pouvoir</b> à chacun, à chaque organisation et à chaque territoire. Concrètement, ils aident chacun à tracer sa <b>feuille de route</b>, et font circuler les bonnes idées entre les équipes.",
+    {intro:"Un <b>médiateur</b> adapte la méthode à votre structure et à votre <b>métier</b>. Avec lui, chacun trace sa <b>feuille de route</b>, et les bonnes idées passent d'une équipe à l'autre.",
      fields:[],
      parts:[{p:"Chaque équipe avance <b>à son rythme</b>, et <b>partage</b> ce qui marche."}]}
   ]},
-  {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"Mon organisation territoriale", sub:"Mon quartier, ma commune, ma région", dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Mon organisation territoriale", levels:[
+  {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"Mon organisation territoriale", sub:"Mon quartier, ma commune, ma région", dream:"un territoire où chacun trouve <b>ce dont il a besoin</b>, tout près de chez lui", t:"Mon organisation territoriale", levels:[
     L1({qui:'autour de vous, près de chez vous', intro:"Imaginez\u00a0: des <b>services à deux pas</b>, des voisins qui <b>s'entraident</b>, des acteurs qui avancent <b>main dans la main</b>. Tout commence par une petite question\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', extra:[{k:'echelle', type:'scales', label:'Où avez-vous envie d\'agir\u00a0? Votre quartier, votre commune, votre région… choisissez ce qui vous parle'},{k:'domaine', type:'chips', label:'Qu\'est-ce qui vous tient à cœur\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
     {intro:"Et aujourd'hui, comment ça se passe près de chez vous\u00a0? Un curseur par étape\u00a0: à <b>0</b>, tout reste à imaginer\u00a0; à <b>5</b>, ça roule déjà.",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée qui vous trotte dans la tête\u00a0?'}], details:[STEPS_DETAIL]},
@@ -899,19 +899,19 @@ const DREAMS = [
         <p><b>Un exemple concret.</b> Emploi, logement, finance, éducation : aujourd'hui l'information est dispersée. Une annonce immobilière pourrait passer par une <b>agence publique locale</b>, où les pros sont rémunérés pour le service rendu (comme un médecin payé pour bien soigner, pas pour multiplier les actes). Même logique pour tous les métiers, selon les <b>besoins réels</b> de chaque territoire. Des interfaces locales mettraient le marché local en avant, sans rien interdire : l'import reste possible s'il respecte le marché local, l'environnement et la loi.</p>
         <p><b>Cercles et sous-cercles.</b> Chaque thématique et chaque échelle a son cercle de coopération, et ses sous-cercles (« Psychologie » dans « Santé », par exemple). Données, projets, votes et évaluations circulent de l'un à l'autre.</p>`},
       {sum:"+ Le déploiement en 6 étapes, et 2 gestes pour se lancer", html:`<ol class="steps6"><li>Structurer les acteurs de la transition</li><li>Sonder et échanger, pour installer la confiance</li><li>Co-construire des feuilles de route par filière (court, moyen, long terme), accordées entre elles</li><li>Validation institutionnelle et citoyenne</li><li>Expérimenter et évaluer</li><li>Inspirer les partenaires nationaux et internationaux</li></ol>
-        <p><b>Geste 1 : participer</b> à la préparation de ce projet territorial.</p>
+        <p><b>Geste 1 : mettre la main à la pâte</b> pour le projet de votre territoire.</p>
         <p><b>Geste 2 : une vidéo d'une minute</b>, par exemple : « J'ai compris que tout est lié. Je m'implique chez moi et au travail, et je soutiens les médiateurs territoriaux pour qu'ils préparent et animent cette concertation. » À partager avec les médiateurs, vos proches et vos collègues !</p>`}],
-     fields:[{k:'role', type:'chips1', label:'Votre implication sur ce territoire', opts:['👀 Suivre','🙋 Participer','🎤 Animer']},
-             {k:'preparer', type:'toggle', label:"Je veux <b>participer à la préparation</b> du projet territorial"},
+     fields:[{k:'role', type:'chips1', label:'Et vous, comment aimeriez-vous participer\u00a0?', opts:['👀 Suivre','🙋 Participer','🎤 Animer']},
+             {k:'preparer', type:'toggle', label:"J'aimerais <b>mettre la main à la pâte</b> pour le projet de mon territoire"},
              {k:'mediateur', type:'toggle', label:"Devenir <b>médiateur</b> m'intéresse"}]}
   ]},
   {k:'pensee', e:'🧠', cat:'Personnel', defi:"Choisissez un domaine ci-dessous et testez sa piste pendant 7 jours.", pick:"Mon organisation personnelle", sub:"Mon état d'esprit, ma santé, mon temps, mon budget", dream:"mieux comprendre le lien entre <b>tout ce que vous vivez</b> et <b>votre état d'esprit</b>", t:"Mon organisation personnelle", levels:[
-    {intro:"Tout ce qui se passe dans votre existence est la <b>conséquence de votre état d'esprit</b>, et de l'<b>organisation</b> qui en découle. Premier pas\u00a0: voir où vous en êtes.",
-     fields:[{k:'lien', type:'chips1', label:"Arrivez-vous à voir le lien entre votre façon de penser et ce que vous vivez\u00a0?", opts:['✨ Oui, clairement','🌿 En partie','🌱 Je le découvre']},
+    {intro:"Notre <b>état d'esprit</b> colore tout ce qu'on vit, et la façon dont on <b>s'organise</b>. Premier pas\u00a0: voir où vous en êtes, tout simplement.",
+     fields:[{k:'lien', type:'chips1', label:"Voyez-vous le lien entre votre façon de penser et ce que vous vivez\u00a0?", opts:['✨ Oui, clairement','🌿 En partie','🌱 Je le découvre']},
              {k:'soi', type:'chips', label:'Les domaines dont vous aimeriez davantage prendre soin', opts:DOM_NAMES}]},
     {intro:"Quelle attention portez-vous à chaque domaine de votre vie\u00a0? Un curseur chacun\u00a0: pas de note, juste un <b>point de départ</b>, avec une <b>piste concrète</b> à la clé.",
      fields:[{k:'indiv', type:'domainsEval'}, {k:'envie', type:'text', label:'Votre envie du moment', ph:'ex. mieux dormir, tenir mon budget…'}]},
-    {intro:"Rien n'est injuste : tout est la conséquence de l'<b>intelligence de la vie</b>, qui opère en chacun de nous et en chaque situation. Votre <b>psychologie</b> est elle-même façonnée par votre environnement\u00a0: on avance sur les deux tableaux, <b>en même temps</b>.",
+    {intro:"La vie a son <b>intelligence</b>, en chacun de nous et dans chaque situation. Et notre <b>psychologie</b> se nourrit de notre environnement\u00a0: on prend soin des deux, <b>en même temps</b>.",
      parts:[{h:"Le féminin et le masculin en soi", p:"Le <b>féminin</b> accueille l'intelligence de la vie en toute chose\u00a0; le <b>masculin</b> pose un cadre pour créer de l'harmonie. L'<b>équilibre affectif</b> naît de leur dialogue."},
             {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements sur mesure</b> : dites-le juste en dessous, et un médiateur vous oriente vers le bon professionnel."}],
      fields:[{k:'ecriture', type:'area', label:"✍️ Écriture intuitive : qui aimeriez-vous être ? Que voulez-vous vivre ? Dans quelle société ? Et pourquoi, à chaque fois ?"}]}
@@ -932,9 +932,9 @@ const DREAMS = [
              {k:'domaine', type:'chips', label:'Vos thématiques', opts:THEMES.map(t=>t.e+' '+t.n)},
              {k:'echelle', type:'chips', label:'Où aimez-vous agir\u00a0? Quartier, commune, région…', opts:ECH}, TEMOIGNAGE]},
     {name:"Je m'implique", intro:"Chacun s'implique <b>à son rythme</b>. Choisissez votre degré d'implication, puis les missions qui vous parlent : une seule suffit pour démarrer.",
-     fields:[{k:'degre', type:'cards1', label:"Votre degré d'implication", opts:DEGRES},
+     fields:[{k:'degre', type:'cards1', label:"Comment aimeriez-vous vous impliquer\u00a0?", opts:DEGRES},
              {k:'missions', type:'cardsN', label:'Les missions qui vous parlent', opts:MISSIONS},
-             {k:'propose', type:'area', label:'🧰 Ce que vous proposez au réseau : une compétence, un outil, et la thématique concernée'},
+             {k:'propose', type:'area', label:'🧰 Ce que vous aimeriez partager\u00a0: un savoir-faire, un outil… et dans quel domaine'},
              {k:'contacts', type:'text', label:'Les acteurs repérés autour de vous', ph:"ex. l'asso du quartier, ma mairie…"},
              {k:'invite', type:'invite'}]},
     {intro:"La mission des médiateurs\u00a0: <b>redonner le pouvoir à chacun</b>, à chaque organisation et à chaque territoire. Le réseau compte déjà des professionnels en <b>6 pôles</b> : géographie, intelligence collective, numérique, environnement, médiation, santé et bien-être. Chacun a une approche systémique\u00a0: sa thématique est une porte d'entrée. Objectif : <b>au moins 10 médiateurs par région</b>, dans chaque thématique.",
@@ -1047,7 +1047,7 @@ function field(dk, f){
   }
   if(f.type==='stepsEvalMulti'){
     const all=a[f.k]||(a[f.k]={}); const sel=(a[f.src]||[]); const list=sel.length?sel:['Votre territoire'];
-    if(!sel.length) w.appendChild(h('p',{class:'hint'},"Astuce\u00a0: choisissez une ou plusieurs échelles au niveau 1 pour les évaluer séparément."));
+    if(!sel.length) w.appendChild(h('p',{class:'hint'},"Astuce\u00a0: choisissez vos lieux au niveau 1, et vous pourrez les noter un par un."));
     const fb=h('div'); const upd=()=>paintFb(fb, CYCLE.map(c=>({n:c.n, v:Math.max(0,...list.map(e=>(all[e]||{})[c.k]||0)), tip:CYCLE_TIPS[c.k]})));
     list.forEach(e=>{ const p=h('div',{class:'dom-row'}); p.appendChild(h('div',{class:'dom-top'},`<span>📍 ${esc(echLabel(a,e))}</span>`)); stepsRows(p, all[e]||(all[e]={}), upd); w.appendChild(p); });
     w.appendChild(fb); upd();
@@ -1261,7 +1261,7 @@ function printBilan(sel){
   let g=null, body='';
   sel.forEach(x=>{ if(x.g!==g){ if(g!==null) body+='</ul></section>'; body+='<section><h2>'+esc(x.g)+'</h2><ul>'; g=x.g; } body+='<li>'+esc(x.t)+'</li>'; });
   if(g!==null) body+='</ul></section>';
-  if(!body) body='<p>Aucun élément sélectionné.</p>';
+  if(!body) body='<p>Cochez au moins une ligne pour créer votre fiche.</p>';
   const doc=`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ma fiche Géomédiation – ${esc(date)}</title><style>
   body{font-family:'Segoe UI',system-ui,sans-serif;color:#241E14;max-width:720px;margin:32px auto;padding:0 20px;line-height:1.5}
   header{border-bottom:3px solid #C9A227;padding-bottom:12px;margin-bottom:22px}

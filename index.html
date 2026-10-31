@@ -1128,8 +1128,8 @@ function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',
   det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
 function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
 function renderHome(){
-  add(h('h1',{class:'dream-h1'},"Tout le monde peut <em>améliorer</em> son organisation."));
-  add(h('p',{class:'hero-lead'},"Pour soi, en famille, au travail ou dans son quartier. <b>Un petit pas suffit</b> pour démarrer, et <b>on vous accompagne</b> jusqu'à vos objectifs."));
+  add(h('h1',{class:'dream-h1'},"Chacun peut <em>contribuer</em> à une meilleure organisation."));
+  add(h('p',{class:'hero-lead'},"<b>Quelle que soit la situation ou l'échelle</b>\u00a0: pour soi, en famille, au travail ou dans son quartier. Un petit pas suffit pour démarrer, et <b>on vous accompagne</b> jusqu'à vos objectifs."));
   const path=h('div',{class:'path'});
   [['👀','Je découvre'],['🧭','Je fais le point'],['🚀','J\'avance'],['🤝','Je suis guidé']].forEach(([e,t],i)=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);

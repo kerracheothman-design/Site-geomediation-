@@ -814,10 +814,10 @@ const LEVIERS = ["🌿 Bien-être","Gouvernance","Finance éthique","Numérique,
 const STEPS_DETAIL = {sum:"+ Les 7 étapes en détail", html:()=>`<ol class="steps7">${CYCLE.map((c,i)=>`<li><i style="background:${CYCLE_COLS[i]};color:${i<3?'#1F3329':'#fff'}">${i+1}</i><span><b>${c.n}</b> · ${c.d}</span></li>`).join('')}</ol>`};
 const DEPART={k:'depart', type:'chips1', label:"Où en êtes-vous ? Chacun avance à son rythme", opts:['🌱 Je découvre','🔥 Je suis motivé','🚀 J\'agis déjà','🎓 C\'est mon métier']};
 function L1(o){ return {intro:o.intro,
-  fields:[{k:'question', type:'chips1', label:`LA question : l'avez-vous déjà posée ${o.qui} ?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Bientôt"]}, ...(o.extra||[]),
+  fields:[{k:'question', type:'chips1', label:`Avez-vous déjà posé LA question ${o.qui}\u00a0?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Bientôt"]}, ...(o.extra||[]),
           {k:'besoins', type:'area', label:o.labA+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phA||''}, {k:'ressources', type:'area', label:o.labR+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phR||''}]}; }
-function L2(ou, lab){ return {intro:`Où en est l'organisation ${ou} ? Pour chaque étape : <b>0</b> = à imaginer, <b>5</b> = bien en place.`,
-  fields:[{k:'eval', type:'stepsEval'}, {k:'projet', type:'area', label:lab||'Une idée de projet'}], details:[STEPS_DETAIL]}; }
+function L2(ou, lab){ return {intro:`Et aujourd'hui, comment ça se passe ${ou}\u00a0? Un curseur par étape\u00a0: à <b>0</b>, tout reste à imaginer\u00a0; à <b>5</b>, ça roule déjà.`,
+  fields:[{k:'eval', type:'stepsEval'}, {k:'projet', type:'area', label:lab||'Une idée qui vous trotte dans la tête\u00a0?'}], details:[STEPS_DETAIL]}; }
 
 const ACTEURS=[
   {t:'🙋 Citoyen', d:"Vit et fait vivre le territoire."},
@@ -864,7 +864,7 @@ const COLLAB_GROUPS = [
   {label:"Santé & bien-être", e:"💛", m:[["Stéphanie Wünsche","Équilibre psycho-corporel et pratiques d'harmonisation"],["Fanny Walter","Bien-être et qualité de vie, réseau BNB (Bonheur National Brut)"]]}];
 const PRO_POLES = {entreprise:["Intelligence collective & gouvernance","Médiation & coopération","Numérique & open source"], idees:["Géographie & territoire","Médiation & coopération","Environnement & économie régénérative"], pensee:["Santé & bien-être"], maison:["Santé & bien-être","Médiation & coopération"], reseau:["Médiation & coopération","Numérique & open source"]};
 function prosFor(dk){ return (PRO_POLES[dk]||[]).flatMap(l=>{ const g=COLLAB_GROUPS.find(x=>x.label===l); return g?g.m.map(([n,r])=>({t:n, d:g.e+' '+r})):[]; }); }
-const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 <b>Je témoigne</b> (vidéo ou écrit)\u00a0: en tant qu'acteur, je souhaite qu'une telle organisation soit mise en place dans notre société et sur nos territoires"};
+const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 <b>Je témoigne</b> (vidéo ou écrit)\u00a0: je raconte pourquoi j'aimerais vivre dans un territoire organisé comme ça"};
 const FORMATS = {k:'format', type:'chips', label:'Le format qui vous conviendrait', opts:['Atelier','Formation','Accompagnement']};
 
 const DREAMS = [
@@ -877,9 +877,9 @@ const DREAMS = [
      parts:[{p:"Chaque équipe avance <b>à son rythme</b>, et <b>partage</b> ce qui marche."}]}
   ]},
   {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"Mon organisation territoriale", sub:"Mon quartier, ma commune, ma région", dream:"que les <b>besoins</b> et les <b>ressources</b> de chacun soient pris en compte à la bonne <b>échelle territoriale</b>", t:"Mon organisation territoriale", levels:[
-    L1({qui:'aux acteurs de votre territoire', intro:"Un territoire bien organisé\u00a0: des <b>services à deux pas</b>, des <b>initiatives utiles</b>, des acteurs qui <b>travaillent ensemble</b>. <b>Posez la question autour de vous\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on relie les <b>besoins</b> et les <b>ressources</b>, pour <b>co-construire des projets</b> votés et évalués par les habitants.", labA:'Les besoins', labR:'Les ressources', extra:[{k:'echelle', type:'scales', label:'Quelles échelles territoriales ? Autant que vous voulez, ou aucune'},{k:'domaine', type:'chips', label:'Dans quels domaines ?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
-    {intro:"Où en est l'organisation à chaque échelle choisie\u00a0? Pour chaque étape\u00a0: <b>0</b> = à imaginer, <b>5</b> = bien en place.",
-     fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet'}], details:[STEPS_DETAIL]},
+    L1({qui:'autour de vous, près de chez vous', intro:"Imaginez\u00a0: des <b>services à deux pas</b>, des voisins qui <b>s'entraident</b>, des acteurs qui avancent <b>main dans la main</b>. Tout commence par une petite question\u00a0: <b>«\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Ce qui vous manque près de chez vous', labR:'Ce qui existe déjà et vous plaît', phA:'ex. un marché le soir, des pistes cyclables…', phR:'ex. une asso dynamique, un jardin partagé…', extra:[{k:'echelle', type:'scales', label:'Où avez-vous envie d\'agir\u00a0? Votre quartier, votre commune, votre région… choisissez ce qui vous parle'},{k:'domaine', type:'chips', label:'Qu\'est-ce qui vous tient à cœur\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
+    {intro:"Et aujourd'hui, comment ça se passe près de chez vous\u00a0? Un curseur par étape\u00a0: à <b>0</b>, tout reste à imaginer\u00a0; à <b>5</b>, ça roule déjà.",
+     fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée qui vous trotte dans la tête\u00a0?'}], details:[STEPS_DETAIL]},
     {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions, pour répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin, et le <b>Sud-Ouest</b> a de sérieux atouts. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
      details:[
       {sum:"+ Pourquoi une région, et pourquoi le Sud-Ouest", html:`<p><b>Les solutions existent déjà partout.</b> L'enjeu : les déployer à la bonne échelle, avec des <b>feuilles de route</b> et des <b>marchés intentionnels</b> validés par les acteurs, puis par les citoyens.</p>
@@ -930,7 +930,7 @@ const DREAMS = [
     {intro:"Le réseau relie tous ceux qui veulent <b>faire avancer la société</b>. Vous gardez votre <b>casquette de spécialiste</b>, vous gagnez en <b>visibilité</b>, et vous restez <b>indépendant</b>.",
      fields:[{k:'acteur', type:'cardsN', label:'Vous êtes (plusieurs casquettes, c\'est permis)', opts:ACTEURS},
              {k:'domaine', type:'chips', label:'Vos thématiques', opts:THEMES.map(t=>t.e+' '+t.n)},
-             {k:'echelle', type:'chips', label:'Vos échelles territoriales', opts:ECH}, TEMOIGNAGE]},
+             {k:'echelle', type:'chips', label:'Où aimez-vous agir\u00a0? Quartier, commune, région…', opts:ECH}, TEMOIGNAGE]},
     {name:"Je m'implique", intro:"Chacun s'implique <b>à son rythme</b>. Choisissez votre degré d'implication, puis les missions qui vous parlent : une seule suffit pour démarrer.",
      fields:[{k:'degre', type:'cards1', label:"Votre degré d'implication", opts:DEGRES},
              {k:'missions', type:'cardsN', label:'Les missions qui vous parlent', opts:MISSIONS},

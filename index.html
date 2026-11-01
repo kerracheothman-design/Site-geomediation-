@@ -922,7 +922,7 @@ const DREAMS = [
      fields:[{k:'indiv', type:'domainsEval'}, {k:'envie', type:'text', label:'Votre envie du moment', ph:'ex. mieux dormir, tenir mon budget…'}]},
     {intro:"La vie a son <b>intelligence</b>, en chacun de nous et dans chaque situation. Et notre <b>psychologie</b> se nourrit de notre environnement\u00a0: on prend soin des deux, <b>en même temps</b>.",
      parts:[{h:"Le féminin et le masculin en soi", p:"Le <b>féminin</b> accueille l'intelligence de la vie en toute chose\u00a0; le <b>masculin</b> pose un cadre pour créer de l'harmonie. L'<b>équilibre affectif</b> naît de leur dialogue."},
-            {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements adaptés à chaque situation</b>\u00a0: cliquez plus bas sur «\u00a0J'aimerais connaître un professionnel\u00a0», et un médiateur vous oriente."}],
+            {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements adaptés à chaque situation</b>\u00a0: cliquez plus bas sur «\u00a0Je serais intéressé par un accompagnement personnalisé\u00a0», et un médiateur vous oriente."}],
      fields:[{k:'ecriture', type:'area', label:"✍️ Écriture intuitive : qui aimeriez-vous être ? Que voulez-vous vivre ? Dans quelle société ? Et pourquoi, à chaque fois ?"}]}
   ]},
   {k:'maison', e:'🏡', cat:'Famille & proches', defi:"Posez LA question au prochain repas, et notez les idées de chacun.", pick:"Mon organisation familiale", sub:"Avec mes proches : couple, enfants, colocation", dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Mon organisation familiale", levels:[
@@ -1145,11 +1145,11 @@ function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>améliorer</em> l'organisation de notre société."));
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les problématiques, <b>individuelles et collectives</b>. <b>Quelle que soit la situation ou l'échelle</b> : quartier, commune, région… Un petit pas suffit pour démarrer, et <b>on vous accompagne</b> jusqu'à vos objectifs."));
   const path=h('div',{class:'path'});
-  [['👀','Je découvre'],['🧭','Je fais le point'],['🚀','J\'avance'],['🤝','Je suis guidé']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
+  [['📖','En savoir plus'],['🧭','Auto-évaluation'],['🎯','Objectifs à atteindre'],['💬','J\'ai une question'],['🤝','Accompagnement personnalisé']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
-  add(stepH(2,'Agir sur son territoire'));
+  add(stepH(2,'Agir pour son environnement'));
   const list=h('div',{class:'picks', id:'agir'});
   list.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Citoyen, élu, association, entreprise : chacun a sa place'));
   add(list);
@@ -1190,24 +1190,22 @@ function decisionBar(d, lv){
   const row=h('div',{class:'dec-row'});
   const tog=(k,v)=>{ D[k]=D[k]===v?null:v; render(); };
   const btn=(on,label,fn,cls)=>h('button',{class:(on?'on ':'')+(cls||''), 'aria-pressed':String(!!on), onclick:fn}, label);
-  row.append(btn(D.choix==='reflechis','🤔 Je réfléchis',()=>tog('choix','reflechis')));
-  if(d.act) row.append(btn(false,d.act,()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }));
-  else row.append(btn(D.choix==='agis',"🚀 J'agis",()=>tog('choix','agis')));
+  const L2=d.levels.findIndex((L,ix)=>ix>0 && (L.fields||[]).some(f=>/Eval/.test(f.type)))+1;
+  if(lv<d.levels.length) row.append(h('button',{class:'go', onclick:()=>openLevel(d,lv+1)},`📖 En savoir plus <small style="display:block;font-weight:600;opacity:.75">Niveau ${lv+1} · ${d.levels[lv].name||LEVEL_NAMES[lv]}</small>`));
+  if(L2>0) row.append(h('button',{class:'go', onclick:()=>openLevel(d,L2)},'🧭 Auto-évaluation <small style="display:block;font-weight:600;opacity:.75">Faire le point en 1 minute</small>'));
+  row.append(btn(D.choix==='obj','🎯 Objectifs à atteindre',()=>tog('choix','obj')));
   row.append(btn(D.q,"💬 J'ai une question",()=>tog('q',true)));
-  if(!d.hidden) row.append(btn(D.pro,"🤝 J'aimerais connaître un professionnel dans ce domaine",()=>tog('pro',true)));
-  const row2=h('div',{class:'dec-row'});
-  if(lv<d.levels.length) row2.appendChild(h('button',{class:'go', onclick:()=>openLevel(d,lv+1)},`✨ Je veux en savoir plus <small style="display:block;font-weight:600;opacity:.75">Niveau ${lv+1} · ${d.levels[lv].name||LEVEL_NAMES[lv]}</small>`));
-  row2.appendChild(h('button',{class:'go', onclick:()=>go('recap')},'✅ Ça me suffit pour l\'instant <small style="display:block;font-weight:600;opacity:.75">Je passe à ma fiche</small>'));
+  if(!d.hidden) row.append(btn(D.pro,"🤝 Je serais intéressé par un accompagnement personnalisé sur ce sujet",()=>tog('pro',true)));
+  else if(d.act) row.append(btn(false,d.act,()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }));
   box.appendChild(row);
-  if(D.choix){ const id='obj-'+d.k; const f=h('div',{class:'fld'}); f.append(h('label',{class:'fld-label',for:id}, D.choix==='agis'?'🎯 Mon objectif':'🎯 Mon objectif, quand je serai prêt')); const ta=h('textarea',{id, placeholder:'En une phrase, ce que je veux faire'}); ta.value=a.obj||''; ta.oninput=e=>{ a.obj=e.target.value; }; f.appendChild(ta); box.appendChild(f); }
+  if(D.choix){ const id='obj-'+d.k; const f=h('div',{class:'fld'}); f.append(h('label',{class:'fld-label',for:id}, '🎯 Mes objectifs à atteindre')); const ta=h('textarea',{id, placeholder:'En une phrase, ce que je veux faire'}); ta.value=a.obj||''; ta.oninput=e=>{ a.obj=e.target.value; }; f.appendChild(ta); box.appendChild(f); }
   if(D.pro){ box.appendChild(field(d.k, FORMATS)); const P=prosFor(d.k); if(P.length) box.appendChild(field(d.k, {k:'proQui', type:'cardsN', label:'Les professionnels du réseau sur ce sujet (facultatif)', opts:P})); }
   if(D.q||D.pro){ const m=h('div',{class:'medi', style:'margin-top:0'});
     m.appendChild(h('p',null, D.q ? (D.pro ? "💬 Votre question part au <b>médiateur</b>, qui vous répond et vous met en relation avec un professionnel du réseau." : "💬 Votre question part au <b>médiateur</b>, qui vous répond. Elle ne va pas dans votre fiche.") : "🤝 Le <b>médiateur</b> de cette thématique vous oriente vers les techniques et les acteurs qui vous correspondent le mieux."));
     if(D.q){ const ta=h('textarea',{'aria-label':'Votre question', placeholder:'Votre question ou votre remarque…'}); ta.value=a.remarque||''; ta.oninput=e=>{ a.remarque=e.target.value; }; m.appendChild(ta); }
     const mm=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
-    mm.onclick=()=>{ const L=['Bonjour,','']; if(D.pro) L.push(`J'aimerais connaître un professionnel dans ce domaine : ${d.cat}`+((a.format||[]).length?` (format : ${a.format.join(', ')})`:'')+'.'+((a.proQui||[]).length?` Je pense à : ${a.proQui.join(', ')}.`:''),''); if(D.q&&a.remarque) L.push(a.remarque,''); L.push('Merci !'); mm.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation · '+d.cat)+'&body='+encodeURIComponent(L.join('\n')); };
+    mm.onclick=()=>{ const L=['Bonjour,','']; if(D.pro) L.push(`Je serais intéressé par un accompagnement personnalisé sur ce sujet : ${d.cat}`+((a.format||[]).length?` (format : ${a.format.join(', ')})`:'')+'.'+((a.proQui||[]).length?` Je pense à : ${a.proQui.join(', ')}.`:''),''); if(D.q&&a.remarque) L.push(a.remarque,''); L.push('Merci !'); mm.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation · '+d.cat)+'&body='+encodeURIComponent(L.join('\n')); };
     m.appendChild(mm); box.appendChild(m); }
-  box.appendChild(row2);
   return box;
 }
 function fichesGroup(key, title, html){
@@ -1322,8 +1320,8 @@ function recapItems(){
       else if(f.type==='invite' && v) push(g, "J'ai partagé l'invitation autour de moi");
     }));
     const D=(state.dec||{})[d.k]||{};
-    if(D.choix||a.obj) push(g, (D.choix==='agis'?'J\'agis':D.choix==='reflechis'?'Je réfléchis':'Mon objectif')+(a.obj?' · 🎯 '+a.obj:''));
-    if(D.pro) push(g, 'J\'aimerais connaître un professionnel dans ce domaine'+((a.format||[]).length?' ('+a.format.join(', ')+')':'')+((a.proQui||[]).length?' · '+a.proQui.join(', '):''));
+    if(D.choix||a.obj) push(g, 'Mes objectifs'+(a.obj?' · 🎯 '+a.obj:''));
+    if(D.pro) push(g, 'Accompagnement personnalisé souhaité'+((a.format||[]).length?' ('+a.format.join(', ')+')':'')+((a.proQui||[]).length?' · '+a.proQui.join(', '):''));
   });
   return it;
 }
@@ -1359,13 +1357,13 @@ function renderRecap(){
   add(box);
   }
   const qs0=(state.qs||[]).map(x=>({d:{e:'💬', cat:x.c.replace(/^\S+\s/,'')}, t:x.t}));
-  const qs=qs0.concat(DREAMS.map(d=>{ const D=(state.dec||{})[d.k]||{}, a=state.a[d.k]||{}; const t=[D.pro?'J\'aimerais connaître un professionnel dans ce domaine.':'', D.q?(a.remarque||'').trim():''].filter(Boolean).join(' '); return {d,t}; }).filter(x=>x.t));
+  const qs=qs0.concat(DREAMS.map(d=>{ const D=(state.dec||{})[d.k]||{}, a=state.a[d.k]||{}; const t=[D.pro?'Je serais intéressé par un accompagnement personnalisé sur ce sujet.':'', D.q?(a.remarque||'').trim():''].filter(Boolean).join(' '); return {d,t}; }).filter(x=>x.t));
   const mb=h('section',{class:'medi'}); mb.appendChild(h('h3',null,'💬 Mes demandes au médiateur'));
   if(qs.length){ qs.forEach(x=>mb.appendChild(h('p',null,`<b>${x.d.e} ${x.d.cat}</b> · ${esc(x.t)}`)));
     const m=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
     m.onclick=()=>{ m.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Géomédiation : mes demandes')+'&body='+encodeURIComponent('Bonjour,\n\n'+qs.map(x=>x.d.cat+' : '+x.t).join('\n\n')+'\n\nMerci !'); };
     mb.appendChild(m); }
-  else mb.appendChild(h('p',null,`Une question, ou envie de connaître un professionnel ? Dites-le dans n'importe quelle rubrique, ou écrivez à <b>${CONTACT_MAIL}</b>.`));
+  else mb.appendChild(h('p',null,`Une question, ou envie d'un accompagnement personnalisé\u00a0? Dites-le dans n'importe quelle rubrique, ou écrivez à <b>${CONTACT_MAIL}</b>.`));
   add(mb);
   const n=h('div',{class:'nav'});
   n.append(h('button',{class:'btn btn-ghost', onclick:goBack},'← Retour'), h('button',{class:'btn btn-soft', onclick:()=>go('home')},'🏠 Menu principal'));

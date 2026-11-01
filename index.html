@@ -407,6 +407,11 @@
   .lk-e{font-size:22px; flex:0 0 26px; text-align:center;} .lk-t{flex:1; min-width:0; display:flex; flex-direction:column; gap:1px;}
   .card .lk-t b{font-size:14px; background:none; padding:0;} .lk-t small{font-size:12.5px; color:var(--ink-soft); line-height:1.35;} .card .lk-t small b{font-size:12.5px; background:none; padding:0; color:var(--forest-dark);}
   .link-btn i{font-style:normal; font-weight:800; color:var(--clay);}
+  .missing{background:#FFF7DD; border:1.5px solid var(--gold); border-radius:16px; padding:14px 16px; margin:0 0 16px;}
+  .missing .mk-t{font:800 16px var(--display); color:var(--forest-dark); margin:0 0 6px;}
+  .missing p{font-size:14.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 8px;}
+  .card .missing b{background:none; padding:0; color:var(--forest-dark);}
+  .missing .mk-cta{display:inline-block; margin-top:2px;}
   .bonus-card{margin:22px auto 0; max-width:420px; border-radius:16px; border:1.5px dashed var(--gold); background:linear-gradient(135deg,#FFFBEF,#F6F1E7); cursor:pointer; transition:transform .25s; perspective:600px;}
   .bonus-card:hover{transform:translateY(-2px) rotate(-.4deg);}
   .bonus-card.on{border-style:solid; cursor:default; animation:flipIn .35s ease;}
@@ -1147,6 +1152,10 @@ function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives. Quelle que soit la situation ou l'échelle : quartier, commune, région… <b>chaque initiative compte</b>."));
+  const mk=h('div',{class:'missing'});
+  mk.innerHTML=`<p class="mk-t">🔗 Le chaînon manquant</p><p>Outils de vote, consultations, cartes des alternatives, mouvements citoyens : les initiatives ne manquent pas. Ce qui manque, c'est <b>le lien</b> entre les <b>thématiques</b>, les <b>acteurs</b> et les <b>échelles</b>, avec une <b>méthode adaptée à chaque situation</b>.</p><p>C'est le rôle des <b>médiateurs indépendants</b> : chacun garde sa spécialité, et la <b>complémentarité</b> entre les outils, les thématiques, les échelles et les acteurs devient naturelle.</p>`;
+  const qc=h('a',{class:'mail-btn mk-cta', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Prise de contact Géomédiation')},'✉️ Contacter un médiateur');
+  mk.appendChild(qc); add(mk);
   const path=h('div',{class:'path'});
   [['📖','En savoir plus'],['🧭','Auto-évaluation'],['🎯','Objectifs à atteindre'],['💬','J\'ai une question'],['🤝','Accompagnement personnalisé']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);

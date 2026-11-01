@@ -877,7 +877,7 @@ const COLLAB_GROUPS = [
 const MEDIATEURS_NA = [["Sandrine Nouaux","Solutions Démocratiques, Espoir RIC"],["Alexandra Tran","Les Ruches"],["Gaspard","Maraîcher bio"]];
 const PRO_POLES = {entreprise:["Intelligence collective & gouvernance","Médiation & coopération","Numérique & open source"], idees:["Géographie & territoire","Médiation & coopération","Environnement & économie régénérative"], pensee:["Santé & bien-être"], maison:["Santé & bien-être","Médiation & coopération"], reseau:["Médiation & coopération","Numérique & open source"]};
 function prosFor(dk){ return (dk==='idees'?MEDIATEURS_NA.map(([n,r])=>({t:n, d:'📍 Médiateur territorial · '+r})):[]).concat((PRO_POLES[dk]||[]).flatMap(l=>{ const g=COLLAB_GROUPS.find(x=>x.label===l); return g?g.m.map(([n,r])=>({t:n, d:g.e+' '+r})):[]; })); }
-const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 <b>Je témoigne</b>, en vidéo ou par écrit\u00a0: pourquoi une <b>organisation concertée</b> de notre territoire me tient à cœur"};
+const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 <b>Je témoigne en vidéo</b> pour soutenir l'équipe de <b>médiateurs territoriaux indépendants</b>, et je développe la <b>conscience politique</b> dans mon entourage"};
 const FORMATS = {k:'format', type:'chips', label:'Le format qui vous conviendrait', opts:['Atelier','Formation','Accompagnement']};
 
 const DREAMS = [

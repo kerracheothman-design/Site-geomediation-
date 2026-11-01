@@ -1158,7 +1158,7 @@ function renderHome(){
   const ac=h('div',{class:'accomp'});
   ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à fixer vos objectifs, puis vous oriente <b>selon vos aspirations</b>. <b>Pas de pression</b> : vous avancez quand vous voulez, comme vous voulez.</p>`;
   const ar=h('div',{class:'row-inline'});
-  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Envie d'être accompagné")},'✉️ Parler à un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche'));
+  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Envie d'être accompagné")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche'));
   ac.appendChild(ar); add(ac);
   const opt=h('details',{class:'optx'}); if(state.optOpen) opt.open=true;
   opt.innerHTML='<summary><span>✨ <b>En option</b> : la méthode au travail et à la maison</span><i>Voir +</i></summary>';

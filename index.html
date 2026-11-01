@@ -472,6 +472,8 @@
   .lvl-prog{height:6px; border-radius:99px; background:var(--line); overflow:hidden; margin:2px 0 10px;} .lvl-prog i{display:block; height:100%; background:linear-gradient(90deg,var(--gold),var(--forest)); border-radius:99px; transition:width .5s;}
   .toast{position:fixed; left:50%; top:18px; transform:translateX(-50%); z-index:60; background:var(--forest-dark); color:var(--cream); font:800 14.5px var(--body); padding:12px 18px; border-radius:999px; box-shadow:0 10px 30px rgba(0,0,0,.3); transition:opacity .4s; max-width:92vw; text-align:center;}
   .toast.out{opacity:0;}
+  .legal{margin:14px 0 0;} .legal h3{font:800 16px var(--display); color:var(--forest-dark); margin:0 0 6px;} .legal p{font-size:14px; line-height:1.6; color:var(--ink-soft); margin:0 0 8px;} .legal a{color:var(--clay); font-weight:700;}
+  .legal-links{text-align:center; font-size:12px; margin:8px 0 0;} .legal-links a{color:var(--muted); text-decoration:underline;}
   .lvl-nav-cap{font:700 13px var(--body); color:var(--forest-dark); margin:22px 0 4px;}
   .lvl-nav button.next{border-style:dashed; border-color:var(--gold);}
   .lvl-cap{font-size:13px; color:var(--ink-soft); margin:0 0 4px; text-align:center;}
@@ -1273,6 +1275,23 @@ function renderDream(){
   add(n);
 }
 
+
+/* ================= MENTIONS LÉGALES ================= */
+function renderLegal(){
+  add(h('div',{class:'kicker'},'Informations légales'));
+  add(h('h2',null,'Mentions légales, confidentialité et cookies'));
+  const sec=(t,html)=>{ const b=h('section',{class:'legal'}); b.innerHTML=`<h3>${t}</h3>${html}`; add(b); };
+  sec('Éditeur du site',`<p><b>Othman Kerrache</b>, entrepreneur individuel · Géomédiation<br>SIREN 932 577 240 · SIRET 932 577 240 00017<br>N° TVA intracommunautaire FR17 932 577 240<br>Siège : 33310 Lormont (Gironde)<br>Contact : <a href="mailto:${CONTACT_MAIL}">${CONTACT_MAIL}</a></p><p>Directeur de la publication : Othman Kerrache.</p>`);
+  sec('Hébergement',`<p>GitHub, Inc. (service GitHub Pages)<br>88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</p>`);
+  sec('Propriété intellectuelle',`<p>Les textes, schémas, vidéos et la méthode présentés sur ce site sont la propriété de Géomédiation. Toute reproduction est soumise à autorisation préalable ; les courtes citations sont les bienvenues, avec mention de la source.</p>`);
+  sec('Vos données personnelles',`<p><b>Vos réponses restent sur votre appareil.</b> Le site n'enregistre aucune donnée sur un serveur : vos réponses, objectifs et votre fiche acteur sont conservés dans la mémoire de votre navigateur (stockage local), et vous seul y avez accès.</p><p><b>Quand vous écrivez au médiateur</b>, le message part depuis votre propre messagerie. Les informations transmises servent uniquement à vous répondre et à vous orienter ; elles ne sont ni vendues ni cédées, et sont conservées au plus trois ans après le dernier échange.</p><p>Vous disposez d'un droit d'accès, de rectification, d'effacement et d'opposition : il suffit d'écrire à <a href="mailto:${CONTACT_MAIL}">${CONTACT_MAIL}</a>. Vous pouvez aussi saisir la <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a>.</p>`);
+  sec('Cookies',`<p><b>Aucun cookie publicitaire ni de mesure d'audience.</b> Le seul stockage utilisé est celui de vos réponses sur votre appareil, indispensable au fonctionnement du site : il ne nécessite donc pas de consentement.</p><p>Les polices d'écriture sont chargées depuis les serveurs de Google Fonts, qui reçoivent à cette occasion l'adresse IP de votre appareil.</p>`);
+  const b=h('section',{class:'legal'}); b.innerHTML='<h3>Effacer mes réponses</h3><p>Supprime définitivement vos réponses, objectifs et votre fiche de cet appareil.</p>';
+  const del=h('button',{class:'btn btn-soft', onclick:()=>{ if(!confirm('Effacer toutes vos réponses de cet appareil ?')) return; try{ localStorage.removeItem(STORE); }catch(e){} state=fresh(); render(); window.scrollTo({top:0}); toast('✓ Vos réponses ont été effacées'); }},'🗑️ Effacer mes réponses');
+  b.appendChild(del); add(b);
+  const n=h('div',{class:'nav'}); n.append(h('button',{class:'btn btn-soft', onclick:()=>go('home')},'🏠 Menu')); add(n);
+}
+
 /* ================= RÉCAP ================= */
 function printBilan(sel){
   const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
@@ -1405,8 +1424,9 @@ function render(){
   if(state.view!=='home') slot.append(h('button',{class:'back-btn', onclick:goBack},'← Retour'));
   const fh=$('fabHome'); if(fh) fh.style.display=state.view==='home'?'none':'flex';
   root.innerHTML='';
-  ({home:renderHome, dream:renderDream, recap:renderRecap}[state.view]||renderHome)();
+  ({home:renderHome, dream:renderDream, recap:renderRecap, legal:renderLegal}[state.view]||renderHome)();
   add(h('p',{class:'small center', style:'margin-top:18px'}, `💬 ${state.view==='dream'?'':"Une question, une remarque\u00a0? "}Écrivez au médiateur à tout moment\u00a0: <a href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Géomédiation : ma question')}" style="color:var(--clay);font-weight:700">${CONTACT_MAIL}</a>`));
+  add(h('p',{class:'legal-links'},'<a href="#" id="legalLink">Mentions légales · Confidentialité · Cookies</a>')); const ll=$('legalLink'); if(ll) ll.onclick=e=>{ e.preventDefault(); go('legal'); };
   save();
 }
 $('brandBtn').onclick=()=>go('home');

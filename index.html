@@ -1164,7 +1164,7 @@ function renderHome(){
   opt.innerHTML='<summary><span>✨ <b>En option</b> : la méthode au travail et à la maison</span><i>Voir +</i></summary>';
   opt.addEventListener('toggle',()=>{ state.optOpen=opt.open; save(); });
   const ob=h('div',{class:'optx-b'});
-  ob.appendChild(h('p',{class:'optx-lead'},"La même méthode s'adapte à votre structure, à votre famille ou à votre quotidien. <b>Seulement si vous en avez envie.</b>"));
+  ob.appendChild(h('p',{class:'optx-lead'},"La même méthode s'adapte à votre structure, à votre famille ou à votre quotidien."));
   ob.appendChild(testBlock());
   const ol=h('div',{class:'picks'});
   [['entreprise',2],['maison',1],['pensee',0]].forEach(([k,i])=>ol.appendChild(pickBtn(k,i)));

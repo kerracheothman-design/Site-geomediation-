@@ -1145,8 +1145,8 @@ function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k
   return h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
     `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${title||d.pick}</b><small>${sub||d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`); }
 function renderHome(){
-  add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer l'organisation de notre société."));
-  add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les problématiques, <b>individuelles et collectives</b>. <b>Quelle que soit la situation ou l'échelle</b> : quartier, commune, région… Un petit pas suffit pour démarrer, et <b>on vous accompagne</b> jusqu'à vos objectifs."));
+  add(h('h1',{class:'dream-h1'},"Chacun peut participer à améliorer <em>l'organisation</em> de notre société."));
+  add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives. Quelle que soit la situation ou l'échelle : quartier, commune, région… Un petit pas suffit pour démarrer, et <b>on vous accompagne</b> jusqu'à vos objectifs."));
   const path=h('div',{class:'path'});
   [['📖','En savoir plus'],['🧭','Auto-évaluation'],['🎯','Objectifs à atteindre'],['💬','J\'ai une question'],['🤝','Accompagnement personnalisé']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);

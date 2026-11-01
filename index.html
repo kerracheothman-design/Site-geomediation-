@@ -528,6 +528,7 @@
   .dec-row button:hover{border-color:var(--gold);}
   .dec-row button.on{background:var(--forest); border-color:var(--forest); color:var(--cream);}
   .dec-row button.go{background:var(--cream);}
+  .dec .more-lv{font:800 14px var(--body); text-align:left; border:1.5px solid var(--gold); background:#FFF7DD; color:var(--forest-dark); border-radius:12px; padding:11px 12px; cursor:pointer;}
   .medi{background:var(--paper); border:1.5px solid var(--line); border-radius:16px; padding:14px 16px; margin-top:14px; display:flex; flex-direction:column; gap:8px;}
   .medi h3{margin:0; font:800 16px var(--display); color:var(--forest-dark);}
   .medi p{margin:0; font-size:13px; line-height:1.45; color:var(--ink-soft);}
@@ -1158,7 +1159,7 @@ function renderHome(){
   const ac=h('div',{class:'accomp'});
   ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à fixer vos objectifs, puis vous oriente <b>selon vos aspirations</b>. <b>Pas de pression</b> : vous avancez quand vous voulez, comme vous voulez.</p>`;
   const ar=h('div',{class:'row-inline'});
-  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Envie d'être accompagné")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche'));
+  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Envie d'être accompagné")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
   ac.appendChild(ar); add(ac);
   const opt=h('details',{class:'optx'}); if(state.optOpen) opt.open=true;
   opt.innerHTML='<summary><span>✨ <b>En option</b> : la méthode au travail et à la maison</span><i>Voir +</i></summary>';
@@ -1183,24 +1184,27 @@ function renderHome(){
 /* ================= UNE PORTE D'ENTRÉE ================= */
 function toast(msg){ const t=h('div',{class:'toast'},msg); document.body.appendChild(t); setTimeout(()=>t.classList.add('out'),1800); setTimeout(()=>t.remove(),2300); }
 function openLevel(d, n){ const lv=state.lvl[d.k]||1; if(n>lv){ state.lvl[d.k]=n; toast(n>=d.levels.length?`🏆 Niveau ${n} débloqué : vous avez tout exploré !`:`🎉 Niveau ${n} débloqué`); if(n>=d.levels.length) confetti(); } render(); setTimeout(()=>{ const el=$('lvl-'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
-function decisionBar(d, lv){
+function decisionBar(d, lv, li){ if(li===undefined) li=lv-1;
   state.dec=state.dec||{}; let D=state.dec[d.k]; if(!D||typeof D!=='object'||Array.isArray(D)||D[1]!==undefined||D[2]!==undefined||D[3]!==undefined) D=state.dec[d.k]={};
   const a=A(d.k);
-  const box=h('div',{class:'dec'}); box.appendChild(h('div',{class:'dec-t'},'Et maintenant\u00a0?'));
+  const box=h('div',{class:'dec'});
   const row=h('div',{class:'dec-row'});
-  const tog=(k,v)=>{ D[k]=D[k]===v?null:v; render(); };
+  const here=(D.at===undefined?lv-1:D.at)===li;
+  const tog=(k,v)=>{ D[k]=(here&&D[k]===v)?null:v; D.at=li; render(); };
   const btn=(on,label,fn,cls)=>h('button',{class:(on?'on ':'')+(cls||''), 'aria-pressed':String(!!on), onclick:fn}, label);
   const L2=d.levels.findIndex((L,ix)=>ix>0 && (L.fields||[]).some(f=>/Eval/.test(f.type)))+1;
-  if(lv<d.levels.length) row.append(h('button',{class:'go', onclick:()=>openLevel(d,lv+1)},`📖 En savoir plus <small style="display:block;font-weight:600;opacity:.75">Niveau ${lv+1} · ${d.levels[lv].name||LEVEL_NAMES[lv]}</small>`));
-  if(L2>0) row.append(h('button',{class:'go', onclick:()=>openLevel(d,L2)},'🧭 Auto-évaluation <small style="display:block;font-weight:600;opacity:.75">Faire le point en 1 minute</small>'));
-  row.append(btn(D.choix==='obj','🎯 Objectifs à atteindre',()=>tog('choix','obj')));
-  row.append(btn(D.q,"💬 J'ai une question",()=>tog('q',true)));
-  if(!d.hidden) row.append(btn(D.pro,"🤝 Je serais intéressé par un accompagnement personnalisé sur ce sujet",()=>tog('pro',true)));
-  else if(d.act) row.append(btn(false,d.act,()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }));
+  const last=li===lv-1;
+  if(last && lv<d.levels.length){ const more=h('button',{class:'go more-lv', onclick:()=>openLevel(d,lv+1)},`📖 En savoir plus <small style="display:block;font-weight:600;opacity:.75">Niveau ${lv+1} · ${d.levels[lv].name||LEVEL_NAMES[lv]}</small>`); box.appendChild(more); }
+  row.append(h('button',{class:'go', onclick:()=>{ if(L2>0) openLevel(d,L2); else { state.optOpen=true; go('home'); setTimeout(()=>{ const el=document.querySelector('.test'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },150); } }},'🧭 M\'auto-évaluer'));
+  row.append(btn(here&&D.choix==='obj','🎯 Noter mes objectifs',()=>tog('choix','obj')));
+  row.append(btn(here&&D.q,"💬 Poser une question",()=>tog('q',true)));
+  if(!d.hidden) row.append(btn(here&&D.pro,"🤝 Je souhaite un accompagnement avec un professionnel du domaine",()=>tog('pro',true)));
+  row.append(h('button',{class:'go', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
+  if(last && d.act) row.append(btn(false,d.act,()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }));
   box.appendChild(row);
-  if(D.choix){ const id='obj-'+d.k; const f=h('div',{class:'fld'}); f.append(h('label',{class:'fld-label',for:id}, '🎯 Mes objectifs à atteindre')); const ta=h('textarea',{id, placeholder:'En une phrase, ce que je veux faire'}); ta.value=a.obj||''; ta.oninput=e=>{ a.obj=e.target.value; }; f.appendChild(ta); box.appendChild(f); }
-  if(D.pro){ box.appendChild(field(d.k, FORMATS)); const P=prosFor(d.k); if(P.length) box.appendChild(field(d.k, {k:'proQui', type:'cardsN', label:'Les professionnels du réseau sur ce sujet (facultatif)', opts:P})); }
-  if(D.q||D.pro){ const m=h('div',{class:'medi', style:'margin-top:0'});
+  if(here && D.choix){ const id='obj-'+d.k; const f=h('div',{class:'fld'}); f.append(h('label',{class:'fld-label',for:id}, '🎯 Mes objectifs à atteindre')); const ta=h('textarea',{id, placeholder:'En une phrase, ce que je veux faire'}); ta.value=a.obj||''; ta.oninput=e=>{ a.obj=e.target.value; }; f.appendChild(ta); box.appendChild(f); }
+  if(here && D.pro){ box.appendChild(field(d.k, FORMATS)); const P=prosFor(d.k); if(P.length) box.appendChild(field(d.k, {k:'proQui', type:'cardsN', label:'Les professionnels du réseau sur ce sujet (facultatif)', opts:P})); }
+  if(here && (D.q||D.pro)){ const m=h('div',{class:'medi', style:'margin-top:0'});
     m.appendChild(h('p',null, D.q ? (D.pro ? "💬 Votre question part au <b>médiateur</b>, qui vous répond et vous met en relation avec un professionnel du réseau." : "💬 Votre question part au <b>médiateur</b>, qui vous répond. Elle ne va pas dans votre fiche.") : "🤝 Le <b>médiateur</b> de cette thématique vous oriente vers les techniques et les acteurs qui vous correspondent le mieux."));
     if(D.q){ const ta=h('textarea',{'aria-label':'Votre question', placeholder:'Votre question ou votre remarque…'}); ta.value=a.remarque||''; ta.oninput=e=>{ a.remarque=e.target.value; }; m.appendChild(ta); }
     const mm=h('a',{class:'mail-btn', href:'#'},'📨 Envoyer au médiateur');
@@ -1254,7 +1258,7 @@ function renderDream(){
       card.appendChild(box); });
     (L.details||[]).forEach((D,di)=>{ const html=typeof D.html==='function'?D.html():D.html; if(i===2){ card.appendChild(fichesGroup(d.k+'-'+di, D.sum.replace(/^\+\s*/,''), html)); return; } const det=h('details',{class:'more-box'}); det.innerHTML=`<summary>${D.sum}</summary>`+html; card.appendChild(det); });
     L.fields.forEach(f=>card.appendChild(field(d.k,f)));
-    if(i===lv-1) card.appendChild(decisionBar(d, lv));
+    card.appendChild(decisionBar(d, lv, i));
     root.appendChild(card);
   }
   wires.forEach(f=>f());
@@ -1265,7 +1269,7 @@ function renderDream(){
     const L=LINKS[d.k]||{}; const g=h('div',{class:'link-list'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'link-btn', onclick:()=>go('dream',x.k)},`<span class="lk-e">${x.e}</span><span class="lk-t"><b>${x.pick||x.t}${done?' ✓':''}</b><small>${L[x.k]||''}</small></span><i>→</i>`)); });
     ex.appendChild(g); add(ex); }
   const n=h('div',{class:'nav'});
-  n.append(h('button',{class:'btn btn-soft', onclick:()=>go('home')},'🏠 Menu'), h('button',{class:'btn btn-primary', onclick:()=>go('recap')},'📇 Ma fiche →'));
+  n.append(h('button',{class:'btn btn-soft', onclick:()=>go('home')},'🏠 Menu'), h('button',{class:'btn btn-primary', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
   add(n);
 }
 
@@ -1288,7 +1292,7 @@ function printBilan(sel){
   @media print{.tip{display:none} body{margin:0}}
   </style></head><body>
   <p class="tip">Pour l'enregistrer en PDF : dans la fenêtre d'impression, choisissez <b>« Enregistrer au format PDF »</b> comme imprimante.</p>
-  <header><div class="brand">GÉOMÉDIATION</div><h1>Ma fiche</h1><div class="date">${esc(date)}</div></header>
+  <header><div class="brand">GÉOMÉDIATION</div><h1>Ma fiche acteur</h1><div class="date">${esc(date)}</div></header>
   ${body}
   <footer>Géomédiation · Inspirée de la géographie, science de l'organisation des territoires · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
   </body></html>`;
@@ -1328,7 +1332,7 @@ function recapItems(){
 function renderRecap(){
   confetti();
   state.sendTo = state.sendTo==='med' ? 'libre' : (state.sendTo||'libre');
-  add(h('div',{class:'kicker'},'Ma fiche'));
+  add(h('div',{class:'kicker'},'Ma fiche acteur'));
   add(h('h2',null,'📇 Votre fiche prend forme'));
   const items=recapItems();
   if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Choisissez d'abord ce que vous souhaitez améliorer\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }
@@ -1372,7 +1376,7 @@ function renderRecap(){
 }
 
 /* ================= RENDU ================= */
-function ctxLabel(){ if(state.view==='dream'){ const d=DREAMS.find(x=>x.k===state.dream); if(d) return d.e+' '+d.cat; } return state.view==='recap'?'📇 Ma fiche':'🏠 Accueil'; }
+function ctxLabel(){ if(state.view==='dream'){ const d=DREAMS.find(x=>x.k===state.dream); if(d) return d.e+' '+d.cat; } return state.view==='recap'?'📇 Ma fiche acteur':'🏠 Accueil'; }
 function qa(ctx, dark){ const w=h('span',{class:'qa'+(dark?' dark':'')});
   w.append(h('button',{class:'qa-b', title:'Noter un objectif', 'aria-label':'Noter un objectif · '+ctx, onclick:e=>{ e.stopPropagation(); openSheet('obj',ctx); }},'🎯'), h('button',{class:'qa-b', title:'Poser une question', 'aria-label':'Poser une question · '+ctx, onclick:e=>{ e.stopPropagation(); openSheet('q',ctx); }},'💬'));
   return w; }

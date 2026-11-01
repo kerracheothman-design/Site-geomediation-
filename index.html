@@ -1156,7 +1156,7 @@ function renderHome(){
   add(h('p',{class:'pick-note'},'3 niveaux par sujet, à explorer quand vous voulez. Un <b>🎯</b> objectif ou une <b>💬</b> question ? Un clic suffit.'));
   add(stepH(3,'Être accompagné, à votre rythme'));
   const ac=h('div',{class:'accomp'});
-  ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à fixer vos objectifs, puis vous oriente vers les bons interlocuteurs. <b>Pas de pression</b> : vous avancez quand vous voulez, comme vous voulez.</p>`;
+  ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à fixer vos objectifs, puis vous oriente <b>selon vos aspirations</b>. <b>Pas de pression</b> : vous avancez quand vous voulez, comme vous voulez.</p>`;
   const ar=h('div',{class:'row-inline'});
   ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Envie d'être accompagné")},'✉️ Parler à un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche'));
   ac.appendChild(ar); add(ac);

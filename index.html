@@ -1180,7 +1180,7 @@ function renderHome(){
   [['📖','En savoir plus'],['🧭','M\'auto-évaluer'],['🎯','Noter mes objectifs'],['💬','Poser une question'],['🤝','Être accompagné par un professionnel'],['📇','Ma fiche acteur']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);
   const opt=h('details',{class:'optx'}); if(state.optOpen) opt.open=true;
-  opt.innerHTML='<summary><span>✨ <b>En option</b> : la méthode au travail et à la maison</span><i>Voir +</i></summary>';
+  opt.innerHTML='<summary><span>✨ <b>En option</b> : la même méthode, au travail et à la maison</span><i>Voir +</i></summary>';
   opt.addEventListener('toggle',()=>{ state.optOpen=opt.open; save(); });
   const ob=h('div',{class:'optx-b'});
   ob.appendChild(h('p',{class:'optx-lead'},"La même méthode s'adapte à votre structure, à votre famille ou à votre quotidien."));

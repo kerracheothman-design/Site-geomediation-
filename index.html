@@ -412,6 +412,9 @@
   .missing p{font-size:14.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 8px;}
   .card .missing b{background:none; padding:0; color:var(--forest-dark);}
   .missing .mk-cta{display:inline-block; margin-top:2px;}
+  .method{background:var(--paper); border:1.5px solid var(--line); border-radius:16px; padding:14px 14px 10px; margin:0 0 6px;}
+  .method p{font-size:14.5px; line-height:1.55; color:var(--ink-soft); margin:0 0 8px;} .card .method b{background:none; padding:0; color:var(--forest-dark);}
+  .method .me-cap{font-size:13px; color:var(--muted); margin:6px 0 0;}
   .bonus-card{margin:22px auto 0; max-width:420px; border-radius:16px; border:1.5px dashed var(--gold); background:linear-gradient(135deg,#FFFBEF,#F6F1E7); cursor:pointer; transition:transform .25s; perspective:600px;}
   .bonus-card:hover{transform:translateY(-2px) rotate(-.4deg);}
   .bonus-card.on{border-style:solid; cursor:default; animation:flipIn .35s ease;}
@@ -1164,7 +1167,11 @@ function renderHome(){
   add(mk);
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
-  add(stepH(2,'Agir pour son environnement'));
+  add(stepH(2,'La méthode, en 7 étapes'));
+  const me=h('div',{class:'method'});
+  me.innerHTML=`<p>Une <b>même méthode</b>, adaptable à chaque situation et à chaque échelle : de soi à la région, en passant par la famille, le travail et le quartier.</p>`+STEPS_DETAIL.html();
+  add(me);
+  add(stepH(3,'Agir pour son environnement'));
   const list=h('div',{class:'picks', id:'agir'});
   list.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Citoyen, élu, association, entreprise : chacun a sa place'));
   add(list);
@@ -1172,12 +1179,6 @@ function renderHome(){
   const path=h('div',{class:'path'});
   [['📖','En savoir plus'],['🧭','M\'auto-évaluer'],['🎯','Noter mes objectifs'],['💬','Poser une question'],['🤝','Être accompagné par un professionnel'],['📇','Ma fiche acteur']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);
-  add(stepH(3,'Un accompagnement personnalisé'));
-  const ac=h('div',{class:'accomp'});
-  ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à définir vos objectifs, puis vous oriente <b>selon vos aspirations</b> vers les professionnels et les partenaires adaptés. Vous savez toujours <b>ce que devient votre contribution</b>.</p>`;
-  const ar=h('div',{class:'row-inline'});
-  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Demande d'accompagnement personnalisé")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
-  ac.appendChild(ar); add(ac);
   const opt=h('details',{class:'optx'}); if(state.optOpen) opt.open=true;
   opt.innerHTML='<summary><span>✨ <b>En option</b> : la méthode au travail et à la maison</span><i>Voir +</i></summary>';
   opt.addEventListener('toggle',()=>{ state.optOpen=opt.open; save(); });
@@ -1187,6 +1188,12 @@ function renderHome(){
   const ol=h('div',{class:'picks'});
   [['entreprise',2],['maison',1],['pensee',0]].forEach(([k,i])=>ol.appendChild(pickBtn(k,i)));
   ob.appendChild(ol); opt.appendChild(ob); add(opt);
+  add(stepH(4,'Un accompagnement personnalisé'));
+  const ac=h('div',{class:'accomp'});
+  ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à définir vos objectifs, puis vous oriente <b>selon vos aspirations</b> vers les professionnels et les partenaires adaptés. Vous savez toujours <b>ce que devient votre contribution</b>.</p>`;
+  const ar=h('div',{class:'row-inline'});
+  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Demande d'accompagnement personnalisé")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
+  ac.appendChild(ar); add(ac);
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>💪 On a un vrai pouvoir quand on apprend à le partager intelligemment.</b></p><p>Chacun y contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`

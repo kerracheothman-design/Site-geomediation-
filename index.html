@@ -1153,9 +1153,10 @@ function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives. Quelle que soit la situation ou l'échelle : quartier, commune, région… <b>chaque initiative compte</b>."));
   const mk=h('div',{class:'missing'});
-  mk.innerHTML=`<p class="mk-t">🔗 Le chaînon manquant</p><p>Outils de vote, consultations, cartes des alternatives, mouvements citoyens : les initiatives ne manquent pas. Ce qui manque, c'est <b>le lien</b> entre les <b>thématiques</b>, les <b>acteurs</b> et les <b>échelles</b>, avec une <b>méthode adaptée à chaque situation</b>.</p><p>C'est le rôle des <b>médiateurs indépendants</b> : chacun garde sa spécialité, et la <b>complémentarité</b> entre les outils, les thématiques, les échelles et les acteurs devient naturelle.</p>`;
+  mk.innerHTML=`<p class="mk-t">Comment bien organiser un territoire sans une équipe de <b>médiateurs neutres</b>, capables d'animer les échanges entre tous ses acteurs ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région.</p>`;
   const qc=h('a',{class:'mail-btn mk-cta', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Prise de contact Géomédiation')},'✉️ Contacter un médiateur');
-  mk.appendChild(qc); add(mk);
+  const sup=h('button',{class:'btn btn-soft mk-cta', onclick:()=>go('dream','reseau')},'🤝 Soutenir les médiateurs');
+  const mr=h('div',{class:'row-inline'}); mr.append(qc, sup); mk.appendChild(mr); add(mk);
   const path=h('div',{class:'path'});
   [['📖','En savoir plus'],['🧭','Auto-évaluation'],['🎯','Objectifs à atteindre'],['💬','J\'ai une question'],['🤝','Accompagnement personnalisé']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);

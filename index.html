@@ -603,6 +603,13 @@
     .test{padding:14px 12px;}
     .acc summary{padding:10px 12px;}
   }
+  body.typing .fab, body.typing .fab-home{display:none !important;}
+  @media (max-width:540px){ .fab-home{display:none !important;} }
+  .card .lvl-intro b, .card .lvl-part p b, .card .more-box p b, .card .fiche b, .card .hero-lead b, .card .missing b, .card .legal b{background:none; padding:0;}
+  .btn, .mail-btn, .chip, .dec-row button, .link-btn, .more-row button, .bc-links button{min-height:44px;}
+  .mail-btn{display:inline-flex; align-items:center; justify-content:center;}
+  .missing .row-inline{display:flex; flex-direction:column; gap:8px;} .missing .mk-cta{width:100%; text-align:center; font-size:15px;}
+  .lvl-nav.sticky{position:sticky; top:0; z-index:30; background:var(--cream); padding:6px 0; box-shadow:0 6px 10px -8px rgba(0,0,0,.25);}
 </style>
 </head>
 <body>
@@ -829,11 +836,11 @@ function stepsRows(w, cur, cb){ CYCLE.forEach((c,i)=>{ const row=h('div',{class:
   w.appendChild(h('div',{class:'scale'},'<span>0 · à imaginer</span><span>5 · bien en place</span>')); }
 const LEVIERS = ["🌿 Bien-être","Gouvernance","Finance éthique","Numérique, IA & open source","Intelligence collective","Éducation","Communication","Juridique"];
 const STEPS_DETAIL = {sum:"+ Les 7 étapes en détail", html:()=>`<ol class="steps7">${CYCLE.map((c,i)=>`<li><i style="background:${CYCLE_COLS[i]};color:${i<3?'#1F3329':'#fff'}">${i+1}</i><span><b>${c.n}</b> · ${c.d}</span></li>`).join('')}</ol>`};
-const DEPART={k:'depart', type:'chips1', label:"Où en êtes-vous ? Chacun avance à son rythme", opts:['🌱 Je découvre','🔥 Je suis motivé','🚀 J\'agis déjà','🎓 C\'est mon métier']};
+const DEPART={k:'depart', type:'chips1', label:"Où en êtes-vous ?", opts:['🌱 Je découvre','🔥 Je suis motivé','🚀 J\'agis déjà','🎓 C\'est mon métier']};
 function L1(o){ return {intro:o.intro,
   fields:(()=>{ const q={k:'question', type:'chips1', label:`Et vous, avez-vous déjà posé LA question\u00a0?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Bientôt"]}; return o.pre ? [...o.pre, ...(o.extra||[]), q] : [q, ...(o.extra||[])]; })().concat([
           {k:'besoins', type:'area', label:o.labA+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phA||''}, {k:'ressources', type:'area', label:o.labR+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phR||''}])}; }
-function L2(ou, lab){ return {intro:`Où en est l'organisation ${ou}\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place).`,
+function L2(ou, lab){ return {intro:`Où en est l'organisation ${ou}\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place). Exemple\u00a0: pour «\u00a0Besoins\u00a0», a-t-on demandé à chacun ce qui lui manque\u00a0?`,
   fields:[{k:'eval', type:'stepsEval'}, {k:'projet', type:'area', label:lab||'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]}; }
 
 const ACTEURS=[
@@ -859,7 +866,7 @@ const PRINCIPLES = [
    l:"Notre enquête de terrain le confirme. Le déclic : se sentir <b>légitime</b> pour se lancer, gagner en <b>confiance</b> en la vie et dans les autres, et voir qu'un système plus viable <b>profite à chacun</b>, quel que soit son patrimoine."},
   {k:"p3", c:"c3", t:"Notre monde nous ressemble",
    s:"Notre <b>épanouissement</b> et notre <b>environnement</b> grandissent main dans la main. Prendre soin de soi, c'est aussi prendre soin de <b>tout ce qui nous entoure</b>.",
-   l:"Chaque pas compte : un mieux-être personnel nourrit l'organisation collective, et une meilleure organisation collective nourrit l'épanouissement de chacun. Pas besoin de tout faire avancer en même temps : ce sont des <b>va-et-vient</b> qui se renforcent, à votre rythme."},
+   l:"Chaque pas compte : un mieux-être personnel nourrit l'organisation collective, et une meilleure organisation collective nourrit l'épanouissement de chacun. Pas besoin de tout faire avancer en même temps : ce sont des <b>va-et-vient</b> qui se renforcent."},
   {k:"p4", c:"c4", t:"Une organisation adaptée à chaque situation",
    s:"Chaque situation est unique. Des <b>médiateurs</b> redonnent le <b>pouvoir</b> à chacun, en adaptant une <b>même méthode</b> à chaque thématique et à chaque échelle : la <b>coopération</b> devient naturelle, et chacun garde son <b>autonomie</b>.",
    l:"Bien organiser son territoire, c'est aider chacun à <b>s'épanouir</b>. Des <b>médiateurs</b> relient les acteurs, du quartier à la région, sur chaque sujet. Leur boussole\u00a0: une <b>méthode éprouvée</b>, où chacun avance à son pas, et où <b>tout le monde y gagne</b>."}
@@ -892,11 +899,11 @@ const DREAMS = [
     L2('dans votre structure'),
     {intro:"Un <b>médiateur</b> adapte la méthode à votre structure et à votre <b>métier</b>. Avec lui, chacun trace sa <b>feuille de route</b>, et les bonnes idées passent d'une équipe à l'autre.",
      fields:[],
-     parts:[{p:"Chaque équipe avance <b>à son rythme</b>, et <b>partage</b> ce qui marche."}]}
+     parts:[{p:"Chaque équipe <b>partage</b> ce qui marche."}]}
   ]},
   {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"L'organisation de mon territoire", sub:"Mon quartier, ma commune, ma région", dream:"un territoire où chacun trouve <b>ce dont il a besoin</b>, tout près de chez lui", t:"L'organisation de mon territoire", levels:[
     L1({qui:'aux acteurs de votre territoire', pre:[{k:'role', type:'cards1', label:"Comment aimeriez-vous agir\u00a0?", opts:DEGRES.slice(0,3)}], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>, grâce à une <b>gestion concertée</b> où chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', extra:[{k:'echelle', type:'scales', label:'Quelle échelle territoriale vous intéresserait\u00a0?'},{k:'domaine', type:'chips', label:'Qu\'est-ce qui vous tient à cœur\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
-    {intro:"Où en est l'organisation près de chez vous\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place).",
+    {intro:"Où en est l'organisation près de chez vous\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place). Exemple\u00a0: pour «\u00a0Besoins\u00a0», a-t-on demandé à chacun ce qui lui manque\u00a0?",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]},
     {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions, pour répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin : suffisamment petite pour se réunir facilement, suffisamment grande pour porter un vrai <b>plan de développement économique</b> cohérent. Et le <b>Sud-Ouest</b> a les atouts pour inspirer une telle <b>transition organisationnelle et démocratique</b> : sa <b>culture girondine</b>, son <b>bassin hydrographique</b> et son potentiel d'<b>économies d'échelle</b>, pour des prix raisonnables tout en restant compétitifs. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
      details:[
@@ -1185,7 +1192,7 @@ function renderHome(){
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>💪 On a un vrai pouvoir quand on apprend à le partager intelligemment.</b></p><p>Chacun y contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`
-      : `<div class="bc-front"><span>🎁 <b>Bonus</b></span><i>Retourner ↻</i></div>`;
+      : `<div class="bc-front"><span>🎁 <b>Bonus</b> : la philosophie du projet</span><i>↻</i></div>`;
     bc.querySelectorAll('[data-go]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); const k=b.dataset.go; k==='recap'?go('recap'):go('dream',k); }); };
   bc.onclick=e=>{ if(state.bonusOpen && !(e.target.classList&&e.target.classList.contains('bc-close'))) return; state.bonusOpen=!state.bonusOpen; save(); paintB(); };
   bc.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); state.bonusOpen=!state.bonusOpen; save(); paintB(); } };
@@ -1252,7 +1259,7 @@ function renderDream(){
       nav.appendChild(h('button',{class:st, 'aria-label':`Niveau ${n} : ${L.name||LEVEL_NAMES[i]}`, onclick:()=>openLevel(d,n)}, `<b>${n<=lv?'✓ ':''}Niveau ${n}</b><span>${L.name||LEVEL_NAMES[i]}</span>`)); });
     return nav; };
   add(h('div',{class:'lvl-prog', 'aria-hidden':'true'},`<i style="width:${Math.round(lv/d.levels.length*100)}%"></i>`));
-  add(mkNav());
+  { const nv=mkNav(); nv.classList.add('sticky'); add(nv); }
   const wires=[];
   for(let i=0;i<lv;i++){
     const L=d.levels[i]; const card=h('section',{class:'lvl l'+(i+1), id:'lvl-'+(i+1)});
@@ -1441,6 +1448,8 @@ function render(){
 }
 $('brandBtn').onclick=()=>go('home');
 { const fh=h('button',{class:'fab-home', id:'fabHome', 'aria-label':'Retour au menu principal', onclick:()=>go('home')},'🏠 Menu'); fh.style.display=state.view==='home'?'none':'flex'; document.body.appendChild(fh); }
+document.addEventListener('focusin',e=>{ if(/^(TEXTAREA|INPUT)$/.test(e.target.tagName)&&!['range','checkbox'].includes(e.target.type)) document.body.classList.add('typing'); });
+document.addEventListener('focusout',()=>document.body.classList.remove('typing'));
 { const f=h('button',{class:'fab', 'aria-label':'Noter un objectif ou poser une question', onclick:()=>openSheet()},'<span>🎯</span><span class="fab-t">Objectif ·</span><span>💬</span><span class="fab-t">Question</span>'); document.body.appendChild(f); }
 render();
 

@@ -418,6 +418,14 @@
   .me-test .mt-h{font:800 16px var(--display); color:var(--forest-dark); margin:14px 0 8px;}
   .eg{margin:0 0 14px;} .eg-h{font:800 16px var(--display); color:var(--forest-dark); margin:4px 0 2px;}
   .eg-s{font-size:14px; line-height:1.5; color:var(--ink-soft); margin:0 0 8px;} .card .eg-s b{background:none; padding:0; color:var(--forest-dark);}
+  .journey{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin:4px 0 6px;}
+  .j-st{position:relative; display:flex; flex-direction:column; align-items:center; gap:3px; font:800 10.5px var(--body); color:var(--forest-dark); background:var(--paper); border:1.5px solid var(--line); border-radius:14px; padding:8px 0; min-width:0; hyphens:manual; cursor:pointer; min-height:56px;}
+  .j-st i{font-style:normal; font-size:20px;} .j-st span{text-align:center; line-height:1.15;} .j-st:not(:last-child)::after{content:'→'; position:absolute; right:-10px; top:50%; transform:translateY(-50%); color:var(--gold); font-weight:800; font-size:13px;} .j-arr{color:var(--gold); font-weight:800; font-size:14px;}
+  .flow7{display:flex; flex-wrap:wrap; align-items:center; gap:5px; margin:8px 0 10px;}
+  .f7{display:inline-flex; align-items:center; gap:5px; font:700 12.5px var(--body); color:var(--forest-dark); background:#fff; border:1.5px solid var(--line); border-radius:999px; padding:4px 10px 4px 4px;}
+  .f7 i{font-style:normal; width:20px; height:20px; border-radius:50%; background:var(--c); color:var(--t); font:800 11px var(--body); display:inline-flex; align-items:center; justify-content:center;}
+  .f7a{color:var(--gold); font-weight:800; background:none !important; padding:0 !important;}
+  .method .visual{margin:4px 0 0;}
   .bonus-card{margin:22px auto 0; max-width:420px; border-radius:16px; border:1.5px dashed var(--gold); background:linear-gradient(135deg,#FFFBEF,#F6F1E7); cursor:pointer; transition:transform .25s; perspective:600px;}
   .bonus-card:hover{transform:translateY(-2px) rotate(-.4deg);}
   .bonus-card.on{border-style:solid; cursor:default; animation:flipIn .35s ease;}
@@ -907,7 +915,7 @@ const DREAMS = [
      fields:[],
      parts:[{p:"Chaque équipe <b>partage</b> ce qui marche."}]}
   ]},
-  {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"L'organisation de mon territoire", sub:"Mon quartier, ma commune, ma région", dream:"un territoire où chacun trouve <b>ce dont il a besoin</b>, tout près de chez lui", t:"L'organisation de mon territoire", levels:[
+  {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"L'organisation de nos territoires", sub:"Mon quartier, ma commune, ma région", dream:"un territoire où chacun trouve <b>ce dont il a besoin</b>, tout près de chez lui", t:"L'organisation de nos territoires", levels:[
     L1({qui:'aux acteurs de votre territoire', pre:[{k:'role', type:'cards1', label:"Comment aimeriez-vous agir\u00a0?", opts:DEGRES.slice(0,3)}], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>, grâce à une <b>gestion concertée</b> où chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', extra:[{k:'echelle', type:'scales', label:'Quelle échelle territoriale vous intéresserait\u00a0?'},{k:'domaine', type:'chips', label:'Qu\'est-ce qui vous tient à cœur\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
     {intro:"Où en est l'organisation près de chez vous\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place). Exemple\u00a0: pour «\u00a0Besoins\u00a0», a-t-on demandé à chacun ce qui lui manque\u00a0?",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]},
@@ -1156,7 +1164,7 @@ function progressOf(k){ const d=DREAMS.find(x=>x.k===k); const lv=state.lvl[k]||
 function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',{class:'acc'}); if(state.accH[id]) det.open=true;
   det.innerHTML=`<summary>${title}</summary>`; const b=h('div',{class:'acc-b'}); fill(b); det.appendChild(b);
   det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
-function stepH(n, t){ return h('h2',{class:'step-h'},`<span>${n}</span>${t}`); }
+function stepH(n, t){ return h('h2',{class:'step-h', id:'step'+n},`<span>${n}</span>${t}`); }
 function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k);
   const dots=Array.from({length:p.max},(_,j)=>`<i class="${j<p.lv?'on':''}"></i>`).join('');
   const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
@@ -1168,12 +1176,15 @@ function renderHome(){
   const mk=h('div',{class:'missing'});
   mk.innerHTML=`<p class="mk-t">Comment bien organiser un territoire sans une équipe de <b>médiateurs neutres</b>, capables d'animer les échanges entre tous ses acteurs ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région.</p>`;
   add(mk);
+  const jr=h('div',{class:'journey'});
+  [['🎬','Découvrir',1],['🧭','Comprendre',2],['🚀','Agir',3],['🤝','Être accom­pagné',4]].forEach(([e,t,n],k)=>{ jr.appendChild(h('button',{class:'j-st', onclick:()=>{ const el=$('step'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},`<i>${e}</i><span>${t}</span>`)); });
+  add(jr);
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   add(stepH(2,'La méthode, en 7 étapes'));
   const me=h('div',{class:'method'});
-  me.innerHTML=`<p>Une <b>même méthode</b>, adaptable à chaque situation et à chaque échelle : de soi à la région, en passant par la famille, le travail et le quartier.</p>`+STEPS_DETAIL.html();
-  add(me);
+  me.innerHTML=`<p>Une <b>même méthode</b>, adaptable à chaque situation et à chaque échelle\u00a0: de soi à la région, en passant par la famille, le travail et le quartier.</p><div class="visual">${stairsSVG()}</div><div class="flow7">${CYCLE.map((c,k)=>`<span class="f7" style="--c:${CYCLE_COLS[k]};--t:${k<3?'#1F3329':'#fff'}"><i>${k+1}</i>${c.n}</span>`).join('<b class="f7a">→</b>')}<b class="f7a">↺</b></div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
+  add(me); wireSlide();
   add(h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'));
   add(testBlock());
   add(stepH(3,'Maintenant, agissez sur votre environnement'));

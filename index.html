@@ -605,7 +605,7 @@
   }
   body.typing .fab, body.typing .fab-home{display:none !important;}
   @media (max-width:540px){ .fab-home{display:none !important;} }
-  .card .lvl-intro b, .card .lvl-part p b, .card .more-box p b, .card .fiche b, .card .hero-lead b, .card .missing b, .card .legal b{background:none; padding:0;}
+  .card .lvl-intro b, .card .lvl-part p b, .card .more-box p b, .card .fiche b, .card .hero-lead b, .card .missing b, .card .legal b, .card .accomp b{background:none; padding:0;}
   .btn, .mail-btn, .chip, .dec-row button, .link-btn, .more-row button, .bc-links button{min-height:44px;}
   .mail-btn{display:inline-flex; align-items:center; justify-content:center;}
   .missing .row-inline{display:flex; flex-direction:column; gap:8px;} .missing .mk-cta{width:100%; text-align:center; font-size:15px;}
@@ -1161,19 +1161,17 @@ function renderHome(){
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives. Quelle que soit la situation ou l'échelle : quartier, commune, région… <b>chaque initiative compte</b>."));
   const mk=h('div',{class:'missing'});
   mk.innerHTML=`<p class="mk-t">Comment bien organiser un territoire sans une équipe de <b>médiateurs neutres</b>, capables d'animer les échanges entre tous ses acteurs ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région.</p>`;
-  const qc=h('a',{class:'mail-btn mk-cta', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Prise de contact Géomédiation')},'✉️ Contacter un médiateur');
-  const sup=h('button',{class:'btn btn-soft mk-cta', onclick:()=>go('dream','reseau')},'🤝 Soutenir les médiateurs');
-  const mr=h('div',{class:'row-inline'}); mr.append(qc, sup); mk.appendChild(mr); add(mk);
-  const path=h('div',{class:'path'});
-  [['📖','En savoir plus'],['🧭','Auto-évaluation'],['🎯','Objectifs à atteindre'],['💬','J\'ai une question'],['🤝','Accompagnement personnalisé']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
-  add(path);
+  add(mk);
   add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   add(stepH(2,'Agir pour son environnement'));
   const list=h('div',{class:'picks', id:'agir'});
   list.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Citoyen, élu, association, entreprise : chacun a sa place'));
   add(list);
-  add(h('p',{class:'pick-note'},'3 niveaux par sujet, à explorer quand vous voulez. Un <b>🎯</b> objectif ou une <b>💬</b> question ? Un clic suffit.'));
+  add(h('p',{class:'pick-note'},'Dans chaque sujet, 3 niveaux et, à chaque étape\u00a0:'));
+  const path=h('div',{class:'path'});
+  [['📖','En savoir plus'],['🧭','M\'auto-évaluer'],['🎯','Noter mes objectifs'],['💬','Poser une question'],['🤝','Être accompagné par un professionnel'],['📇','Ma fiche acteur']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
+  add(path);
   add(stepH(3,'Un accompagnement personnalisé'));
   const ac=h('div',{class:'accomp'});
   ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à définir vos objectifs, puis vous oriente <b>selon vos aspirations</b> vers les professionnels et les partenaires adaptés. Vous savez toujours <b>ce que devient votre contribution</b>.</p>`;

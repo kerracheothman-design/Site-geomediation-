@@ -1205,16 +1205,13 @@ function renderHome(){
   add(h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'));
   add(testBlock());
   add(stepH(3,'Vous pouvez agir sur votre environnement, à votre rythme'));
-  add(h('p',{class:'pick-note'},"Chacun peut apporter sa pierre à <b>tous les niveaux</b>\u00a0: choisissez par où commencer."));
   const g1=h('div',{class:'eg'}); g1.appendChild(h('p',{class:'eg-h'},'🗺️ Sur votre territoire'));
-  g1.appendChild(h('p',{class:'eg-s'},"Votre <b>expertise d'usage</b> et votre soutien aux médiateurs font avancer tout le territoire."));
   const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Citoyen, élu, association, entreprise : chacun a sa place'));
   g1.appendChild(l1); add(g1);
   const g2=h('div',{class:'eg'}); g2.appendChild(h('p',{class:'eg-h'},'🏡 Dans votre vie'));
-  g2.appendChild(h('p',{class:'eg-s'},"Pour vous, avec vos proches, avec vos collaborateurs\u00a0: <b>la même méthode</b>, et un exemple qui inspire autour de vous."));
   const l2=h('div',{class:'picks'}); l2.append(pickBtn('pensee',0,'Pour moi'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('entreprise',2,'Avec mes collaborateurs'));
   g2.appendChild(l2); add(g2);
-  add(h('p',{class:'pick-note'},'Dans chaque sujet, 3 niveaux et, à chaque étape\u00a0:'));
+  add(h('p',{class:'pick-note'},'Dans chaque sujet\u00a0:'));
   const path=h('div',{class:'path'});
   [['📖','En savoir plus'],['🧭','M\'auto-évaluer'],['🎯','Noter mes objectifs'],['💬','Poser une question'],['🤝','Être accompagné par un professionnel'],['📇','Ma fiche acteur']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);

@@ -1163,7 +1163,7 @@ function ricochetSVG(){
 function testBlock(){
   state.test=state.test||{};
   const t=h('section',{class:'test'});
-  t.innerHTML=`<div class="qa-row"><p class="test-s">Notez chaque niveau de 0 à 5 : on vous dit par où commencer.</p></div>`;
+  t.innerHTML=`<div class="qa-row"><p class="test-s">Notez chaque niveau de 0 à 5.</p></div>`;
   t.firstChild.appendChild(qa('🧭 Mon test d\'organisation', true));
   const fb=h('div'); const btn=h('button',{class:'btn btn-gold'});
   const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); state.reco=d.k; document.querySelectorAll('.pick').forEach(el=>el.classList.toggle('suggest', el.dataset.k===d.k)); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.t} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });

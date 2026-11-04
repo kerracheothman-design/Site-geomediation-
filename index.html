@@ -635,6 +635,7 @@
     .acc summary{padding:10px 12px;}
   }
   body.typing .fab, body.typing .fab-home{display:none !important;}
+  .fab{transition:opacity .25s, transform .25s;} .fab.fab-away{opacity:0; transform:translateY(12px); pointer-events:none;}
   @media (max-width:540px){ .fab-home{display:none !important;} }
   .card .lvl-intro b, .card .lvl-part p b, .card .more-box p b, .card .fiche b, .card .hero-lead b, .card .missing b, .card .legal b, .card .accomp b{background:none; padding:0;}
   .btn, .mail-btn, .chip, .dec-row button, .link-btn, .more-row button, .bc-links button{min-height:44px;}
@@ -1164,7 +1165,6 @@ function testBlock(){
   state.test=state.test||{};
   const t=h('section',{class:'test'});
   t.innerHTML=`<div class="qa-row"><p class="test-s">Notez chaque niveau de 0 à 5.</p></div>`;
-  t.firstChild.appendChild(qa('🧭 Mon test d\'organisation', true));
   const fb=h('div'); const btn=h('button',{class:'btn btn-gold'});
   const upd=()=>paintFb(fb, SPHERES.map(x=>({n:x.e+' '+x.n, v:state.test[x.k]||0, tip:x.tip, card:x.card})), (box,low)=>{ const sp=SPHERES.find(x=>x.e+' '+x.n===low.n); const d=DREAMS.find(x=>x.k===sp.card); state.reco=d.k; document.querySelectorAll('.pick').forEach(el=>el.classList.toggle('suggest', el.dataset.k===d.k)); btn.textContent=`Commencer par\u00a0: ${d.e} ${d.t} →`; btn.onclick=()=>go('dream',d.k); box.appendChild(btn); });
   SPHERES.forEach(x=>{ const v=state.test[x.k]||0; const row=h('div',{class:'sph'}); const val=h('span',null,v+'/5');
@@ -1482,7 +1482,8 @@ $('brandBtn').onclick=()=>go('home');
 { const fh=h('button',{class:'fab-home', id:'fabHome', 'aria-label':'Retour au menu principal', onclick:()=>go('home')},'🏠 Menu'); fh.style.display=state.view==='home'?'none':'flex'; document.body.appendChild(fh); }
 document.addEventListener('focusin',e=>{ if(/^(TEXTAREA|INPUT)$/.test(e.target.tagName)&&!['range','checkbox'].includes(e.target.type)) document.body.classList.add('typing'); });
 document.addEventListener('focusout',()=>document.body.classList.remove('typing'));
-{ const f=h('button',{class:'fab', 'aria-label':'Noter un objectif ou poser une question', onclick:()=>openSheet()},'<span>🎯</span><span class="fab-t">Objectif ·</span><span>💬</span><span class="fab-t">Question</span>'); document.body.appendChild(f); }
+{ const f=h('button',{class:'fab', 'aria-label':'Noter un objectif ou poser une question', onclick:()=>openSheet()},'<span>🎯</span><span class="fab-t">Objectif ·</span><span>💬</span><span class="fab-t">Question</span>'); document.body.appendChild(f);
+  let st; addEventListener('scroll',()=>{ f.classList.add('fab-away'); clearTimeout(st); st=setTimeout(()=>f.classList.remove('fab-away'),900); },{passive:true}); }
 render();
 
 </script>

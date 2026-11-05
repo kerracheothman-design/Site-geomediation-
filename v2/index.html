@@ -1239,17 +1239,17 @@ function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives."));
+  add(stepH(1,'Découvrir en 1 minute'));
+  const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="../video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="../video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   const mk=h('div',{class:'missing'});
   mk.innerHTML=`<p class="mk-t">Comment bien organiser <b>un territoire</b> sans <b>une équipe</b> de <b>médiateurs neutres</b>, capables d'animer les échanges entre tous <b>ses acteurs</b> ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région…</p>`;
   add(mk);
   const jr=h('div',{class:'journey'});
   [['🎬','Découvrir',1],['🧭','Comprendre',2],['🚀','Agir',3],['🤝','Être accom­pagné',4]].forEach(([e,t,n],k)=>{ jr.appendChild(h('button',{class:'j-st', onclick:()=>{ const el=$('step'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},`<i>${e}</i><span>${t}</span>`)); });
   add(jr);
-  add(stepH(1,'Découvrir en 1 minute'));
-  const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="../video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="../video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   add(stepH(2,'La méthode, en 7 étapes'));
   const me=h('div',{class:'method'});
-  me.innerHTML=`<div class="visual">${stairsSVG()}</div><div class="flow7">${CYCLE.map((c,k)=>`<span class="f7" style="--c:${CYCLE_COLS[k]};--t:${k<3?'#1F3329':'#fff'}"><i>${k+1}</i>${c.n}</span>`).join('<b class="f7a">→</b>')}<b class="f7a">↺</b></div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
+  me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
   add(me); wireSlide();
   add(stepH(3,'Vous pouvez agir sur votre environnement, à votre rythme'));
   const g1=h('div',{class:'eg'}); g1.appendChild(h('p',{class:'eg-h'},'🗺️ Sur votre territoire'));
@@ -1258,10 +1258,6 @@ function renderHome(){
   const g2=h('div',{class:'eg'}); g2.appendChild(h('p',{class:'eg-h'},'🏡 Dans votre vie'));
   const l2=h('div',{class:'picks'}); l2.append(pickBtn('pensee',0,'Pour moi'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('entreprise',2,'Avec mes collaborateurs'));
   g2.appendChild(l2); add(g2);
-  add(h('p',{class:'pick-note'},'Dans chaque sujet\u00a0:'));
-  const path=h('div',{class:'path'});
-  [['📖','En savoir plus'],['🧭','M\'auto-évaluer'],['🎯','Noter mes objectifs'],['💬','Poser une question'],['🤝','Être accompagné par un professionnel'],['📇','Ma fiche acteur']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
-  add(path);
   add(stepH(4,'Un accompagnement personnalisé'));
   add(h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'));
   add(testBlock());
@@ -1280,13 +1276,13 @@ function renderHome(){
   paintB(); add(bc);
   add(h('section',{class:'site-sec rv', id:'events'},`<h2 class="site-h">📅 Prochain rendez-vous</h2>
     <div class="ev"><img src="../social/biganos-8-novembre-v2-4x5.jpg" alt="Affiche : À Biganos, une rencontre au service de nos territoires, dimanche 8 novembre">
-    <div><h3>À Biganos, une rencontre au service de nos territoires</h3><p style="margin:0;color:var(--ink-soft)">Dimanche 8 novembre · Le Tour de France de <b>La Marche à suivre</b> fait étape chez nous.</p>
-    <div class="when"><span><b>13h30</b>Départ de la marche, 27 rue Henri Fabre</span><span><b>16h30 – 19h</b>Rencontre à la Serre Ô Délices, 71 chemin de Pardies</span><span>🥗 Auberge espagnole</span></div>
+    <div><h3>À Biganos, une rencontre au service de nos territoires</h3><p style="margin:0;color:var(--ink-soft)"><b>Dimanche 8 novembre</b> · Le Tour de France de <b>La Marche à suivre</b> fait étape chez nous.</p>
+    <div class="when"><span><b>13h30</b>Départ de la marche, 27 rue Henri Fabre</span><span><b>16h30 – 19h</b>Rencontre à la Serre Ô Délices, 71 chemin de Pardies</span><span>🥗 <b>Auberge espagnole</b> : un plat ou une boisson à partager</span></div>
     <div class="ev-l"><a class="evb g" href="https://facebook.com/events/s/la-marche-a-suivre/1438003731372309/" target="_blank" rel="noopener">Je participe</a><a class="evb o" href="https://lamarcheasuivre.net" target="_blank" rel="noopener">La Marche à suivre</a></div></div></div>`));
   add(h('section',{class:'site-sec rv', id:'equipe'},`<h2 class="site-h">👥 L'équipe de médiateurs territoriaux indépendants</h2>
     <div class="team"><div class="tm"><b>Othman Kerrache</b><span>Géographe</span></div><div class="tm"><b>Nataly Vigato</b><span>Aide médico-psychologique</span></div><div class="tm"><b>Alexandra Tran</b><span>AESH</span></div><div class="tm"><b>Gaspard Rousselot</b><span>Maraîcher bio</span></div><div class="tm"><b>Sandrine Nouaux</b><span>Agent territorial</span></div></div>`));
-  add(h('section',{class:'site-sec rv', id:'contact'},`<div class="ct"><h2 class="site-h" style="color:var(--cream);justify-content:center">✉️ Contact</h2><p>Une question, une envie d'agir ou de <b>soutenir le projet</b> ? Écrivez-nous.</p>
-    <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Tout commence par un échange.</small></div>`));
+  add(h('section',{class:'site-sec rv', id:'contact'},`<div class="ct"><h2 class="site-h" style="color:var(--cream);justify-content:center">✉️ Contact</h2><p>Une <b>question</b>, une envie d'<b>agir</b> ou de <b>soutenir le projet</b> ? Écrivez-nous.</p>
+    <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Tout commence par <b>un échange</b>.</small></div>`));
   add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
 }
 

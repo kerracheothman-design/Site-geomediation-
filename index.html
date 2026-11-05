@@ -1213,7 +1213,7 @@ function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives."));
   const mk=h('div',{class:'missing'});
-  mk.innerHTML=`<p class="mk-t">Comment bien organiser un territoire sans une équipe de <b>médiateurs neutres</b>, capables d'animer les échanges entre tous ses acteurs ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région.</p>`;
+  mk.innerHTML=`<p class="mk-t">Comment bien organiser <b>un territoire</b> sans <b>une équipe</b> de <b>médiateurs neutres</b>, capables d'animer les échanges entre tous <b>ses acteurs</b> ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région…</p>`;
   add(mk);
   const jr=h('div',{class:'journey'});
   [['🎬','Découvrir',1],['🧭','Comprendre',2],['🚀','Agir',3],['🤝','Être accom­pagné',4]].forEach(([e,t,n],k)=>{ jr.appendChild(h('button',{class:'j-st', onclick:()=>{ const el=$('step'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},`<i>${e}</i><span>${t}</span>`)); });

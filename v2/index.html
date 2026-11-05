@@ -678,6 +678,15 @@
   .card .site-sec b{background:none; padding:0;} .card .ct b{color:var(--gold-light);}
   .evb{display:inline-flex; align-items:center; min-height:44px; padding:0 20px; border-radius:999px; font-weight:800; text-decoration:none; font-size:15px;}
   .evb.g{background:var(--gold); color:var(--forest-dark);} .evb.o{border:2px solid var(--forest); color:var(--forest-dark);}
+
+  /* v2 : couleurs et respiration */
+  .card .missing .mk-t b{background:none; padding:0; color:var(--clay);}
+  .card .missing p:not(.mk-t) b{background:none; padding:0; color:var(--forest);}
+  .card .hero-lead b{background:none; padding:0; color:var(--clay);}
+  .card .accomp b{background:none; padding:0; color:var(--clay);}
+  .step-h{margin:44px 0 16px;} .missing{padding:18px 20px; margin:6px 0 26px; line-height:1.6;} .hero-lead{margin-bottom:24px;}
+  .eg{margin-bottom:22px;} .journey{margin-bottom:10px;} .me-test{margin-top:6px;}
+  .step-h span{box-shadow:0 0 0 6px rgba(201,162,39,.18);}
   .rv{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1);} .rv.in{opacity:1; transform:none;}
   @media (prefers-reduced-motion:reduce){ .rv{opacity:1; transform:none; transition:none;} }
   .btn, .pick, .mail-btn{transition:transform .15s ease, box-shadow .2s ease;} .btn:active, .pick:active, .mail-btn:active{transform:scale(.97);}
@@ -1221,7 +1230,7 @@ function progressOf(k){ const d=DREAMS.find(x=>x.k===k); const lv=state.lvl[k]||
 function acc(id, title, fill){ state.accH=state.accH||{}; const det=h('details',{class:'acc'}); if(state.accH[id]) det.open=true;
   det.innerHTML=`<summary>${title}</summary>`; const b=h('div',{class:'acc-b'}); fill(b); det.appendChild(b);
   det.addEventListener('toggle',()=>{ state.accH[id]=det.open; save(); }); return det; }
-function stepH(n, t){ return h('h2',{class:'step-h', id:'step'+n},`<span>${n}</span>${t}`); }
+function stepH(n, t){ return h('h2',{class:'step-h rv', id:'step'+n},`<span>${n}</span>${t}`); }
 function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k);
   const dots=Array.from({length:p.max},(_,j)=>`<i class="${j<p.lv?'on':''}"></i>`).join('');
   const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
@@ -1242,8 +1251,6 @@ function renderHome(){
   const me=h('div',{class:'method'});
   me.innerHTML=`<div class="visual">${stairsSVG()}</div><div class="flow7">${CYCLE.map((c,k)=>`<span class="f7" style="--c:${CYCLE_COLS[k]};--t:${k<3?'#1F3329':'#fff'}"><i>${k+1}</i>${c.n}</span>`).join('<b class="f7a">→</b>')}<b class="f7a">↺</b></div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
   add(me); wireSlide();
-  add(h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'));
-  add(testBlock());
   add(stepH(3,'Vous pouvez agir sur votre environnement, à votre rythme'));
   const g1=h('div',{class:'eg'}); g1.appendChild(h('p',{class:'eg-h'},'🗺️ Sur votre territoire'));
   const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Citoyen, élu, association, entreprise : chacun a sa place'));
@@ -1256,10 +1263,12 @@ function renderHome(){
   [['📖','En savoir plus'],['🧭','M\'auto-évaluer'],['🎯','Noter mes objectifs'],['💬','Poser une question'],['🤝','Être accompagné par un professionnel'],['📇','Ma fiche acteur']].forEach(([e,t])=>path.appendChild(h('span',{class:'path-i'},`<i>${e}</i>${t}`)));
   add(path);
   add(stepH(4,'Un accompagnement personnalisé'));
+  add(h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'));
+  add(testBlock());
   const ac=h('div',{class:'accomp'});
   ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à définir vos objectifs, puis vous oriente <b>selon vos aspirations</b> vers les professionnels et les partenaires adaptés. Vous savez toujours <b>ce que devient votre contribution</b>.</p>`;
   const ar=h('div',{class:'row-inline'});
-  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Demande d'accompagnement personnalisé")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
+  ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Demande d'accompagnement personnalisé")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('dream','pensee')},'📖 En savoir plus'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
   ac.appendChild(ar); add(ac);
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));

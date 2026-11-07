@@ -692,6 +692,12 @@
   .btn, .pick, .mail-btn{transition:transform .15s ease, box-shadow .2s ease;} .btn:active, .pick:active, .mail-btn:active{transform:scale(.97);}
 
   .card .qa{display:none !important;}
+
+  .pourqui{margin:22px 0 6px;} .pq-h{font:800 19px var(--display); color:var(--forest-dark); margin:0 0 6px;} .pq-i{margin:0 0 12px; color:var(--ink-soft); line-height:1.55;}
+  .pq-g{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px;}
+  .pq{background:var(--paper); border-radius:14px; padding:14px; box-shadow:0 4px 14px rgba(31,51,41,.07); display:flex; flex-direction:column; gap:6px;}
+  .pq > b{font:800 15.5px var(--display); color:var(--forest-dark);} .pq span{font-size:14px; line-height:1.45; color:var(--ink-soft);}
+  .card .pourqui b{background:none; padding:0;} .card .pourqui span b, .card .pq-i b{color:var(--clay);}
 </style>
 </head>
 <body>
@@ -1268,6 +1274,11 @@ function renderHome(){
   const ar=h('div',{class:'row-inline'});
   ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Demande d'accompagnement personnalisé")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('dream','pensee')},'📖 En savoir plus'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
   ac.appendChild(ar); add(ac);
+  add(h('div',{class:'pourqui rv'},`<p class="pq-h">🎯 Pour qui ?</p><p class="pq-i"><b>Comprendre les enjeux sociétaux</b>, <b>sensibiliser</b> et <b>accompagner</b> vers une <b>co-organisation optimale</b>.</p>
+    <div class="pq-g"><div class="pq"><b>🙋 Citoyens</b><span>Agir pour soi, avec ses proches et sur son <b>territoire</b>.</span></div>
+    <div class="pq"><b>🏛️ Collectivités</b><span><b>Sensibiliser</b> les habitants et faciliter la <b>concertation</b> entre tous les acteurs.</span></div>
+    <div class="pq"><b>💼 Entreprises</b><span>Des <b>rôles clairs</b>, une <b>coopération</b> fluide, des liens avec les filières locales.</span></div>
+    <div class="pq"><b>🤝 Associations</b><span>Relier vos actions aux autres acteurs et gagner en <b>impact</b>.</span></div></div>`));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>💪 On a un vrai pouvoir quand on apprend à le partager intelligemment.</b></p><p><b>🧩 Dans une organisation optimale, tout le monde a sa place.</b></p><p>Chacun y contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`
@@ -1365,7 +1376,7 @@ function renderDream(){
       card.appendChild(box); });
     (L.details||[]).forEach((D,di)=>{ const html=typeof D.html==='function'?D.html():D.html; if(i===2){ card.appendChild(fichesGroup(d.k+'-'+di, D.sum.replace(/^\+\s*/,''), html)); return; } const det=h('details',{class:'more-box'}); det.innerHTML=`<summary>${D.sum}</summary>`+html; card.appendChild(det); });
     L.fields.forEach(f=>card.appendChild(field(d.k,f)));
-    card.appendChild(decisionBar(d, lv, i));
+    if(i===lv-1) card.appendChild(decisionBar(d, lv, i));
     root.appendChild(card);
   }
   wires.forEach(f=>f());

@@ -690,6 +690,8 @@
   .rv{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1);} .rv.in{opacity:1; transform:none;}
   @media (prefers-reduced-motion:reduce){ .rv{opacity:1; transform:none; transition:none;} }
   .btn, .pick, .mail-btn{transition:transform .15s ease, box-shadow .2s ease;} .btn:active, .pick:active, .mail-btn:active{transform:scale(.97);}
+
+  .card .qa{display:none !important;}
 </style>
 </head>
 <body>
@@ -716,7 +718,7 @@ const CYCLE_TIPS = {"sensibilisation": "Posez LA question au prochain repas, à 
 const CYCLE_COLS = ['#E0C15C','#CBB253','#A89A45','#7E8045','#5B6F3B','#3E5A38','#1F3329'];
 
 const INDIV_DOMAINS = [
-  {k:"respiration", n:"Respiration", e:"🌬️", tip:"Respiration Ujjayi, le soir et au réveil\u00a0: détente assurée."},
+  {k:"respiration", n:"Respiration", e:"🌬️", tip:"Respiration Ujjayi, le soir et au réveil, pour bien se détendre."},
   {k:"sommeil", n:"Sommeil", e:"😴", tip:"Des heures de coucher stables pour un sommeil qui recharge."},
   {k:"agenda", n:"Agenda", e:"🗓️", tip:"Un agenda tenu, et vos projets personnels et professionnels avancent sereinement."},
   {k:"budget", n:"Budget", e:"💰", tip:"Un œil sur ses dépenses, et l'esprit plus léger pour ses projets."},
@@ -1018,7 +1020,7 @@ const DREAMS = [
      fields:[{k:'indiv', type:'domainsEval'}, {k:'envie', type:'text', label:'Votre envie du moment', ph:'ex. mieux dormir, tenir mon budget…'}]},
     {intro:"La vie a son <b>intelligence</b>, en chacun de nous et dans chaque situation. Et notre <b>psychologie</b> se nourrit de notre environnement\u00a0: on prend soin des deux, <b>en même temps</b>.",
      parts:[{h:"Le féminin et le masculin en soi", p:"Le <b>féminin</b> accueille l'intelligence de la vie en toute chose\u00a0; le <b>masculin</b> pose un cadre pour créer de l'harmonie. L'<b>équilibre affectif</b> naît de leur dialogue."},
-            {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements adaptés à chaque situation</b>\u00a0: cliquez plus bas sur «\u00a0Je serais intéressé par un accompagnement personnalisé\u00a0», et un médiateur vous oriente."}],
+            {h:"Et ensuite ?", p:"Des <b>ateliers d'initiation</b>, des <b>formations</b> ou des <b>accompagnements adaptés à chaque situation</b>\u00a0: cliquez plus bas sur «\u00a0Je souhaite un accompagnement avec un professionnel du domaine\u00a0», et un médiateur vous oriente."}],
      fields:[{k:'ecriture', type:'area', label:"✍️ Écriture intuitive : qui aimeriez-vous être ? Que voulez-vous vivre ? Dans quelle société ? Et pourquoi, à chaque fois ?"}]}
   ]},
   {k:'maison', e:'🏡', cat:'Famille & proches', defi:"Posez LA question au prochain repas, et notez les idées de chacun.", pick:"Mon organisation familiale", sub:"Avec mes proches : couple, enfants, colocation", dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Mon organisation familiale", levels:[
@@ -1274,7 +1276,7 @@ function renderHome(){
   bc.onclick=e=>{ if(state.bonusOpen && !(e.target.classList&&e.target.classList.contains('bc-close'))) return; state.bonusOpen=!state.bonusOpen; save(); paintB(); };
   bc.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); state.bonusOpen=!state.bonusOpen; save(); paintB(); } };
   paintB(); add(bc);
-  add(h('section',{class:'site-sec rv', id:'events'},`<h2 class="site-h">📅 Prochain rendez-vous</h2>
+  if(Date.now() < Date.parse('2026-11-08T19:00:00+01:00')) add(h('section',{class:'site-sec rv', id:'events'},`<h2 class="site-h">📅 Prochain rendez-vous</h2>
     <div class="ev"><img src="../social/biganos-8-novembre-v2-4x5.jpg" alt="Affiche : À Biganos, une rencontre au service de nos territoires, dimanche 8 novembre">
     <div><h3>À Biganos, une rencontre au service de nos territoires</h3><p style="margin:0;color:var(--ink-soft)"><b>Dimanche 8 novembre</b> · Le Tour de France de <b>La Marche à suivre</b> fait étape chez nous.</p>
     <div class="when"><span><b>13h30</b>Départ de la marche, 27 rue Henri Fabre</span><span><b>16h30 – 19h</b>Rencontre à la Serre Ô Délices, 71 chemin de Pardies</span><span>🥗 <b>Auberge espagnole</b> : un plat ou une boisson à partager</span></div>
@@ -1367,8 +1369,6 @@ function renderDream(){
     root.appendChild(card);
   }
   wires.forEach(f=>f());
-  add(h('p',{class:'lvl-nav-cap'},'📍 Vos niveaux'));
-  add(mkNav());
   const others=[...PICKS,'reseau'].map(k=>DREAMS.find(x=>x.k===k)).filter(x=>x.k!==d.k);
   if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'🔗 TOUT est relié\u00a0: et ensuite\u00a0?'));
     const L=LINKS[d.k]||{}; const g=h('div',{class:'link-list'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'link-btn', onclick:()=>go('dream',x.k)},`<span class="lk-e">${x.e}</span><span class="lk-t"><b>${x.pick||x.t}${done?' ✓':''}</b><small>${L[x.k]||''}</small></span><i>→</i>`)); });

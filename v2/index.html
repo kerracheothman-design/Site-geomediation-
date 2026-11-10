@@ -698,6 +698,14 @@
   .pq{background:var(--paper); border-radius:14px; padding:14px; box-shadow:0 4px 14px rgba(31,51,41,.07); display:flex; flex-direction:column; gap:6px;}
   .pq > b{font:800 15.5px var(--display); color:var(--forest-dark);} .pq span{font-size:14px; line-height:1.45; color:var(--ink-soft);}
   .card .pourqui b{background:none; padding:0;} .card .pourqui span b, .card .pq-i b{color:var(--clay);}
+
+  .brand-name{font-size:22px !important; letter-spacing:.14em !important;} .brand-tag{font-size:12.5px;}
+  .lvl-nav button.cur{box-shadow:0 0 0 3px var(--gold); }
+  .todo{display:block; width:100%; text-align:left; font:600 14.5px var(--body); background:#FFF7DD; color:var(--forest-dark); border:1.5px dashed var(--gold); border-radius:12px; padding:12px 14px; cursor:pointer;}
+  .todo.ok{background:#EAF4EC; border:1.5px solid #9CC7A6; cursor:default;} .card .todo b{background:none; padding:0;}
+  .fld.flash{animation:flash 1.6s ease;} @keyframes flash{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 4px var(--gold); border-radius:12px}}
+  .lvl-step{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;} .lvl-step .btn-primary{margin-left:auto;}
+  @media (max-width:540px){ .fab .fab-t{display:inline !important;} .fab{padding:0 16px !important; font-size:13px;} }
 </style>
 </head>
 <body>
@@ -1101,6 +1109,7 @@ document.addEventListener('input',()=>setTimeout(save,0));
 function A(dk){ return state.a[dk]||(state.a[dk]={}); }
 function go(view, dream){ state.hist=(state.hist||[]).concat({v:state.view,d:state.dream}).slice(-30); state.view=view; if(dream!==undefined) state.dream=dream; render(); window.scrollTo({top:0,behavior:'smooth'}); }
 function goBack(){ const p=(state.hist||[]).pop(); if(p){ state.view=p.v; state.dream=p.d; } else state.view='home'; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+function lvlTodo(d,i){ const a=state.a[d.k]||{}; return ((d.levels[i]||{}).fields||[]).filter(f=>['chips','chips1','cards1','cardsN','scales','range','stepsEval','stepsEvalMulti','domainsEval'].includes(f.type)).filter(f=>{ const v=a[f.k]; return v==null||v===''||(Array.isArray(v)&&!v.length)||(typeof v==='object'&&!Array.isArray(v)&&!Object.keys(v).length); }); }
 function answered(dk){ const a=state.a[dk]||{}; return Object.values(a).filter(v=>Array.isArray(v)?v.length:(v!==''&&v!==false&&v!=null&&!(typeof v==='object'&&!Object.keys(v).length))).length + Object.values((state.dec||{})[dk]||{}).filter(Boolean).length; }
 
 /* ================= CHAMPS ================= */
@@ -1301,7 +1310,7 @@ function renderHome(){
 
 /* ================= UNE PORTE D'ENTRÉE ================= */
 function toast(msg){ const t=h('div',{class:'toast'},msg); document.body.appendChild(t); setTimeout(()=>t.classList.add('out'),1800); setTimeout(()=>t.remove(),2300); }
-function openLevel(d, n){ const lv=state.lvl[d.k]||1; if(n>lv){ state.lvl[d.k]=n; toast(n>=d.levels.length?`🏆 Niveau ${n} débloqué : vous avez tout exploré !`:`🎉 Niveau ${n} débloqué`); if(n>=d.levels.length) confetti(); } render(); setTimeout(()=>{ const el=$('lvl-'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
+function openLevel(d, n){ state.cur=state.cur||{}; state.cur[d.k]=n; const lv=state.lvl[d.k]||1; if(n>lv){ state.lvl[d.k]=n; toast(n>=d.levels.length?`🏆 Niveau ${n} débloqué : vous avez tout exploré !`:`🎉 Niveau ${n} débloqué`); if(n>=d.levels.length) confetti(); } render(); setTimeout(()=>{ const el=$('lvl-'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
 function decisionBar(d, lv, li){ if(li===undefined) li=lv-1;
   state.dec=state.dec||{}; let D=state.dec[d.k]; if(!D||typeof D!=='object'||Array.isArray(D)||D[1]!==undefined||D[2]!==undefined||D[3]!==undefined) D=state.dec[d.k]={};
   const a=A(d.k);
@@ -1354,13 +1363,14 @@ function renderDream(){
   add(h('div',{class:'kicker'},d.cat));
   add(h('h2',null,`${d.e} ${d.t}`));
   const mkNav=()=>{ const nav=h('div',{class:'lvl-nav'});
-    d.levels.forEach((L,i)=>{ const n=i+1, st=n<=lv?'open':(n===lv+1?'next':'');
-      nav.appendChild(h('button',{class:st, 'aria-label':`Niveau ${n} : ${L.name||LEVEL_NAMES[i]}`, onclick:()=>openLevel(d,n)}, `<b>${n<=lv?'✓ ':''}Niveau ${n}</b><span>${L.name||LEVEL_NAMES[i]}</span>`)); });
+    d.levels.forEach((L,i)=>{ const n=i+1, cur=Math.min((state.cur||{})[d.k]||lv,lv), done=n<=lv&&!lvlTodo(d,i).length, st=(n<=lv?'open':(n===lv+1?'next':''))+(n===cur?' cur':'');
+      nav.appendChild(h('button',{class:st, 'aria-label':`Niveau ${n} : ${L.name||LEVEL_NAMES[i]}`, onclick:()=>openLevel(d,n)}, `<b>${done?'✓ ':''}Niveau ${n}</b><span>${L.name||LEVEL_NAMES[i]}</span>`)); });
     return nav; };
   add(h('div',{class:'lvl-prog', 'aria-hidden':'true'},`<i style="width:${Math.round(lv/d.levels.length*100)}%"></i>`));
   { const nv=mkNav(); nv.classList.add('sticky'); add(nv); }
   const wires=[];
-  for(let i=0;i<lv;i++){
+  const curL=Math.min((state.cur||{})[d.k]||lv,lv);
+  for(let i=curL-1;i<curL;i++){
     const L=d.levels[i]; const card=h('section',{class:'lvl l'+(i+1), id:'lvl-'+(i+1)});
     { const r=h('div',{class:'qa-row'}); r.append(h('div',{class:'lvl-badge'},`Niveau ${i+1} · ${L.name||LEVEL_NAMES[i]}`), qa(`${d.e} ${d.cat} · Niveau ${i+1}`)); card.appendChild(r); }
     if(i===0 && d.tuto){ const f=h('figure',{class:'intro-video tuto'}); f.innerHTML=`<video controls playsinline preload="none" aria-label="Tuto ${d.t}"><source src="${d.tuto}" type="video/mp4"></video><figcaption>🎬 Le tuto en 1 minute</figcaption>`; card.appendChild(f); }
@@ -1375,8 +1385,11 @@ function renderDream(){
       if(P.w) wires.push(()=>P.w(box));
       card.appendChild(box); });
     (L.details||[]).forEach((D,di)=>{ const html=typeof D.html==='function'?D.html():D.html; if(i===2){ card.appendChild(fichesGroup(d.k+'-'+di, D.sum.replace(/^\+\s*/,''), html)); return; } const det=h('details',{class:'more-box'}); det.innerHTML=`<summary>${D.sum}</summary>`+html; card.appendChild(det); });
-    L.fields.forEach(f=>card.appendChild(field(d.k,f)));
-    if(i===lv-1) card.appendChild(decisionBar(d, lv, i));
+    L.fields.forEach(f=>{ const el=field(d.k,f); el.id='f-'+d.k+'-'+f.k; card.appendChild(el); });
+    { const td=lvlTodo(d,i); if(td.length){ card.appendChild(h('button',{class:'todo', onclick:()=>{ const el=$('f-'+d.k+'-'+td[0].k); if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1600);} }}, `📝 Encore <b>${td.length} question${td.length>1?'s':''}</b> pour compléter ce niveau →`)); }
+      else if(L.fields.length) card.appendChild(h('p',{class:'todo ok'},'✅ Niveau complété, bravo !')); }
+    card.appendChild(decisionBar(d, lv, i));
+    { const nv=h('div',{class:'lvl-step'}); if(i>0) nv.appendChild(h('button',{class:'btn btn-soft', onclick:()=>openLevel(d,i)},`← Niveau ${i}`)); if(i+1<lv) nv.appendChild(h('button',{class:'btn btn-primary', onclick:()=>openLevel(d,i+2)},`Niveau ${i+2} →`)); if(nv.children.length) card.appendChild(nv); }
     root.appendChild(card);
   }
   wires.forEach(f=>f());

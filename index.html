@@ -1290,7 +1290,7 @@ function renderHome(){
   const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Chacun a sa place'));
   g1.appendChild(l1); add(g1);
   const g2=h('div',{class:'eg'}); g2.appendChild(h('p',{class:'eg-h'},'🏡 Dans votre vie'));
-  const l2=h('div',{class:'picks'}); l2.append(pickBtn('pensee',0,'Pour moi'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('entreprise',2,'Avec mes collaborateurs'));
+  const l2=h('div',{class:'picks'}); l2.append(pickBtn('entreprise',0,'Avec mes collaborateurs'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('pensee',2,'Pour moi'));
   g2.appendChild(l2); add(g2);
   const me=h('div',{class:'method'});
   me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;

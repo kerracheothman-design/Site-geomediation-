@@ -722,6 +722,11 @@
   .fold[open] > summary::after{content:'–';}
   .fd-t{font:800 18px var(--display); color:var(--forest-dark);} .fd-s{font-size:14px; color:var(--ink-soft);}
   .fd-b{padding:0 16px 16px;}
+
+  .pros-i{margin:0 0 10px; line-height:1.55;} .card .pros-i b, .card .pros-cta b{background:none; padding:0; color:var(--clay);}
+  .pole{margin:12px 0 0;} .pole-h{font:800 15.5px var(--display); color:var(--forest-dark); margin:0 0 6px;}
+  .pro{display:flex; flex-direction:column; gap:1px; background:var(--cream); border-radius:10px; padding:8px 12px; margin:0 0 6px;} .pro b{font-size:14.5px; color:var(--forest-dark); background:none !important; padding:0 !important;} .pro span{font-size:13px; color:var(--ink-soft);}
+  .pros-cta{margin-top:16px; background:#FFF7DD; border:1.5px solid var(--gold); border-radius:14px; padding:14px; text-align:center;} .pros-cta p{margin:0 0 10px;}
 </style>
 </head>
 <body>
@@ -729,7 +734,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">Agir</a><a href="#" data-to="f-method">La méthode</a><a href="#" data-to="f-med">Devenir médiateur</a><a href="#" data-to="contact">Contact</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">Agir</a><a href="#" data-to="f-method">La méthode</a><a href="#" data-to="f-pros">Les pros</a><a href="#" data-to="f-med">Devenir médiateur</a><a href="#" data-to="contact">Contact</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1267,6 +1272,8 @@ function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k
   const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
   return h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
     `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${title||d.pick}</b><small>${sub||d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`); }
+function prosNode(){ const w=h('div',null,`<p class="pros-i">Des <b>professionnels</b> en 6 pôles pour accompagner les <b>humains</b>, les <b>entreprises</b>, les <b>filières</b> et les <b>territoires</b>.</p>`+COLLAB_GROUPS.map(g=>`<div class="pole"><p class="pole-h">${g.e} ${g.label}</p>${g.m.map(([n,r])=>`<div class="pro"><b>${n}</b><span>${r}</span></div>`).join('')}</div>`).join('')+`<div class="pros-cta"><p><b>Envie d'animer ?</b> Des <b>compétences</b> pour accompagner ?</p><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Rejoindre les professionnels du réseau')}">🤝 Je rejoins les professionnels</a></div>`); return w; }
+function openPros(){ const go2=()=>{ const el=document.getElementById('f-pros'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }; if(state.view!=='home'){ go('home'); setTimeout(go2,350); } else go2(); }
 function fold(id,t,sub,nodes){ const d=h('details',{class:'fold rv',id}); d.innerHTML=`<summary><span class="fd-t">${t}</span><span class="fd-s">${sub}</span></summary>`; const b=h('div',{class:'fd-b'}); nodes.forEach(n=>b.appendChild(n)); d.appendChild(b); return d; }
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
@@ -1297,7 +1304,9 @@ function renderHome(){
     <div class="pq"><b>🏛️ Collectivités</b><span><b>Sensibiliser</b> les habitants et faciliter la <b>concertation</b> entre tous les acteurs.</span></div>
     <div class="pq"><b>💼 Entreprises</b><span>Des <b>rôles clairs</b>, une <b>coopération</b> fluide, des liens avec les filières locales.</span></div>
     <div class="pq"><b>🤝 Associations</b><span>Relier vos actions aux autres acteurs et gagner en <b>impact</b>.</span></div></div>`));
+  F2.push(h('button',{class:'btn btn-soft', style:'margin-top:12px', onclick:openPros},'👥 Voir les professionnels du réseau'));
   add(fold('f-accomp','🤝 Faire le point et être accompagné','Votre auto-évaluation, un médiateur pour vous orienter',F2));
+  add(fold('f-pros','👥 Les professionnels du réseau','Des compétences pour vous accompagner, à chaque échelle',[prosNode()]));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>💪 On a un vrai pouvoir quand on apprend à le partager intelligemment.</b></p><p><b>🧩 Dans une organisation optimale, tout le monde a sa place.</b></p><p>Chacun y contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`
@@ -1413,6 +1422,7 @@ function renderDream(){
     const L=LINKS[d.k]||{}; const g=h('div',{class:'link-list'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'link-btn', onclick:()=>go('dream',x.k)},`<span class="lk-e">${x.e}</span><span class="lk-t"><b>${x.pick||x.t}${done?' ✓':''}</b><small>${L[x.k]||''}</small></span><i>→</i>`)); });
     ex.appendChild(g); add(ex); }
   const n=h('div',{class:'nav'});
+  add(h('button',{class:'btn btn-soft', style:'width:100%;margin-top:14px', onclick:openPros},'👥 Les professionnels du réseau : être accompagné ou rejoindre l\'équipe'));
   n.append(h('button',{class:'btn btn-soft', onclick:()=>go('home')},'🏠 Menu'), h('button',{class:'btn btn-primary', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
   add(n);
 }

@@ -710,6 +710,17 @@
   .med3{display:flex; flex-direction:column; gap:8px;} .med3 div{display:flex; gap:12px; align-items:center; background:var(--paper); border-radius:14px; padding:12px 14px; box-shadow:0 4px 14px rgba(31,51,41,.06);} .med3 i{flex:0 0 30px; height:30px; border-radius:50%; background:var(--gold); color:var(--forest-dark); font:800 15px var(--display); font-style:normal; display:flex; align-items:center; justify-content:center;} .card .med3 b{background:none; padding:0; color:var(--clay);}
 
   .med-ex{margin:14px 0 0; background:#FFF7DD; border-left:4px solid var(--gold); border-radius:10px; padding:12px 14px; line-height:1.55;} .card .med-ex b{background:none; padding:0;}
+
+  .how{background:var(--paper); border-radius:18px; padding:16px; margin:18px 0 6px; box-shadow:0 6px 20px rgba(31,51,41,.07);}
+  .how-h{font:800 18px var(--display); color:var(--forest-dark); margin:0 0 10px;}
+  .how-f{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; counter-reset:hw;} .how-f li{counter-increment:hw; display:flex; align-items:center; gap:8px; background:var(--cream); border-radius:14px; padding:10px 12px; font:600 14px var(--body); color:var(--forest-dark); line-height:1.3;} .how-f li::before{content:counter(hw); flex:0 0 22px; height:22px; border-radius:50%; background:var(--gold); font:800 12px/22px var(--display); text-align:center;} .how-f i{font-style:normal;} .card .how-f b{background:none; padding:0; color:var(--clay);}
+  .fold{background:var(--paper); border-radius:18px; margin:14px 0; box-shadow:0 6px 20px rgba(31,51,41,.07); overflow:hidden;}
+  .fold > summary{list-style:none; cursor:pointer; padding:16px 44px 16px 16px; position:relative; display:flex; flex-direction:column; gap:3px;}
+  .fold > summary::-webkit-details-marker{display:none;}
+  .fold > summary::after{content:'+'; position:absolute; right:16px; top:50%; transform:translateY(-50%); width:28px; height:28px; border-radius:50%; background:var(--gold); color:var(--forest-dark); font:900 18px/28px var(--display); text-align:center;}
+  .fold[open] > summary::after{content:'–';}
+  .fd-t{font:800 18px var(--display); color:var(--forest-dark);} .fd-s{font-size:14px; color:var(--ink-soft);}
+  .fd-b{padding:0 16px 16px;}
 </style>
 </head>
 <body>
@@ -718,7 +729,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step2">La méthode</a><a href="#" data-to="step3">Agir</a><a href="#" data-to="events">Événements</a><a href="#" data-to="equipe">Devenir médiateur</a><a href="#" data-to="contact">Contact</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">Agir</a><a href="#" data-to="f-method">La méthode</a><a href="#" data-to="f-med">Devenir médiateur</a><a href="#" data-to="contact">Contact</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1256,41 +1267,37 @@ function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k
   const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
   return h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
     `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${title||d.pick}</b><small>${sub||d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`); }
+function fold(id,t,sub,nodes){ const d=h('details',{class:'fold rv',id}); d.innerHTML=`<summary><span class="fd-t">${t}</span><span class="fd-s">${sub}</span></summary>`; const b=h('div',{class:'fd-b'}); nodes.forEach(n=>b.appendChild(n)); d.appendChild(b); return d; }
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives."));
-  add(stepH(1,'Découvrir en 1 minute'));
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="../video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="../video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   const mk=h('div',{class:'missing'});
   mk.innerHTML=`<p class="mk-t">Comment bien organiser <b>un territoire</b> sans <b>une équipe</b> de <b>médiateurs neutres</b>, capables d'animer les échanges entre tous <b>ses acteurs</b> ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région…</p>`;
   add(mk);
-  const jr=h('div',{class:'journey'});
-  [['🎬','Découvrir',1],['🧭','Comprendre',2],['🚀','Agir',3],['🤝','Être accom­pagné',4]].forEach(([e,t,n],k)=>{ jr.appendChild(h('button',{class:'j-st', onclick:()=>{ const el=$('step'+n); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},`<i>${e}</i><span>${t}</span>`)); });
-  add(jr);
-  add(stepH(2,'La méthode, en 7 étapes'));
-  const me=h('div',{class:'method'});
-  me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
-  add(me); wireSlide();
-  add(stepH(3,'Vous pouvez agir sur votre environnement, à votre rythme'));
+  add(h('div',{class:'how'},`<p class="how-h">Comment ça marche ?</p><ol class="how-f"><li><i>🧭</i><span>Choisissez un <b>sujet</b></span></li><li><i>📊</i><span>Faites le <b>point</b></span></li><li><i>🎯</i><span>Notez vos <b>objectifs</b></span></li><li><i>🤝</i><span>Un <b>médiateur</b> vous oriente</span></li></ol>`));
+  add(h('h2',{class:'step-h rv', id:'step3'},'<span>🚀</span>Par où commencer ?'));
   const g1=h('div',{class:'eg'}); g1.appendChild(h('p',{class:'eg-h'},'🗺️ Sur votre territoire'));
   const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Chacun a sa place'));
   g1.appendChild(l1); add(g1);
   const g2=h('div',{class:'eg'}); g2.appendChild(h('p',{class:'eg-h'},'🏡 Dans votre vie'));
   const l2=h('div',{class:'picks'}); l2.append(pickBtn('pensee',0,'Pour moi'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('entreprise',2,'Avec mes collaborateurs'));
   g2.appendChild(l2); add(g2);
-  add(stepH(4,'Un accompagnement personnalisé'));
-  add(h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'));
-  add(testBlock());
+  const me=h('div',{class:'method'});
+  me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
+  add(fold('f-method','🔁 La méthode en 7 étapes','Le toboggan de la coopération',[me])); wireSlide();
+  const F2=[h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'), testBlock()];
   const ac=h('div',{class:'accomp'});
   ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à définir vos objectifs, puis vous oriente <b>selon vos aspirations</b> vers les professionnels et les partenaires adaptés. Vous savez toujours <b>ce que devient votre contribution</b>.</p>`;
   const ar=h('div',{class:'row-inline'});
   ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Demande d'accompagnement personnalisé")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('dream','pensee')},'📖 En savoir plus'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
-  ac.appendChild(ar); add(ac);
-  add(h('div',{class:'pourqui rv'},`<p class="pq-h">🎯 Pour qui ?</p><p class="pq-i"><b>Comprendre les enjeux sociétaux</b>, <b>sensibiliser</b> et <b>accompagner</b> vers une <b>co-organisation optimale</b>.</p>
+  ac.appendChild(ar); F2.push(ac);
+  F2.push(h('div',{class:'pourqui'},`<p class="pq-h">🎯 Pour qui ?</p><p class="pq-i"><b>Comprendre les enjeux sociétaux</b>, <b>sensibiliser</b> et <b>accompagner</b> vers une <b>co-organisation optimale</b>.</p>
     <div class="pq-g"><div class="pq"><b>🙋 Citoyens</b><span>Agir pour soi, avec ses proches et sur son <b>territoire</b>.</span></div>
     <div class="pq"><b>🏛️ Collectivités</b><span><b>Sensibiliser</b> les habitants et faciliter la <b>concertation</b> entre tous les acteurs.</span></div>
     <div class="pq"><b>💼 Entreprises</b><span>Des <b>rôles clairs</b>, une <b>coopération</b> fluide, des liens avec les filières locales.</span></div>
     <div class="pq"><b>🤝 Associations</b><span>Relier vos actions aux autres acteurs et gagner en <b>impact</b>.</span></div></div>`));
+  add(fold('f-accomp','🤝 Faire le point et être accompagné','Votre auto-évaluation, un médiateur pour vous orienter',F2));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>💪 On a un vrai pouvoir quand on apprend à le partager intelligemment.</b></p><p><b>🧩 Dans une organisation optimale, tout le monde a sa place.</b></p><p>Chacun y contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`
@@ -1304,13 +1311,13 @@ function renderHome(){
     <div><h3>À Biganos, une rencontre au service de nos territoires</h3><p style="margin:0;color:var(--ink-soft)"><b>Dimanche 8 novembre</b> · Le Tour de France de <b>La Marche à suivre</b> fait étape chez nous.</p>
     <div class="when"><span><b>13h30</b>Départ de la marche, 27 rue Henri Fabre</span><span><b>16h30 – 19h</b>Rencontre à la Serre Ô Délices, 71 chemin de Pardies</span><span>🥗 <b>Auberge espagnole</b> : un plat ou une boisson à partager</span></div>
     <div class="ev-l"><a class="evb g" href="https://facebook.com/events/s/la-marche-a-suivre/1438003731372309/" target="_blank" rel="noopener">Je participe</a><a class="evb o" href="https://lamarcheasuivre.net" target="_blank" rel="noopener">La Marche à suivre</a></div></div></div>`));
-  add(h('section',{class:'site-sec rv', id:'equipe'},`<h2 class="site-h">🌟 Devenez médiateur territorial</h2>
+  add(fold('f-med','🌟 Devenez médiateur territorial','3 gestes pour faire bouger votre territoire',[h('div',null,`
     <p style="margin:0 0 12px;font-size:17px">Et si c'était <b>vous</b> qui faisiez bouger votre territoire ? <b>3 gestes</b> suffisent :</p>
     <div class="med3"><div><i>1</i><span>Dire que <b>toutes les problématiques découlent de l'organisation</b></span></div><div><i>2</i><span><b>Lister les acteurs</b> de son territoire ou de sa filière</span></div><div><i>3</i><span>Les <b>inviter à débattre</b></span></div></div>
     <p class="med-ex">🔧 Pas besoin d'être mécanicien pour réunir celui qui a une <b>panne</b> et celui qui sait <b>réparer</b>. Le médiateur crée la <b>rencontre</b> : c'est là que tout commence.</p>
     <p style="margin:12px 0 10px;line-height:1.6">Ensuite, chacun choisit sa place : <b>suivre</b>, <b>participer</b> ou <b>animer</b> les échanges et le développement des projets. Envie d'aller plus loin ? Développez de <b>nouvelles compétences</b> :</p>
     <div class="team"><div class="tm"><b>🧠 Intelligence collective</b><span>et animation</span></div><div class="tm"><b>🔍 Analyse</b><span>des besoins et des ressources</span></div><div class="tm"><b>🛠️ Co-construction</b><span>de projets et de feuilles de route</span></div><div class="tm"><b>🗳️ Votations</b><span>et évaluations</span></div><div class="tm"><b>📣 Communication</b><span>et cartographie</span></div></div>
-    <p style="margin:14px 0 0"><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur territorial')}">🚀 Je me lance</a></p>`));
+    <p style="margin:14px 0 0"><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur territorial')}">🚀 Je me lance</a></p>`)]));
   add(h('section',{class:'site-sec rv', id:'contact'},`<div class="ct"><h2 class="site-h" style="color:var(--cream);justify-content:center">✉️ Contact</h2><p>Une <b>question</b>, une envie d'<b>agir</b> ou de <b>soutenir le projet</b> ? Écrivez-nous.</p>
     <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Tout commence par <b>un échange</b>.</small></div>`));
   add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
@@ -1572,7 +1579,7 @@ document.addEventListener('focusout',()=>document.body.classList.remove('typing'
   let st; addEventListener('scroll',()=>{ f.classList.add('fab-away'); clearTimeout(st); st=setTimeout(()=>f.classList.remove('fab-away'),900); },{passive:true}); }
 render();
 
-document.querySelectorAll('.sitenav a').forEach(a=>a.onclick=e=>{ e.preventDefault(); const id=a.dataset.to; const goTo=()=>{ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };
+document.querySelectorAll('.sitenav a').forEach(a=>a.onclick=e=>{ e.preventDefault(); const id=a.dataset.to; const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };
   if(state.view!=='home'){ go('home'); setTimeout(goTo,350); } else goTo(); });
 const rvIO=('IntersectionObserver' in window)? new IntersectionObserver(es=>es.forEach(x=>{ if(x.isIntersecting){ x.target.classList.add('in'); rvIO.unobserve(x.target);} }),{threshold:.12}) : null;
 new MutationObserver(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'))).observe(document.getElementById('cardRoot'),{childList:true,subtree:true});

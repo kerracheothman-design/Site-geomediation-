@@ -1418,7 +1418,7 @@ function renderDream(){
   }
   wires.forEach(f=>f());
   const others=[...PICKS,'reseau'].map(k=>DREAMS.find(x=>x.k===k)).filter(x=>x.k!==d.k);
-  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'🔗 TOUT est relié\u00a0: et ensuite\u00a0?'));
+  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'✨ Envie d\'aller plus loin\u00a0?'));
     const L=LINKS[d.k]||{}; const g=h('div',{class:'link-list'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'link-btn', onclick:()=>go('dream',x.k)},`<span class="lk-e">${x.e}</span><span class="lk-t"><b>${x.pick||x.t}${done?' ✓':''}</b><small>${L[x.k]||''}</small></span><i>→</i>`)); });
     ex.appendChild(g); add(ex); }
   const n=h('div',{class:'nav'});

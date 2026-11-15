@@ -736,7 +736,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">Agir</a><a href="#" data-to="f-method">La méthode</a><a href="#" data-to="f-pros">Les pros</a><a href="#" data-to="f-med">Devenir médiateur</a><a href="#" data-to="contact">Contact</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">Agir</a><a href="#" data-to="recap">📇 Ma fiche</a><a href="#" data-to="f-method">La méthode</a><a href="#" data-to="f-pros">Les pros</a><a href="#" data-to="f-med">Devenir médiateur</a><a href="#" data-to="contact">Contact</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1122,7 +1122,7 @@ const LEVEL_NAMES=["Je découvre","Je fais le point","J'approfondis"];
 
 /* ================= ÉTAT ================= */
 const STORE='geomediation_reves_v1';
-function fresh(){ return {view:'home', dream:null, hist:[], lvl:{}, a:{}, acc:{}, dec:{}, test:{}, sendSel:{}, sendTo:'libre', sendAddr:''}; }
+function fresh(){ return {view:'home', dream:null, hist:[], lvl:{}, a:{}, acc:{}, dec:{}, test:{}, sendSel:{}, sendTo:'med', sendAddr:''}; }
 let state=fresh();
 try{ const sv=JSON.parse(localStorage.getItem(STORE)||'null'); if(sv) state=Object.assign(fresh(),sv); }catch(e){}
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
@@ -1447,7 +1447,7 @@ function renderLegal(){
 }
 
 /* ================= RÉCAP ================= */
-function printBilan(sel){
+function printBilan(sel, mode){
   const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   let g=null, body='';
   sel.forEach(x=>{ if(x.g!==g){ if(g!==null) body+='</ul></section>'; body+='<section><h2>'+esc(x.g)+'</h2><ul>'; g=x.g; } body+='<li>'+esc(x.t)+'</li>'; });
@@ -1464,15 +1464,15 @@ function printBilan(sel){
   .tip{background:#F6F1E7;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:20px}
   @media print{.tip{display:none} body{margin:0}}
   </style></head><body>
-  <p class="tip">Pour l'enregistrer en PDF : dans la fenêtre d'impression, choisissez <b>« Enregistrer au format PDF »</b> comme imprimante.</p>
+  <p class="tip"><button onclick="print()" style="font:inherit;font-weight:800;border:0;border-radius:999px;padding:8px 14px;background:#C9A227;color:#1F3329;cursor:pointer">🖨️ Enregistrer en PDF</button> Dans la fenêtre d'impression, choisissez <b>« Enregistrer au format PDF »</b>.</p>
   <header><div class="brand">GÉOMÉDIATION</div><h1>Ma fiche acteur</h1><div class="date">${esc(date)}</div></header>
   ${body}
   <footer>Géomédiation · Inspirée de la géographie, science de l'organisation des territoires · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
   </body></html>`;
-  const w=window.open('','_blank');
-  if(!w){ const a=h('a',{href:URL.createObjectURL(new Blob([doc],{type:'text/html'})), download:'fiche-geomediation.html'}); document.body.appendChild(a); a.click(); a.remove(); return; }
-  w.document.open(); w.document.write(doc); w.document.close();
-  w.onload=null; setTimeout(()=>{ try{ w.focus(); w.print(); }catch(e){} },300);
+  if(mode==='file'){ const a=h('a',{href:URL.createObjectURL(new Blob([doc],{type:'text/html'})), download:'ma-fiche-geomediation.html'}); document.body.appendChild(a); a.click(); a.remove(); return; }
+  const url=URL.createObjectURL(new Blob([doc],{type:'text/html'}));
+  const w=window.open(url,'_blank');
+  if(!w){ const a=h('a',{href:url, download:'ma-fiche-geomediation.html'}); document.body.appendChild(a); a.click(); a.remove(); }
 }
 function recapItems(){
   const it=[]; const push=(g,t)=>it.push({id:g+'|'+t,g,t});
@@ -1504,9 +1504,9 @@ function recapItems(){
 }
 function renderRecap(){
   confetti();
-  state.sendTo = state.sendTo==='med' ? 'libre' : (state.sendTo||'libre');
+  state.sendTo = state.sendTo||'med';
   add(h('div',{class:'kicker'},'Ma fiche acteur'));
-  add(h('h2',null,'📇 Votre fiche prend forme'));
+  add(h('h2',null,'📇 Ma fiche acteur'));
   const items=recapItems();
   if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Choisissez d'abord ce que vous souhaitez améliorer\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }
   else {
@@ -1519,17 +1519,18 @@ function renderRecap(){
   const body=()=>{ let g=null; const L=['Voici ma fiche Géomédiation :']; sel().forEach(x=>{ if(x.g!==g){ L.push('', x.g); g=x.g; } L.push('- '+x.t); }); L.push('','geomediation.fr'); return L.join('\n'); };
   const msg=h('div',{class:'msg'}); msg.hidden=true; const sm='padding:8px 14px;font-size:13px';
   const btns=h('div',{class:'row-inline', style:'margin-top:14px'});
-  btns.append(h('button',{class:'btn btn-gold', style:sm, onclick:()=>printBilan(sel())},'📄 Télécharger ma fiche (PDF)'));
+  btns.append(h('button',{class:'btn btn-gold', style:sm, onclick:()=>printBilan(sel(),'file')},'📥 Télécharger ma fiche'), h('button',{class:'btn btn-soft', style:sm, onclick:()=>printBilan(sel())},'🖨️ Voir / PDF'));
   if(navigator.share) btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>navigator.share({title:'Ma fiche Géomédiation', text:body()}).catch(()=>{})},'📤 Partager'));
   btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>copyText(body(),msg)},'📋 Copier'));
   box.append(btns,msg);
-  box.appendChild(h('div',{class:'eg', style:'margin-top:16px'},'Ou l\'envoyer par e-mail'));
+  box.appendChild(h('div',{class:'eg', style:'margin-top:16px'},'Si vous le souhaitez, l\'envoyer'));
+  box.appendChild(h('p',{class:'small'},'Au médiateur général, à un professionnel précis, ou à qui vous voulez. Vous pouvez aussi la <b>copier</b> et la coller dans n\'importe quel message.'));
   const row=h('div',{class:'chip-row'});
-  [{k:'libre',n:'Je choisis dans ma messagerie'},{k:'autre',n:'À une adresse précise'}].forEach(r=>row.appendChild(h('button',{class:'chip sm'+(state.sendTo===r.k?' active':''), onclick:()=>{ state.sendTo=r.k; render(); }}, r.n)));
+  [{k:'med',n:'🧭 Au médiateur général'},{k:'autre',n:'👤 À un professionnel (adresse)'},{k:'libre',n:'✉️ Je choisis dans ma messagerie'}].forEach(r=>row.appendChild(h('button',{class:'chip sm'+(state.sendTo===r.k?' active':''), onclick:()=>{ state.sendTo=r.k; render(); }}, r.n)));
   box.appendChild(row);
   if(state.sendTo==='autre'){ const f=h('div',{class:'fld'}); f.appendChild(h('label',{class:'fld-label',for:'sendAddr'},'Adresse e-mail')); const i=h('input',{id:'sendAddr',type:'text',placeholder:'ex. prenom@exemple.fr'}); i.value=state.sendAddr||''; i.oninput=e=>state.sendAddr=e.target.value; f.appendChild(i); box.appendChild(f); }
-  const mail=h('a',{class:'mail-btn', href:'#', style:'margin-top:10px'},'📬 Préparer l\'e-mail');
-  mail.onclick=()=>{ const to=state.sendTo==='autre'?(state.sendAddr||'').trim():''; mail.href='mailto:'+to+'?subject='+encodeURIComponent('Ma fiche Géomédiation')+'&body='+encodeURIComponent('Bonjour,\n\n'+body()); };
+  const mail=h('a',{class:'mail-btn', href:'#', style:'margin-top:10px'},'📬 Envoyer ma fiche par e-mail');
+  mail.onclick=()=>{ const to=state.sendTo==='autre'?(state.sendAddr||'').trim():state.sendTo==='med'?CONTACT_MAIL:''; mail.href='mailto:'+to+'?subject='+encodeURIComponent('Ma fiche Géomédiation')+'&body='+encodeURIComponent('Bonjour,\n\n'+body()); };
   box.appendChild(mail);
   add(box);
   }
@@ -1598,7 +1599,7 @@ function airy(){ document.querySelectorAll('#cardRoot .lvl p, #cardRoot .lvl-int
   p.innerHTML=parts.map(x=>`<span class="s">${x}</span>`).join(''); p.classList.add('airy'); }); }
 new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{childList:true,subtree:true}); airy();
 
-document.querySelectorAll('.sitenav a').forEach(a=>a.onclick=e=>{ e.preventDefault(); const id=a.dataset.to; const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };
+document.querySelectorAll('.sitenav a').forEach(a=>a.onclick=e=>{ e.preventDefault(); const id=a.dataset.to; if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };
   if(state.view!=='home'){ go('home'); setTimeout(goTo,350); } else goTo(); });
 const rvIO=('IntersectionObserver' in window)? new IntersectionObserver(es=>es.forEach(x=>{ if(x.isIntersecting){ x.target.classList.add('in'); rvIO.unobserve(x.target);} }),{threshold:.12}) : null;
 new MutationObserver(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'))).observe(document.getElementById('cardRoot'),{childList:true,subtree:true});

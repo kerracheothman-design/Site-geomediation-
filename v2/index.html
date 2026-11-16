@@ -367,6 +367,7 @@
   .hero-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 20px;} .hero-stats div{background:var(--paper); border:1.5px solid var(--line); border-radius:14px; padding:10px 6px; text-align:center; font-size:12.5px; line-height:1.3; color:var(--ink-soft);}
   .card .hero-stats b{display:block; font:800 24px var(--display); color:var(--clay); background:none; padding:0;}
   .how-go{cursor:pointer;} .how-go:hover{border-color:var(--gold);}
+  .docs .ex-doc{margin-top:8px;} .doc-art{background:var(--paper); border:1.5px solid var(--line); border-radius:18px; padding:16px 18px; margin-top:6px;} .doc-art p{line-height:1.6;} .doc-art .place{margin:4px 0;}
   .send-box{background:var(--paper); border:2px solid var(--gold); border-radius:18px; padding:16px 18px; margin-top:16px;}
   .send-box h3{margin:0 0 6px; font-size:18px; color:var(--forest-dark);}
   .send-item{display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4; color:var(--ink); padding:7px 0; border-bottom:1px solid var(--line); cursor:pointer;}
@@ -698,7 +699,7 @@
   .sitenav{display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end;}
   .sitenav a{white-space:nowrap; color:var(--cream); text-decoration:none; font:700 13.5px var(--body); padding:8px 11px; border-radius:999px; opacity:.9; transition:background .2s, opacity .2s;}
   .sitenav a:hover{background:rgba(255,255,255,.12); opacity:1;}
-  @media (min-width:541px){ .top{flex-direction:column; align-items:stretch; gap:10px;} .sitenav{justify-content:flex-start; flex-wrap:wrap; gap:2px; margin-left:-9px;} .sitenav a{padding:6px 6px; font-size:12.5px;} .sitenav a.nav-fiche{order:-1; margin:0 6px 0 0; padding:7px 12px;} }
+  @media (min-width:541px){ .top{flex-direction:column; align-items:stretch; gap:10px;} .sitenav{justify-content:flex-start; flex-wrap:nowrap; gap:2px; margin-left:-9px; margin-right:-60px;} .sitenav a{padding:6px 6px; font-size:12.5px;} .sitenav .nt{display:none;} .sitenav a.nav-fiche{order:-1; margin:0 6px 0 0; padding:7px 12px;} }
   .sitenav a.nav-fiche{background:var(--gold); color:var(--forest-dark); opacity:1; margin-left:6px;} .sitenav a.nav-fiche:hover{background:var(--gold-light);}
   @media (max-width:540px){ .top{flex-direction:column; align-items:stretch;} .sitenav{flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; margin:0 -16px; padding:2px 16px 6px; max-width:none; gap:6px; mask-image:linear-gradient(90deg,#000 88%,transparent);} .sitenav::-webkit-scrollbar{display:none;}
     .sitenav a{padding:7px 12px; font-size:13px; background:rgba(255,255,255,.1);} .sitenav a.nav-fiche{order:-1; margin-left:0; background:var(--gold);} }
@@ -780,7 +781,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">🚀 Agir</a><a href="plan-mobilite.html#sondage">💭 Quiz</a><a href="#" data-to="f-method">🧭 La méthode</a><a href="#" data-to="f-pros">🤝 Être accompagné</a><a href="#" data-to="f-med">🌟 Devenir médiateur</a><a href="#" data-to="contact">✉️ Contact</a><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">🚀 Agir</a><a href="plan-mobilite.html#sondage">💭 Quiz</a><a href="#" data-to="f-method">🧭 La méthode</a><a href="#" data-to="f-docs">📚 Documents</a><a href="#" data-to="f-pros">🤝 Être accompagné</a><a href="#" data-to="f-med">🌟 Devenir médiateur</a><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1086,21 +1087,7 @@ function prosFor(dk){ return [].concat((PRO_POLES[dk]||[]).flatMap(l=>{ const g=
 const TEMOIGNAGE = {k:'temoigner', type:'toggle', label:"🎥 <b>Je témoigne en vidéo</b> pour soutenir l'équipe de <b>médiateurs territoriaux indépendants</b>, et je développe la <b>conscience politique</b> dans mon entourage"};
 const FORMATS = {k:'format', type:'chips', label:'Le format qui vous conviendrait', opts:['Atelier','Formation','Accompagnement']};
 
-const DREAMS = [
-  {k:'entreprise', e:'💼', cat:'Travail & association', defi:"Posez LA question à la prochaine réunion : 5 minutes suffisent.", pick:"Mon organisation professionnelle", sub:"Mon entreprise, mon établissement, mon association", dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Mon organisation professionnelle", levels:[
-    L1({qui:'à vos collaborateurs', intro:"Une équipe bien organisée\u00a0: des <b>rôles clairs</b>, des <b>réunions efficaces</b>, des <b>résultats concrets</b>. <b>Posez la question à vos collaborateurs\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on recense ensemble les <b>besoins</b> et les <b>solutions envisagées</b>, puis on <b>co-construit les projets</b>.",
-        extra:[{k:'leviers', type:'chips', label:'Par quoi aimeriez-vous commencer ?', opts:LEVIERS}], labA:"Vos besoins, pour vous ou pour l'équipe", labR:'Les solutions envisagées'}),
-    L2('dans votre structure'),
-    {intro:"Un <b>médiateur</b> adapte la méthode à votre structure et à votre <b>métier</b>. Avec lui, chacun trace sa <b>feuille de route</b>, et les bonnes idées passent d'une équipe à l'autre.",
-     fields:[],
-     parts:[{p:"Chaque équipe <b>partage</b> ce qui marche."}]}
-  ]},
-  {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"L'organisation de nos territoires", sub:"Mon quartier, ma commune, ma région", dream:"un territoire où chacun trouve <b>ce dont il a besoin</b>, tout près de chez lui", t:"L'organisation de nos territoires", levels:[
-    L1({qui:'aux acteurs de votre territoire', pre:[{k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span class="q-hint">Précisez votre ou vos territoires : on vous met en relation avec les bons acteurs.</span>'},{k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)},{k:'role', type:'cards1', label:"Et pour ces échanges, vous aimeriez…", opts:DEGRES.slice(0,3)}, TEMOIGNAGE], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>. Grâce à une <b>gestion concertée</b>, chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', }),
-    {intro:"Où en est l'organisation près de chez vous\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place). Exemple\u00a0: pour «\u00a0Besoins\u00a0», a-t-on demandé à chacun ce qui lui manque\u00a0?",
-     fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]},
-    {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions. Objectif : répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin : suffisamment petite pour se réunir facilement, suffisamment grande pour porter un vrai <b>plan de développement économique</b> cohérent. Et le <b>Sud-Ouest</b> a les atouts pour inspirer une telle <b>transition organisationnelle et démocratique</b>. Ses atouts : sa <b>culture girondine</b>, son <b>bassin hydrographique</b> et son potentiel d'<b>économies d'échelle</b>. De quoi proposer des prix raisonnables tout en restant compétitifs. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
-     details:[
+const TERR_DOCS = [
       {sum:"+ Pourquoi une région, et pourquoi le Sud-Ouest", html:`<p><b>Les solutions existent déjà partout.</b> L'enjeu : les déployer à la bonne échelle, avec des <b>feuilles de route</b> et des <b>marchés intentionnels</b> (prospectifs). Ils sont validés techniquement par les <b>acteurs</b>, puis par les <b>citoyens</b>, pour garantir un <b>business plan territorial pérenne</b>.</p>
         <p><b>Les expériences locales l'ont prouvé.</b> Chiapas au Mexique, Rojava en Syrie… Chacune a montré qu'on peut vivre autrement. Et partout, la <b>coopération</b> fait ses preuves : les <b>villes en transition</b> en Angleterre, les <b>coopératives d'énergie</b> en Scandinavie, la monnaie <b>WIR</b> qui soutient l'économie suisse depuis 1934… L'enjeu n'est ni <b>nationaliste</b> ni <b>indépendantiste</b> : c'est l'<b>organisation</b>, la <b>gouvernance</b> et la <b>démocratie directe</b>. Mais sans une <b>région industrielle</b> qui s'inspire de cette organisation, il ne peut y avoir de <b>modèle économique</b> capable d'inspirer le monde.</p>
         <p><b>La région, le bon tremplin.</b> Assez grande pour produire intelligemment ce dont on a besoin, assez proche pour rester à taille humaine. Une région pilote inspire tout un pays, qui inspire à son tour le monde. Plus elle coopère, plus elle redistribue vers départements et communes (<b>subsidiarité</b>). C'est l'esprit du <b>biorégionalisme</b>.</p>
@@ -1119,6 +1106,46 @@ const DREAMS = [
         <p><b>Cercles et sous-cercles.</b> Chaque thématique et chaque échelle a son cercle de coopération, et ses sous-cercles (« Psychologie » dans « Santé », par exemple). Données, projets, votes et évaluations circulent de l'un à l'autre.</p>
         <p><b>Un exemple concret, la mobilité.</b> Transports gratuits et fréquents, centre apaisé, réseau vélo continu, sécurité, filière régionale.</p>
         <a class="ex-doc" href="plan-mobilite.html">📄 <span><b>Ouvrir le plan mobilité</b><small>Exemple de plan de développement territorial</small></span><i>→</i></a>`},
+];
+const DOCS = [
+  {k:'meriadeck', e:'🏙️', t:'Bordeaux-Mériadeck 2030', s:'5 domaines, un même quartier : mutualiser les services', html:()=>{ const x=TERR_DOCS[1].html; return typeof x==='function'?x():x; }},
+  {k:'mobilite', e:'🚲', t:'Plan mobilité', s:'Exemple de plan de développement territorial, avec un quiz', href:'plan-mobilite.html'},
+  {k:'debat', e:'🗣️', t:'Kit débat', s:'Organiser un débat citoyen en 5 étapes', html:()=>`<p><b>Un débat où chacun a sa place.</b> Pas besoin d'être expert : il suffit d'une salle, de quelques tables, et de l'envie de faire parler les habitants entre eux. L'organisateur reste <b>en retrait</b> : ce sont les participants qui débattent, à égalité de parole.</p>
+<p><b>1. Préparer, 2 à 3 semaines avant.</b> Une salle gratuite et accessible (associative, tiers-lieu), un coin pour les enfants. Des flyers dans les commerces, cafés et associations. Un formulaire d'inscription où chacun propose un <b>sujet</b>. Le matériel : tables, Post-it, stylos, une boîte à idées par table.</p>
+<p><b>2. Accueillir.</b> Un brise-glace léger (« Votre musique préférée ? ») pour montrer que nos goûts sont variés, sans conflit. Puis un mot d'accueil de <b>2 minutes maximum</b> : pourquoi ce débat est différent, ce qu'on attend de chacun, comment on commence.</p>
+<p><b>3. Une table par sujet, trois rôles.</b> Entre 5 et 15 participants par table. Le <b>secrétaire</b> note l'essentiel (le seul rôle indispensable). Le <b>facilitateur</b> aide sans orienter. Le <b>gestionnaire</b> répartit la parole et le temps.</p>
+<p><b>4. Le débat en 5 étapes.</b> Cartes sur table : chacun note ses idées sur un Post-it. Un premier vote pour voir les tendances. Un tour de table. On négocie pour converger. Puis le vote final.</p>
+<p><b>5. Voter au jugement majoritaire.</b> Chacun donne une mention à chaque proposition, de « excellent » à « à rejeter ». L'application gratuite <b>Urne</b> de Mieux Voter, ou de simples bulletins papier, suffisent.</p>
+<p><b>Si ça coince.</b> Quelqu'un prend trop la parole ? On ne le juge jamais, on redonne la parole au groupe. Un blocage ? Plan B : chacun écrit son opinion, celle de l'autre, puis les points d'entente.</p>
+<p><b>6. Après le débat.</b> Un compte-rendu fidèle, envoyé aux participants et aux élus. Un appel aux participants clés deux semaines plus tard. Une rétrospective de l'équipe : ce qui a marché, ce qui a freiné.</p>
+<p><b>7. Et avec la Géomédiation.</b> On <b>célèbre</b> chaque proposition adoptée, pour donner envie de revenir. Et chaque débat rejoint les autres : les thématiques et les échelles se relient, et un médiateur oriente les propositions vers les bons acteurs.</p>
+<p class="small">Inspiré du guide « Organisez votre débat Parlons-en » de l'association 3R (licence Creative Commons BY-SA). <a href="https://rrr.netlib.re/IMG/pdf/organisez-votre-debat-parlons-en.pdf" target="_blank" rel="noopener">Télécharger le guide complet</a>.</p>`},
+  {k:'region', e:'🧭', t:'Pourquoi une région, et pourquoi le Sud-Ouest', s:'Le bon tremplin pour une transition organisationnelle', html:()=>{ const x=TERR_DOCS[0].html; return typeof x==='function'?x():x; }}];
+function openDoc(k){ const d=DOCS.find(x=>x.k===k); if(!d) return; if(d.href){ location.href=d.href; return; } state.doc=k; go('doc'); }
+function openDocs(){ const go2=()=>{ const el=document.getElementById('f-docs'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }; if(state.view!=='home'){ go('home'); setTimeout(go2,350); } else go2(); }
+function docsNode(){ const w=h('div',{class:'docs'}); DOCS.forEach(d=>{ const a=h('a',{class:'ex-doc', href:d.href||'#'},`${d.e} <span><b>${d.t}</b><small>${d.s}</small></span><i>→</i>`); if(!d.href) a.onclick=e=>{ e.preventDefault(); openDoc(d.k); }; w.appendChild(a); }); return w; }
+function renderDoc(){ const d=DOCS.find(x=>x.k===state.doc)||DOCS[0];
+  add(h('div',{class:'kicker'},'📚 Documents'));
+  add(h('h2',null,d.e+' '+d.t)); add(h('p',{class:'lead'},d.s));
+  const art=h('div',{class:'doc-art'}); art.innerHTML=typeof d.html==='function'?d.html():d.html; add(art);
+  const others=DOCS.filter(x=>x!==d); const o=h('div',{class:'rc-card'}); o.appendChild(h('div',{class:'rc-h'},'📚 Les autres documents')); others.forEach(x=>{ const a=h('a',{class:'ex-doc', href:x.href||'#'},`${x.e} <span><b>${x.t}</b><small>${x.s}</small></span><i>→</i>`); if(!x.href) a.onclick=e=>{ e.preventDefault(); openDoc(x.k); }; o.appendChild(a); }); add(o);
+  const n=h('div',{class:'nav'}); n.append(h('button',{class:'btn btn-ghost', onclick:goBack},'← Retour'), h('button',{class:'btn btn-soft', onclick:()=>go('home')},'🏠 Menu principal')); add(n); }
+const DREAMS = [
+  {k:'entreprise', e:'💼', cat:'Travail & association', defi:"Posez LA question à la prochaine réunion : 5 minutes suffisent.", pick:"Mon organisation professionnelle", sub:"Mon entreprise, mon établissement, mon association", dream:"améliorer l'organisation de <b>votre entreprise</b>, de <b>votre établissement</b>…", t:"Mon organisation professionnelle", levels:[
+    L1({qui:'à vos collaborateurs', intro:"Une équipe bien organisée\u00a0: des <b>rôles clairs</b>, des <b>réunions efficaces</b>, des <b>résultats concrets</b>. <b>Posez la question à vos collaborateurs\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on recense ensemble les <b>besoins</b> et les <b>solutions envisagées</b>, puis on <b>co-construit les projets</b>.",
+        extra:[{k:'leviers', type:'chips', label:'Par quoi aimeriez-vous commencer ?', opts:LEVIERS}], labA:"Vos besoins, pour vous ou pour l'équipe", labR:'Les solutions envisagées'}),
+    L2('dans votre structure'),
+    {intro:"Un <b>médiateur</b> adapte la méthode à votre structure et à votre <b>métier</b>. Avec lui, chacun trace sa <b>feuille de route</b>, et les bonnes idées passent d'une équipe à l'autre.",
+     fields:[],
+     parts:[{p:"Chaque équipe <b>partage</b> ce qui marche."}]}
+  ]},
+  {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"L'organisation de nos territoires", sub:"Mon quartier, ma commune, ma région", dream:"un territoire où chacun trouve <b>ce dont il a besoin</b>, tout près de chez lui", t:"L'organisation de nos territoires", levels:[
+    L1({qui:'aux acteurs de votre territoire', pre:[{k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span class="q-hint">Précisez votre ou vos territoires : on vous met en relation avec les bons acteurs.</span>'},{k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)},{k:'role', type:'cards1', label:"Et pour ces échanges, vous aimeriez…", opts:DEGRES.slice(0,3)}, TEMOIGNAGE], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>. Grâce à une <b>gestion concertée</b>, chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', }),
+    {intro:"Où en est l'organisation près de chez vous\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place). Exemple\u00a0: pour «\u00a0Besoins\u00a0», a-t-on demandé à chacun ce qui lui manque\u00a0?",
+     fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]},
+    {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions. Objectif : répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin : suffisamment petite pour se réunir facilement, suffisamment grande pour porter un vrai <b>plan de développement économique</b> cohérent. Et le <b>Sud-Ouest</b> a les atouts pour inspirer une telle <b>transition organisationnelle et démocratique</b>. Ses atouts : sa <b>culture girondine</b>, son <b>bassin hydrographique</b> et son potentiel d'<b>économies d'échelle</b>. De quoi proposer des prix raisonnables tout en restant compétitifs. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
+     details:[
+      {sum:"+ Les dossiers à consulter", html:`<p><b>Pour aller plus loin.</b> Le dossier <b>Bordeaux-Mériadeck 2030</b>, le <b>plan mobilité</b>, le <b>kit débat</b> et <b>pourquoi une région</b> : tout est réuni dans la rubrique Documents.</p><a class="ex-doc" href="#" onclick="openDocs();return false">📚 <span><b>Ouvrir les documents</b><small>Dossiers, plans et kits pratiques</small></span><i>→</i></a>`},
       {sum:"+ Le déploiement en 6 étapes, et 2 gestes pour se lancer", html:`<ol class="steps6"><li>Structurer les acteurs de la transition</li><li>Sonder et échanger, pour installer la confiance</li><li>Co-construire des feuilles de route par filière (court, moyen, long terme), accordées entre elles</li><li>Validation institutionnelle et citoyenne</li><li>Expérimenter et évaluer</li><li>Inspirer les partenaires nationaux et internationaux</li></ol>
         <p><b>Geste 1 : participer à l'organisation d'échanges</b> avec les acteurs de votre territoire.</p>
         <p><b>Geste 2 : une vidéo d'une minute</b>, par exemple : « J'ai compris que tout est lié. Je m'implique chez moi et au travail, et je soutiens les médiateurs territoriaux pour qu'ils préparent et animent cette concertation. » À partager avec les médiateurs, vos proches et vos collaborateurs !</p>`}],
@@ -1379,6 +1406,7 @@ function renderHome(){
   const me=h('div',{class:'method'});
   me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
   add(fold('f-method','🔁 La méthode en 7 étapes','Le toboggan de la coopération',[me])); wireSlide();
+  add(fold('f-docs','📚 Les documents','Dossiers, plans et kits pratiques',[docsNode()]));
   const F2=[h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'), testBlock()];
   const ac=h('div',{class:'accomp'});
   ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à définir vos objectifs, puis vous oriente <b>selon vos aspirations</b> vers les professionnels et les partenaires adaptés. Vous savez toujours <b>ce que devient votre contribution</b>.</p>`;
@@ -1729,7 +1757,7 @@ function render(){
   if(state.view!=='home') slot.append(h('button',{class:'back-btn', onclick:goBack},'← Retour'));
   const fh=$('fabHome'); if(fh) fh.style.display=state.view==='home'?'none':'flex';
   root.innerHTML='';
-  ({home:renderHome, dream:renderDream, recap:renderRecap, legal:renderLegal}[state.view]||renderHome)();
+  ({home:renderHome, dream:renderDream, recap:renderRecap, legal:renderLegal, doc:renderDoc}[state.view]||renderHome)();
   if(state.view!=='home') add(h('p',{class:'small center', style:'margin-top:18px'}, `💬 ${state.view==='dream'?'':"Une question, une remarque\u00a0? "}Écrivez au médiateur à tout moment\u00a0: <a href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Géomédiation : ma question')}" style="color:var(--clay);font-weight:700">${CONTACT_MAIL}</a>`));
   add(h('p',{class:'legal-links'},'<a href="#" id="legalLink">Mentions légales · Confidentialité · Cookies</a>')); const ll=$('legalLink'); if(ll) ll.onclick=e=>{ e.preventDefault(); go('legal'); };
   save();
@@ -1745,7 +1773,7 @@ render();
 if(location.hash==='#agir'){ setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },300); }
 if(/^#(recap|agir)$/.test(location.hash)) history.replaceState(null,'',location.href.split('#')[0]);
 
-function airy(){ document.querySelectorAll('#cardRoot .lvl p, #cardRoot .lvl-intro, #cardRoot .fd-b p, #cardRoot .more-box p, #cardRoot details p, #cardRoot .accomp p').forEach(p=>{
+function airy(){ document.querySelectorAll('#cardRoot .doc-art p, #cardRoot .lvl p, #cardRoot .lvl-intro, #cardRoot .fd-b p, #cardRoot .more-box p, #cardRoot details p, #cardRoot .accomp p').forEach(p=>{
   if(p.dataset.airy||p.closest('.how,.pq,.tm,.pro,.med3,.todo,.fld-label')) return; p.dataset.airy='1';
   if(p.textContent.length<150) return;
   const parts=p.innerHTML.split(/(?<=[.!?…»](?:<\/[a-z]+>)*)\s+(?=(?:<[^>]+>)*[A-ZÀ-ÖØ-Þ«])/); if(parts.length<2) return;

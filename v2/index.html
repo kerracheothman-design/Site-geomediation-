@@ -345,6 +345,12 @@
   .card .rc-hero .rc-sum b, .card .rc-sum b{color:var(--gold-light); background:none; padding:0;}
   .rc-card{box-shadow:0 6px 18px rgba(31,51,41,.07); border-left:5px solid var(--gold);}
   .rc-defi{margin-top:8px; background:#fff; border-radius:10px; padding:8px 10px; font-size:13.5px; color:var(--forest-dark);}
+  .rc-meter{margin-top:12px;} .rc-meter-t{font-size:13.5px; margin-bottom:5px; color:var(--cream);} .card .rc-meter-t b{color:var(--gold-light); background:none; padding:0;}
+  .rc-meter .rc-bar{background:rgba(255,255,255,.18);} .rc-meter .chip-row{margin-top:8px;}
+  .rc-meter .chip{background:rgba(255,255,255,.1); color:var(--cream); border-color:rgba(255,255,255,.3);}
+  .rc-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;} .rc-grid .rc-wide{grid-column:1/-1;}
+  .rc-grid input[type=email],.rc-grid input[type=tel]{width:100%; font:14px var(--body); padding:10px 12px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--ink); outline:none;}
+  @media (max-width:540px){ .rc-grid{grid-template-columns:1fr;} }
   .send-box{background:var(--paper); border:2px solid var(--gold); border-radius:18px; padding:16px 18px; margin-top:16px;}
   .send-box h3{margin:0 0 6px; font-size:18px; color:var(--forest-dark);}
   .send-item{display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4; color:var(--ink); padding:7px 0; border-bottom:1px solid var(--line); cursor:pointer;}
@@ -1511,8 +1517,10 @@ function printBilan(sel, mode){
 }
 function nextStep(dk){ const d=DREAMS.find(x=>x.k===dk); if(!d) return null; const p=progressOf(dk); const lv=Math.max(1,p.lv); const done=lv>=p.max;
   return {d, lv, max:p.max, done, nextName: done?'':(d.levels[lv]||{}).name||LEVEL_NAMES[lv]||'', defi:d.defi||''}; }
+const CONTACT_FIELDS=[['nom','Prénom et nom'],['structure','Structure ou rôle'],['lieu','Commune ou territoire'],['mail','E-mail'],['tel','Téléphone'],['info','Informations complémentaires']];
 function recapItems(){
   const it=[]; const push=(g,t)=>it.push({id:g+'|'+t,g,t});
+  const C=state.contact||{}; CONTACT_FIELDS.forEach(([k,l])=>{ const v=(C[k]||'').trim(); if(v) push('👤 Mes coordonnées', l+' : '+v); });
   if(state.depart) push('🧭 Mon point de départ', state.depart);
   (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
@@ -1547,16 +1555,35 @@ function renderRecap(){
   const items=recapItems();
   if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Choisissez d'abord ce que vous souhaitez améliorer\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }
   else {
+  const own=items.filter(x=>x.g!=='👤 Mes coordonnées');
   const started=DREAMS.filter(d=>items.some(x=>x.dk===d.k));
   const nObj=items.filter(x=>/objectifs/i.test(x.g)||/^Mes objectifs/.test(x.t)).length;
   const hero=h('div',{class:'rc-hero'}); hero.appendChild(h('div',{class:'rc-hero-t'},'Vous êtes en marche 🚀'));
   hero.appendChild(h('p',null,'Chaque réponse vous rapproche d\'une vie <b>mieux organisée</b> et d\'un territoire <b>qui vous ressemble</b>.'));
   const sum=h('div',{class:'rc-sum'});
-  [[started.length,started.length>1?'parcours lancés':'parcours lancé'],[nObj,nObj>1?'objectifs fixés':'objectif fixé'],[items.length,items.length>1?'idées partagées':'idée partagée']].forEach(([n,t])=>sum.appendChild(h('div',null,'<b>'+n+'</b>'+t)));
-  hero.appendChild(sum); add(hero);
+  [[started.length,started.length>1?'parcours lancés':'parcours lancé'],[nObj,nObj>1?'objectifs fixés':'objectif fixé'],[own.length,own.length>1?'idées partagées':'idée partagée']].forEach(([n,t])=>sum.appendChild(h('div',null,'<b>'+n+'</b>'+t)));
+  const C=state.contact||{}; const hasC=!!((C.nom||'').trim()||(C.mail||'').trim()||(C.tel||'').trim());
+  const T=state.test||{}; const crit=[
+    {ok:hasC, t:'👤 Ajouter mes coordonnées', go:()=>{ const el=$('rc-contact'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); }},
+    {ok:nObj>0, t:'🎯 Fixer un objectif', go:()=>openSheet('obj')},
+    {ok:started.length>0, t:'🧭 Lancer un parcours', go:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},
+    {ok:SPHERES.some(x=>T[x.k]), t:'📊 Faire mon auto-évaluation', go:()=>{ state.optOpen=true; go('home'); setTimeout(()=>{ const el=document.querySelector('.test'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },150); }}];
+  const pct=Math.round(100*crit.filter(c=>c.ok).length/crit.length);
+  const meter=h('div',{class:'rc-meter'}); meter.appendChild(h('div',{class:'rc-meter-t'},pct===100?'🌟 Fiche complète à 100 % : bravo !':'Fiche complète à <b>'+pct+' %</b>'));
+  meter.appendChild(h('div',{class:'rc-bar'},'<i style="width:'+pct+'%"></i>'));
+  const miss=crit.filter(c=>!c.ok); if(miss.length){ const r=h('div',{class:'chip-row'}); miss.forEach(c=>r.appendChild(h('button',{class:'chip sm', onclick:c.go},'➕ '+c.t.replace(/^\S+\s/,'')))); meter.appendChild(r); }
+  hero.appendChild(sum); hero.appendChild(meter); add(hero);
+  const cc=h('div',{class:'rc-card', id:'rc-contact'}); cc.appendChild(h('div',{class:'rc-h'},'👤 Mes coordonnées <small>facultatif</small>'));
+  cc.appendChild(h('p',{class:'small'},'Pour qu\'un médiateur ou un professionnel puisse <b>vous recontacter</b>. Rien n\'est envoyé sans votre accord.'));
+  const cg=h('div',{class:'rc-grid'});
+  CONTACT_FIELDS.forEach(([k,l])=>{ const fw=h('div',{class:'fld'+(k==='info'?' rc-wide':'')}); fw.appendChild(h('label',{class:'fld-label',for:'ct-'+k},l));
+    const inp=k==='info'?h('textarea',{id:'ct-'+k, rows:'3', placeholder:'Vos disponibilités, vos compétences, ce que vous aimeriez apporter…'}):h('input',{id:'ct-'+k, type:k==='mail'?'email':k==='tel'?'tel':'text', autocomplete:{nom:'name',mail:'email',tel:'tel',structure:'organization',lieu:'address-level2'}[k]||'off'});
+    inp.value=(state.contact||{})[k]||''; inp.oninput=e=>{ state.contact=state.contact||{}; state.contact[k]=e.target.value; save(); };
+    fw.appendChild(inp); cg.appendChild(fw); });
+  cc.appendChild(cg); add(cc);
   add(h('p',{class:'small', style:'margin-top:10px'},'✔️ <b>Cochez</b> ce que vous voulez garder ou partager.'));
   const groups=[]; items.forEach(x=>{ let G=groups.find(y=>y.g===x.g); if(!G){ G={g:x.g, dk:x.dk, list:[]}; groups.push(G); } G.list.push(x); });
-  groups.forEach(G=>{ const c=h('div',{class:'rc-card'+(!G.dk&&/objectifs/i.test(G.g)?' rc-obj':'')}); const n=G.dk?nextStep(G.dk):null;
+  groups.forEach(G=>{ if(G.g==='👤 Mes coordonnées') return; const c=h('div',{class:'rc-card'+(!G.dk&&/objectifs/i.test(G.g)?' rc-obj':'')}); const n=G.dk?nextStep(G.dk):null;
     c.appendChild(h('div',{class:'rc-h'},esc(G.g)+(n?'<small>'+(n.done?'🏆 Terminé':'Niveau '+n.lv+' / '+n.max)+'</small>':'')));
     if(n) c.appendChild(h('div',{class:'rc-bar'},'<i style="width:'+Math.round(100*n.lv/n.max)+'%"></i>'));
     G.list.forEach(x=>{ const lab=h('label',{class:'send-item'}); const cb=h('input',{type:'checkbox'}); cb.checked=state.sendSel[x.id]!==false; cb.onchange=()=>{ state.sendSel[x.id]=cb.checked; save(); }; lab.append(cb, h('span',null,esc(x.t))); c.appendChild(lab); });
@@ -1569,7 +1596,7 @@ function renderRecap(){
   const todo=DREAMS.filter(d=>d.pick && !d.hidden && !started.includes(d));
   if(todo.length){ const t=h('div',{class:'rc-card'}); t.appendChild(h('div',{class:'rc-h'},'✨ Envie d\'élargir vos horizons ?')); t.appendChild(h('p',{class:'small'},'D\'autres parcours vous attendent, à votre rythme.')); const r=h('div',{class:'chip-row'}); todo.forEach(d=>r.appendChild(h('button',{class:'chip sm', onclick:()=>go('dream',d.k)},d.e+' '+esc(d.pick)))); t.appendChild(r); add(t); }
   const box=h('div',{class:'send-box'}); box.appendChild(h('h3',null,'📣 Faites-la vivre !')); box.appendChild(h('p',{class:'small'},'Téléchargez-la, partagez-la, ou confiez-la à un médiateur&nbsp;: il vous ouvre les portes du réseau.'));
-  const sel=()=>items.filter(x=>state.sendSel[x.id]!==false);
+  const sel=()=>recapItems().filter(x=>x.g==='👤 Mes coordonnées'||state.sendSel[x.id]!==false);
   const body=()=>{ let g=null; const L=['Voici ma fiche Géomédiation :']; sel().forEach(x=>{ if(x.g!==g){ L.push('', x.g); g=x.g; } L.push('- '+x.t); }); L.push('','geomediation.fr'); return L.join('\n'); };
   const msg=h('div',{class:'msg'}); msg.hidden=true; const sm='padding:8px 14px;font-size:13px';
   const btns=h('div',{class:'row-inline', style:'margin-top:14px'});

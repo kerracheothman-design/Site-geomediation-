@@ -339,6 +339,13 @@
   .rc-bar i{display:block; height:100%; background:linear-gradient(90deg,var(--forest),var(--gold)); border-radius:9px;}
   .rc-next{background:#FFF7DD; border:1.5px solid var(--gold); border-radius:14px; padding:10px 12px; margin-top:10px; font-size:14px; color:var(--forest-dark); line-height:1.45;}
   .rc-next > span{display:block; font:800 11.5px var(--body); letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin-bottom:3px;}
+  .rc-hero{background:linear-gradient(135deg,var(--forest),var(--forest-dark)); color:var(--cream); border-radius:20px; padding:18px 18px 14px; margin:4px 0 6px;}
+  .rc-hero-t{font:800 22px var(--display); color:var(--gold-light); margin-bottom:4px;}
+  .card .rc-hero p{color:var(--cream); margin:0 0 12px; font-size:15px; line-height:1.5;} .card .rc-hero p b{color:var(--gold-light); background:none; padding:0;}
+  .rc-hero .rc-sum div{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.18); color:var(--cream);}
+  .card .rc-hero .rc-sum b, .card .rc-sum b{color:var(--gold-light); background:none; padding:0;}
+  .rc-card{box-shadow:0 6px 18px rgba(31,51,41,.07); border-left:5px solid var(--gold);}
+  .rc-defi{margin-top:8px; background:#fff; border-radius:10px; padding:8px 10px; font-size:13.5px; color:var(--forest-dark);}
   .send-box{background:var(--paper); border:2px solid var(--gold); border-radius:18px; padding:16px 18px; margin-top:16px;}
   .send-box h3{margin:0 0 6px; font-size:18px; color:var(--forest-dark);}
   .send-item{display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4; color:var(--ink); padding:7px 0; border-bottom:1px solid var(--line); cursor:pointer;}
@@ -1461,15 +1468,15 @@ function renderLegal(){
 function printBilan(sel, mode){
   const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   let g=null, cur=null, body='';
-  const close=()=>{ if(g===null) return; body+='</ul>'; if(cur){ const n=nextStep(cur); if(n) body+='<div class="next"><span>👉 Mon prochain pas</span>'+(n.done?'🏆 Parcours terminé : partagez votre expérience autour de vous !':'Niveau '+(n.lv+1)+' · '+esc(n.nextName))+(n.defi?'<br><small>Défi : '+esc(n.defi)+'</small>':'')+'</div>'; } body+='</section>'; };
+  const close=()=>{ if(g===null) return; body+='</ul>'; if(cur){ const n=nextStep(cur); if(n) body+='<div class="next"><span>'+(n.done?'🏆 Bravo, champion !':'🚀 Et si vous alliez plus loin ?')+'</span>'+(n.done?'Vous avez tout exploré. <b>Inspirez votre entourage</b> !':'Débloquez le <b>niveau '+(n.lv+1)+' · '+esc(n.nextName)+'</b> en 2 minutes sur le site.')+(n.defi?'<br><small>🎯 <b>Le défi de la semaine</b> : '+esc(n.defi)+'</small>':'')+'</div>'; } body+='</section>'; };
   sel.forEach(x=>{ if(x.g!==g){ close(); g=x.g; cur=x.dk||null; const n=cur?nextStep(cur):null;
       body+='<section'+(/objectifs/i.test(x.g)&&!cur?' class="obj"':'')+'><h2>'+esc(x.g)+(n?'<small>Niveau '+n.lv+' / '+n.max+'</small>':'')+'</h2>'+(n?'<div class="bar"><i style="width:'+Math.round(100*n.lv/n.max)+'%"></i></div>':'')+'<ul>'; }
     body+='<li>'+esc(x.t)+'</li>'; });
   close();
   if(!body) body='<p>Cochez au moins une ligne pour créer votre fiche.</p>';
   const nP=new Set(sel.filter(x=>x.dk).map(x=>x.dk)).size;
-  const top='<div class="sum"><div><b>'+nP+'</b>'+(nP>1?'parcours':'parcours')+'</div><div><b>'+sel.length+'</b>réponses</div><div><b>'+esc(date)+'</b>mise à jour</div></div>';
-  body=top+body+'<div class="end"><b>Et maintenant ?</b> Chaque petit pas compte. Continuez à votre rythme sur le site, partagez cette fiche avec vos proches ou les acteurs de votre territoire, et un médiateur peut vous accompagner : <b>'+CONTACT_MAIL+'</b></div>';
+  const top='<div class="sum"><div><b>'+nP+'</b>'+(nP>1?'parcours lancés':'parcours lancé')+'</div><div><b>'+sel.length+'</b>'+(sel.length>1?'idées partagées':'idée partagée')+'</div><div><b>'+esc(date)+'</b>mise à jour</div></div>';
+  body=top+body+'<div class="end"><div class="big">Ensemble, on va plus loin 🤝</div>Chaque petit pas compte, et vous n\'êtes pas seul. Partagez cette fiche avec vos proches ou les acteurs de votre territoire, et un médiateur vous ouvre les portes du réseau : <b>'+CONTACT_MAIL+'</b></div>';
   const doc=`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ma fiche Géomédiation – ${esc(date)}</title><style>
   body{font-family:'Segoe UI',system-ui,sans-serif;color:#241E14;max-width:720px;margin:32px auto;padding:0 20px;line-height:1.5}
   header{border-bottom:3px solid #C9A227;padding-bottom:12px;margin-bottom:22px}
@@ -1484,6 +1491,8 @@ function printBilan(sel, mode){
   .next span{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#B5654A}
   .next small{color:#5A4F46}
   .sum{display:flex;gap:10px;margin-bottom:18px}.sum div{flex:1;text-align:center;border:1px solid #E6DCC8;border-radius:12px;padding:8px;font-size:12px;color:#5A4F46}.sum b{display:block;font-size:20px;color:#1F3329}
+  .hero{background:#1F3329;color:#F6F1E7;border-radius:12px;padding:10px 14px;margin-top:8px;font-size:14px}.hero b{color:#E3C766}
+  .end .big{font-size:18px;font-weight:800;color:#E3C766;margin-bottom:4px}
   .end{background:#1F3329;color:#F6F1E7;border-radius:14px;padding:14px 18px;font-size:14px;line-height:1.5}.end b{color:#E3C766}
   ul{margin:0;padding-left:20px} li{margin:3px 0;font-size:14px}
   footer{margin-top:28px;border-top:1px solid #DDD3BC;padding-top:10px;font-size:12px;color:#857C62}
@@ -1491,7 +1500,7 @@ function printBilan(sel, mode){
   @media print{.tip{display:none} body{margin:0}}
   </style></head><body>
   <p class="tip"><button onclick="print()" style="font:inherit;font-weight:800;border:0;border-radius:999px;padding:8px 14px;background:#C9A227;color:#1F3329;cursor:pointer">🖨️ Enregistrer en PDF</button> Dans la fenêtre d'impression, choisissez <b>« Enregistrer au format PDF »</b>.</p>
-  <header><div class="brand">GÉOMÉDIATION</div><h1>📇 Ma fiche acteur</h1><div class="date">Votre organisation, pas à pas</div></header>
+  <header><div class="brand">GÉOMÉDIATION</div><h1>📇 Ma fiche acteur</h1><div class="hero">Vous êtes en marche 🚀 Chaque réponse vous rapproche d'une vie <b>mieux organisée</b> et d'un territoire <b>qui vous ressemble</b>.</div></header>
   ${body}
   <footer>Géomédiation · Inspirée de la géographie, science de l'organisation des territoires · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
   </body></html>`;
@@ -1540,25 +1549,26 @@ function renderRecap(){
   else {
   const started=DREAMS.filter(d=>items.some(x=>x.dk===d.k));
   const nObj=items.filter(x=>/objectifs/i.test(x.g)||/^Mes objectifs/.test(x.t)).length;
-  add(h('p',{class:'lead'},"<b>Bravo, votre fiche prend forme&nbsp;!</b> Elle vous appartient&nbsp;: gardez-la, partagez-la, et avancez à votre rythme."));
+  const hero=h('div',{class:'rc-hero'}); hero.appendChild(h('div',{class:'rc-hero-t'},'Vous êtes en marche 🚀'));
+  hero.appendChild(h('p',null,'Chaque réponse vous rapproche d\'une vie <b>mieux organisée</b> et d\'un territoire <b>qui vous ressemble</b>.'));
   const sum=h('div',{class:'rc-sum'});
-  [[started.length,started.length>1?'parcours commencés':'parcours commencé'],[nObj,nObj>1?'objectifs':'objectif'],[items.length,'réponses']].forEach(([n,t])=>sum.appendChild(h('div',null,'<b>'+n+'</b>'+t)));
-  add(sum);
-  add(h('p',{class:'small'},'<b>Cochez</b> ce que vous souhaitez garder ou partager.'));
+  [[started.length,started.length>1?'parcours lancés':'parcours lancé'],[nObj,nObj>1?'objectifs fixés':'objectif fixé'],[items.length,items.length>1?'idées partagées':'idée partagée']].forEach(([n,t])=>sum.appendChild(h('div',null,'<b>'+n+'</b>'+t)));
+  hero.appendChild(sum); add(hero);
+  add(h('p',{class:'small', style:'margin-top:10px'},'✔️ <b>Cochez</b> ce que vous voulez garder ou partager.'));
   const groups=[]; items.forEach(x=>{ let G=groups.find(y=>y.g===x.g); if(!G){ G={g:x.g, dk:x.dk, list:[]}; groups.push(G); } G.list.push(x); });
   groups.forEach(G=>{ const c=h('div',{class:'rc-card'+(!G.dk&&/objectifs/i.test(G.g)?' rc-obj':'')}); const n=G.dk?nextStep(G.dk):null;
-    c.appendChild(h('div',{class:'rc-h'},esc(G.g)+(n?'<small>Niveau '+n.lv+' / '+n.max+'</small>':'')));
+    c.appendChild(h('div',{class:'rc-h'},esc(G.g)+(n?'<small>'+(n.done?'🏆 Terminé':'Niveau '+n.lv+' / '+n.max)+'</small>':'')));
     if(n) c.appendChild(h('div',{class:'rc-bar'},'<i style="width:'+Math.round(100*n.lv/n.max)+'%"></i>'));
     G.list.forEach(x=>{ const lab=h('label',{class:'send-item'}); const cb=h('input',{type:'checkbox'}); cb.checked=state.sendSel[x.id]!==false; cb.onchange=()=>{ state.sendSel[x.id]=cb.checked; save(); }; lab.append(cb, h('span',null,esc(x.t))); c.appendChild(lab); });
-    if(n){ const nx=h('div',{class:'rc-next'}); nx.appendChild(h('span',null,'👉 Mon prochain pas'));
-      nx.appendChild(h('div',null, n.done?'🏆 <b>Parcours terminé&nbsp;!</b> Partagez votre expérience autour de vous.':'<b>Niveau '+(n.lv+1)+'</b> · '+esc(n.nextName)));
-      if(n.defi) nx.appendChild(h('div',{class:'small'},'Défi&nbsp;: '+esc(n.defi)));
-      if(!n.done) nx.appendChild(h('button',{class:'btn btn-primary', style:'padding:7px 14px;font-size:13px;margin-top:8px', onclick:()=>{ const d=n.d; go('dream',d.k); setTimeout(()=>openLevel(d,n.lv+1),80); }},'Continuer →'));
+    if(n){ const nx=h('div',{class:'rc-next'}); nx.appendChild(h('span',null,n.done?'🏆 Bravo, champion !':'🚀 Et si vous alliez plus loin ?'));
+      nx.appendChild(h('div',null, n.done?'Vous avez tout exploré. <b>Inspirez votre entourage</b> : partagez votre expérience !':'Débloquez le <b>niveau '+(n.lv+1)+' · '+esc(n.nextName)+'</b> en 2 minutes.'));
+      if(n.defi) nx.appendChild(h('div',{class:'rc-defi'},'🎯 <b>Le défi de la semaine</b> : '+esc(n.defi)));
+      if(!n.done) nx.appendChild(h('button',{class:'btn btn-primary', style:'padding:7px 14px;font-size:13px;margin-top:8px', onclick:()=>{ const d=n.d; go('dream',d.k); setTimeout(()=>openLevel(d,n.lv+1),80); }},'J\'y vais →'));
       c.appendChild(nx); }
     add(c); });
   const todo=DREAMS.filter(d=>d.pick && !d.hidden && !started.includes(d));
-  if(todo.length){ const t=h('div',{class:'rc-card'}); t.appendChild(h('div',{class:'rc-h'},'🌱 À explorer ensuite')); const r=h('div',{class:'chip-row'}); todo.forEach(d=>r.appendChild(h('button',{class:'chip sm', onclick:()=>go('dream',d.k)},d.e+' '+esc(d.pick)))); t.appendChild(r); add(t); }
-  const box=h('div',{class:'send-box'}); box.appendChild(h('h3',null,'📥 Récupérer ou envoyer ma fiche'));
+  if(todo.length){ const t=h('div',{class:'rc-card'}); t.appendChild(h('div',{class:'rc-h'},'✨ Envie d\'élargir vos horizons ?')); t.appendChild(h('p',{class:'small'},'D\'autres parcours vous attendent, à votre rythme.')); const r=h('div',{class:'chip-row'}); todo.forEach(d=>r.appendChild(h('button',{class:'chip sm', onclick:()=>go('dream',d.k)},d.e+' '+esc(d.pick)))); t.appendChild(r); add(t); }
+  const box=h('div',{class:'send-box'}); box.appendChild(h('h3',null,'📣 Faites-la vivre !')); box.appendChild(h('p',{class:'small'},'Téléchargez-la, partagez-la, ou confiez-la à un médiateur&nbsp;: il vous ouvre les portes du réseau.'));
   const sel=()=>items.filter(x=>state.sendSel[x.id]!==false);
   const body=()=>{ let g=null; const L=['Voici ma fiche Géomédiation :']; sel().forEach(x=>{ if(x.g!==g){ L.push('', x.g); g=x.g; } L.push('- '+x.t); }); L.push('','geomediation.fr'); return L.join('\n'); };
   const msg=h('div',{class:'msg'}); msg.hidden=true; const sm='padding:8px 14px;font-size:13px';
@@ -1567,7 +1577,7 @@ function renderRecap(){
   if(navigator.share) btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>navigator.share({title:'Ma fiche Géomédiation', text:body()}).catch(()=>{})},'📤 Partager'));
   btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>copyText(body(),msg)},'📋 Copier'));
   box.append(btns,msg);
-  box.appendChild(h('div',{class:'eg', style:'margin-top:16px'},'Si vous le souhaitez, l\'envoyer'));
+  box.appendChild(h('div',{class:'eg', style:'margin-top:16px'},'✉️ L\'envoyer en un clic'));
   box.appendChild(h('p',{class:'small'},'Au médiateur général, à un professionnel précis, ou à qui vous voulez. Vous pouvez aussi la <b>copier</b> et la coller dans n\'importe quel message.'));
   const row=h('div',{class:'chip-row'});
   [{k:'med',n:'🧭 Au médiateur général'},{k:'autre',n:'👤 À un professionnel (adresse)'},{k:'libre',n:'✉️ Je choisis dans ma messagerie'}].forEach(r=>row.appendChild(h('button',{class:'chip sm'+(state.sendTo===r.k?' active':''), onclick:()=>{ state.sendTo=r.k; render(); }}, r.n)));

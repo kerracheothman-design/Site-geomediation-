@@ -411,7 +411,8 @@
   .lvl.l2 .lvl-badge{background:var(--gold); color:var(--forest-dark);} .lvl.l3 .lvl-badge{background:var(--clay);}
   .lvl-intro{margin:0; font-size:15px; line-height:1.55; color:var(--ink-soft);}
   .fld{display:flex; flex-direction:column; gap:8px;}
-  .fld-label{font-size:13.5px; font-weight:700; color:var(--forest-dark); display:flex; justify-content:space-between; gap:10px; align-items:center;}
+  .fld-label{font-size:13.5px; font-weight:700; color:var(--forest-dark); display:flex; justify-content:space-between; gap:4px 10px; align-items:center; flex-wrap:wrap;}
+  .fld-label .q-hint{flex-basis:100%; font-weight:500; opacity:.75; font-size:12.5px;}
   .fld input[type=text],.fld textarea{width:100%; font:14px var(--body); padding:10px 12px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--ink); outline:none;}
   .fld textarea{min-height:90px; resize:vertical;}
   .fld input:focus,.fld textarea:focus{border-color:var(--forest);}
@@ -982,7 +983,7 @@ const LEVIERS = ["🌿 Bien-être","Gouvernance","Finance éthique","Numérique,
 const STEPS_DETAIL = {sum:"+ Les 7 étapes en détail", html:()=>`<ol class="steps7">${CYCLE.map((c,i)=>`<li><i style="background:${CYCLE_COLS[i]};color:${i<3?'#1F3329':'#fff'}">${i+1}</i><span><b>${c.n}</b> · ${c.d}</span></li>`).join('')}</ol>`};
 const DEPART={k:'depart', type:'chips1', label:"Où en êtes-vous ?", opts:['🌱 Je découvre','🔥 Je suis motivé','🚀 J\'agis déjà','🎓 C\'est mon métier']};
 function L1(o){ return {intro:o.intro,
-  fields:(()=>{ const q={k:'question', type:'chips1', label:`Et vous, avez-vous déjà posé LA question\u00a0?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Bientôt"]}; return o.pre ? [...o.pre, ...(o.extra||[]), q] : [q, ...(o.extra||[])]; })().concat([
+  fields:(()=>{ const q={k:'question', type:'chips1', label:`Et vous, avez-vous déjà posé LA question\u00a0?`, opts:["✅ Oui, c'est fait","📅 Je vais le faire","🌱 Bientôt"]}; return [...(o.pre||[]), ...(o.extra||[]), q]; })().concat([
           {k:'besoins', type:'area', label:o.labA+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phA||''}, {k:'ressources', type:'area', label:o.labR+' <span style="font-weight:500;opacity:.7">(facultatif)</span>', ph:o.phR||''}])}; }
 function L2(ou, lab){ return {intro:`Où en est l'organisation ${ou}\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place). Exemple\u00a0: pour «\u00a0Besoins\u00a0», a-t-on demandé à chacun ce qui lui manque\u00a0?`,
   fields:[{k:'eval', type:'stepsEval'}, {k:'projet', type:'area', label:lab||'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]}; }
@@ -1045,7 +1046,7 @@ const DREAMS = [
      parts:[{p:"Chaque équipe <b>partage</b> ce qui marche."}]}
   ]},
   {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"L'organisation de nos territoires", sub:"Mon quartier, ma commune, ma région", dream:"un territoire où chacun trouve <b>ce dont il a besoin</b>, tout près de chez lui", t:"L'organisation de nos territoires", levels:[
-    L1({qui:'aux acteurs de votre territoire', pre:[{k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span style="font-weight:500;opacity:.7">Précisez le nom : on vous met en relation avec les bons acteurs.</span>'},{k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)},{k:'role', type:'cards1', label:"Et pour ces échanges, vous aimeriez…", opts:DEGRES.slice(0,3)}, TEMOIGNAGE], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>. Grâce à une <b>gestion concertée</b>, chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', }),
+    L1({qui:'aux acteurs de votre territoire', pre:[{k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span class="q-hint">Précisez le nom : on vous met en relation avec les bons acteurs.</span>'},{k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)},{k:'role', type:'cards1', label:"Et pour ces échanges, vous aimeriez…", opts:DEGRES.slice(0,3)}, TEMOIGNAGE], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>. Grâce à une <b>gestion concertée</b>, chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', }),
     {intro:"Où en est l'organisation près de chez vous\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place). Exemple\u00a0: pour «\u00a0Besoins\u00a0», a-t-on demandé à chacun ce qui lui manque\u00a0?",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]},
     {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions. Objectif : répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin : suffisamment petite pour se réunir facilement, suffisamment grande pour porter un vrai <b>plan de développement économique</b> cohérent. Et le <b>Sud-Ouest</b> a les atouts pour inspirer une telle <b>transition organisationnelle et démocratique</b>. Ses atouts : sa <b>culture girondine</b>, son <b>bassin hydrographique</b> et son potentiel d'<b>économies d'échelle</b>. De quoi proposer des prix raisonnables tout en restant compétitifs. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
@@ -1098,8 +1099,8 @@ const DREAMS = [
   {k:'reseau', e:'🌐', cat:'Réseau', defi:"Invitez un contact à découvrir le réseau, avec le message tout prêt du niveau 2.", star:true, dream:"rejoindre un <b>réseau commun</b> qui facilite la coopération entre les <b>échelles</b>, les <b>thématiques</b> et les <b>acteurs</b>", t:"Pour une meilleure organisation de notre société", pick:"Rejoindre le réseau", levels:[
     {intro:"En plus de vos <b>thématiques respectives</b>, notre réseau vous permet de vous rapprocher d'acteurs qui ont, comme vous, une <b>approche systémique et opérationnelle</b>. Objectif : <b>accompagner au mieux la transition</b> de nos territoires.",
      fields:[{k:'acteur', type:'cardsN', label:'Vous êtes… (plusieurs réponses possibles)', opts:ACTEURS},
-             {k:'domaine', type:'chips', label:'Vos thématiques', opts:THEMES.map(t=>t.e+' '+t.n)},
-             {k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span style="font-weight:500;opacity:.7">Précisez le nom.</span>'}, TEMOIGNAGE]},
+             {k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span class="q-hint">Précisez le nom : on vous met en relation avec les bons acteurs.</span>'},
+             {k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]},
     {name:"Je m'implique", intro:"Une seule <b>mission</b> suffit pour démarrer.",
      fields:[{k:'degre', type:'cards1', label:"Comment aimeriez-vous vous impliquer\u00a0?", opts:DEGRES},
              {k:'missions', type:'cardsN', label:'Les missions qui vous parlent', opts:MISSIONS},
@@ -1150,6 +1151,10 @@ const STORE='geomediation_reves_v1';
 function fresh(){ return {view:'home', dream:null, hist:[], lvl:{}, a:{}, acc:{}, dec:{}, test:{}, sendSel:{}, sendTo:'med', sendAddr:''}; }
 let state=fresh();
 try{ const sv=JSON.parse(localStorage.getItem(STORE)||'null'); if(sv) state=Object.assign(fresh(),sv); }catch(e){}
+try{ const m=location.hash.match(/^#reprise=(.+)$/); if(m){ const sv=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1])))));
+  if(sv && confirm('Recharger votre fiche Géomédiation sur cet appareil ?')){ state=Object.assign(fresh(),sv,{view:'recap',hist:[]}); try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
+  history.replaceState(null,'',location.href.split('#')[0]); } }catch(e){}
+function resumeLink(){ const s=Object.assign({},state,{hist:[],view:'recap'}); return location.href.split('#')[0]+'#reprise='+encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(s))))); }
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
 document.addEventListener('input',()=>setTimeout(save,0));
 function A(dk){ return state.a[dk]||(state.a[dk]={}); }
@@ -1611,6 +1616,7 @@ function renderRecap(){
   btns.append(h('button',{class:'btn btn-gold', style:sm, onclick:()=>printBilan(sel(),'file')},'📥 Télécharger ma fiche'), h('button',{class:'btn btn-soft', style:sm, onclick:()=>printBilan(sel())},'🖨️ Voir / PDF'));
   if(navigator.share) btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>navigator.share({title:'Ma fiche Géomédiation', text:body()}).catch(()=>{})},'📤 Partager'));
   btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>copyText(body(),msg)},'📋 Copier'));
+  btns.appendChild(h('button',{class:'btn btn-soft', style:sm, onclick:()=>{ copyText(resumeLink(),msg); setTimeout(()=>{ if(!msg.hidden && /copié/.test(msg.textContent)) msg.innerHTML="<b>Lien de reprise copié&nbsp;!</b> Envoyez-le-vous par mail ou gardez-le en favori&nbsp;: il recharge votre fiche sur <b>n'importe quel appareil</b>."; },300); }},'🔗 Mon lien de reprise'));
   box.append(btns,msg);
   box.appendChild(h('div',{class:'eg', style:'margin-top:16px'},'✉️ L\'envoyer en un clic'));
   box.appendChild(h('p',{class:'small'},'Au médiateur général, à un professionnel précis, ou à qui vous voulez. Vous pouvez aussi la <b>copier</b> et la coller dans n\'importe quel message.'));

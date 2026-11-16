@@ -37,6 +37,9 @@ b{color:var(--forest-dark)}
 .prog{height:7px;border-radius:9px;background:rgba(255,255,255,.18);overflow:hidden;margin:6px 0 2px}.prog i{display:block;height:100%;background:var(--gold-light);width:0;transition:width .4s}
 .thanks{display:none;margin-top:14px;background:var(--gold);color:var(--forest-dark);border-radius:14px;padding:12px 14px;font-weight:700}
 .thanks.on{display:block}
+.open-plan{display:block;width:100%;margin-top:14px;border:0;border-radius:16px;background:var(--gold);color:var(--forest-dark);font:800 17px var(--display);padding:14px 16px;cursor:pointer;text-align:left}
+.open-plan small{display:block;font:600 13px var(--body);opacity:.85;margin-top:2px}
+.open-plan.hide{display:none}
 /* plan */
 details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;margin-top:10px;overflow:hidden}
 summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;font:800 16.5px/1.25 var(--display);color:var(--forest-dark)}
@@ -72,11 +75,12 @@ td:first-child{font-weight:700;color:var(--forest-dark)} .law td:first-child{fon
     <p>Quelques affirmations : choisissez la réponse qui vous parle. <b>Il n'y a pas de mauvaise réponse.</b></p>
     <div class="prog"><i id="prog"></i></div>
     <div id="qs"></div>
-    <div class="thanks" id="thanks">Merci ! Vos avis s'ajoutent à <a href="./#recap" style="color:var(--forest-dark)">votre fiche acteur</a>. Et maintenant, place au concret : voici à quoi peut ressembler un plan construit ensemble 👇</div>
+    <div class="thanks" id="thanks">Merci ! Vos avis s'ajoutent à <a href="./#recap" style="color:var(--forest-dark)">votre fiche acteur</a>. Et maintenant, place au concret 👇</div>
+    <button class="open-plan" id="openPlan" onclick="openPlan()">📄 Découvrir le plan mobilité <small>Bordeaux-Mériadeck 2030 · exemple de plan de développement</small></button>
   </section>
 
-  <section class="card">
-    <div class="kicker">Exemple de plan de développement territorial</div>
+  <section class="card" id="plan" hidden>
+    <div class="kicker">Bordeaux-Mériadeck 2030 · Exemple de plan de développement territorial</div>
     <h1>Se déplacer <em>facilement, partout</em>, en toute sécurité</h1>
     <p class="lead">De chez soi à sa destination, <b>chaque trajet est sécurisé, fluide et efficace</b>, pour tous les usagers de l'espace public.</p>
     <p>Ce plan est un <b>exemple</b> : il montre comment la <b>concertation</b> entre habitants, associations, élus, entreprises, scientifiques et médias permet de bâtir des <b>projets reliés entre eux</b>, au service des besoins réels. Touchez chaque thème pour le découvrir.</p>
@@ -154,7 +158,7 @@ td:first-child{font-weight:700;color:var(--forest-dark)} .law td:first-child{fon
     </div></details>
   </section>
 
-  <section class="cta">
+  <section class="cta" id="planCta" hidden>
     <h2>Envie de construire ce plan avec nous ?</h2>
     <p>Habitant, association, élu, entreprise, scientifique ou média : <b>chacun a sa place</b> dans la concertation.</p>
     <a class="btn btn-gold" href="./#agir">🚀 Je participe</a>
@@ -166,11 +170,11 @@ td:first-child{font-weight:700;color:var(--forest-dark)} .law td:first-child{fon
 <script>
 const STORE='geomediation_reves_v1';
 const QS=[
- {k:'orga', q:"Si la société était bien organisée, aurions-nous moins de problèmes et un accès plus facile aux solutions, dans l'intérêt de tous ?", short:"Une société bien organisée", o:["Oui, j'en suis convaincu","Oui, en partie","Non, je ne crois pas","Je ne sais pas"], fb:"La plupart de nos problèmes viennent de notre organisation : c'est une bonne nouvelle, car l'organisation, ça s'apprend."},
- {k:'riches', q:"« Les riches n'ont pas intérêt à ce que le système change. »", short:"Les riches et le changement", o:["D'accord : ils ne veulent pas perdre une grande partie de leur patrimoine immobilier, foncier et boursier","Pas d'accord : ils aimeraient que le système change, mais aucun modèle économique n'est proposé, alors ils continuent de tirer la couverture à eux","Je ne sais pas"], fb:"Un nouveau modèle économique, construit ensemble, peut rassembler bien au-delà des clivages."},
- {k:'produire', q:"« Pour changer la société, il faut produire autant que possible ce dont on a besoin. »", sub:"On ne produit que si on vend, on ne vend que si les prix sont compétitifs, face à la Chine notamment. La clé : les économies d'échelle. Et c'est à l'échelle d'une région qu'un plan de développement peut démarrer tout de suite, pour inspirer ensuite les partenaires nationaux et internationaux.", short:"Produire ce dont on a besoin", o:["D'accord","Pas d'accord","À débattre"], fb:"C'est tout l'esprit du plan de développement territorial, dont voici un exemple ci-dessous."},
- {k:'psycho', q:"« Tout ce que je vis est la conséquence de ma psychologie, construite par mon environnement. »", short:"Psychologie et environnement", o:["D'accord","Pas d'accord","En partie"], fb:"Prendre soin de soi et de son environnement, en même temps : c'est le cœur du parcours « Mon organisation personnelle »."},
- {k:'affectif', q:"Pour vous, l'équilibre affectif, c'est plutôt…", short:"L'équilibre affectif", o:["Utiliser des choses extérieures pour se sentir bien : argent, relations, sport…","L'équilibre du féminin et du masculin, de la délicatesse et de l'autorité : accepter la réalité telle qu'elle est, et savoir qu'on peut toujours l'améliorer","Je ne sais pas"], fb:"Cet amour de soi et de la vie permet de profiter de tous les plaisirs sans dépendance, avec moins de risques et de problèmes."}
+ {k:'orga', q:"Si notre société était mieux organisée, aurions-nous moins de problèmes et un accès plus facile aux solutions ?", short:"Une société mieux organisée", o:["Oui, sans aucun doute","Oui, en partie","Non, je ne crois pas","Je ne sais pas"], fb:"La plupart de nos problèmes viennent de notre organisation. Bonne nouvelle : l'organisation, ça s'apprend."},
+ {k:'riches', q:"Les plus fortunés ont-ils intérêt à ce que notre modèle économique change ?", short:"Les plus fortunés et le changement", o:["Non : ils ont trop à perdre (immobilier, terres, placements en bourse)","Oui, mais aucun autre modèle crédible ne leur est proposé : alors ils protègent ce qu'ils ont","Je ne sais pas"], fb:"Un nouveau modèle économique, construit ensemble et gagnant pour tous, peut rassembler bien au-delà des clivages."},
+ {k:'produire', q:"Pour mieux vivre, faut-il produire près de chez nous ce dont nous avons besoin ?", sub:"Pour vendre, il faut des prix compétitifs, face à la Chine notamment. La solution : produire ensemble, en plus grande quantité, pour baisser les coûts (les économies d'échelle). Une région peut lancer ce plan dès aujourd'hui, puis inspirer le pays et le monde.", short:"Produire près de chez nous", o:["Oui, c'est la clé","Oui, mais pas pour tout","Non","À débattre"], fb:"C'est tout l'esprit du plan de développement territorial : découvrez-en un exemple juste après le quiz."},
+ {k:'psycho', q:"Notre façon de penser, façonnée par notre environnement, influence-t-elle tout ce que nous vivons ?", short:"Façon de penser et environnement", o:["Oui","En partie","Non"], fb:"Prendre soin de soi et de son environnement, en même temps : c'est le cœur du parcours « Mon organisation personnelle »."},
+ {k:'affectif', q:"Pour vous, se sentir bien, c'est plutôt…", short:"Se sentir bien", o:["Trouver son bien-être à l'extérieur : argent, relations, sport, loisirs…","Trouver son équilibre intérieur, entre douceur et fermeté : accepter la réalité telle qu'elle est, et savoir qu'on peut toujours l'améliorer","Un peu des deux"], fb:"Cet amour de soi et de la vie permet de profiter de tous les plaisirs sans dépendance, avec moins de risques et de problèmes."}
 ];
 function load(){ try{ return JSON.parse(localStorage.getItem(STORE)||'null')||{}; }catch(e){ return {}; } }
 function store(sd){ try{ const s=load(); s.sondage=sd; localStorage.setItem(STORE,JSON.stringify(s)); }catch(e){} }
@@ -187,6 +191,7 @@ function paint(){
   document.getElementById('thanks').className='thanks'+(n===QS.length?' on':'');
 }
 paint();
+function openPlan(){ document.getElementById('plan').hidden=false; document.getElementById('planCta').hidden=false; document.getElementById('openPlan').classList.add('hide'); document.getElementById('plan').scrollIntoView({behavior:'smooth',block:'start'}); }
 </script>
 </body>
 </html>

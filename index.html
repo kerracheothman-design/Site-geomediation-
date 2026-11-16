@@ -971,6 +971,7 @@ const INVITATION="Bonjour ! J'ai découvert la Géomédiation : une méthode sim
 /* ================= LES PORTES D'ENTRÉE ================= */
 const DOM_NAMES = INDIV_DOMAINS.map(d=>d.e+' '+d.n);
 const ECH = ['Quartier','Commune','Agglomération','Département','Région','Pays','Monde'];
+const ECH_Q = {Quartier:'Quel quartier\u00a0?', Commune:'Quelle commune\u00a0?', 'Agglomération':'Quelle agglomération\u00a0?', 'Département':'Quel département\u00a0?', 'Région':'Quelle région\u00a0?', Pays:'Quel pays\u00a0?'};
 const ECH_PH = {Quartier:'ex. Caudéran', Commune:'ex. Bordeaux', 'Agglomération':'ex. Bordeaux Métropole', 'Département':'ex. Gironde', 'Région':'ex. Nouvelle-Aquitaine', Pays:'ex. France', Monde:''};
 function echLabel(a,e){ const n=(a.lieux||{})[e]; return n ? e+' ('+n+')' : e; }
 function stepsRows(w, cur, cb){ CYCLE.forEach((c,i)=>{ const row=h('div',{class:'mini-dim'}); const b=h('b',null,String(cur[c.k]||0));
@@ -1044,7 +1045,7 @@ const DREAMS = [
      parts:[{p:"Chaque équipe <b>partage</b> ce qui marche."}]}
   ]},
   {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"L'organisation de nos territoires", sub:"Mon quartier, ma commune, ma région", dream:"un territoire où chacun trouve <b>ce dont il a besoin</b>, tout près de chez lui", t:"L'organisation de nos territoires", levels:[
-    L1({qui:'aux acteurs de votre territoire', pre:[{k:'role', type:'cards1', label:"Comment aimeriez-vous agir\u00a0?", opts:DEGRES.slice(0,3)}], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>. Grâce à une <b>gestion concertée</b>, chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', extra:[{k:'echelle', type:'scales', label:'Quelle échelle territoriale vous intéresserait\u00a0?'},{k:'domaine', type:'chips', label:'Qu\'est-ce qui vous tient à cœur\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]}),
+    L1({qui:'aux acteurs de votre territoire', pre:[{k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span style="font-weight:500;opacity:.7">Précisez le nom : on vous met en relation avec les bons acteurs.</span>'},{k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)},{k:'role', type:'cards1', label:"Et pour ces échanges, vous aimeriez…", opts:DEGRES.slice(0,3)}, TEMOIGNAGE], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>. Grâce à une <b>gestion concertée</b>, chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', }),
     {intro:"Où en est l'organisation près de chez vous\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place). Exemple\u00a0: pour «\u00a0Besoins\u00a0», a-t-on demandé à chacun ce qui lui manque\u00a0?",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]},
     {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions. Objectif : répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin : suffisamment petite pour se réunir facilement, suffisamment grande pour porter un vrai <b>plan de développement économique</b> cohérent. Et le <b>Sud-Ouest</b> a les atouts pour inspirer une telle <b>transition organisationnelle et démocratique</b>. Ses atouts : sa <b>culture girondine</b>, son <b>bassin hydrographique</b> et son potentiel d'<b>économies d'échelle</b>. De quoi proposer des prix raisonnables tout en restant compétitifs. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
@@ -1098,7 +1099,7 @@ const DREAMS = [
     {intro:"En plus de vos <b>thématiques respectives</b>, notre réseau vous permet de vous rapprocher d'acteurs qui ont, comme vous, une <b>approche systémique et opérationnelle</b>. Objectif : <b>accompagner au mieux la transition</b> de nos territoires.",
      fields:[{k:'acteur', type:'cardsN', label:'Vous êtes… (plusieurs réponses possibles)', opts:ACTEURS},
              {k:'domaine', type:'chips', label:'Vos thématiques', opts:THEMES.map(t=>t.e+' '+t.n)},
-             {k:'echelle', type:'chips', label:'Quelle échelle territoriale vous intéresserait\u00a0?', opts:ECH}, TEMOIGNAGE]},
+             {k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span style="font-weight:500;opacity:.7">Précisez le nom.</span>'}, TEMOIGNAGE]},
     {name:"Je m'implique", intro:"Une seule <b>mission</b> suffit pour démarrer.",
      fields:[{k:'degre', type:'cards1', label:"Comment aimeriez-vous vous impliquer\u00a0?", opts:DEGRES},
              {k:'missions', type:'cardsN', label:'Les missions qui vous parlent', opts:MISSIONS},
@@ -1213,7 +1214,7 @@ function field(dk, f){
     const row=h('div',{class:'chip-row'});
     ECH.forEach(e=>{ const on=cur.includes(e); row.appendChild(h('button',{class:'chip'+(on?' active':''),'aria-pressed':String(on), onclick:()=>{ a[f.k]=on?cur.filter(x=>x!==e):ECH.filter(x=>cur.includes(x)||x===e); render(); }}, e)); });
     w.appendChild(row);
-    cur.filter(e=>ECH_PH[e]!=='').forEach(e=>{ const id='lieu-'+dk+'-'+e; const g=h('div',{class:'fld'}); g.append(h('label',{class:'fld-label',for:id},'Nom · '+e)); const i=h('input',{id,type:'text',placeholder:ECH_PH[e]||''}); i.value=a.lieux[e]||''; i.oninput=ev=>{ a.lieux[e]=ev.target.value; }; g.appendChild(i); w.appendChild(g); });
+    cur.filter(e=>ECH_PH[e]!=='').forEach(e=>{ const id='lieu-'+dk+'-'+e; const g=h('div',{class:'fld'}); g.append(h('label',{class:'fld-label',for:id},'📍 '+(ECH_Q[e]||e))); const i=h('input',{id,type:'text',placeholder:ECH_PH[e]||''}); i.value=a.lieux[e]||''; if(!i.value) i.style.borderColor='var(--gold)'; i.oninput=ev=>{ a.lieux[e]=ev.target.value; i.style.borderColor=ev.target.value?'':'var(--gold)'; save(); }; g.appendChild(i); w.appendChild(g); });
   }
   if(f.type==='stepsEvalMulti'){
     const all=a[f.k]||(a[f.k]={}); const sel=(a[f.src]||[]); const list=sel.length?sel:['Votre territoire'];
@@ -1525,7 +1526,9 @@ function recapItems(){
   (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.t; const push=(g,t)=>it.push({id:g+'|'+t,g,t,dk:d.k});
-    d.levels.forEach(L=>L.fields.forEach(f=>{ const v=a[f.k]; const lab=(f.label||'').replace(/<span[^>]*>.*?<\/span>/g,'').replace(/<[^>]+>/g,'').trim().replace(/ /g,' ');
+    const ENG=['idees','reseau'].includes(d.k); if(ENG){ const role=a.role||a.degre; const th=a.domaine||[]; const ec=(a.echelle||[]).map(e=>e==='Monde'?e:((a.lieux||{})[e]?e+' ('+a.lieux[e]+')':e+' (nom à préciser)'));
+      if(role||th.length||ec.length) { const r=(role||'').replace(/^\S+\s/,''); const verb={Suivre:'Suivre les échanges',Participer:'Participer aux échanges',Animer:'Animer les échanges'}[r]||(r||'Échanges'); push(g, '🗣️ Mon engagement : '+verb+(th.length?' sur '+th.join(', '):'')+(ec.length?' · à l\'échelle : '+ec.join(', '):'')); } }
+    d.levels.forEach(L=>L.fields.forEach(f=>{ const v=a[f.k]; if(ENG && ['role','degre','domaine','echelle'].includes(f.k)) return; const lab=(f.label||'').replace(/<span[^>]*>.*?<\/span>/g,'').replace(/<[^>]+>/g,'').trim().replace(/ /g,' ');
       if(f.type==='chips' && v&&v.length) push(g, lab+' : '+v.join(', '));
       else if(f.type==='chips1' && typeof v==='string') push(g, (f.k==='question'?'LA question':f.k==='depart'?'Mon point de départ':lab.replace(/ ?\?$/,''))+' : '+v);
       else if(f.type==='toggle' && v) push(g, f.k==='question' ? 'J\'ai posé LA question' : lab.replace(/^\S+\s(?=Je)/,''));
@@ -1568,6 +1571,8 @@ function renderRecap(){
     {ok:nObj>0, t:'🎯 Fixer un objectif', go:()=>openSheet('obj')},
     {ok:started.length>0, t:'🧭 Lancer un parcours', go:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},
     {ok:SPHERES.some(x=>T[x.k]), t:'📊 Faire mon auto-évaluation', go:()=>{ state.optOpen=true; go('home'); setTimeout(()=>{ const el=document.querySelector('.test'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },150); }}];
+  const unnamed=DREAMS.find(d=>{ const a=state.a[d.k]||{}; return (a.echelle||[]).some(e=>e!=='Monde' && !((a.lieux||{})[e]||'').trim()); });
+  if(unnamed) crit.push({ok:false, t:'📍 Préciser le nom de mes lieux', go:()=>{ go('dream',unnamed.k); setTimeout(()=>openLevel(unnamed,1),80); }});
   const meter=h('div',{class:'rc-meter'});
   const paintMeter=()=>{ const C2=state.contact||{}; crit[0].ok=!!((C2.nom||'').trim()||(C2.mail||'').trim()||(C2.tel||'').trim());
     const pct=Math.round(100*crit.filter(c=>c.ok).length/crit.length); meter.innerHTML='';

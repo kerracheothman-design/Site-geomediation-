@@ -362,6 +362,11 @@
   .med .med-r{font-size:11.5px; font-weight:800; color:var(--gold-light);} .card .med b{font-size:14.5px; color:#fff;} .med small{font-size:12px; opacity:.85; line-height:1.3;}
   .card .meds-n{margin:12px 0 0; font-size:13px; color:var(--cream);} .meds-n a{color:var(--gold-light); font-weight:800;}
   @media (max-width:420px){ .med-grid{grid-template-columns:1fr;} }
+  .hero-cta{display:flex; flex-wrap:wrap; gap:10px; margin:-6px 0 18px;} .hero-cta .btn{font-size:15.5px; padding:13px 22px; display:inline-flex; align-items:center; gap:8px; text-decoration:none;} .hero-cta small{font-weight:600; font-size:12px; opacity:.8;}
+  .hero-cta .btn-soft{background:var(--paper); color:var(--forest-dark); border:1.5px solid var(--line);}
+  .hero-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 20px;} .hero-stats div{background:var(--paper); border:1.5px solid var(--line); border-radius:14px; padding:10px 6px; text-align:center; font-size:12.5px; line-height:1.3; color:var(--ink-soft);}
+  .card .hero-stats b{display:block; font:800 24px var(--display); color:var(--clay); background:none; padding:0;}
+  .how-go{cursor:pointer;} .how-go:hover{border-color:var(--gold);}
   .send-box{background:var(--paper); border:2px solid var(--gold); border-radius:18px; padding:16px 18px; margin-top:16px;}
   .send-box h3{margin:0 0 6px; font-size:18px; color:var(--forest-dark);}
   .send-item{display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4; color:var(--ink); padding:7px 0; border-bottom:1px solid var(--line); cursor:pointer;}
@@ -1353,11 +1358,13 @@ function fold(id,t,sub,nodes){ const d=h('details',{class:'fold rv',id}); d.inne
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives."));
+  { const cta=h('div',{class:'hero-cta'}); cta.append(h('button',{class:'btn btn-gold', onclick:()=>{ const el=$('step3'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'🚀 Je commence <small>2 minutes</small>'), h('a',{class:'btn btn-soft', href:'plan-mobilite.html#sondage'},'💭 Le quiz')); add(cta);
+    add(h('div',{class:'hero-stats'},`<div><b>${MEDIATEURS.length}</b>régions avec un médiateur</div><div><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div>`)); }
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="../video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="../video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   const mk=h('div',{class:'missing'});
   mk.innerHTML=`<p class="mk-t">Comment bien organiser <b>un territoire</b> sans <b>une équipe</b> de <b>médiateurs neutres</b>, capables d'animer les échanges entre tous <b>ses acteurs</b> ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région…</p>`;
   add(mk);
-  add(h('div',{class:'how'},`<p class="how-h">Comment ça marche ?</p><ol class="how-f"><li><i>🧭</i><span>Choisissez un <b>sujet</b></span></li><li><i>📊</i><span>Faites le <b>point</b></span></li><li><i>🎯</i><span>Notez vos <b>objectifs</b></span></li><li><i>🤝</i><span>Un <b>médiateur</b> vous oriente</span></li></ol>`));
+  add(h('div',{class:'how'},`<p class="how-h">Comment ça marche ?</p><ol class="how-f"><li><i>🧭</i><span>Choisissez un <b>sujet</b></span></li><li><i>📊</i><span>Faites le <b>point</b></span></li><li><i>🎯</i><span>Notez vos <b>objectifs</b></span></li><li class="how-go" onclick="openPros()" role="button" tabindex="0"><i>🤝</i><span>Un <b>médiateur</b> vous oriente →</span></li></ol>`));
   add(h('h2',{class:'step-h rv', id:'step3'},'<span>🚀</span>Par où commencer ?'));
   const g1=h('div',{class:'eg'}); g1.appendChild(h('p',{class:'eg-h'},'🗺️ Sur votre territoire'));
   const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Chacun a sa place'));

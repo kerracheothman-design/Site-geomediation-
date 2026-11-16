@@ -327,6 +327,17 @@
   .mail-btn:hover{background:var(--clay-light);}
   .mail-addr{font-size:12.5px; color:var(--ink-soft);}
   .card .mail-addr b{background:none; padding:0; user-select:all;}
+  .rc-sum{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:6px 0 10px;}
+  .rc-sum div{background:var(--paper); border:1.5px solid var(--line); border-radius:14px; padding:10px 6px; text-align:center; font-size:12.5px; color:var(--ink-soft);}
+  .rc-sum b{display:block; font:800 24px var(--display); color:var(--forest-dark);}
+  .rc-card{background:var(--paper); border:1.5px solid var(--line); border-radius:18px; padding:14px 16px; margin-top:12px;}
+  .rc-card.rc-obj{background:#FFF7DD; border-color:var(--gold);}
+  .rc-h{display:flex; justify-content:space-between; align-items:center; gap:8px; font:800 16px var(--display); color:var(--forest-dark); margin-bottom:6px;}
+  .rc-h small{font:700 12px var(--body); color:var(--clay); white-space:nowrap;}
+  .rc-bar{height:7px; border-radius:9px; background:var(--line); overflow:hidden; margin:0 0 8px;}
+  .rc-bar i{display:block; height:100%; background:linear-gradient(90deg,var(--forest),var(--gold)); border-radius:9px;}
+  .rc-next{background:#FFF7DD; border:1.5px solid var(--gold); border-radius:14px; padding:10px 12px; margin-top:10px; font-size:14px; color:var(--forest-dark); line-height:1.45;}
+  .rc-next > span{display:block; font:800 11.5px var(--body); letter-spacing:.08em; text-transform:uppercase; color:var(--clay); margin-bottom:3px;}
   .send-box{background:var(--paper); border:2px solid var(--gold); border-radius:18px; padding:16px 18px; margin-top:16px;}
   .send-box h3{margin:0 0 6px; font-size:18px; color:var(--forest-dark);}
   .send-item{display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4; color:var(--ink); padding:7px 0; border-bottom:1px solid var(--line); cursor:pointer;}
@@ -1449,23 +1460,38 @@ function renderLegal(){
 /* ================= RÉCAP ================= */
 function printBilan(sel, mode){
   const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
-  let g=null, body='';
-  sel.forEach(x=>{ if(x.g!==g){ if(g!==null) body+='</ul></section>'; body+='<section><h2>'+esc(x.g)+'</h2><ul>'; g=x.g; } body+='<li>'+esc(x.t)+'</li>'; });
-  if(g!==null) body+='</ul></section>';
+  let g=null, cur=null, body='';
+  const close=()=>{ if(g===null) return; body+='</ul>'; if(cur){ const n=nextStep(cur); if(n) body+='<div class="next"><span>👉 Mon prochain pas</span>'+(n.done?'🏆 Parcours terminé : partagez votre expérience autour de vous !':'Niveau '+(n.lv+1)+' · '+esc(n.nextName))+(n.defi?'<br><small>Défi : '+esc(n.defi)+'</small>':'')+'</div>'; } body+='</section>'; };
+  sel.forEach(x=>{ if(x.g!==g){ close(); g=x.g; cur=x.dk||null; const n=cur?nextStep(cur):null;
+      body+='<section'+(/objectifs/i.test(x.g)&&!cur?' class="obj"':'')+'><h2>'+esc(x.g)+(n?'<small>Niveau '+n.lv+' / '+n.max+'</small>':'')+'</h2>'+(n?'<div class="bar"><i style="width:'+Math.round(100*n.lv/n.max)+'%"></i></div>':'')+'<ul>'; }
+    body+='<li>'+esc(x.t)+'</li>'; });
+  close();
   if(!body) body='<p>Cochez au moins une ligne pour créer votre fiche.</p>';
+  const nP=new Set(sel.filter(x=>x.dk).map(x=>x.dk)).size;
+  const top='<div class="sum"><div><b>'+nP+'</b>'+(nP>1?'parcours':'parcours')+'</div><div><b>'+sel.length+'</b>réponses</div><div><b>'+esc(date)+'</b>mise à jour</div></div>';
+  body=top+body+'<div class="end"><b>Et maintenant ?</b> Chaque petit pas compte. Continuez à votre rythme sur le site, partagez cette fiche avec vos proches ou les acteurs de votre territoire, et un médiateur peut vous accompagner : <b>'+CONTACT_MAIL+'</b></div>';
   const doc=`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ma fiche Géomédiation – ${esc(date)}</title><style>
   body{font-family:'Segoe UI',system-ui,sans-serif;color:#241E14;max-width:720px;margin:32px auto;padding:0 20px;line-height:1.5}
   header{border-bottom:3px solid #C9A227;padding-bottom:12px;margin-bottom:22px}
   .brand{font-weight:800;letter-spacing:.16em;color:#1F3329;font-size:13px}
   h1{font-size:26px;color:#1F3329;margin:6px 0 2px} .date{color:#857C62;font-size:13px}
-  section{break-inside:avoid;margin-bottom:18px} h2{font-size:16px;color:#B5654A;margin:0 0 6px}
+  section{break-inside:avoid;margin-bottom:16px;background:#FBF8F1;border:1px solid #E6DCC8;border-radius:14px;padding:14px 18px}
+  section.obj{background:#FFF7DD;border-color:#C9A227}
+  h2{font-size:16px;color:#1F3329;margin:0 0 6px;display:flex;justify-content:space-between;gap:10px}
+  h2 small{font-size:12px;color:#B5654A;font-weight:700;white-space:nowrap}
+  .bar{height:7px;background:#E6DCC8;border-radius:9px;overflow:hidden;margin:0 0 8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#1F3329,#C9A227)}
+  .next{margin-top:10px;background:#fff;border-left:4px solid #C9A227;border-radius:8px;padding:8px 12px;font-size:13.5px;color:#1F3329}
+  .next span{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#B5654A}
+  .next small{color:#5A4F46}
+  .sum{display:flex;gap:10px;margin-bottom:18px}.sum div{flex:1;text-align:center;border:1px solid #E6DCC8;border-radius:12px;padding:8px;font-size:12px;color:#5A4F46}.sum b{display:block;font-size:20px;color:#1F3329}
+  .end{background:#1F3329;color:#F6F1E7;border-radius:14px;padding:14px 18px;font-size:14px;line-height:1.5}.end b{color:#E3C766}
   ul{margin:0;padding-left:20px} li{margin:3px 0;font-size:14px}
   footer{margin-top:28px;border-top:1px solid #DDD3BC;padding-top:10px;font-size:12px;color:#857C62}
   .tip{background:#F6F1E7;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:20px}
   @media print{.tip{display:none} body{margin:0}}
   </style></head><body>
   <p class="tip"><button onclick="print()" style="font:inherit;font-weight:800;border:0;border-radius:999px;padding:8px 14px;background:#C9A227;color:#1F3329;cursor:pointer">🖨️ Enregistrer en PDF</button> Dans la fenêtre d'impression, choisissez <b>« Enregistrer au format PDF »</b>.</p>
-  <header><div class="brand">GÉOMÉDIATION</div><h1>Ma fiche acteur</h1><div class="date">${esc(date)}</div></header>
+  <header><div class="brand">GÉOMÉDIATION</div><h1>📇 Ma fiche acteur</h1><div class="date">Votre organisation, pas à pas</div></header>
   ${body}
   <footer>Géomédiation · Inspirée de la géographie, science de l'organisation des territoires · ${CONTACT_MAIL} · ${esc(location.origin+location.pathname)}</footer>
   </body></html>`;
@@ -1474,12 +1500,14 @@ function printBilan(sel, mode){
   const w=window.open(url,'_blank');
   if(!w){ const a=h('a',{href:url, download:'ma-fiche-geomediation.html'}); document.body.appendChild(a); a.click(); a.remove(); }
 }
+function nextStep(dk){ const d=DREAMS.find(x=>x.k===dk); if(!d) return null; const p=progressOf(dk); const lv=Math.max(1,p.lv); const done=lv>=p.max;
+  return {d, lv, max:p.max, done, nextName: done?'':(d.levels[lv]||{}).name||LEVEL_NAMES[lv]||'', defi:d.defi||''}; }
 function recapItems(){
   const it=[]; const push=(g,t)=>it.push({id:g+'|'+t,g,t});
   if(state.depart) push('🧭 Mon point de départ', state.depart);
   (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
-  DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.t;
+  DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.t; const push=(g,t)=>it.push({id:g+'|'+t,g,t,dk:d.k});
     d.levels.forEach(L=>L.fields.forEach(f=>{ const v=a[f.k]; const lab=(f.label||'').replace(/<span[^>]*>.*?<\/span>/g,'').replace(/<[^>]+>/g,'').trim().replace(/ /g,' ');
       if(f.type==='chips' && v&&v.length) push(g, lab+' : '+v.join(', '));
       else if(f.type==='chips1' && typeof v==='string') push(g, (f.k==='question'?'LA question':f.k==='depart'?'Mon point de départ':lab.replace(/ ?\?$/,''))+' : '+v);
@@ -1510,11 +1538,27 @@ function renderRecap(){
   const items=recapItems();
   if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Choisissez d'abord ce que vous souhaitez améliorer\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }
   else {
-  add(h('p',{class:'lead'},"<b>Votre fiche vous appartient.</b> Utilisez-la quand vous le souhaitez\u00a0: avec vos proches, vos collaborateurs ou les acteurs de votre territoire. <b>Cochez</b> ce que vous souhaitez garder ou partager."));
-  const box=h('div',{class:'send-box'}); let g0=null;
-  items.forEach(x=>{ if(x.g!==g0){ box.appendChild(h('div',{class:'eg'},esc(x.g))); g0=x.g; }
-    const lab=h('label',{class:'send-item'}); const cb=h('input',{type:'checkbox'}); cb.checked=state.sendSel[x.id]!==false; cb.onchange=()=>{ state.sendSel[x.id]=cb.checked; save(); };
-    lab.append(cb, h('span',null,esc(x.t))); box.appendChild(lab); });
+  const started=DREAMS.filter(d=>items.some(x=>x.dk===d.k));
+  const nObj=items.filter(x=>/objectifs/i.test(x.g)||/^Mes objectifs/.test(x.t)).length;
+  add(h('p',{class:'lead'},"<b>Bravo, votre fiche prend forme&nbsp;!</b> Elle vous appartient&nbsp;: gardez-la, partagez-la, et avancez à votre rythme."));
+  const sum=h('div',{class:'rc-sum'});
+  [[started.length,started.length>1?'parcours commencés':'parcours commencé'],[nObj,nObj>1?'objectifs':'objectif'],[items.length,'réponses']].forEach(([n,t])=>sum.appendChild(h('div',null,'<b>'+n+'</b>'+t)));
+  add(sum);
+  add(h('p',{class:'small'},'<b>Cochez</b> ce que vous souhaitez garder ou partager.'));
+  const groups=[]; items.forEach(x=>{ let G=groups.find(y=>y.g===x.g); if(!G){ G={g:x.g, dk:x.dk, list:[]}; groups.push(G); } G.list.push(x); });
+  groups.forEach(G=>{ const c=h('div',{class:'rc-card'+(!G.dk&&/objectifs/i.test(G.g)?' rc-obj':'')}); const n=G.dk?nextStep(G.dk):null;
+    c.appendChild(h('div',{class:'rc-h'},esc(G.g)+(n?'<small>Niveau '+n.lv+' / '+n.max+'</small>':'')));
+    if(n) c.appendChild(h('div',{class:'rc-bar'},'<i style="width:'+Math.round(100*n.lv/n.max)+'%"></i>'));
+    G.list.forEach(x=>{ const lab=h('label',{class:'send-item'}); const cb=h('input',{type:'checkbox'}); cb.checked=state.sendSel[x.id]!==false; cb.onchange=()=>{ state.sendSel[x.id]=cb.checked; save(); }; lab.append(cb, h('span',null,esc(x.t))); c.appendChild(lab); });
+    if(n){ const nx=h('div',{class:'rc-next'}); nx.appendChild(h('span',null,'👉 Mon prochain pas'));
+      nx.appendChild(h('div',null, n.done?'🏆 <b>Parcours terminé&nbsp;!</b> Partagez votre expérience autour de vous.':'<b>Niveau '+(n.lv+1)+'</b> · '+esc(n.nextName)));
+      if(n.defi) nx.appendChild(h('div',{class:'small'},'Défi&nbsp;: '+esc(n.defi)));
+      if(!n.done) nx.appendChild(h('button',{class:'btn btn-primary', style:'padding:7px 14px;font-size:13px;margin-top:8px', onclick:()=>{ const d=n.d; go('dream',d.k); setTimeout(()=>openLevel(d,n.lv+1),80); }},'Continuer →'));
+      c.appendChild(nx); }
+    add(c); });
+  const todo=DREAMS.filter(d=>d.pick && !d.hidden && !started.includes(d));
+  if(todo.length){ const t=h('div',{class:'rc-card'}); t.appendChild(h('div',{class:'rc-h'},'🌱 À explorer ensuite')); const r=h('div',{class:'chip-row'}); todo.forEach(d=>r.appendChild(h('button',{class:'chip sm', onclick:()=>go('dream',d.k)},d.e+' '+esc(d.pick)))); t.appendChild(r); add(t); }
+  const box=h('div',{class:'send-box'}); box.appendChild(h('h3',null,'📥 Récupérer ou envoyer ma fiche'));
   const sel=()=>items.filter(x=>state.sendSel[x.id]!==false);
   const body=()=>{ let g=null; const L=['Voici ma fiche Géomédiation :']; sel().forEach(x=>{ if(x.g!==g){ L.push('', x.g); g=x.g; } L.push('- '+x.t); }); L.push('','geomediation.fr'); return L.join('\n'); };
   const msg=h('div',{class:'msg'}); msg.hidden=true; const sm='padding:8px 14px;font-size:13px';

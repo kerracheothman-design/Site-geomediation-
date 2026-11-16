@@ -694,7 +694,10 @@
   .sitenav{display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end;}
   .sitenav a{white-space:nowrap; color:var(--cream); text-decoration:none; font:700 13.5px var(--body); padding:8px 11px; border-radius:999px; opacity:.9; transition:background .2s, opacity .2s;}
   .sitenav a:hover{background:rgba(255,255,255,.12); opacity:1;}
-  @media (max-width:540px){ .top{flex-direction:column; align-items:flex-start;} .sitenav{justify-content:flex-start; margin-left:-9px; max-width:calc(100% + 9px);} .sitenav a{padding:6px 9px; font-size:13px;} }
+  @media (min-width:541px){ .top{flex-direction:column; align-items:stretch; gap:10px;} .sitenav{justify-content:flex-start; flex-wrap:wrap; gap:2px; margin-left:-9px;} .sitenav a{padding:6px 6px; font-size:12.5px;} .sitenav a.nav-fiche{order:-1; margin:0 6px 0 0; padding:7px 12px;} }
+  .sitenav a.nav-fiche{background:var(--gold); color:var(--forest-dark); opacity:1; margin-left:6px;} .sitenav a.nav-fiche:hover{background:var(--gold-light);}
+  @media (max-width:540px){ .top{flex-direction:column; align-items:stretch;} .sitenav{flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; margin:0 -16px; padding:2px 16px 6px; max-width:none; gap:6px; mask-image:linear-gradient(90deg,#000 88%,transparent);} .sitenav::-webkit-scrollbar{display:none;}
+    .sitenav a{padding:7px 12px; font-size:13px; background:rgba(255,255,255,.1);} .sitenav a.nav-fiche{order:-1; margin-left:0; background:var(--gold);} }
   .site-sec{margin-top:34px; padding-top:22px; border-top:2px solid var(--cream-dark);}
   .site-h{font:800 24px var(--display); color:var(--forest-dark); margin:0 0 14px; display:flex; align-items:center; gap:10px;}
   .ev{display:grid; grid-template-columns:minmax(0,200px) minmax(0,1fr); gap:20px; align-items:start; background:var(--paper); border-radius:18px; padding:16px; box-shadow:0 6px 20px rgba(31,51,41,.08);}
@@ -772,7 +775,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">Agir</a><a href="#" data-to="recap">📇 Ma fiche</a><a href="#" data-to="f-method">La méthode</a><a href="#" data-to="f-pros">Les pros</a><a href="#" data-to="f-med">Devenir médiateur</a><a href="#" data-to="contact">Contact</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">🚀 Agir</a><a href="plan-mobilite.html#sondage">💭 Quiz</a><a href="#" data-to="f-method">🧭 La méthode</a><a href="#" data-to="f-pros">🤝 Être accompagné</a><a href="#" data-to="f-med">🌟 Devenir médiateur</a><a href="#" data-to="contact">✉️ Contact</a><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1084,7 +1087,7 @@ const DREAMS = [
      parts:[{p:"Chaque équipe <b>partage</b> ce qui marche."}]}
   ]},
   {k:'idees', e:'🗺️', cat:'Territoire', defi:"Citez 3 acteurs près de chez vous, et dites-leur qu'un réseau existe.", pick:"L'organisation de nos territoires", sub:"Mon quartier, ma commune, ma région", dream:"un territoire où chacun trouve <b>ce dont il a besoin</b>, tout près de chez lui", t:"L'organisation de nos territoires", levels:[
-    L1({qui:'aux acteurs de votre territoire', pre:[{k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span class="q-hint">Précisez le nom : on vous met en relation avec les bons acteurs.</span>'},{k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)},{k:'role', type:'cards1', label:"Et pour ces échanges, vous aimeriez…", opts:DEGRES.slice(0,3)}, TEMOIGNAGE], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>. Grâce à une <b>gestion concertée</b>, chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', }),
+    L1({qui:'aux acteurs de votre territoire', pre:[{k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span class="q-hint">Précisez votre ou vos territoires : on vous met en relation avec les bons acteurs.</span>'},{k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)},{k:'role', type:'cards1', label:"Et pour ces échanges, vous aimeriez…", opts:DEGRES.slice(0,3)}, TEMOIGNAGE], intro:"Un territoire bien organisé, c'est une meilleure <b>cohérence</b> entre les enjeux <b>sociaux</b>, <b>économiques</b> et <b>environnementaux</b>. Grâce à une <b>gestion concertée</b>, chacun a sa place et valorise son <b>expertise d'usage</b> au service de l'<b>intérêt collectif</b>. <b>Posez la question aux acteurs de votre territoire\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, on met en commun les envies et les talents de chacun, et les habitants choisissent <b>ensemble</b> leurs projets.", labA:'Vos besoins, pour vous ou pour tous', labR:'Vos ressources, les vôtres ou celles du territoire', phA:'ex. une place en crèche, un marché le soir, des pistes cyclables…', phR:'ex. mes talents de bricoleur, une asso dynamique, un jardin partagé…', }),
     {intro:"Où en est l'organisation près de chez vous\u00a0? Évaluez chaque étape, de <b>0</b> (à imaginer) à <b>5</b> (bien en place). Exemple\u00a0: pour «\u00a0Besoins\u00a0», a-t-on demandé à chacun ce qui lui manque\u00a0?",
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]},
     {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions. Objectif : répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin : suffisamment petite pour se réunir facilement, suffisamment grande pour porter un vrai <b>plan de développement économique</b> cohérent. Et le <b>Sud-Ouest</b> a les atouts pour inspirer une telle <b>transition organisationnelle et démocratique</b>. Ses atouts : sa <b>culture girondine</b>, son <b>bassin hydrographique</b> et son potentiel d'<b>économies d'échelle</b>. De quoi proposer des prix raisonnables tout en restant compétitifs. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
@@ -1138,7 +1141,7 @@ const DREAMS = [
   {k:'reseau', e:'🌐', cat:'Réseau', defi:"Invitez un contact à découvrir le réseau, avec le message tout prêt du niveau 2.", star:true, dream:"rejoindre un <b>réseau commun</b> qui facilite la coopération entre les <b>échelles</b>, les <b>thématiques</b> et les <b>acteurs</b>", t:"Pour une meilleure organisation de notre société", pick:"Rejoindre le réseau", levels:[
     {intro:"En plus de vos <b>thématiques respectives</b>, notre réseau vous permet de vous rapprocher d'acteurs qui ont, comme vous, une <b>approche systémique et opérationnelle</b>. Objectif : <b>accompagner au mieux la transition</b> de nos territoires.",
      fields:[{k:'acteur', type:'cardsN', label:'Vous êtes… (plusieurs réponses possibles)', opts:ACTEURS},
-             {k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span class="q-hint">Précisez le nom : on vous met en relation avec les bons acteurs.</span>'},
+             {k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span class="q-hint">Précisez votre ou vos territoires : on vous met en relation avec les bons acteurs.</span>'},
              {k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]},
     {name:"Je m'implique", intro:"Une seule <b>mission</b> suffit pour démarrer.",
      fields:[{k:'degre', type:'cards1', label:"Comment aimeriez-vous vous impliquer\u00a0?", opts:DEGRES},
@@ -1262,7 +1265,7 @@ function field(dk, f){
   }
   if(f.type==='stepsEvalMulti'){
     const all=a[f.k]||(a[f.k]={}); const sel=(a[f.src]||[]); const list=sel.length?sel:['Votre territoire'];
-    if(!sel.length) w.appendChild(h('p',{class:'hint'},"Astuce\u00a0: choisissez vos lieux au niveau 1, et vous pourrez les noter un par un."));
+    if(!sel.length) w.appendChild(h('p',{class:'hint'},"Astuce\u00a0: précisez votre ou vos territoires au niveau 1, et vous pourrez les noter un par un."));
     const fb=h('div'); const upd=()=>paintFb(fb, CYCLE.map(c=>({n:c.n, v:Math.max(0,...list.map(e=>(all[e]||{})[c.k]||0)), tip:CYCLE_TIPS[c.k]})));
     list.forEach(e=>{ const p=h('div',{class:'dom-row'}); p.appendChild(h('div',{class:'dom-top'},`<span>📍 ${esc(echLabel(a,e))}</span>`)); stepsRows(p, all[e]||(all[e]={}), upd); w.appendChild(p); });
     w.appendChild(fb); upd();
@@ -1377,7 +1380,7 @@ function renderHome(){
     <div class="pq"><b>🤝 Associations</b><span>Relier vos actions aux autres acteurs et gagner en <b>impact</b>.</span></div></div>`));
   F2.push(h('button',{class:'btn btn-soft', style:'margin-top:12px', onclick:openPros},'👥 Voir les professionnels du réseau'));
   add(fold('f-accomp','🤝 Faire le point et être accompagné','Votre auto-évaluation, un médiateur pour vous orienter',F2));
-  add(fold('f-pros','👥 Les professionnels du réseau','Des compétences pour vous accompagner, à chaque échelle',[prosNode()]));
+  add(fold('f-pros','🤝 Être accompagné','Les médiateurs de votre région et les professionnels du réseau',[prosNode()]));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>💪 On a un vrai pouvoir quand on apprend à le partager intelligemment.</b></p><p><b>🧩 Dans une organisation optimale, tout le monde a sa place.</b></p><p>Chacun y contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`
@@ -1571,7 +1574,7 @@ function recapItems(){
   Object.values(state.sondage||{}).forEach(x=>{ if(x&&x.r) push('💭 Mes avis', x.q+' : '+x.r); });
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.t; const push=(g,t)=>it.push({id:g+'|'+t,g,t,dk:d.k});
-    const ENG=['idees','reseau'].includes(d.k); if(ENG){ const role=a.role||a.degre; const th=a.domaine||[]; const ec=(a.echelle||[]).map(e=>e==='Monde'?e:((a.lieux||{})[e]?e+' ('+a.lieux[e]+')':e+' (nom à préciser)'));
+    const ENG=['idees','reseau'].includes(d.k); if(ENG){ const role=a.role||a.degre; const th=a.domaine||[]; const ec=(a.echelle||[]).map(e=>e==='Monde'?e:((a.lieux||{})[e]?e+' ('+a.lieux[e]+')':e+' (territoire à préciser)'));
       if(role||th.length||ec.length) { const r=(role||'').replace(/^\S+\s/,''); const verb={Suivre:'Suivre les échanges',Participer:'Participer aux échanges',Animer:'Animer les échanges'}[r]||(r||'Échanges'); push(g, '🗣️ Mon engagement : '+verb+(th.length?' sur '+th.join(', '):'')+(ec.length?' · à l\'échelle : '+ec.join(', '):'')); } }
     d.levels.forEach(L=>L.fields.forEach(f=>{ const v=a[f.k]; if(ENG && ['role','degre','domaine','echelle'].includes(f.k)) return; const lab=(f.label||'').replace(/<span[^>]*>.*?<\/span>/g,'').replace(/<[^>]+>/g,'').trim().replace(/ /g,' ');
       if(f.type==='chips' && v&&v.length) push(g, lab+' : '+v.join(', '));
@@ -1617,7 +1620,7 @@ function renderRecap(){
     {ok:started.length>0, t:'🧭 Lancer un parcours', go:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},
     {ok:SPHERES.some(x=>T[x.k]), t:'📊 Faire mon auto-évaluation', go:()=>{ state.optOpen=true; go('home'); setTimeout(()=>{ const el=document.querySelector('.test'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },150); }}];
   const unnamed=DREAMS.find(d=>{ const a=state.a[d.k]||{}; return (a.echelle||[]).some(e=>e!=='Monde' && !((a.lieux||{})[e]||'').trim()); });
-  if(unnamed) crit.push({ok:false, t:'📍 Préciser le nom de mes lieux', go:()=>{ go('dream',unnamed.k); setTimeout(()=>openLevel(unnamed,1),80); }});
+  if(unnamed) crit.push({ok:false, t:'📍 Préciser mon ou mes territoires', go:()=>{ go('dream',unnamed.k); setTimeout(()=>openLevel(unnamed,1),80); }});
   const meter=h('div',{class:'rc-meter'});
   const paintMeter=()=>{ const C2=state.contact||{}; crit[0].ok=!!((C2.nom||'').trim()||(C2.mail||'').trim()||(C2.tel||'').trim());
     const pct=Math.round(100*crit.filter(c=>c.ok).length/crit.length); meter.innerHTML='';
@@ -1737,7 +1740,7 @@ function airy(){ document.querySelectorAll('#cardRoot .lvl p, #cardRoot .lvl-int
   p.innerHTML=parts.map(x=>`<span class="s">${x}</span>`).join(''); p.classList.add('airy'); }); }
 new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{childList:true,subtree:true}); airy();
 
-document.querySelectorAll('.sitenav a').forEach(a=>a.onclick=e=>{ e.preventDefault(); const id=a.dataset.to; if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };
+document.querySelectorAll('.sitenav a[data-to]').forEach(a=>a.onclick=e=>{ e.preventDefault(); const id=a.dataset.to; if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };
   if(state.view!=='home'){ go('home'); setTimeout(goTo,350); } else goTo(); });
 const rvIO=('IntersectionObserver' in window)? new IntersectionObserver(es=>es.forEach(x=>{ if(x.isIntersecting){ x.target.classList.add('in'); rvIO.unobserve(x.target);} }),{threshold:.12}) : null;
 new MutationObserver(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'))).observe(document.getElementById('cardRoot'),{childList:true,subtree:true});

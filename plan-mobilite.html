@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plan mobilité : un exemple de plan de développement territorial · Géomédiation</title>
+<meta name="description" content="Se déplacer facilement, partout, en toute sécurité : un exemple concret de plan de développement territorial construit par la concertation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#2F4A3C;--forest-dark:#1F3329;--gold:#C9A227;--gold-light:#E0C15C;--clay:#B5654A;--cream:#F6F1E7;--paper:#FFFDF8;--ink:#241E14;--line:#DDD3BC;--soft:#5A4F46;
+--display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;--body:'Figtree','Segoe UI',system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--forest-dark);font:16px/1.55 var(--body);color:var(--ink)}
+.wrap{max-width:760px;margin:0 auto;padding:14px}
+.top{display:flex;justify-content:space-between;align-items:center;color:var(--gold-light);font:800 14px var(--body);letter-spacing:.14em;padding:6px 4px 14px}
+.top a{color:var(--cream);text-decoration:none;font-weight:700;letter-spacing:0;border:1.5px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 14px;font-size:13.5px}
+.card{background:var(--cream);border-radius:22px;padding:22px 18px;margin-bottom:14px}
+.kicker{font:800 11.5px var(--body);letter-spacing:.13em;text-transform:uppercase;color:var(--clay);margin:0 0 6px}
+h1{font:800 30px/1.1 var(--display);color:var(--forest-dark);margin:0 0 10px}
+h1 em{font-style:normal;color:var(--clay)}
+h2{font:800 21px/1.2 var(--display);color:var(--forest-dark);margin:0 0 8px}
+p{margin:0 0 10px}
+b{color:var(--forest-dark)}
+.lead{font-size:17px;color:var(--soft)}
+/* sondage */
+.sd{background:linear-gradient(135deg,var(--forest),var(--forest-dark));color:var(--cream)}
+.sd h2{color:var(--gold-light)} .sd b{color:var(--gold-light)} .sd .kicker{color:var(--gold-light)}
+.q{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px;margin-top:12px}
+.q .qt{font-weight:700;margin-bottom:10px;font-size:15.5px}
+.q .qt small{display:block;font-weight:500;opacity:.8;margin-top:4px;font-size:14px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opts button{font:600 14.5px/1.4 var(--body);text-align:left;background:var(--paper);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:10px 12px;cursor:pointer}
+.opts button.on{border-color:var(--gold);background:#FFF7DD}
+.fb{display:none;margin-top:10px;font-size:14px;background:rgba(224,193,92,.15);border-radius:10px;padding:8px 10px}
+.q.done .fb{display:block}
+.prog{height:7px;border-radius:9px;background:rgba(255,255,255,.18);overflow:hidden;margin:6px 0 2px}.prog i{display:block;height:100%;background:var(--gold-light);width:0;transition:width .4s}
+.thanks{display:none;margin-top:14px;background:var(--gold);color:var(--forest-dark);border-radius:14px;padding:12px 14px;font-weight:700}
+.thanks.on{display:block}
+/* plan */
+details{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;margin-top:10px;overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:10px;font:800 16.5px/1.25 var(--display);color:var(--forest-dark)}
+summary::-webkit-details-marker{display:none}
+summary .e{font-size:22px}
+summary .s{display:block;font:500 13.5px var(--body);color:var(--soft);margin-top:2px}
+summary:after{content:'+';margin-left:auto;flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--forest-dark);display:flex;align-items:center;justify-content:center;font:800 18px var(--body)}
+details[open] summary:after{content:'–'}
+.in{padding:0 16px 16px;font-size:15px}
+.in ul{margin:6px 0 10px;padding-left:20px}.in li{margin-bottom:5px}
+.pill{background:#FFF7DD;border-left:4px solid var(--gold);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:14.5px}
+.warn{background:#F8E9E2;border-left:4px solid var(--clay);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:14.5px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th{background:var(--forest-dark);color:#fff;text-align:left;padding:7px 8px;font-weight:700}
+td{border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
+td:first-child{font-weight:700;color:var(--forest-dark)} .law td:first-child{font-weight:500;color:var(--ink)}
+.chk{list-style:none;padding:0!important}.chk li{padding-left:26px;position:relative}.chk li:before{content:'✓';position:absolute;left:0;top:0;width:19px;height:19px;border-radius:50%;background:var(--forest);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+.cta{background:var(--clay);color:#fff;border-radius:20px;padding:20px 18px;text-align:center}
+.cta h2{color:#fff}.cta b{color:#fff}
+.btn{display:inline-block;font:800 15px var(--body);border-radius:999px;padding:12px 20px;text-decoration:none;margin:6px 4px 0}
+.btn-gold{background:var(--gold);color:var(--forest-dark)}.btn-soft{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.foot{text-align:center;color:#C9C1B4;font-size:12.5px;padding:10px 0 30px}.foot a{color:#E0C15C}
+@media print{body{background:#fff}.top a,.cta .btn,.sd{display:none}details{border:none}details .in{display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>GÉOMÉDIATION</span><a href="./">← Retour au site</a></div>
+
+  <section class="card sd" id="sondage">
+    <div class="kicker">Avant de commencer · 1 minute</div>
+    <h2>Et vous, qu'en pensez-vous ?</h2>
+    <p>Quelques affirmations : choisissez la réponse qui vous parle. <b>Il n'y a pas de mauvaise réponse.</b></p>
+    <div class="prog"><i id="prog"></i></div>
+    <div id="qs"></div>
+    <div class="thanks" id="thanks">Merci ! Vos avis s'ajoutent à <a href="./#recap" style="color:var(--forest-dark)">votre fiche acteur</a>. Et maintenant, place au concret : voici à quoi peut ressembler un plan construit ensemble 👇</div>
+  </section>
+
+  <section class="card">
+    <div class="kicker">Exemple de plan de développement territorial</div>
+    <h1>Se déplacer <em>facilement, partout</em>, en toute sécurité</h1>
+    <p class="lead">De chez soi à sa destination, <b>chaque trajet est sécurisé, fluide et efficace</b>, pour tous les usagers de l'espace public.</p>
+    <p>Ce plan est un <b>exemple</b> : il montre comment la <b>concertation</b> entre habitants, associations, élus, entreprises, scientifiques et médias permet de bâtir des <b>projets reliés entre eux</b>, au service des besoins réels. Touchez chaque thème pour le découvrir.</p>
+
+    <details><summary><span class="e">🤝</span><span>La méthode : une concertation intégrale<span class="s">Tous les acteurs, des projets reliés entre eux</span></span></summary><div class="in">
+      <p>Chacun dit simplement <b>où ça coince</b> et <b>ce qui l'aiderait</b>. Associations, citoyens, élus, entreprises, scientifiques et médias coopèrent pour proposer des <b>projets intégrés</b>, regroupés dans un <b>plan de développement territorial</b>.</p>
+      <p>Le cercle vertueux : en rapprochant ce que l'on <b>consomme</b> et ce que l'on <b>produit</b> sur le territoire, on crée des emplois, on finance plus facilement les services, et chacun y trouve son intérêt.</p>
+      <div class="pill">Le résultat : un dynamisme <b>économique et culturel</b>, le respect de l'<b>environnement</b>, et des solutions plus faciles d'accès pour tous.</div>
+    </div></details>
+
+    <details><summary><span class="e">🌳</span><span>Le centre apaisé<span class="s">Exemple bordelais : de la rive gauche aux boulevards</span></span></summary><div class="in">
+      <p>À l'intérieur des boulevards, la ville se vit <b>à vélo, à pied et en transports en commun</b> :</p>
+      <ul><li>vélos classiques, <b>vélos cargo</b>, <b>vélos multiplaces</b> pour les familles et les groupes ;</li><li>trottinettes et <b>scooters électriques</b> ;</li><li>bus et tram, <b>gratuits et fréquents</b>.</li></ul>
+      <p><b>Les véhicules motorisés restent possibles</b> pour les besoins réels : résidents, situations particulières, déménagements, grosses livraisons, artisans, secours et ambulances, bus.</p>
+      <div class="pill">Partout, voitures limitées à <b>30 km/h</b>, sauf véhicules d'urgence.</div>
+    </div></details>
+
+    <details><summary><span class="e">🚌</span><span>Transports en commun gratuits et fréquents<span class="s">Plus de cadence, de nouvelles lignes</span></span></summary><div class="in">
+      <ul><li><b>Plus de cadence</b> : on n'attend plus, on part.</li><li><b>De nouvelles lignes</b> là où la concertation montre un besoin.</li><li><b>La gratuité</b> : déjà en place à Dunkerque depuis 2018, à Montpellier pour ses habitants depuis fin 2023, et dans tout le Luxembourg depuis 2020.</li></ul>
+      <p>La leçon de ces villes : la gratuité attire, mais c'est <b>la fréquence et les lignes</b> qui font lâcher la voiture. Les deux vont ensemble.</p>
+    </div></details>
+
+    <details><summary><span class="e">🚲</span><span>Un réseau vélo continu et sécurisé<span class="s">Même aux carrefours, dans presque toutes les rues</span></span></summary><div class="in">
+      <ul><li><b>Une piste continue, même aux carrefours</b> : ce sont les voitures qui cèdent le passage, comme aux Pays-Bas.</li><li><b>Des pistes larges avec des pointillés</b> : un côté pour rouler tranquillement, l'autre pour doubler.</li><li><b>Presque toutes les rues accessibles à vélo</b>, au moins dans un sens.</li></ul>
+      <table><tr><th>Espace</th><th>Vitesse</th></tr><tr><td>Rues piétonnes balisées</td><td>moins de 15 km/h</td></tr><tr><td>Toutes les autres rues en ville</td><td>30 km/h</td></tr></table>
+    </div></details>
+
+    <details><summary><span class="e">🛵</span><span>Motos et scooters<span class="s">Une place à part entière</span></span></summary><div class="in">
+      <p>Les deux-roues motorisés doivent aussi trouver leur place, sans gêner les cyclistes ni les piétons. Deux pistes, à tester par la concertation :</p>
+      <ul><li><b>des voies dédiées</b> sur les grands axes ;</li><li><b>l'accès aux couloirs de bus</b>, là où les vélos ont leur propre piste séparée. Quelques villes l'ont déjà expérimenté : on évalue la sécurité avant de généraliser.</li></ul>
+    </div></details>
+
+    <details><summary><span class="e">🅿️</span><span>Garer son vélo, partout<span class="s">Immeubles, quartiers, entreprises, gares</span></span></summary><div class="in">
+      <ul><li><b>Chaque immeuble</b> : un local vélo sécurisé aux normes, déjà prévu pour le neuf, à étendre à l'existant.</li><li><b>Chaque quartier</b> : abris et box selon les besoins des habitants.</li><li><b>Chaque entreprise</b> : un espace pour les vélos de ses salariés.</li><li><b>Chaque gare</b> : un parking sécurisé pour combiner train, tram et vélo.</li></ul>
+    </div></details>
+
+    <details><summary><span class="e">🎥</span><span>La sécurité, avec l'intelligence artificielle<span class="s">L'IA détecte, les humains réparent et décident</span></span></summary><div class="in">
+      <p><b>Des caméras partout</b> dans l'espace public repèrent les anomalies : verre brisé, obstacle, nid-de-poule, accident. L'alerte part tout de suite vers les équipes d'entretien, et les images permettent de <b>comprendre ce qui s'est passé</b> en cas d'accident.</p>
+      <div class="warn"><b>Un cadre clair, pour la confiance.</b> Les images sont protégées par le RGPD et la CNIL, la reconnaissance faciale est interdite, et l'analyse par algorithme n'est autorisée qu'à titre expérimental. Le plan prévoit des règles publiques : qui accède aux images, pour quoi, combien de temps.</div>
+    </div></details>
+
+    <details><summary><span class="e">⚖️</span><span>Revoir la loi : aujourd'hui, c'est le flou<span class="s">Pour sécuriser chaque trajet, de porte à porte</span></span></summary><div class="in">
+      <table class="law"><tr><th>Ce qui ne va pas</th><th>Ce qu'on propose</th></tr>
+        <tr><td>On trouve en vente des vélos et des kits qui ne respectent pas les normes.</td><td>Contrôler la vente, en ligne comme en magasin.</td></tr>
+        <tr><td>L'assistance électrique s'arrête à 25 km/h, mais sans assistance on peut rouler plus vite. Et un vélo plus rapide devient un cyclomoteur, interdit sur les pistes.</td><td>Des règles simples et cohérentes, et une <b>homologation simplifiée</b> des vélos rapides, avec accès à la voie de dépassement des pistes larges.</td></tr>
+        <tr><td>Beaucoup de piétons ignorent qu'ils ne doivent pas marcher sur les pistes cyclables, sauf s'ils n'ont pas le choix.</td><td>Informer, et marquer clairement chaque espace au sol.</td></tr>
+        <tr><td>Motos et scooters n'ont pas de place prévue.</td><td>Voies dédiées ou couloirs de bus, après expérimentation.</td></tr>
+      </table>
+    </div></details>
+
+    <details><summary><span class="e">🏭</span><span>Une filière régionale<span class="s">Produire, réparer, recycler sur place</span></span></summary><div class="in">
+      <p>Vélos, vélos cargo, scooters et batteries <b>produits dans la région</b>, avec des technologies durables et faciles à recycler (batteries LFP et sodium-ion). Des <b>ateliers de réparation</b> dans chaque quartier, et le <b>recyclage</b> sur place.</p>
+      <p>Résultat : des <b>emplois locaux</b>, des prix compétitifs grâce aux économies d'échelle, et une région qui inspire les autres.</p>
+    </div></details>
+
+    <details><summary><span class="e">✅</span><span>A-t-on pensé à tout le monde ?<span class="s">Sécurité, fluidité, efficacité, pour chaque usager</span></span></summary><div class="in">
+      <ul class="chk">
+        <li><b>Piétons</b> : trottoirs dégagés, traversées sûres, rues piétonnes balisées.</li>
+        <li><b>Enfants</b> : apprendre à rouler à l'école, rues apaisées devant les écoles, pédibus et vélobus.</li>
+        <li><b>Seniors et handicaps</b> : vélos adaptés, tricycles, bus et arrêts accessibles.</li>
+        <li><b>Familles</b> : vélos cargo et multiplaces, aides à l'achat ou à la location.</li>
+        <li><b>Cyclistes</b> : réseau continu, stationnement sûr, ateliers de réparation.</li>
+        <li><b>Livreurs et artisans</b> : livraisons en vélo cargo, accès réservés pour les gros volumes.</li>
+        <li><b>Secours et services</b> : passage prioritaire partout.</li>
+        <li><b>Résidents et commerçants</b> : accès garanti, stationnement résident.</li>
+        <li><b>La nuit</b> : éclairage, sécurité, notamment pour les femmes.</li>
+        <li><b>Hors des villes</b> : cars express, transport à la demande, véloroutes entre communes.</li>
+        <li><b>Tout le monde</b> : un seul billet et une seule appli pour bus, train, vélo et voiture partagée.</li>
+      </ul>
+    </div></details>
+
+    <details><summary><span class="e">🌐</span><span>Et demain : un plan de développement général<span class="s">Tout relier, au service de tous</span></span></summary><div class="in">
+      <p>La mobilité n'est qu'un exemple. La même méthode permettra bientôt un <b>plan de développement général</b> qui relie <b>agriculture</b>, <b>finance</b>, <b>gestion des ressources</b>, <b>industrie</b>, <b>infrastructures</b> et <b>services</b>.</p>
+      <div class="pill">Objectif : répartir de manière équitable la capacité de nos territoires à <b>produire ce dont la population a besoin</b>.</div>
+    </div></details>
+  </section>
+
+  <section class="cta">
+    <h2>Envie de construire ce plan avec nous ?</h2>
+    <p>Habitant, association, élu, entreprise, scientifique ou média : <b>chacun a sa place</b> dans la concertation.</p>
+    <a class="btn btn-gold" href="./#agir">🚀 Je participe</a>
+    <a class="btn btn-soft" href="mailto:geomediation@live.fr?subject=Plan%20mobilit%C3%A9">✉️ Écrire à un médiateur</a>
+  </section>
+  <div class="foot">Géomédiation · <a href="./">geomediation.fr</a> · Inspirée de la géographie, science de l'organisation des territoires</div>
+</div>
+
+<script>
+const STORE='geomediation_reves_v1';
+const QS=[
+ {k:'orga', q:"Si la société était bien organisée, aurions-nous moins de problèmes et un accès plus facile aux solutions, dans l'intérêt de tous ?", short:"Une société bien organisée", o:["Oui, j'en suis convaincu","Oui, en partie","Non, je ne crois pas","Je ne sais pas"], fb:"La plupart de nos problèmes viennent de notre organisation : c'est une bonne nouvelle, car l'organisation, ça s'apprend."},
+ {k:'riches', q:"« Les riches n'ont pas intérêt à ce que le système change. »", short:"Les riches et le changement", o:["D'accord : ils ne veulent pas perdre une grande partie de leur patrimoine immobilier, foncier et boursier","Pas d'accord : ils aimeraient que le système change, mais aucun modèle économique n'est proposé, alors ils continuent de tirer la couverture à eux","Je ne sais pas"], fb:"Un nouveau modèle économique, construit ensemble, peut rassembler bien au-delà des clivages."},
+ {k:'produire', q:"« Pour changer la société, il faut produire autant que possible ce dont on a besoin. »", sub:"On ne produit que si on vend, on ne vend que si les prix sont compétitifs, face à la Chine notamment. La clé : les économies d'échelle. Et c'est à l'échelle d'une région qu'un plan de développement peut démarrer tout de suite, pour inspirer ensuite les partenaires nationaux et internationaux.", short:"Produire ce dont on a besoin", o:["D'accord","Pas d'accord","À débattre"], fb:"C'est tout l'esprit du plan de développement territorial, dont voici un exemple ci-dessous."},
+ {k:'psycho', q:"« Tout ce que je vis est la conséquence de ma psychologie, construite par mon environnement. »", short:"Psychologie et environnement", o:["D'accord","Pas d'accord","En partie"], fb:"Prendre soin de soi et de son environnement, en même temps : c'est le cœur du parcours « Mon organisation personnelle »."},
+ {k:'affectif', q:"Pour vous, l'équilibre affectif, c'est plutôt…", short:"L'équilibre affectif", o:["Utiliser des choses extérieures pour se sentir bien : argent, relations, sport…","L'équilibre du féminin et du masculin, de la délicatesse et de l'autorité : accepter la réalité telle qu'elle est, et savoir qu'on peut toujours l'améliorer","Je ne sais pas"], fb:"Cet amour de soi et de la vie permet de profiter de tous les plaisirs sans dépendance, avec moins de risques et de problèmes."}
+];
+function load(){ try{ return JSON.parse(localStorage.getItem(STORE)||'null')||{}; }catch(e){ return {}; } }
+function store(sd){ try{ const s=load(); s.sondage=sd; localStorage.setItem(STORE,JSON.stringify(s)); }catch(e){} }
+let sd=(load().sondage)||{};
+const box=document.getElementById('qs');
+function paint(){
+  box.innerHTML='';
+  QS.forEach((x,i)=>{ const ans=sd[x.k]&&sd[x.k].r; const d=document.createElement('div'); d.className='q'+(ans?' done':'');
+    d.innerHTML='<div class="qt">'+(i+1)+'. '+x.q+(x.sub?'<small>'+x.sub+'</small>':'')+'</div>';
+    const o=document.createElement('div'); o.className='opts';
+    x.o.forEach(t=>{ const b=document.createElement('button'); b.textContent=t; if(ans===t) b.className='on'; b.onclick=()=>{ sd[x.k]={q:x.short, r:t}; store(sd); paint(); }; o.appendChild(b); });
+    d.appendChild(o); const fb=document.createElement('div'); fb.className='fb'; fb.textContent='💡 '+x.fb; d.appendChild(fb); box.appendChild(d); });
+  const n=QS.filter(x=>sd[x.k]).length; document.getElementById('prog').style.width=Math.round(100*n/QS.length)+'%';
+  document.getElementById('thanks').className='thanks'+(n===QS.length?' on':'');
+}
+paint();
+</script>
+</body>
+</html>

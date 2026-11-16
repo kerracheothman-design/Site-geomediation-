@@ -352,6 +352,8 @@
   .rc-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;} .rc-grid .rc-wide{grid-column:1/-1;}
   .rc-grid input[type=email],.rc-grid input[type=tel]{width:100%; font:14px var(--body); padding:10px 12px; border:1.5px solid var(--line); border-radius:10px; background:#fff; color:var(--ink); outline:none;}
   @media (max-width:540px){ .rc-grid{grid-template-columns:1fr;} }
+  .ex-doc{display:flex; align-items:center; gap:12px; margin-top:12px; padding:12px 14px; border-radius:14px; background:var(--forest); color:var(--cream); text-decoration:none; font-size:24px;}
+  .ex-doc span{flex:1; font-size:14.5px; line-height:1.35;} .card .ex-doc b{display:block; color:var(--gold-light); background:none; padding:0;} .ex-doc small{display:block; font-size:12.5px; opacity:.85;} .ex-doc i{font-style:normal; font-size:20px; color:var(--gold-light);}
   .send-box{background:var(--paper); border:2px solid var(--gold); border-radius:18px; padding:16px 18px; margin-top:16px;}
   .send-box h3{margin:0 0 6px; font-size:18px; color:var(--forest-dark);}
   .send-item{display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4; color:var(--ink); padding:7px 0; border-bottom:1px solid var(--line); cursor:pointer;}
@@ -1051,6 +1053,7 @@ const DREAMS = [
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]},
     {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions. Objectif : répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin : suffisamment petite pour se réunir facilement, suffisamment grande pour porter un vrai <b>plan de développement économique</b> cohérent. Et le <b>Sud-Ouest</b> a les atouts pour inspirer une telle <b>transition organisationnelle et démocratique</b>. Ses atouts : sa <b>culture girondine</b>, son <b>bassin hydrographique</b> et son potentiel d'<b>économies d'échelle</b>. De quoi proposer des prix raisonnables tout en restant compétitifs. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
      details:[
+      {sum:"+ Un exemple concret : le plan mobilité", html:`<p>Transports gratuits et fréquents, réseau vélo continu, centre apaisé, sécurité, filière régionale : un <b>plan de développement territorial</b> construit par la concertation.</p><a class="ex-doc" href="plan-mobilite.html">🚲 <span><b>Ouvrir le plan mobilité</b><small>Avec un petit sondage pour commencer</small></span><i>→</i></a>`},
       {sum:"+ Pourquoi une région, et pourquoi le Sud-Ouest", html:`<p><b>Les solutions existent déjà partout.</b> L'enjeu : les déployer à la bonne échelle, avec des <b>feuilles de route</b> et des <b>marchés intentionnels</b> (prospectifs). Ils sont validés techniquement par les <b>acteurs</b>, puis par les <b>citoyens</b>, pour garantir un <b>business plan territorial pérenne</b>.</p>
         <p><b>Les expériences locales l'ont prouvé.</b> Chiapas au Mexique, Rojava en Syrie… Chacune a montré qu'on peut vivre autrement. Et partout, la <b>coopération</b> fait ses preuves : les <b>villes en transition</b> en Angleterre, les <b>coopératives d'énergie</b> en Scandinavie, la monnaie <b>WIR</b> qui soutient l'économie suisse depuis 1934… L'enjeu n'est ni <b>nationaliste</b> ni <b>indépendantiste</b> : c'est l'<b>organisation</b>, la <b>gouvernance</b> et la <b>démocratie directe</b>. Mais sans une <b>région industrielle</b> qui s'inspire de cette organisation, il ne peut y avoir de <b>modèle économique</b> capable d'inspirer le monde.</p>
         <p><b>La région, le bon tremplin.</b> Assez grande pour produire intelligemment ce dont on a besoin, assez proche pour rester à taille humaine. Une région pilote inspire tout un pays, qui inspire à son tour le monde. Plus elle coopère, plus elle redistribue vers départements et communes (<b>subsidiarité</b>). C'est l'esprit du <b>biorégionalisme</b>.</p>
@@ -1323,7 +1326,7 @@ function renderHome(){
   const l2=h('div',{class:'picks'}); l2.append(pickBtn('entreprise',0,'Avec mes collaborateurs'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('pensee',2,'Pour moi'));
   g2.appendChild(l2); add(g2);
   const me=h('div',{class:'method'});
-  me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
+  me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details><a class="ex-doc" href="plan-mobilite.html">🚲 <span><b>Un exemple concret : le plan mobilité</b><small>Un plan de développement construit par la concertation · 1 min de sondage pour commencer</small></span><i>→</i></a>`;
   add(fold('f-method','🔁 La méthode en 7 étapes','Le toboggan de la coopération',[me])); wireSlide();
   const F2=[h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'), testBlock()];
   const ac=h('div',{class:'accomp'});
@@ -1529,6 +1532,7 @@ function recapItems(){
   const C=state.contact||{}; CONTACT_FIELDS.forEach(([k,l])=>{ const v=(C[k]||'').trim(); if(v) push('👤 Mes coordonnées', l+' : '+v); });
   if(state.depart) push('🧭 Mon point de départ', state.depart);
   (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
+  Object.values(state.sondage||{}).forEach(x=>{ if(x&&x.r) push('💭 Mes avis', x.q+' : '+x.r); });
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.t; const push=(g,t)=>it.push({id:g+'|'+t,g,t,dk:d.k});
     const ENG=['idees','reseau'].includes(d.k); if(ENG){ const role=a.role||a.degre; const th=a.domaine||[]; const ec=(a.echelle||[]).map(e=>e==='Monde'?e:((a.lieux||{})[e]?e+' ('+a.lieux[e]+')':e+' (nom à préciser)'));
@@ -1685,7 +1689,10 @@ document.addEventListener('focusin',e=>{ if(/^(TEXTAREA|INPUT)$/.test(e.target.t
 document.addEventListener('focusout',()=>document.body.classList.remove('typing'));
 { const f=h('button',{class:'fab', 'aria-label':'Noter un objectif ou poser une question', onclick:()=>openSheet()},'<span>🎯</span><span class="fab-t">Objectif ·</span><span>💬</span><span class="fab-t">Question</span>'); document.body.appendChild(f);
   let st; addEventListener('scroll',()=>{ f.classList.add('fab-away'); clearTimeout(st); st=setTimeout(()=>f.classList.remove('fab-away'),900); },{passive:true}); }
+if(location.hash==='#recap') state.view='recap';
 render();
+if(location.hash==='#agir'){ setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },300); }
+if(/^#(recap|agir)$/.test(location.hash)) history.replaceState(null,'',location.href.split('#')[0]);
 
 function airy(){ document.querySelectorAll('#cardRoot .lvl p, #cardRoot .lvl-intro, #cardRoot .fd-b p, #cardRoot .more-box p, #cardRoot details p, #cardRoot .accomp p').forEach(p=>{
   if(p.dataset.airy||p.closest('.how,.pq,.tm,.pro,.med3,.todo,.fld-label')) return; p.dataset.airy='1';

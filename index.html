@@ -1568,17 +1568,20 @@ function renderRecap(){
     {ok:nObj>0, t:'🎯 Fixer un objectif', go:()=>openSheet('obj')},
     {ok:started.length>0, t:'🧭 Lancer un parcours', go:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},
     {ok:SPHERES.some(x=>T[x.k]), t:'📊 Faire mon auto-évaluation', go:()=>{ state.optOpen=true; go('home'); setTimeout(()=>{ const el=document.querySelector('.test'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },150); }}];
-  const pct=Math.round(100*crit.filter(c=>c.ok).length/crit.length);
-  const meter=h('div',{class:'rc-meter'}); meter.appendChild(h('div',{class:'rc-meter-t'},pct===100?'🌟 Fiche complète à 100 % : bravo !':'Fiche complète à <b>'+pct+' %</b>'));
-  meter.appendChild(h('div',{class:'rc-bar'},'<i style="width:'+pct+'%"></i>'));
-  const miss=crit.filter(c=>!c.ok); if(miss.length){ const r=h('div',{class:'chip-row'}); miss.forEach(c=>r.appendChild(h('button',{class:'chip sm', onclick:c.go},'➕ '+c.t.replace(/^\S+\s/,'')))); meter.appendChild(r); }
+  const meter=h('div',{class:'rc-meter'});
+  const paintMeter=()=>{ const C2=state.contact||{}; crit[0].ok=!!((C2.nom||'').trim()||(C2.mail||'').trim()||(C2.tel||'').trim());
+    const pct=Math.round(100*crit.filter(c=>c.ok).length/crit.length); meter.innerHTML='';
+    meter.appendChild(h('div',{class:'rc-meter-t'},pct===100?'🌟 Fiche complète à 100 % : bravo !':'Fiche complète à <b>'+pct+' %</b>'));
+    meter.appendChild(h('div',{class:'rc-bar'},'<i style="width:'+pct+'%"></i>'));
+    const miss=crit.filter(c=>!c.ok); if(miss.length){ const r=h('div',{class:'chip-row'}); miss.forEach(c=>r.appendChild(h('button',{class:'chip sm', onclick:c.go},'➕ '+c.t.replace(/^\S+\s/,'')))); meter.appendChild(r); } };
+  paintMeter();
   hero.appendChild(sum); hero.appendChild(meter); add(hero);
   const cc=h('div',{class:'rc-card', id:'rc-contact'}); cc.appendChild(h('div',{class:'rc-h'},'👤 Mes coordonnées <small>facultatif</small>'));
   cc.appendChild(h('p',{class:'small'},'Pour qu\'un médiateur ou un professionnel puisse <b>vous recontacter</b>. Rien n\'est envoyé sans votre accord.'));
   const cg=h('div',{class:'rc-grid'});
   CONTACT_FIELDS.forEach(([k,l])=>{ const fw=h('div',{class:'fld'+(k==='info'?' rc-wide':'')}); fw.appendChild(h('label',{class:'fld-label',for:'ct-'+k},l));
     const inp=k==='info'?h('textarea',{id:'ct-'+k, rows:'3', placeholder:'Vos disponibilités, vos compétences, ce que vous aimeriez apporter…'}):h('input',{id:'ct-'+k, type:k==='mail'?'email':k==='tel'?'tel':'text', autocomplete:{nom:'name',mail:'email',tel:'tel',structure:'organization',lieu:'address-level2'}[k]||'off'});
-    inp.value=(state.contact||{})[k]||''; inp.oninput=e=>{ state.contact=state.contact||{}; state.contact[k]=e.target.value; save(); };
+    inp.value=(state.contact||{})[k]||''; inp.oninput=e=>{ state.contact=state.contact||{}; state.contact[k]=e.target.value; save(); paintMeter(); };
     fw.appendChild(inp); cg.appendChild(fw); });
   cc.appendChild(cg); add(cc);
   add(h('p',{class:'small', style:'margin-top:10px'},'✔️ <b>Cochez</b> ce que vous voulez garder ou partager.'));

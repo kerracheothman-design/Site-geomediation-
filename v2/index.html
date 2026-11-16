@@ -1075,6 +1075,7 @@ const MEDIATEURS = [
   ["Provence","Jean-Claude Goñi","Construisons notre bonheur","https://construisonsnotrebonheur.com/"],
   ["Lyon","Olivier Luisetti","IRIC, Institut de Recherche et d'Innovation Citoyenne","https://fr.linkedin.com/in/olivierluisetti"],
   ["Paris","Lucas Benavenuto","La KLE","https://sa.lakle.fr"],
+  ["Lille & Hauts-de-France","Martin Boutry","objet(s) participatif · facilitateur","https://objetsparticipatif.fr/site/parcours/"],
   ["Bretagne & Pays de la Loire","Paméla Deline","Lapasrel","https://lapasrel.org/"]];
 function medNode(){ return `<div class="meds"><p class="pole-h">🧭 Les médiateurs territoriaux</p><p class="meds-i">Le <b>médiateur</b> facilite la <b>coopération des acteurs de la transition</b> au service de nos territoires.</p><div class="med-grid">`+MEDIATEURS.map(([r,n,o,u])=>`<a class="med" href="${u}" target="_blank" rel="noopener"><span class="med-r">📍 ${r}</span><b>${n}</b><small>${o}</small></a>`).join('')+`</div><p class="meds-n">Votre région n'apparaît pas encore&nbsp;? <a href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur dans ma région')}">Devenez son médiateur</a>.</p></div>`; }
 const PRO_POLES = {entreprise:["Intelligence collective & gouvernance","Médiation & coopération","Numérique & open source"], idees:["Géographie & territoire","Médiation & coopération","Environnement & économie régénérative"], pensee:["Santé & bien-être"], maison:["Santé & bien-être","Médiation & coopération"], reseau:["Médiation & coopération","Numérique & open source"]};

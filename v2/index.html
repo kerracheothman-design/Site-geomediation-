@@ -1764,7 +1764,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ const b=$('sheetB
 function render(){
   const slot=$('homeSlot'); slot.innerHTML='';
   if(state.view!=='home') slot.append(h('button',{class:'back-btn', onclick:goBack},'← Retour'));
-  const fh=$('fabHome'); if(fh) fh.style.display=state.view==='home'?'none':'flex';
+  const fh=$('fabHome'); if(fh) fh.style.display=state.view==='home'?'none':'flex'; if(window.fabTop) setTimeout(fabTop,50);
   root.innerHTML='';
   ({home:renderHome, dream:renderDream, recap:renderRecap, legal:renderLegal, doc:renderDoc}[state.view]||renderHome)();
   if(state.view!=='home') add(h('p',{class:'small center', style:'margin-top:18px'}, `💬 ${state.view==='dream'?'':"Une question, une remarque\u00a0? "}Écrivez au médiateur à tout moment\u00a0: <a href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Géomédiation : ma question')}" style="color:var(--clay);font-weight:700">${CONTACT_MAIL}</a>`));
@@ -1776,7 +1776,8 @@ $('brandBtn').onclick=()=>go('home');
 document.addEventListener('focusin',e=>{ if(/^(TEXTAREA|INPUT)$/.test(e.target.tagName)&&!['range','checkbox'].includes(e.target.type)) document.body.classList.add('typing'); });
 document.addEventListener('focusout',()=>document.body.classList.remove('typing'));
 { const f=h('button',{class:'fab', 'aria-label':'Noter un objectif ou poser une question', onclick:()=>openSheet()},'<span>🎯</span><span class="fab-t">Objectif ·</span><span>💬</span><span class="fab-t">Question</span>'); document.body.appendChild(f);
-  let st; addEventListener('scroll',()=>{ f.classList.add('fab-away'); clearTimeout(st); st=setTimeout(()=>f.classList.remove('fab-away'),900); },{passive:true}); }
+  const top=()=>state.view==='home' && scrollY<520; window.fabTop=()=>f.classList.toggle('fab-away', top()); fabTop();
+  let st; addEventListener('scroll',()=>{ f.classList.add('fab-away'); clearTimeout(st); st=setTimeout(()=>{ if(!top()) f.classList.remove('fab-away'); },900); },{passive:true}); }
 if(location.hash==='#recap') state.view='recap';
 render();
 if(location.hash==='#agir'){ setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },300); }

@@ -1139,7 +1139,7 @@ const DOCS = [
 function openDoc(k){ const d=DOCS.find(x=>x.k===k); if(!d) return; if(d.href){ location.href=d.href; return; } state.doc=k; go('doc'); }
 function openDocs(){ const go2=()=>{ const el=document.getElementById('f-docs'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }; if(state.view!=='home'){ go('home'); setTimeout(go2,350); } else go2(); }
 const SOON=[
-  ['🎲','Le jeu de société',"On s'organise ensemble pour faire vivre sa région.","« Save the world, save your region, breathe the life »"],
+  ['🎲','Le jeu de société',"On s'organise ensemble pour faire vivre sa région.","« Save the world, save your region, breathe life »"],
   ['🎬','Le film',"La méthode en images, sur le terrain."],
   ['🎙️','Les interviews',"Ceux qui agissent racontent leur territoire."],
   ['📹','Les reportages terrain',"Au cœur des initiatives qui changent le quotidien."],

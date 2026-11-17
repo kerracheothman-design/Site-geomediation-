@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Chacun peut participer à améliorer l'organisation de notre société : une même méthode, de soi au territoire, et des médiateurs neutres pour relier thématiques, acteurs et échelles.">
+<meta name="description" content="Chacun peut participer à améliorer l'organisation de notre société : une même méthode, de soi au territoire, et des médiateurs indépendants pour relier thématiques, acteurs et échelles.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="author" content="Othman Kerrache · Géomédiation">
 <script type="application/ld+json">
@@ -22,14 +22,14 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://kerracheothman-design.github.io/Site-geomediation-/">
 <meta property="og:title" content="Chacun peut participer à améliorer l'organisation de notre société">
-<meta property="og:description" content="Une même méthode, de soi au territoire, et des médiateurs neutres pour relier les thématiques, les acteurs et les échelles. Découvrez-la en 1 minute.">
+<meta property="og:description" content="Une même méthode, de soi au territoire, et des médiateurs indépendants pour relier les thématiques, les acteurs et les échelles. Découvrez-la en 1 minute.">
 <meta property="og:image" content="https://kerracheothman-design.github.io/Site-geomediation-/social/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Géomédiation : chacun peut participer à améliorer l'organisation de notre société">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chacun peut participer à améliorer l'organisation de notre société">
-<meta name="twitter:description" content="Une même méthode, de soi au territoire, et des médiateurs neutres pour relier les thématiques, les acteurs et les échelles.">
+<meta name="twitter:description" content="Une même méthode, de soi au territoire, et des médiateurs indépendants pour relier les thématiques, les acteurs et les échelles.">
 <meta name="twitter:image" content="https://kerracheothman-design.github.io/Site-geomediation-/social/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1399,10 +1399,10 @@ function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives."));
   { const cta=h('div',{class:'hero-cta'}); cta.append(h('button',{class:'btn btn-gold', onclick:()=>{ const el=$('step3'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'🚀 Je commence <small>2 minutes</small>'), h('a',{class:'btn btn-soft', href:'plan-mobilite.html#sondage'},'💭 Le quiz')); add(cta);
-    add(h('div',{class:'hero-stats'},`<div><b>${MEDIATEURS.length}</b>régions avec un médiateur</div><div><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div>`)); }
+    add(h('div',{class:'hero-stats'},`<div><b>${MEDIATEURS.length}</b>médiateurs en région</div><div><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div>`)); }
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="../video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="../video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   const mk=h('div',{class:'missing'});
-  mk.innerHTML=`<p class="mk-t">Comment bien organiser <b>un territoire</b> sans <b>une équipe</b> de <b>médiateurs neutres</b>, capables d'animer les échanges entre tous <b>ses acteurs</b> ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région…</p>`;
+  mk.innerHTML=`<p class="mk-t">Comment bien organiser <b>un territoire</b> sans <b>une équipe</b> de <b>médiateurs indépendants</b>, capables d'animer les échanges entre tous <b>ses acteurs</b> ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région…</p>`;
   add(mk);
   add(h('div',{class:'how'},`<p class="how-h">Comment ça marche ?</p><ol class="how-f"><li><i>🧭</i><span>Choisissez un <b>sujet</b></span></li><li><i>📊</i><span>Faites le <b>point</b></span></li><li><i>🎯</i><span>Notez vos <b>objectifs</b></span></li><li class="how-go" onclick="openPros()" role="button" tabindex="0"><i>🤝</i><span>Un <b>médiateur</b> vous oriente →</span></li></ol>`));
   add(h('h2',{class:'step-h rv', id:'step3'},'<span>🚀</span>Par où commencer ?'));
@@ -1414,8 +1414,6 @@ function renderHome(){
   g2.appendChild(l2); add(g2);
   const me=h('div',{class:'method'});
   me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
-  add(fold('f-method','🔁 La méthode en 7 étapes','Le toboggan de la coopération',[me])); wireSlide();
-  add(fold('f-docs','📚 Les documents','Dossiers, plans et kits pratiques',[docsNode()]));
   const F2=[h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'), testBlock()];
   const ac=h('div',{class:'accomp'});
   ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à définir vos objectifs, puis vous oriente <b>selon vos aspirations</b> vers les professionnels et les partenaires adaptés. Vous savez toujours <b>ce que devient votre contribution</b>.</p>`;
@@ -1428,7 +1426,8 @@ function renderHome(){
     <div class="pq"><b>💼 Entreprises</b><span>Des <b>rôles clairs</b>, une <b>coopération</b> fluide, des liens avec les filières locales.</span></div>
     <div class="pq"><b>🤝 Associations</b><span>Relier vos actions aux autres acteurs et gagner en <b>impact</b>.</span></div></div>`));
   F2.push(h('button',{class:'btn btn-soft', style:'margin-top:12px', onclick:openPros},'👥 Voir les professionnels du réseau'));
-  add(fold('f-accomp','🤝 Faire le point et être accompagné','Votre auto-évaluation, un médiateur pour vous orienter',F2));
+  add(fold('f-accomp','🧭 Faire le point','Votre auto-évaluation en 1 minute, et un médiateur pour vous orienter',F2));
+  add(fold('f-method','🔁 La méthode en 7 étapes','Le toboggan de la coopération',[me])); wireSlide();
   add(fold('f-pros','🤝 Être accompagné','Les médiateurs de votre région et les professionnels du réseau',[prosNode()]));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
@@ -1450,6 +1449,7 @@ function renderHome(){
     <p style="margin:12px 0 10px;line-height:1.6">Ensuite, chacun choisit sa place : <b>suivre</b>, <b>participer</b> ou <b>animer</b> les échanges et le développement des projets. Envie d'aller plus loin ? Développez de <b>nouvelles compétences</b> :</p>
     <div class="team"><div class="tm"><b>🧠 Intelligence collective</b><span>et animation</span></div><div class="tm"><b>🔍 Analyse</b><span>des besoins et des ressources</span></div><div class="tm"><b>🛠️ Co-construction</b><span>de projets et de feuilles de route</span></div><div class="tm"><b>🗳️ Votations</b><span>et évaluations</span></div><div class="tm"><b>📣 Communication</b><span>et cartographie</span></div></div>
     <p style="margin:14px 0 0"><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur territorial')}">🚀 Je me lance</a></p>`)]));
+  add(fold('f-docs','📚 Les documents','Dossiers, plans et kits pratiques',[docsNode()]));
   add(h('section',{class:'site-sec rv', id:'contact'},`<div class="ct"><h2 class="site-h" style="color:var(--cream);justify-content:center">✉️ Contact</h2><p>Une <b>question</b>, une envie d'<b>agir</b> ou de <b>soutenir le projet</b> ? Écrivez-nous.</p>
     <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Tout commence par <b>un échange</b>.</small></div>`));
   add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));

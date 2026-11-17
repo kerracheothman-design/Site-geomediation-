@@ -374,6 +374,7 @@
   .cmp td{border-bottom:1px solid var(--line); padding:7px 4px; text-align:center;} .cmp td.cm{text-align:left; padding-left:10px; min-width:130px;} .card .cmp td.cm b{display:block; color:var(--forest-dark); background:none; padding:0; font-size:13px;} .cmp td.cm small{color:var(--ink-soft); font-size:11px;}
   .cmp tr.cg td{background:#F8E9E2; border-top:2px solid var(--clay); border-bottom:2px solid var(--clay);} .card .cmp tr.cg td.cm b{color:var(--clay);}
   .cd{display:inline-block; width:13px; height:13px; border-radius:50%; border:1.5px solid var(--forest); vertical-align:middle;} .cd.f{background:var(--forest);} .cd.p{background:linear-gradient(90deg,var(--forest) 50%,transparent 50%);} .cmp tr.cg .cd{border-color:var(--clay); background:var(--clay);}
+  .socials{margin-top:14px; text-align:center;} .socials p{margin:0 0 8px; font-size:13px; color:var(--cream); opacity:.85;} .so-row{display:flex; flex-wrap:wrap; justify-content:center; gap:8px;} .so-row a{font:700 13px var(--body); color:var(--cream); background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); border-radius:999px; padding:7px 13px; text-decoration:none;}
   .send-box{background:var(--paper); border:2px solid var(--gold); border-radius:18px; padding:16px 18px; margin-top:16px;}
   .send-box h3{margin:0 0 6px; font-size:18px; color:var(--forest-dark);}
   .send-item{display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.4; color:var(--ink); padding:7px 0; border-bottom:1px solid var(--line); cursor:pointer;}
@@ -993,6 +994,7 @@ function h(tag, attrs, html){
 function add(...els){ els.forEach(e=>root.appendChild(e)); }
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 const CONTACT_MAIL='geomediation@live.fr';
+const SOCIALS=[['in LinkedIn','https://fr.linkedin.com/in/othman-kerrache-61a17a122'],['📸 Instagram','https://www.instagram.com/othmankerrache/'],['🎵 TikTok','https://www.tiktok.com/@othman33000']];
 const INVITATION="Bonjour ! J'ai découvert la Géomédiation : une méthode simple pour faciliter la coopération, du foyer au territoire. On part des besoins et des ressources de chacun, et un réseau relie les acteurs entre eux. On en parle autour d'un café ? 👉 geomediation.fr";
 
 /* ================= LES PORTES D'ENTRÉE ================= */
@@ -1451,7 +1453,7 @@ function renderHome(){
     <p style="margin:14px 0 0"><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur territorial')}">🚀 Je me lance</a></p>`)]));
   add(fold('f-docs','📚 Les documents','Dossiers, plans et kits pratiques',[docsNode()]));
   add(h('section',{class:'site-sec rv', id:'contact'},`<div class="ct"><h2 class="site-h" style="color:var(--cream);justify-content:center">✉️ Contact</h2><p>Une <b>question</b>, une envie d'<b>agir</b> ou de <b>soutenir le projet</b> ? Écrivez-nous.</p>
-    <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Un médiateur vous répond <b>personnellement</b> : tout commence par <b>un échange</b>.</small></div>`));
+    <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Un médiateur vous répond <b>personnellement</b> : tout commence par <b>un échange</b>.</small><div class="socials"><p>Suivez Othman et la Géomédiation</p><div class="so-row">${SOCIALS.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join('')}</div></div></div>`));
   add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
 }
 

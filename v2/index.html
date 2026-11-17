@@ -2,13 +2,15 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Chacun peut participer à améliorer l'organisation de notre société : une même méthode, de soi au territoire, et des médiateurs indépendants pour relier thématiques, acteurs et échelles.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="author" content="Othman Kerrache · Géomédiation">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"Organization","@id":"https://kerracheothman-design.github.io/Site-geomediation-/#org","name":"Géomédiation","alternateName":"Géomédiation Conseils","url":"https://geomediation.fr","logo":"https://kerracheothman-design.github.io/Site-geomediation-/apple-touch-icon.png","description":"Une méthode d'organisation inspirée de la géographie et des médiateurs territoriaux indépendants pour relier thématiques, échelles et acteurs.","founder":{"@type":"Person","name":"Othman Kerrache","jobTitle":"Géographe, médiateur territorial indépendant"},"areaServed":"Nouvelle-Aquitaine","address":{"@type":"PostalAddress","addressLocality":"Lormont","postalCode":"33310","addressCountry":"FR"},"sameAs":["https://geomediation.fr","https://www.instagram.com/othmankerrache/","https://www.tiktok.com/@othman33000"]},
+{"@type":"Organization","@id":"https://kerracheothman-design.github.io/Site-geomediation-/#org","name":"Géomédiation","alternateName":"Géomédiation Conseils","url":"https://geomediation.fr","logo":"https://kerracheothman-design.github.io/Site-geomediation-/apple-touch-icon.png","description":"Une méthode d'organisation inspirée de la géographie et des médiateurs territoriaux indépendants pour relier thématiques, échelles et acteurs.","founder":{"@type":"Person","name":"Othman Kerrache","jobTitle":"Géographe, médiateur territorial indépendant"},"areaServed":"Nouvelle-Aquitaine","address":{"@type":"PostalAddress","addressLocality":"Lormont","postalCode":"33310","addressCountry":"FR"},"sameAs":["https://geomediation.fr","https://www.instagram.com/othmankerrache/","https://www.tiktok.com/@othman33000","https://fr.linkedin.com/in/othman-kerrache-61a17a122","https://www.youtube.com/channel/UClxKbqqtclI_XgT6mPbiZLA"]},
 {"@type":"WebSite","@id":"https://kerracheothman-design.github.io/Site-geomediation-/#site","url":"https://kerracheothman-design.github.io/Site-geomediation-/","name":"Géomédiation · la plateforme","inLanguage":"fr-FR","publisher":{"@id":"https://kerracheothman-design.github.io/Site-geomediation-/#org"}},
 {"@type":"Event","name":"À Biganos, une rencontre au service de nos territoires","description":"Le Tour de France de La Marche à suivre fait étape à Biganos : marche, puis rencontre sur les enjeux écologiques, les circuits courts, la gestion des incendies et la coopération des acteurs du territoire. Auberge espagnole.","startDate":"2026-11-08T13:30:00+01:00","endDate":"2026-11-08T19:00:00+01:00","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","isAccessibleForFree":true,"location":{"@type":"Place","name":"La Serre Ô Délices","address":{"@type":"PostalAddress","streetAddress":"71 chemin de Pardies","addressLocality":"Biganos","postalCode":"33380","addressCountry":"FR"}},"image":["https://kerracheothman-design.github.io/Site-geomediation-/social/biganos-8-novembre-v2.jpg"],"organizer":[{"@type":"Organization","name":"Kyria et l'Association Gaya · La Marche à suivre","url":"https://lamarcheasuivre.net"},{"@id":"https://kerracheothman-design.github.io/Site-geomediation-/#org"}],"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","availability":"https://schema.org/InStock","url":"https://facebook.com/events/s/la-marche-a-suivre/1438003731372309/"}}
 ]}
@@ -31,9 +33,10 @@
 <meta name="twitter:title" content="Chacun peut participer à améliorer l'organisation de notre société">
 <meta name="twitter:description" content="Une même méthode, de soi au territoire, et des médiateurs indépendants pour relier les thématiques, les acteurs et les échelles.">
 <meta name="twitter:image" content="https://kerracheothman-design.github.io/Site-geomediation-/social/og-image.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Bricolage Grotesque';src:url('../fonts/bricolage.woff') format('woff');font-weight:500 800;font-style:normal;font-display:swap}
+@font-face{font-family:'Figtree';src:url('../fonts/figtree.woff') format('woff');font-weight:300 900;font-style:normal;font-display:swap}
+</style>
 <style>
   :root{
     color-scheme: light;
@@ -994,7 +997,7 @@ function h(tag, attrs, html){
 function add(...els){ els.forEach(e=>root.appendChild(e)); }
 function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 const CONTACT_MAIL='geomediation@live.fr';
-const SOCIALS=[['in LinkedIn','https://fr.linkedin.com/in/othman-kerrache-61a17a122'],['📸 Instagram','https://www.instagram.com/othmankerrache/'],['🎵 TikTok','https://www.tiktok.com/@othman33000']];
+const SOCIALS=[['in LinkedIn','https://fr.linkedin.com/in/othman-kerrache-61a17a122'],['📸 Instagram','https://www.instagram.com/othmankerrache/'],['🎵 TikTok','https://www.tiktok.com/@othman33000'],['👍 Facebook','https://www.facebook.com/1565726467056991'],['▶️ YouTube','https://www.youtube.com/channel/UClxKbqqtclI_XgT6mPbiZLA']];
 const INVITATION="Bonjour ! J'ai découvert la Géomédiation : une méthode simple pour faciliter la coopération, du foyer au territoire. On part des besoins et des ressources de chacun, et un réseau relie les acteurs entre eux. On en parle autour d'un café ? 👉 geomediation.fr";
 
 /* ================= LES PORTES D'ENTRÉE ================= */
@@ -1240,9 +1243,23 @@ const LEVEL_NAMES=["Je découvre","Je fais le point","J'approfondis"];
 const STORE='geomediation_reves_v1';
 function fresh(){ return {view:'home', dream:null, hist:[], lvl:{}, a:{}, acc:{}, dec:{}, test:{}, sendSel:{}, sendTo:'med', sendAddr:''}; }
 let state=fresh();
-try{ const sv=JSON.parse(localStorage.getItem(STORE)||'null'); if(sv) state=Object.assign(fresh(),sv); }catch(e){}
+function cleanV(v,d){ d=d||0; if(d>8) return null;
+  if(typeof v==='string') return v.replace(/[<>]/g,'').slice(0,3000);
+  if(typeof v==='number') return isFinite(v)?v:0;
+  if(typeof v==='boolean'||v===null) return v;
+  if(Array.isArray(v)) return v.slice(0,300).map(x=>cleanV(x,d+1));
+  if(typeof v==='object'){ const o={}; Object.keys(v).slice(0,400).forEach(k=>{ if(k==='__proto__'||k==='constructor'||k==='prototype') return; o[String(k).replace(/[<>]/g,'').slice(0,100)]=cleanV(v[k],d+1); }); return o; }
+  return null; }
+function safeState(sv){ if(!sv||typeof sv!=='object'||Array.isArray(sv)) return null; const s=Object.assign(fresh(),cleanV(sv));
+  if(!['home','dream','recap','legal','doc'].includes(s.view)) s.view='home';
+  if(s.dream!=null && !DREAMS.some(x=>x.k===s.dream)){ s.dream=null; if(s.view==='dream') s.view='home'; }
+  ['a','acc','dec','test','sendSel','lvl'].forEach(k=>{ if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k])) s[k]={}; });
+  if(!Array.isArray(s.hist)) s.hist=[];
+  if(!['med','autre','libre'].includes(s.sendTo)) s.sendTo='med';
+  return s; }
+try{ const sv=safeState(JSON.parse(localStorage.getItem(STORE)||'null')); if(sv) state=sv; }catch(e){}
 try{ const m=location.hash.match(/^#reprise=(.+)$/); if(m){ const sv=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1])))));
-  if(sv && confirm('Recharger votre fiche Géomédiation sur cet appareil ?')){ state=Object.assign(fresh(),sv,{view:'recap',hist:[]}); try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
+  const ok=safeState(sv); if(ok && confirm('Recharger votre fiche Géomédiation sur cet appareil ?')){ state=Object.assign(ok,{view:'recap',hist:[]}); try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
   history.replaceState(null,'',location.href.split('#')[0]); } }catch(e){}
 function resumeLink(){ const s=Object.assign({},state,{hist:[],view:'recap'}); return location.href.split('#')[0]+'#reprise='+encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(s))))); }
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
@@ -1562,7 +1579,7 @@ function renderLegal(){
   sec('Hébergement',`<p>GitHub, Inc. (service GitHub Pages)<br>88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</p>`);
   sec('Propriété intellectuelle',`<p>Les textes, schémas, vidéos et la méthode présentés sur ce site sont la propriété de Géomédiation. Toute reproduction est soumise à autorisation préalable ; les courtes citations sont les bienvenues, avec mention de la source.</p>`);
   sec('Vos données personnelles',`<p><b>Vos réponses restent sur votre appareil.</b> Le site n'enregistre aucune donnée sur un serveur : vos réponses, objectifs et votre fiche acteur sont conservés dans la mémoire de votre navigateur (stockage local), et vous seul y avez accès.</p><p><b>Quand vous écrivez au médiateur</b>, le message part depuis votre propre messagerie. Les informations transmises servent uniquement à vous répondre et à vous orienter ; elles ne sont ni vendues ni cédées, et sont conservées au plus trois ans après le dernier échange.</p><p>Vous disposez d'un droit d'accès, de rectification, d'effacement et d'opposition : il suffit d'écrire à <a href="mailto:${CONTACT_MAIL}">${CONTACT_MAIL}</a>. Vous pouvez aussi saisir la <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a>.</p>`);
-  sec('Cookies',`<p><b>Aucun cookie publicitaire ni de mesure d'audience.</b> Le seul stockage utilisé est celui de vos réponses sur votre appareil, indispensable au fonctionnement du site : il ne nécessite donc pas de consentement.</p><p>Les polices d'écriture sont chargées depuis les serveurs de Google Fonts, qui reçoivent à cette occasion l'adresse IP de votre appareil.</p>`);
+  sec('Cookies',`<p><b>Aucun cookie publicitaire ni de mesure d'audience.</b> Le seul stockage utilisé est celui de vos réponses sur votre appareil, indispensable au fonctionnement du site : il ne nécessite donc pas de consentement.</p><p>Tout est hébergé sur le site lui-même, polices d'écriture comprises : <b>aucun service tiers</b> ne reçoit votre adresse IP quand vous naviguez.</p>`);
   const b=h('section',{class:'legal'}); b.innerHTML='<h3>Effacer mes réponses</h3><p>Supprime définitivement vos réponses, objectifs et votre fiche de cet appareil.</p>';
   const del=h('button',{class:'btn btn-soft', onclick:()=>{ if(!confirm('Effacer toutes vos réponses de cet appareil ?')) return; try{ localStorage.removeItem(STORE); }catch(e){} state=fresh(); render(); window.scrollTo({top:0}); toast('✓ Vos réponses ont été effacées'); }},'🗑️ Effacer mes réponses');
   b.appendChild(del); add(b);

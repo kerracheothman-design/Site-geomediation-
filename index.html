@@ -784,6 +784,43 @@
   .pro{display:flex; flex-direction:column; gap:1px; background:var(--cream); border-radius:10px; padding:8px 12px; margin:0 0 6px;} .pro b{font-size:14.5px; color:var(--forest-dark); background:none !important; padding:0 !important;} .pro span{font-size:13px; color:var(--ink-soft);}
   .pros-cta{margin-top:16px; background:#FFF7DD; border:1.5px solid var(--gold); border-radius:14px; padding:14px; text-align:center;} .pros-cta p{margin:0 0 10px;}
 
+
+  /* ===== Annuaire du réseau (v2) ===== */
+  .dir{--dk:#1F3329; --tx:#2B2A22; --mu:#5E5845; --cl:#8E4A33;}
+  .dir b{background:none !important; padding:0 !important;}
+  .dir-lead{font-size:15.5px; line-height:1.5; color:var(--tx); margin:0 0 14px;}
+  .dir-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 16px; padding:0; list-style:none; counter-reset:st;}
+  .dir-steps li{counter-increment:st; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:10px 8px; text-align:center; font-size:12.5px; line-height:1.3; color:var(--tx); font-weight:600;}
+  .dir-steps li::before{content:counter(st); display:flex; align-items:center; justify-content:center; width:26px; height:26px; margin:0 auto 6px; border-radius:50%; background:var(--dk); color:#fff; font:800 13px var(--display);}
+  .dir-tabs{display:flex; gap:4px; background:var(--cream-dark); border-radius:14px; padding:4px; margin:0 0 14px;}
+  .dir-tab{flex:1; white-space:nowrap; border:0; border-radius:11px; padding:11px 6px; font:800 13.5px var(--body); color:var(--mu); background:transparent; cursor:pointer;}
+  .dir-tab[aria-selected="true"]{background:#fff; color:var(--dk); box-shadow:0 1px 4px rgba(31,51,41,.15);}
+  .dir-tab small{display:inline-block; margin-left:4px; font-size:12px; font-weight:700; color:var(--mu);}
+  .dir-chips{display:flex; gap:6px; overflow-x:auto; padding:2px 2px 10px; margin:0 0 6px; scrollbar-width:none;} .dir-chips::-webkit-scrollbar{display:none;}
+  .dir-chip{flex:none; border:1.5px solid var(--line); background:#fff; color:var(--dk); border-radius:999px; padding:8px 13px; font:700 13px var(--body); cursor:pointer; white-space:nowrap;}
+  .dir-chip[aria-pressed="true"]{background:var(--dk); border-color:var(--dk); color:#fff;}
+  .dir-list{display:flex; flex-direction:column; gap:10px;}
+  .dir-card{display:flex; gap:12px; align-items:flex-start; background:#fff; border:1.5px solid var(--line); border-radius:16px; padding:14px; text-decoration:none; color:var(--tx);}
+  a.dir-card:active, a.dir-card:hover{border-color:var(--dk);}
+  .dir-av{flex:none; width:44px; height:44px; border-radius:50%; background:var(--dk); color:#fff; display:flex; align-items:center; justify-content:center; font:800 15px var(--display); letter-spacing:.02em;}
+  .dir-av.alt{background:#E9DFC6; color:var(--dk);}
+  .dir-bd{flex:1; min-width:0; display:flex; flex-direction:column; gap:3px;}
+  .dir-tag{align-self:flex-start; font:800 11.5px var(--body); color:var(--dk); background:#F3E7BF; border-radius:999px; padding:3px 9px;}
+  .dir-nm{font:800 16px var(--display); color:var(--dk); line-height:1.2;}
+  .dir-org{font-size:13px; font-weight:700; color:var(--cl);}
+  .dir-ds{font-size:13.5px; line-height:1.45; color:var(--tx);}
+  .dir-for{font-size:12.5px; color:var(--mu);}
+  .dir-lk{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;}
+  .dir-lk a{font:700 12.5px var(--body); color:var(--dk); background:var(--cream); border:1.5px solid var(--line); border-radius:999px; padding:5px 11px; text-decoration:none;}
+  .dir-card[hidden],.dir-pane[hidden]{display:none !important;}
+  .dir-go{flex:none; align-self:center; font:800 18px var(--body); color:var(--dk);}
+  .dir-cta{margin-top:18px; background:var(--dk); border-radius:18px; padding:18px 16px; text-align:center; color:#fff;}
+  .dir-cta p{margin:0 0 12px; font-size:15px; line-height:1.45; color:#fff;} .dir-cta p b{color:#F3D77A;}
+  .dir-cta .row{display:flex; flex-direction:column; gap:8px;}
+  .dir-cta a{display:block; border-radius:12px; padding:12px; font:800 14.5px var(--body); text-decoration:none;}
+  .dir-cta a.pri{background:#E0C15C; color:var(--dk);} .dir-cta a.sec{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.55);}
+  @media (max-width:380px){ .dir-steps li{font-size:11.5px;} }
+
   p.airy .s{display:block;} p.airy .s + .s{margin-top:8px;}
 </style>
 </head>
@@ -1458,7 +1495,20 @@ function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k
   const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
   return h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
     `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${title||d.pick}</b><small>${sub||d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`); }
-function prosNode(){ const w=h('div',null,medNode()+`<p class="pros-i" style="margin-top:16px">Des <b>professionnels</b> en ${COLLAB_GROUPS.length} pôles pour accompagner les <b>humains</b>, les <b>entreprises</b>, les <b>filières</b> et les <b>territoires</b>.</p>`+COLLAB_GROUPS.map(g=>`<div class="pole"><p class="pole-h">${g.e} ${g.label}</p>${g.m.map(([n,r,x])=>`<div class="pro"><b>${n}</b>${x&&x.org?`<i class="pro-o">${x.org}</i>`:''}<span>${x&&x.d?x.d:r}</span>${x&&x.pour?`<span class="pro-p">👥 Pour : ${x.pour}</span>`:''}${x&&x.l&&x.l.length?`<span class="pro-l">${x.l.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</span>`:''}</div>`).join('')}</div>`).join('')+`<div class="pros-cta"><p><b>Envie d'animer ?</b> Des <b>compétences</b> pour accompagner ?</p><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Rejoindre les professionnels du réseau')}">🤝 Je rejoins les professionnels</a></div>`); return w; }
+function prosNode(){
+  const ini=n=>n.replace(/[^A-Za-zÀ-ÿ' -]/g,'').split(/[\s-]+/).filter(Boolean).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+  const nPros=COLLAB_GROUPS.reduce((t,g)=>t+g.m.length,0);
+  const w=h('div',{class:'dir'});
+  w.innerHTML=`<p class="dir-lead">Un <b>réseau d'acteurs</b> pour vous accompagner, près de chez vous, dans tous les domaines.</p>
+  <ol class="dir-steps"><li>Je contacte le médiateur de ma région</li><li>Il m'oriente vers les bons acteurs</li><li>On avance ensemble</li></ol>
+  <div class="dir-tabs" role="tablist"><button class="dir-tab" role="tab" data-t="med" aria-selected="true">🧭 Médiateurs<small>${MEDIATEURS.length}</small></button><button class="dir-tab" role="tab" data-t="pro" aria-selected="false">🤝 Professionnels<small>${nPros}</small></button></div>
+  <div class="dir-pane" data-p="med"><div class="dir-list">${MEDIATEURS.map(([r,n,o,u])=>`<a class="dir-card" href="${u}" target="_blank" rel="noopener"><span class="dir-av">${ini(n)}</span><span class="dir-bd"><span class="dir-tag">📍 ${r}</span><span class="dir-nm">${n}</span><span class="dir-org">${o}</span></span><span class="dir-go" aria-hidden="true">→</span></a>`).join('')}</div></div>
+  <div class="dir-pane" data-p="pro" hidden><div class="dir-chips">${['Tous',...COLLAB_GROUPS.map(g=>g.e+' '+g.label)].map((l,i)=>`<button class="dir-chip" data-g="${i-1}" aria-pressed="${i===0}">${l}</button>`).join('')}</div>
+  <div class="dir-list">${COLLAB_GROUPS.map((g,gi)=>g.m.map(([n,r,x])=>`<div class="dir-card" data-g="${gi}"><span class="dir-av alt">${ini(n)}</span><span class="dir-bd"><span class="dir-tag">${g.e} ${g.label}</span><span class="dir-nm">${n}</span>${x&&x.org?`<span class="dir-org">${x.org}</span>`:''}<span class="dir-ds">${x&&x.d?x.d:r}</span>${x&&x.pour?`<span class="dir-for">👥 Pour : ${x.pour}</span>`:''}${x&&x.l&&x.l.length?`<span class="dir-lk">${x.l.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</span>`:''}</span></div>`).join('')).join('')}</div></div>
+  <div class="dir-cta"><p>Votre région n'a pas encore de médiateur&nbsp;? Vous avez des <b>compétences</b> à partager&nbsp;?</p><div class="row"><a class="pri" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur dans ma région')}">🧭 Je deviens médiateur de ma région</a><a class="sec" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Rejoindre les professionnels du réseau')}">🤝 Je rejoins les professionnels</a></div></div>`;
+  w.querySelectorAll('.dir-tab').forEach(t=>t.onclick=()=>{ w.querySelectorAll('.dir-tab').forEach(x=>x.setAttribute('aria-selected',x===t)); w.querySelectorAll('.dir-pane').forEach(p=>p.hidden=p.dataset.p!==t.dataset.t); });
+  w.querySelectorAll('.dir-chip').forEach(c=>c.onclick=()=>{ w.querySelectorAll('.dir-chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); const g=c.dataset.g; w.querySelectorAll('.dir-pane[data-p="pro"] .dir-card').forEach(k=>k.hidden=!(g==='-1'||k.dataset.g===g)); });
+  return w; }
 function openPros(){ const go2=()=>{ const el=document.getElementById('f-pros'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }; if(state.view!=='home'){ go('home'); setTimeout(go2,350); } else go2(); }
 function fold(id,t,sub,nodes){ const d=h('details',{class:'fold rv',id}); d.innerHTML=`<summary><span class="fd-t">${t}</span><span class="fd-s">${sub}</span></summary>`; const b=h('div',{class:'fd-b'}); nodes.forEach(n=>b.appendChild(n)); d.appendChild(b); return d; }
 function renderHome(){

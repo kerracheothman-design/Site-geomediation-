@@ -814,6 +814,7 @@
   .dir-for{font-size:12.5px; color:var(--mu);}
   .dir-lk{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;}
   .dir-lk a{font:700 12.5px var(--body); color:var(--dk); background:var(--cream); border:1.5px solid var(--line); border-radius:999px; padding:5px 11px; text-decoration:none;}
+  .hs-go{cursor:pointer;} .hs-go:hover{border-color:var(--forest) !important;}
   .dir-card[hidden],.dir-pane[hidden]{display:none !important;}
   .dir-go{flex:none; align-self:center; font:800 18px var(--body); color:var(--dk);}
   .dir-cta{margin-top:18px; background:var(--dk); border-radius:18px; padding:18px 16px; text-align:center; color:#fff;}
@@ -831,7 +832,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">🚀 Agir</a><a href="#" data-to="reseau">🌐 Le réseau</a><a href="plan-mobilite.html#sondage">💭 Quiz</a><a href="#" data-to="f-method">🧭 La méthode</a><a href="#" data-to="f-docs">📚 Documents</a><a href="#" data-to="f-pros">🤝 Être accompagné</a><a href="#" data-to="f-med">🌟 Devenir médiateur</a><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">🚀 Agir</a><a href="#" data-to="reseau">🌐 Rejoindre le réseau</a><a href="plan-mobilite.html#sondage">💭 Quiz</a><a href="#" data-to="f-method">🧭 La méthode</a><a href="#" data-to="f-docs">📚 Documents</a><a href="#" data-to="f-pros">🤝 Médiateurs & pros</a><a href="#" data-to="f-med">🌟 Devenir médiateur</a><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1293,7 +1294,7 @@ const DREAMS = [
         <p><b>2 · Le rythme de croisière.</b> Des acteurs formés partout, un outil coopératif accessible à tous, des services mutualisés, des échelles et des pratiques qui se complètent. La vie de chacun devient plus simple.</p>
         <p><b>Deux voies pour devenir médiateur :</b> généraliste, pour orchestrer l'ensemble, ou spécialisé dans une thématique, en se formant directement au sein de l'équipe, sans passer par l'université.</p>`},
       {sum:"+ Devenez médiateur territorial", html:`<p>Et si c'était <b>vous</b> qui faisiez bouger votre territoire\u00a0? Dites que <b>toutes les problématiques découlent de l'organisation</b>, <b>listez les acteurs</b> de votre territoire ou de votre filière, et <b>invitez-les à débattre</b>. Pas besoin d'être mécanicien pour réunir celui qui a une panne et celui qui sait réparer\u00a0: le médiateur crée la <b>rencontre</b>.</p><p>Ensuite, chacun choisit sa place\u00a0: <b>suivre</b>, <b>participer</b> ou <b>animer</b>. Envie d'aller plus loin\u00a0? Développez de nouvelles compétences\u00a0: <b>intelligence collective</b>, analyse des <b>besoins</b> et des <b>ressources</b>, <b>co-construction</b> de projets, <b>votations</b>, <b>évaluations</b>, <b>communication</b> et cartographie.</p>`},
-      {sum:"+ L'équipe, pôle par pôle", html:()=>COLLAB_GROUPS.map(g=>`<p style="margin:12px 0 4px"><b>${g.e} ${g.label}</b></p>${g.m.map(([n,r])=>`<div class="place"><b>${n}</b> · ${r}</div>`).join('')}`).join('')},
+      {sum:"+ Les professionnels du réseau, pôle par pôle", html:()=>dirTeam()},
       {sum:"+ Qui est à l'origine du réseau ?", html:`<p>Depuis 2000, <b>Othman Kerrache</b> explore les liens entre psychologie, gouvernance et écologie humaine. Il est nourri d'une double culture (allemande par sa mère, algérienne par son père) et d'un parcours marqué par le sport, les voyages et la philosophie. Convaincu que la politique, c'est <b>organiser la coopération</b>, il crée la Géomédiation en 2010.</p><p>📬 ${'geomediation@live.fr'}</p>`}],
      fields:[{k:'transiscope', type:'toggle', label:"Je suis déjà sur <a href=\"https://transiscope.gogocarto.fr/map#/carte/@46.33,2.50,5z?cat=all\" target=\"_blank\" rel=\"noopener\">Transiscope</a>, la carte des acteurs de la transition (ou sur une autre carte)"},
              {k:'inscrire', type:'toggle', label:"Je veux <b>inscrire ma structure</b> ou mon projet dans le réseau"}]}
@@ -1497,28 +1498,31 @@ function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k
   const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
   return h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
     `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${title||d.pick}</b><small>${sub||d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`); }
+const dirIni=n=>n.replace(/[^A-Za-zÀ-ÿ' -]/g,'').split(/[\s-]+/).filter(Boolean).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+function dirMed([r,n,o,u]){ return `<a class="dir-card" href="${u}" target="_blank" rel="noopener"><span class="dir-av">${dirIni(n)}</span><span class="dir-bd"><span class="dir-tag">📍 ${r}</span><span class="dir-nm">${n}</span><span class="dir-org">${o}</span></span><span class="dir-go" aria-hidden="true">→</span></a>`; }
+function dirPro([n,r,x],g,gi){ return `<div class="dir-card" data-g="${gi}"><span class="dir-av alt">${dirIni(n)}</span><span class="dir-bd"><span class="dir-tag">${g.e} ${g.label}</span><span class="dir-nm">${n}</span>${x&&x.org?`<span class="dir-org">${x.org}</span>`:''}<span class="dir-ds">${x&&x.d?x.d:r}</span>${x&&x.pour?`<span class="dir-for">👥 Pour : ${x.pour}</span>`:''}${x&&x.l&&x.l.length?`<span class="dir-lk">${x.l.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</span>`:''}</span></div>`; }
+function dirTeam(){ return `<div class="dir"><div class="dir-list">${COLLAB_GROUPS.map((g,gi)=>g.m.map(m=>dirPro(m,g,gi)).join('')).join('')}</div></div>`; }
 function prosNode(){
-  const ini=n=>n.replace(/[^A-Za-zÀ-ÿ' -]/g,'').split(/[\s-]+/).filter(Boolean).map(w=>w[0]).slice(0,2).join('').toUpperCase();
   const nPros=COLLAB_GROUPS.reduce((t,g)=>t+g.m.length,0);
   const w=h('div',{class:'dir'});
-  w.innerHTML=`<p class="dir-lead">Un <b>réseau d'acteurs</b> pour vous accompagner, près de chez vous, dans tous les domaines.</p>
+  w.innerHTML=`<p class="dir-lead">Des <b>médiateurs</b> dans chaque région, des <b>professionnels</b> dans tous les domaines.</p>
   <div class="dir-why"><p><b>Avoir de beaux projets, c'est très positif.</b> Mais sans reconnaître notre <b>responsabilité</b> dans la dégradation continue de notre société, malgré des solutions dans presque tous les domaines, on ne pourra pas réellement la faire avancer.</p><p>Porter des solutions chacun de son côté, c'est chronophage, avec un impact limité, visible par peu.</p><p>Or toutes les solutions portées par les acteurs de la transition sont <b>complémentaires</b>.</p><p>Il suffit de soutenir des <b>équipes de co-pilotage</b> : un genre de syndicat multi-acteurs, multi-thèmes, multi-échelles. Il valorise vos activités, tout en soutenant une <b>modification profonde de l'organisation de nos territoires</b>.</p><p>Pour lancer la dynamique : quelques <b>médiateurs par thème</b>, soit <b>20 à 30 dans une région pilote</b>.</p></div>
   <ol class="dir-steps"><li>Je contacte le médiateur de ma région</li><li>Il m'oriente vers les bons acteurs</li><li>On avance ensemble</li></ol>
   <div class="dir-tabs" role="tablist"><button class="dir-tab" role="tab" data-t="med" aria-selected="true">🧭 Médiateurs<small>${MEDIATEURS.length}</small></button><button class="dir-tab" role="tab" data-t="pro" aria-selected="false">🤝 Professionnels<small>${nPros}</small></button></div>
-  <div class="dir-pane" data-p="med"><div class="dir-list">${MEDIATEURS.map(([r,n,o,u])=>`<a class="dir-card" href="${u}" target="_blank" rel="noopener"><span class="dir-av">${ini(n)}</span><span class="dir-bd"><span class="dir-tag">📍 ${r}</span><span class="dir-nm">${n}</span><span class="dir-org">${o}</span></span><span class="dir-go" aria-hidden="true">→</span></a>`).join('')}</div></div>
+  <div class="dir-pane" data-p="med"><div class="dir-list">${MEDIATEURS.map(dirMed).join('')}</div></div>
   <div class="dir-pane" data-p="pro" hidden><div class="dir-chips">${['Tous',...COLLAB_GROUPS.map(g=>g.e+' '+g.label)].map((l,i)=>`<button class="dir-chip" data-g="${i-1}" aria-pressed="${i===0}">${l}</button>`).join('')}</div>
-  <div class="dir-list">${COLLAB_GROUPS.map((g,gi)=>g.m.map(([n,r,x])=>`<div class="dir-card" data-g="${gi}"><span class="dir-av alt">${ini(n)}</span><span class="dir-bd"><span class="dir-tag">${g.e} ${g.label}</span><span class="dir-nm">${n}</span>${x&&x.org?`<span class="dir-org">${x.org}</span>`:''}<span class="dir-ds">${x&&x.d?x.d:r}</span>${x&&x.pour?`<span class="dir-for">👥 Pour : ${x.pour}</span>`:''}${x&&x.l&&x.l.length?`<span class="dir-lk">${x.l.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</span>`:''}</span></div>`).join('')).join('')}</div></div>
+  <div class="dir-list">${COLLAB_GROUPS.map((g,gi)=>g.m.map(m=>dirPro(m,g,gi)).join('')).join('')}</div></div>
   <div class="dir-cta"><p>Votre région n'a pas encore de médiateur&nbsp;? Vous avez des <b>compétences</b> à partager&nbsp;?</p><div class="row"><a class="pri" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur dans ma région')}">🧭 Je deviens médiateur de ma région</a><a class="sec" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Rejoindre les professionnels du réseau')}">🤝 Je rejoins les professionnels</a></div></div>`;
   w.querySelectorAll('.dir-tab').forEach(t=>t.onclick=()=>{ w.querySelectorAll('.dir-tab').forEach(x=>x.setAttribute('aria-selected',x===t)); w.querySelectorAll('.dir-pane').forEach(p=>p.hidden=p.dataset.p!==t.dataset.t); });
   w.querySelectorAll('.dir-chip').forEach(c=>c.onclick=()=>{ w.querySelectorAll('.dir-chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); const g=c.dataset.g; w.querySelectorAll('.dir-pane[data-p="pro"] .dir-card').forEach(k=>k.hidden=!(g==='-1'||k.dataset.g===g)); });
   return w; }
-function openPros(){ const go2=()=>{ const el=document.getElementById('f-pros'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }; if(state.view!=='home'){ go('home'); setTimeout(go2,350); } else go2(); }
+function openPros(tab){ const go2=()=>{ const el=document.getElementById('f-pros'); if(el){ el.open=true; if(tab){ const t=el.querySelector(`.dir-tab[data-t="${tab}"]`); if(t) t.click(); } el.scrollIntoView({behavior:'smooth',block:'start'}); } }; if(state.view!=='home'){ go('home'); setTimeout(go2,350); } else go2(); }
 function fold(id,t,sub,nodes){ const d=h('details',{class:'fold rv',id}); d.innerHTML=`<summary><span class="fd-t">${t}</span><span class="fd-s">${sub}</span></summary>`; const b=h('div',{class:'fd-b'}); nodes.forEach(n=>b.appendChild(n)); d.appendChild(b); return d; }
 function renderHome(){
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
   add(h('p',{class:'hero-lead'},"C'est d'elle que découlent toutes les <b>problématiques</b>, individuelles et collectives."));
   { const cta=h('div',{class:'hero-cta'}); cta.append(h('button',{class:'btn btn-gold', onclick:()=>{ const el=$('step3'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'🚀 Je commence <small>2 minutes</small>'), h('a',{class:'btn btn-soft', href:'plan-mobilite.html#sondage'},'💭 Le quiz')); add(cta);
-    add(h('div',{class:'hero-stats'},`<div><b>${MEDIATEURS.length}</b>médiateurs en région</div><div><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div>`)); }
+    add(h('div',{class:'hero-stats'},`<div class="hs-go" data-t="med" role="button" tabindex="0"><b>${MEDIATEURS.length}</b>médiateurs en région</div><div class="hs-go" data-t="pro" role="button" tabindex="0"><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div>`)); }
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   const mk=h('div',{class:'missing'});
   mk.innerHTML=`<p class="mk-t">Comment bien organiser <b>un territoire</b> sans <b>une équipe</b> de <b>médiateurs indépendants</b>, capables d'animer les échanges entre tous <b>ses acteurs</b> ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région…</p>`;
@@ -1547,7 +1551,7 @@ function renderHome(){
   F2.push(h('button',{class:'btn btn-soft', style:'margin-top:12px', onclick:openPros},'👥 Voir les professionnels du réseau'));
   add(fold('f-accomp','🧭 Faire le point','Votre auto-évaluation en 1 minute, et un médiateur pour vous orienter',F2));
   add(fold('f-method','🔁 La méthode en 7 étapes','Le toboggan de la coopération',[me])); wireSlide();
-  add(fold('f-pros','🤝 Être accompagné','Les médiateurs de votre région et les professionnels du réseau',[prosNode()]));
+  add(fold('f-pros','🤝 Médiateurs & pros','Le réseau qui vous accompagne, près de chez vous',[prosNode()]));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>💪 On a un vrai pouvoir quand on apprend à le partager intelligemment.</b></p><p><b>🧩 Dans une organisation optimale, tout le monde a sa place.</b></p><p>Chacun y contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`
@@ -1916,6 +1920,7 @@ const rvIO=('IntersectionObserver' in window)? new IntersectionObserver(es=>es.f
 new MutationObserver(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'))).observe(document.getElementById('cardRoot'),{childList:true,subtree:true});
 document.querySelectorAll('.rv').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'));
 
+document.addEventListener('click',e=>{ const g=e.target.closest('.hs-go'); if(g){ e.preventDefault(); openPros(g.dataset.t); } });
 </script>
 
 </body>

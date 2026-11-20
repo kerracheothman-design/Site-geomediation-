@@ -809,7 +809,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a><button type="button" class="nv" data-g="decouvrir" aria-expanded="false">💡 Découvrir <i>▾</i></button><button type="button" class="nv" data-g="point" aria-expanded="false">🧭 Faire le point <i>▾</i></button><button type="button" class="nv" data-g="accomp" aria-expanded="false">🤝 Être accompagné <i>▾</i></button><button type="button" class="nv" data-g="engager" aria-expanded="false">🌐 S'engager <i>▾</i></button><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a></nav><div class="subnav" id="subnav" hidden></div><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a><button type="button" class="nv" data-g="decouvrir" aria-expanded="false">💡 Découvrir <i>▾</i></button><button type="button" class="nv" data-g="agir" aria-expanded="false">🚀 Agir <i>▾</i></button><button type="button" class="nv" data-g="reseau" aria-expanded="false">🌐 Intégrer le réseau <i>▾</i></button><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a></nav><div class="subnav" id="subnav" hidden></div><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1225,9 +1225,9 @@ function offresNode(){ const w=h('div',{class:'offres'}); const O=OF();
   w.appendChild(h('p',{class:'of-st'},"<i>3</i> <span>Votre objectif ou votre question <small>(facultatif)</small></span>"));
   const ta=h('textarea',{class:'of-ta',rows:'3',placeholder:'Ex. : mieux organiser notre équipe, lancer un projet dans mon quartier…','aria-label':'Votre objectif ou votre question'}); ta.value=O.msg||''; ta.oninput=()=>{ O.msg=ta.value; upd(); };
   w.appendChild(ta);
-  const ct=h('div',{class:'of-ct'}); const a=h('a',{class:'evb g'},'💬 Parlons de votre projet'); const fi=h('button',{class:'evb o',type:'button'},'📇 Garder dans ma fiche');
+  const ct=h('div',{class:'of-ct'}); const a=h('a',{class:'evb g'},'📄 Demander un devis personnalisé'); const fi=h('button',{class:'evb o',type:'button'},'📇 Garder dans ma fiche');
   fi.onclick=()=>{ save(); go('recap'); };
-  const upd=()=>{ const l=O.sel; a.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Demande d\'accompagnement'+(O.cible?' pour '+O.cible:''))+'&body='+encodeURIComponent('Bonjour,\n\nJe souhaite échanger sur un accompagnement'+(O.cible?' pour '+O.cible:'')+'.'+(l.length?'\n\nCe qui m\'intéresse :\n'+l.map(x=>'- '+x).join('\n'):'')+'\n\nMon objectif ou ma question :\n'+((O.msg||'').trim()||'…')+'\n\nMerci !'); };
+  const upd=()=>{ const l=O.sel; a.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Demande de devis personnalisé'+(O.cible?' pour '+O.cible:''))+'&body='+encodeURIComponent('Bonjour,\n\nJe souhaite recevoir un devis personnalisé'+(O.cible?' pour '+O.cible:'')+'.'+(l.length?'\n\nCe qui m\'intéresse :\n'+l.map(x=>'- '+x).join('\n'):'')+'\n\nMon objectif ou ma question :\n'+((O.msg||'').trim()||'…')+'\n\nMerci !'); };
   ct.append(a,fi); w.appendChild(ct);
   w.appendChild(h('p',{class:'of-pv'},'🔒 Vos choix restent <b>sur votre appareil</b>, dans votre fiche : vous seul décidez de les partager.'));
   upd(); return w; }
@@ -1562,7 +1562,7 @@ function renderHome(){
   bc.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); state.bonusOpen=!state.bonusOpen; save(); paintB(); } };
   paintB(); add(bc);
   add(fold('f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance, données…',[faqNode()]));
-  add(h('p',{class:'grp-h rv'},'🧭 Faire le point'));
+  add(h('p',{class:'grp-h rv'},'🚀 Agir'));
   add(h('h2',{class:'step-h rv', id:'step3'},'<span>🚀</span>Par où commencer ?'));
   const g1=h('div',{class:'eg'}); g1.appendChild(h('p',{class:'eg-h'},'🗺️ Sur votre territoire'));
   const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Chacun a sa place'));
@@ -1571,15 +1571,14 @@ function renderHome(){
   const l2=h('div',{class:'picks'}); l2.append(pickBtn('entreprise',0,'Avec mes collaborateurs'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('pensee',2,'Pour moi'));
   g2.appendChild(l2); add(g2);
   add(fold('f-accomp','📊 Mon auto-évaluation','En 1 minute, et un médiateur pour vous orienter',F2));
-  add(h('p',{class:'grp-h rv'},'🤝 Être accompagné'));
   add(fold('f-offres','💼 Nos accompagnements','Pour un individu, une famille, une entreprise, une filière, un territoire',[offresNode()]));
+  add(h('p',{class:'grp-h rv'},'🌐 Intégrer le réseau'));
   add(fold('f-pros','🤝 Être accompagné','Les médiateurs de votre région et les professionnels du réseau',[prosNode()]));
   if(Date.now() < Date.parse('2026-11-08T19:00:00+01:00')) add(h('section',{class:'site-sec rv', id:'events'},`<h2 class="site-h">📅 Prochain rendez-vous</h2>
     <div class="ev"><img src="../social/biganos-8-novembre-v2-4x5.jpg" alt="Affiche : À Biganos, une rencontre au service de nos territoires, dimanche 8 novembre">
     <div><h3>À Biganos, une rencontre au service de nos territoires</h3><p style="margin:0;color:var(--ink-soft)"><b>Dimanche 8 novembre</b> · Le Tour de France de <b>La Marche à suivre</b> fait étape chez nous.</p>
     <div class="when"><span><b>13h30</b>Départ de la marche, 27 rue Henri Fabre</span><span><b>16h30 – 19h</b>Rencontre à la Serre Ô Délices, 71 chemin de Pardies</span><span>🥗 <b>Auberge espagnole</b> : un plat ou une boisson à partager</span></div>
     <div class="ev-l"><a class="evb g" href="https://facebook.com/events/s/la-marche-a-suivre/1438003731372309/" target="_blank" rel="noopener">Je participe</a><a class="evb o" href="https://lamarcheasuivre.net" target="_blank" rel="noopener">La Marche à suivre</a></div></div></div>`));
-  add(h('p',{class:'grp-h rv'},'🌐 S\'engager'));
   add(fold('f-med','🌟 Et si vous deveniez médiateur ?','3 gestes pour faire bouger votre territoire',[h('div',null,`
     <p style="margin:0 0 12px;font-size:17px">Et si c'était <b>vous</b> qui faisiez bouger votre territoire ? <b>3 gestes</b> suffisent :</p>
     <div class="med3"><div><i>1</i><span><b>Lister les acteurs</b> de son territoire ou de sa filière : citoyens, entreprises, collectivités, associations, médias, scientifiques</span></div><div><i>2</i><span>Les <b>sonder</b> sur l'importance d'une <b>bonne organisation</b></span></div><div><i>3</i><span>Les <b>inviter à débattre</b></span></div></div>
@@ -1936,9 +1935,8 @@ new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{ch
 
 const MENU={
   decouvrir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-enjeux','🌍 Les enjeux','Des solutions partout… sauf deux'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-docs','📚 Les documents','Dossiers, plans et kits pratiques'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
-  point:[['step3','🚀 Par où commencer ?','Choisissez un sujet, 2 minutes'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['@plan-mobilite.html#sondage','💭 Le quiz','5 questions pour donner votre avis']],
-  accomp:[['f-offres','💼 Nos accompagnements','Diagnostic, atelier, accompagnement personnalisé'],['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous']],
-  engager:[['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']]};
+  agir:[['step3','🚀 Par où commencer ?','Choisissez un sujet, 2 minutes'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['@plan-mobilite.html#sondage','💭 Le quiz','5 questions pour donner votre avis'],['f-offres','💼 Nos accompagnements','Diagnostic, atelier, devis personnalisé']],
+  reseau:[['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous'],['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']]};
 function navGo(id){ const sn=$('subnav'); sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(b=>b.setAttribute('aria-expanded','false'));
   if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } if(id==='reseau'){ go('dream','reseau'); scrollTo({top:0,behavior:'smooth'}); return; }
   const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };

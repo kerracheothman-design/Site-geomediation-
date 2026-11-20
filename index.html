@@ -1604,7 +1604,7 @@ function fold(id,t,sub,nodes){ const d=h('details',{class:'fold rv',id}); d.inne
 function renderHome(){
   add(h('p',{class:'hero-k'},'🌍 Sauver sa région pour sauver le monde'));
   add(h('h1',{class:'dream-h1'},"Et si on améliorait <em>ensemble</em> l'organisation de <em>nos territoires</em>\u00a0?"));
-  add(h('p',{class:'hero-lead'},"Nos <b>problématiques</b>, individuelles et collectives, dépendraient-elles d'abord de <b>notre façon de nous organiser</b>\u00a0?"));
+  add(h('p',{class:'hero-lead'},"Et si tous nos problèmes avaient pour origine commune <b>l'organisation de notre société</b>, qui va soit générer des <b>tensions</b>, soit rendre difficile <b>l'accès aux solutions</b>\u00a0?"));
   { const cta=h('div',{class:'hero-cta'}); cta.append(h('button',{class:'btn btn-gold', onclick:()=>{ const el=$('step3'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'🚀 Je commence <small>2 minutes</small>'), h('a',{class:'btn btn-soft', href:'plan-mobilite.html#sondage'},'💭 Le quiz')); add(cta);
     add(h('div',{class:'hero-stats'},`<div class="hs-go" data-t="med" role="button" tabindex="0"><b>${MEDIATEURS.length}</b>médiateurs en région</div><div class="hs-go" data-t="pro" role="button" tabindex="0"><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div>`)); }
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);

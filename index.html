@@ -842,7 +842,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a><button type="button" class="nv" data-g="agir" aria-expanded="false">🚀 Agir <i>▾</i></button><button type="button" class="nv" data-g="comprendre" aria-expanded="false">💡 Comprendre <i>▾</i></button><button type="button" class="nv" data-g="accomp" aria-expanded="false">🤝 Être accompagné <i>▾</i></button><button type="button" class="nv" data-g="reseau" aria-expanded="false">🌐 Le réseau <i>▾</i></button><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a></nav><div class="subnav" id="subnav" hidden></div><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a><button type="button" class="nv" data-g="decouvrir" aria-expanded="false">💡 Découvrir <i>▾</i></button><button type="button" class="nv" data-g="point" aria-expanded="false">🧭 Faire le point <i>▾</i></button><button type="button" class="nv" data-g="accomp" aria-expanded="false">🤝 Être accompagné <i>▾</i></button><button type="button" class="nv" data-g="engager" aria-expanded="false">🌐 S'engager <i>▾</i></button><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a></nav><div class="subnav" id="subnav" hidden></div><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1224,16 +1224,16 @@ const SOON=[
   ['📱',"L'application","Votre fiche, vos objectifs et le réseau, dans votre poche."],
   ['🎓','La formation',"Devenir médiateur, avec une formation qui vise la certification <b>Qualiopi</b>."]];
 const OFFRES=[
-  ['🔍','Le diagnostic organisationnel',"On fait le point : vos <b>besoins</b>, vos <b>ressources</b>, vos <b>acteurs</b>."],
+  ['🔍','Le diagnostic organisationnel',"On évalue les <b>forces</b> et les <b>faiblesses</b> de votre organisation."],
   ['🎓','L\'atelier de sensibilisation',"Un temps collectif, ludique et concret, pour <b>mieux s'organiser ensemble</b>."],
-  ['🤝','L\'accompagnement personnalisé',"Un médiateur à vos côtés, jusqu'à la <b>réussite de vos projets</b>."]];
+  ['🤝','L\'accompagnement personnalisé',"Un <b>médiateur</b> pour vous orienter, un <b>réseau de professionnels</b> pour vous accompagner au plus proche de <b>vos besoins</b> et de <b>vos objectifs</b>."]];
 const CIBLES=[['🙋','un individu'],['🏡','une famille'],['💼','une entreprise'],['🏭','une filière'],['🗺️','un territoire']];
 function OF(){ const o=state.offres||(state.offres={}); if(!Array.isArray(o.sel)) o.sel=[]; return o; }
 const AUD=[
  ['🙋','Un citoyen',"Faire le point sur votre vie, donner votre avis et <b>agir près de chez vous</b>.",[['🚀 Je commence','#step3'],['💭 Le quiz','@plan-mobilite.html#sondage'],['🌐 Rejoindre le réseau','!reseau']]],
- ['💼','Une entreprise',"Mieux organiser l'équipe et trouver des <b>partenaires</b> sur votre territoire et dans votre filière.",[['💼 Mon parcours entreprise','!entreprise'],['✂️ Un accompagnement sur mesure','#f-offres'],['🤝 Médiateurs & pros','#f-pros']]],
+ ['💼','Une entreprise',"Mieux organiser l'équipe et trouver des <b>partenaires</b> sur votre territoire et dans votre filière.",[['💼 Mon parcours entreprise','!entreprise'],['💼 Nos accompagnements','#f-offres'],['🤝 Médiateurs & pros','#f-pros']]],
  ['🤝','Une association',"Relier les acteurs, <b>co-organiser des débats</b> et porter des projets communs.",[['🗣️ Le kit débat','%debat'],['🌐 Rejoindre le réseau','!reseau'],['🤝 Médiateurs & pros','#f-pros']]],
- ['🏛️','Un élu, une collectivité',"Concerter habitants et acteurs, bâtir un <b>plan de développement territorial</b> approuvé et évalué par les citoyens.",[['🧭 Le plan régional','%region'],['✂️ Un accompagnement sur mesure','#f-offres'],['🗣️ Le kit débat','%debat']]],
+ ['🏛️','Un élu, une collectivité',"Concerter habitants et acteurs, bâtir un <b>plan de développement territorial</b> approuvé et évalué par les citoyens.",[['🧭 Le plan régional','%region'],['💼 Nos accompagnements','#f-offres'],['🗣️ Le kit débat','%debat']]],
  ['🔬','Un chercheur, un média',"Analyser, documenter et <b>faire connaître les solutions</b> qui marchent.",[['📊 Le comparatif des méthodes','%comparatif'],['📚 Les documents','#f-docs'],['✉️ Nous écrire','#contact']]]];
 function audGo(t){ const c=t[0], v=t.slice(1); if(c==='@'){ location.href=v; return; } if(c==='%'){ openDoc(v); return; } if(c==='!'){ go('dream',v); return; }
   const el=document.getElementById(v); if(el){ if(el.tagName==='DETAILS') el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }
@@ -1258,20 +1258,19 @@ function enjeuxNode(){ const w=h('div',{class:'enj'}); if(!Array.isArray(state.e
     c.onclick=tog; c.onkeydown=ev=>{ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); tog(); } }; paint(); g.appendChild(c); });
   w.appendChild(g); w.appendChild(h('p',{class:'of-pv'},'📇 Vos choix s\'ajoutent à <b>votre fiche</b>, sur votre appareil.')); return w; }
 const FAQ=[["C'est pour qui ?","Pour tout le monde : un <b>individu</b>, une <b>famille</b>, une <b>entreprise</b>, une <b>filière</b>, un <b>territoire</b>. La méthode s'adapte à chaque échelle."],
- ["Combien ça coûte ?","Le site, la fiche et le quiz sont <b>libres d'accès</b>. Les accompagnements sont <b>sur mesure</b> : tout commence par un échange pour construire la formule adaptée."],
+ ["Combien ça coûte ?","Le site, la fiche et le quiz sont <b>libres d'accès</b>. Les accompagnements s'adaptent à <b>vos besoins</b> et à <b>vos objectifs</b> : tout commence par un échange."],
  ["Les médiateurs sont-ils indépendants ?","Oui. Ils ne défendent <b>aucun camp</b> : ils réunissent les acteurs, animent les échanges et mettent en lumière les solutions."],
  ["Médiateur ou professionnel, quelle différence ?","Le <b>médiateur</b> réunit et relie les acteurs. Le <b>professionnel</b> apporte une compétence précise : géographie, gouvernance, numérique, santé…"],
  ["Mes réponses sont-elles protégées ?","Oui : elles restent <b>sur votre appareil</b>. Rien n'est envoyé sans votre accord, et vous pouvez tout effacer à tout moment."],
  ["Comment devenir médiateur ?","Trois gestes : <b>lister</b> les acteurs autour de vous, les <b>sonder</b> sur l'importance d'une bonne organisation, puis les <b>inviter à débattre</b>."]];
 function faqNode(){ const w=h('div',{class:'faq'}); FAQ.forEach(([q,r])=>{ const d=h('details',{class:'faq-i'}); d.innerHTML=`<summary>${q}</summary><p>${r}</p>`; w.appendChild(d); }); return w; }
 function offresNode(){ const w=h('div',{class:'offres'}); const O=OF();
-  w.appendChild(h('div',{class:'of-sm'},"<b>✂️ 100 % sur mesure</b><span>Chaque situation est unique : on construit <b>la formule qui vous ressemble</b>.</span>"));
   w.appendChild(h('p',{class:'of-st'},"<i>1</i> <span>Vous êtes :</span>"));
   const row=h('div',{class:'of-cib'});
   const paintC=()=>row.querySelectorAll('button').forEach(x=>{ const on=x.dataset.c===O.cible; x.classList.toggle('active',on); x.setAttribute('aria-pressed',on); });
   CIBLES.forEach(([e,t])=>{ const b=h('button',{class:'chip','data-c':t},e+' '+t.replace(/^une? /,'').replace(/^./,c=>c.toUpperCase())); b.onclick=()=>{ O.cible=O.cible===t?null:t; paintC(); save(); upd(); }; row.appendChild(b); });
   w.appendChild(row); paintC();
-  w.appendChild(h('p',{class:'of-st'},"<i>2</i> <span>Ce qui vous intéresse, <b>à la carte</b> ou en <b>parcours complet</b> :</span>"));
+  w.appendChild(h('p',{class:'of-st'},"<i>2</i> <span>Ce qui vous intéresse :</span>"));
   const g=h('div',{class:'of-g'});
   OFFRES.forEach(([e,t,d])=>{ const c=h('div',{class:'of-c',role:'button',tabindex:'0'},`<b>${e} ${t}</b><span>${d}</span><em></em>`);
     const paint=()=>{ const on=O.sel.includes(t); c.classList.toggle('on',on); c.setAttribute('aria-pressed',on); c.querySelector('em').textContent=on?'✅ Ça m\'intéresse':'＋ Ça m\'intéresse'; };
@@ -1283,7 +1282,7 @@ function offresNode(){ const w=h('div',{class:'offres'}); const O=OF();
   w.appendChild(ta);
   const ct=h('div',{class:'of-ct'}); const a=h('a',{class:'evb g'},'💬 Parlons de votre projet'); const fi=h('button',{class:'evb o',type:'button'},'📇 Garder dans ma fiche');
   fi.onclick=()=>{ save(); go('recap'); };
-  const upd=()=>{ const l=O.sel; a.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Accompagnement sur mesure'+(O.cible?' pour '+O.cible:''))+'&body='+encodeURIComponent('Bonjour,\n\nJe souhaite échanger sur un accompagnement'+(O.cible?' pour '+O.cible:'')+'.'+(l.length?'\n\nCe qui m\'intéresse :\n'+l.map(x=>'- '+x).join('\n'):'')+'\n\nMon objectif ou ma question :\n'+((O.msg||'').trim()||'…')+'\n\nMerci !'); };
+  const upd=()=>{ const l=O.sel; a.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Demande d\'accompagnement'+(O.cible?' pour '+O.cible:''))+'&body='+encodeURIComponent('Bonjour,\n\nJe souhaite échanger sur un accompagnement'+(O.cible?' pour '+O.cible:'')+'.'+(l.length?'\n\nCe qui m\'intéresse :\n'+l.map(x=>'- '+x).join('\n'):'')+'\n\nMon objectif ou ma question :\n'+((O.msg||'').trim()||'…')+'\n\nMerci !'); };
   ct.append(a,fi); w.appendChild(ct);
   w.appendChild(h('p',{class:'of-pv'},'🔒 Vos choix restent <b>sur votre appareil</b>, dans votre fiche : vous seul décidez de les partager.'));
   upd(); return w; }
@@ -1602,15 +1601,8 @@ function renderHome(){
   mk.innerHTML=`<p class="mk-t">Comment bien organiser <b>un territoire</b> sans <b>une équipe</b> de <b>médiateurs indépendants</b>, capables d'animer les échanges entre tous <b>ses acteurs</b> ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région…</p>`;
   add(mk);
   add(h('div',{class:'how'},`<p class="how-h">Comment ça marche ?</p><ol class="how-f"><li><i>🧭</i><span>Choisissez un <b>sujet</b></span></li><li><i>📊</i><span>Faites le <b>point</b></span></li><li><i>🎯</i><span>Notez vos <b>objectifs</b></span></li><li class="how-go" onclick="openPros()" role="button" tabindex="0"><i>🤝</i><span>Un <b>médiateur</b> vous oriente →</span></li></ol>`));
+  add(h('p',{class:'grp-h rv'},'💡 Découvrir'));
   add(audNode());
-  add(h('p',{class:'grp-h rv'},'🚀 Agir'));
-  add(h('h2',{class:'step-h rv', id:'step3'},'<span>🚀</span>Par où commencer ?'));
-  const g1=h('div',{class:'eg'}); g1.appendChild(h('p',{class:'eg-h'},'🗺️ Sur votre territoire'));
-  const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Chacun a sa place'));
-  g1.appendChild(l1); add(g1);
-  const g2=h('div',{class:'eg'}); g2.appendChild(h('p',{class:'eg-h'},'🏡 Dans votre vie'));
-  const l2=h('div',{class:'picks'}); l2.append(pickBtn('entreprise',0,'Avec mes collaborateurs'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('pensee',2,'Pour moi'));
-  g2.appendChild(l2); add(g2);
   const me=h('div',{class:'method'});
   me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
   const F2=[h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'), testBlock()];
@@ -1619,14 +1611,7 @@ function renderHome(){
   const ar=h('div',{class:'row-inline'});
   ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Demande d'accompagnement personnalisé")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('dream','pensee')},'📖 En savoir plus'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
   ac.appendChild(ar); F2.push(ac);
-  F2.push(h('div',{class:'pourqui'},`<p class="pq-h">🎯 Pour qui ?</p><p class="pq-i"><b>Comprendre les enjeux sociétaux</b>, <b>sensibiliser</b> et <b>accompagner</b> vers une <b>co-organisation optimale</b>.</p>
-    <div class="pq-g"><div class="pq"><b>🙋 Citoyens</b><span>Agir pour soi, avec ses proches et sur son <b>territoire</b>.</span></div>
-    <div class="pq"><b>🏛️ Collectivités</b><span><b>Sensibiliser</b> les habitants et faciliter la <b>concertation</b> entre tous les acteurs.</span></div>
-    <div class="pq"><b>💼 Entreprises</b><span>Des <b>rôles clairs</b>, une <b>coopération</b> fluide, des liens avec les filières locales.</span></div>
-    <div class="pq"><b>🤝 Associations</b><span>Relier vos actions aux autres acteurs et gagner en <b>impact</b>.</span></div></div>`));
   F2.push(h('button',{class:'btn btn-soft', style:'margin-top:12px', onclick:openPros},'👥 Voir les professionnels du réseau'));
-  add(fold('f-accomp','🧭 Faire le point','Votre auto-évaluation en 1 minute, et un médiateur pour vous orienter',F2));
-  add(h('p',{class:'grp-h rv'},'💡 Comprendre'));
   add(fold('f-enjeux','🌍 Les enjeux','Pourquoi s\'organiser ensemble, aujourd\'hui\u00a0?',[enjeuxNode()]));
   add(fold('f-method','🔁 La méthode en 7 étapes','Le toboggan de la coopération',[me])); wireSlide();
   add(fold('f-docs','📚 Les documents','Dossiers, plans et kits pratiques',[docsNode()]));
@@ -1638,8 +1623,16 @@ function renderHome(){
   bc.onclick=e=>{ if(state.bonusOpen && !(e.target.classList&&e.target.classList.contains('bc-close'))) return; state.bonusOpen=!state.bonusOpen; save(); paintB(); };
   bc.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); state.bonusOpen=!state.bonusOpen; save(); paintB(); } };
   paintB(); add(bc);
-  add(fold('f-soon','✨ Bientôt','Jeu, film, interviews, débats, appli, formation…',[soonNode()]));
   add(fold('f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance, données…',[faqNode()]));
+  add(h('p',{class:'grp-h rv'},'🧭 Faire le point'));
+  add(h('h2',{class:'step-h rv', id:'step3'},'<span>🚀</span>Par où commencer ?'));
+  const g1=h('div',{class:'eg'}); g1.appendChild(h('p',{class:'eg-h'},'🗺️ Sur votre territoire'));
+  const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0), pickBtn('reseau',1,'Rejoindre le réseau','Chacun a sa place'));
+  g1.appendChild(l1); add(g1);
+  const g2=h('div',{class:'eg'}); g2.appendChild(h('p',{class:'eg-h'},'🏡 Dans votre vie'));
+  const l2=h('div',{class:'picks'}); l2.append(pickBtn('entreprise',0,'Avec mes collaborateurs'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('pensee',2,'Pour moi'));
+  g2.appendChild(l2); add(g2);
+  add(fold('f-accomp','📊 Mon auto-évaluation','En 1 minute, et un médiateur pour vous orienter',F2));
   add(h('p',{class:'grp-h rv'},'🤝 Être accompagné'));
   add(fold('f-offres','💼 Nos accompagnements','Pour un individu, une famille, une entreprise, une filière, un territoire',[offresNode()]));
   add(fold('f-pros','🤝 Médiateurs & pros','Le réseau qui vous accompagne, près de chez vous',[prosNode()]));
@@ -1648,7 +1641,7 @@ function renderHome(){
     <div><h3>À Biganos, une rencontre au service de nos territoires</h3><p style="margin:0;color:var(--ink-soft)"><b>Dimanche 8 novembre</b> · Le Tour de France de <b>La Marche à suivre</b> fait étape chez nous.</p>
     <div class="when"><span><b>13h30</b>Départ de la marche, 27 rue Henri Fabre</span><span><b>16h30 – 19h</b>Rencontre à la Serre Ô Délices, 71 chemin de Pardies</span><span>🥗 <b>Auberge espagnole</b> : un plat ou une boisson à partager</span></div>
     <div class="ev-l"><a class="evb g" href="https://facebook.com/events/s/la-marche-a-suivre/1438003731372309/" target="_blank" rel="noopener">Je participe</a><a class="evb o" href="https://lamarcheasuivre.net" target="_blank" rel="noopener">La Marche à suivre</a></div></div></div>`));
-  add(h('p',{class:'grp-h rv'},'🌐 Le réseau'));
+  add(h('p',{class:'grp-h rv'},'🌐 S\'engager'));
   add(fold('f-med','🌟 Devenez médiateur territorial','3 gestes pour faire bouger votre territoire',[h('div',null,`
     <p style="margin:0 0 12px;font-size:17px">Et si c'était <b>vous</b> qui faisiez bouger votre territoire ? <b>3 gestes</b> suffisent :</p>
     <div class="med3"><div><i>1</i><span><b>Lister les acteurs</b> de son territoire ou de sa filière</span></div><div><i>2</i><span>Les <b>sonder</b> sur l'importance d'une <b>bonne organisation</b></span></div><div><i>3</i><span>Les <b>inviter à débattre</b></span></div></div>
@@ -1656,6 +1649,7 @@ function renderHome(){
     <p style="margin:12px 0 10px;line-height:1.6">Ensuite, chacun choisit sa place : <b>suivre</b>, <b>participer</b> ou <b>animer</b> les échanges et le développement des projets. Envie d'aller plus loin ? Développez de <b>nouvelles compétences</b> :</p>
     <div class="team"><div class="tm"><b>🧠 Intelligence collective</b><span>et animation</span></div><div class="tm"><b>🔍 Analyse</b><span>des besoins et des ressources</span></div><div class="tm"><b>🛠️ Co-construction</b><span>de projets et de feuilles de route</span></div><div class="tm"><b>🗳️ Votations</b><span>et évaluations</span></div><div class="tm"><b>📣 Communication</b><span>et cartographie</span></div></div>
     <p style="margin:14px 0 0"><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur territorial')}">🚀 Je me lance</a></p>`)]));
+  add(fold('f-soon','✨ Bientôt','Jeu, film, interviews, débats, appli, formation…',[soonNode()]));
   add(h('section',{class:'site-sec rv', id:'contact'},`<div class="ct"><h2 class="site-h" style="color:var(--cream);justify-content:center">✉️ Contact</h2><p>Une <b>question</b>, une envie d'<b>agir</b> ou de <b>soutenir le projet</b> ? Écrivez-nous.</p>
     <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Un médiateur vous répond <b>personnellement</b> : tout commence par <b>un échange</b>.</small><div class="socials"><p>Suivez Othman et la Géomédiation</p><div class="so-row">${SOCIALS.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join('')}</div></div></div>`));
   add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
@@ -2000,10 +1994,10 @@ function airy(){ document.querySelectorAll('#cardRoot .doc-art p, #cardRoot .lvl
 new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{childList:true,subtree:true}); airy();
 
 const MENU={
-  agir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['step3','🚀 Par où commencer ?','Choisissez un sujet, 2 minutes'],['f-accomp','🧭 Faire le point','Votre auto-évaluation en 1 minute'],['@plan-mobilite.html#sondage','💭 Le quiz','5 questions pour donner votre avis']],
-  comprendre:[['f-enjeux','🌍 Les enjeux','Pourquoi s\'organiser ensemble'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-docs','📚 Les documents','Dossiers, plans et kits pratiques'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']],
-  accomp:[['f-offres','💼 Nos accompagnements','Diagnostic, atelier, accompagnement sur mesure'],['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous']],
-  reseau:[['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire']]};
+  decouvrir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-enjeux','🌍 Les enjeux','Pourquoi s\'organiser ensemble'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-docs','📚 Les documents','Dossiers, plans et kits pratiques'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
+  point:[['step3','🚀 Par où commencer ?','Choisissez un sujet, 2 minutes'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['@plan-mobilite.html#sondage','💭 Le quiz','5 questions pour donner votre avis']],
+  accomp:[['f-offres','💼 Nos accompagnements','Diagnostic, atelier, accompagnement personnalisé'],['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous']],
+  engager:[['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']]};
 function navGo(id){ const sn=$('subnav'); sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(b=>b.setAttribute('aria-expanded','false'));
   if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } if(id==='reseau'){ go('dream','reseau'); scrollTo({top:0,behavior:'smooth'}); return; }
   const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };

@@ -1677,7 +1677,7 @@ function renderHome(){
   const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0));
   g1.appendChild(l1); add(g1);
   const g2=h('div',{class:'eg'}); g2.appendChild(h('p',{class:'eg-h'},'🏡 Dans votre vie'));
-  const l2=h('div',{class:'picks'}); l2.append(pickBtn('entreprise',0,'Avec mes collaborateurs'), pickBtn('maison',1,'Chez moi','Mon foyer : famille, couple, colocation'), pickBtn('pensee',2,'Pour moi'));
+  const l2=h('div',{class:'picks'}); l2.append(pickBtn('entreprise',0,'Avec mes collaborateurs'), pickBtn('maison',1,'Mon foyer','Famille, couple, colocation'), pickBtn('pensee',2,'Mon bien-être'));
   g2.appendChild(l2); add(g2);
   add(fold('f-accomp','📊 Mon auto-évaluation','En 1 minute, et un médiateur pour vous orienter',F2));
   add(fold('f-quiz','💭 Le quiz','5 questions pour donner votre avis',[quizNode()]));

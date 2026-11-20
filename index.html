@@ -708,14 +708,20 @@
 
   /* ===== v2 : site complet ===== */
   .testbar{background:var(--gold); color:var(--forest-dark); font:800 12px var(--body); text-align:center; padding:6px 10px; letter-spacing:.04em;}
-  .sitenav{display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end;}
-  .sitenav a{white-space:nowrap; color:var(--cream); text-decoration:none; font:700 13.5px var(--body); padding:8px 11px; border-radius:999px; opacity:.9; transition:background .2s, opacity .2s;}
-  .sitenav a:hover{background:rgba(255,255,255,.12); opacity:1;}
-  @media (min-width:541px){ .top{flex-direction:column; align-items:stretch; gap:10px;} .sitenav{justify-content:flex-start; flex-wrap:nowrap; gap:2px; margin-left:-9px; margin-right:-60px;} .sitenav a{padding:6px 6px; font-size:12.5px;} .sitenav .nt{display:none;} .sitenav a.nav-fiche{order:-1; margin:0 6px 0 0; padding:7px 12px;} }
-  @media (min-width:541px) and (max-width:1000px){ .sitenav{flex-wrap:wrap !important; margin-right:0 !important;} }
-  .sitenav a.nav-fiche{background:var(--gold); color:var(--forest-dark); opacity:1; margin-left:6px;} .sitenav a.nav-fiche:hover{background:var(--gold-light);}
-  @media (max-width:540px){ .top{flex-direction:column; align-items:stretch;} .sitenav{flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; margin:0 -16px; padding:2px 16px 6px; max-width:none; gap:6px; mask-image:linear-gradient(90deg,#000 88%,transparent);} .sitenav::-webkit-scrollbar{display:none;}
-    .sitenav a{padding:7px 12px; font-size:13px; background:rgba(255,255,255,.1);} .sitenav a.nav-fiche{order:-1; margin-left:0; background:var(--gold);} }
+  .sitenav{display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-start;}
+  .sitenav a,.sitenav .nv{white-space:nowrap; color:var(--cream); text-decoration:none; font:700 13.5px var(--body); padding:8px 12px; border-radius:999px; opacity:.92; transition:background .2s, opacity .2s; background:none; border:0; cursor:pointer;}
+  .sitenav a:hover,.sitenav .nv:hover,.sitenav .nv[aria-expanded="true"]{background:rgba(255,255,255,.14); opacity:1;}
+  .sitenav .nv i{font-style:normal; font-size:10px; opacity:.7; display:inline-block; transition:transform .2s;} .sitenav .nv[aria-expanded="true"] i{transform:rotate(180deg);}
+  .sitenav a.nav-fiche{background:var(--gold); color:var(--forest-dark); opacity:1;} .sitenav a.nav-fiche:hover{background:var(--gold-light);}
+  .subnav{display:flex; flex-wrap:wrap; gap:8px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); border-radius:18px; padding:10px; animation:snIn .2s ease;}
+  .subnav[hidden]{display:none;}
+  .grp-h{font:800 13px var(--body); letter-spacing:.12em; text-transform:uppercase; color:var(--clay); margin:34px 4px 10px;}
+  .subnav a{display:flex; flex-direction:column; gap:2px; color:var(--cream); text-decoration:none; background:rgba(255,255,255,.08); border-radius:14px; padding:10px 14px; font:700 14px var(--body); flex:1 1 180px;}
+  .subnav a small{font-weight:500; font-size:12px; opacity:.75;} .subnav a:hover{background:rgba(255,255,255,.16);}
+  @keyframes snIn{from{opacity:0; transform:translateY(-4px)} to{opacity:1; transform:none}}
+  @media (min-width:541px){ .top{flex-direction:column; align-items:stretch; gap:10px;} .sitenav{margin-left:-10px;} }
+  @media (max-width:540px){ .top{flex-direction:column; align-items:stretch;} .sitenav{flex-wrap:wrap; gap:6px;}
+    .sitenav a,.sitenav .nv{padding:7px 12px; font-size:13px; background:rgba(255,255,255,.1);} .sitenav a.nav-fiche{background:var(--gold);} .subnav a{flex:1 1 100%;} .sitenav .nt{display:none;} }
   .site-sec{margin-top:34px; padding-top:22px; border-top:2px solid var(--cream-dark);}
   .site-h{font:800 24px var(--display); color:var(--forest-dark); margin:0 0 14px; display:flex; align-items:center; gap:10px;}
   .ev{display:grid; grid-template-columns:minmax(0,200px) minmax(0,1fr); gap:20px; align-items:start; background:var(--paper); border-radius:18px; padding:16px; box-shadow:0 6px 20px rgba(31,51,41,.08);}
@@ -833,7 +839,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="step3">🚀 Agir</a><a href="#" data-to="reseau">🌐 Rejoindre le réseau</a><a href="plan-mobilite.html#sondage">💭 Quiz</a><a href="#" data-to="f-method">🧭 La méthode</a><a href="#" data-to="f-docs">📚 Documents</a><a href="#" data-to="f-pros">🤝 Médiateurs & pros</a><a href="#" data-to="f-med">🌟 Devenir médiateur</a><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a></nav><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a><button type="button" class="nv" data-g="agir" aria-expanded="false">🚀 Agir <i>▾</i></button><button type="button" class="nv" data-g="comprendre" aria-expanded="false">💡 Comprendre <i>▾</i></button><button type="button" class="nv" data-g="accomp" aria-expanded="false">🤝 Être accompagné <i>▾</i></button><button type="button" class="nv" data-g="reseau" aria-expanded="false">🌐 Le réseau <i>▾</i></button><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a></nav><div class="subnav" id="subnav" hidden></div><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1580,9 +1586,9 @@ function renderHome(){
     <div class="pq"><b>🤝 Associations</b><span>Relier vos actions aux autres acteurs et gagner en <b>impact</b>.</span></div></div>`));
   F2.push(h('button',{class:'btn btn-soft', style:'margin-top:12px', onclick:openPros},'👥 Voir les professionnels du réseau'));
   add(fold('f-accomp','🧭 Faire le point','Votre auto-évaluation en 1 minute, et un médiateur pour vous orienter',F2));
+  add(h('p',{class:'grp-h rv'},'💡 Comprendre'));
   add(fold('f-method','🔁 La méthode en 7 étapes','Le toboggan de la coopération',[me])); wireSlide();
-  add(fold('f-offres','💼 Nos accompagnements','Pour un individu, une famille, une entreprise, une filière, un territoire',[offresNode()]));
-  add(fold('f-pros','🤝 Médiateurs & pros','Le réseau qui vous accompagne, près de chez vous',[prosNode()]));
+  add(fold('f-docs','📚 Les documents','Dossiers, plans et kits pratiques',[docsNode()]));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
   const paintB=()=>{ const on=!!state.bonusOpen; bc.className='bonus-card'+(on?' on':''); bc.setAttribute('aria-expanded',String(on));
     bc.innerHTML= on ? `<div class="bc-back"><div class="bc-links"><button data-go="comprendre">🧭 Le projet en images</button></div><p><b>💪 On a un vrai pouvoir quand on apprend à le partager intelligemment.</b></p><p><b>🧩 Dans une organisation optimale, tout le monde a sa place.</b></p><p>Chacun y contribue selon ses <b>responsabilités</b> et ses <b>connaissances</b>.</p><details class="bc-more"><summary>➕ En savoir plus</summary><p>Pas de règles toutes faites, mais une <b>philosophie commune</b> qui s'adapte à chaque situation.</p><p>C'est l'<b>esprit girondin</b> : souple, pragmatique, serein. On <b>anticipe</b> et on <b>se concerte</b> pour vivre plus librement, près de chez soi comme au loin.</p><p><b>Chaque défi est une chance.</b> Plutôt que chercher des coupables, on cherche des <b>solutions</b> : et chercher ensemble, ça rassemble.</p></details><span class="bc-close">↺ Retourner</span></div>`
@@ -1591,11 +1597,16 @@ function renderHome(){
   bc.onclick=e=>{ if(state.bonusOpen && !(e.target.classList&&e.target.classList.contains('bc-close'))) return; state.bonusOpen=!state.bonusOpen; save(); paintB(); };
   bc.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); state.bonusOpen=!state.bonusOpen; save(); paintB(); } };
   paintB(); add(bc);
+  add(fold('f-soon','✨ Bientôt','Jeu, film, interviews, débats, appli, formation…',[soonNode()]));
+  add(h('p',{class:'grp-h rv'},'🤝 Être accompagné'));
+  add(fold('f-offres','💼 Nos accompagnements','Pour un individu, une famille, une entreprise, une filière, un territoire',[offresNode()]));
+  add(fold('f-pros','🤝 Médiateurs & pros','Le réseau qui vous accompagne, près de chez vous',[prosNode()]));
   if(Date.now() < Date.parse('2026-11-08T19:00:00+01:00')) add(h('section',{class:'site-sec rv', id:'events'},`<h2 class="site-h">📅 Prochain rendez-vous</h2>
     <div class="ev"><img src="social/biganos-8-novembre-v2-4x5.jpg" alt="Affiche : À Biganos, une rencontre au service de nos territoires, dimanche 8 novembre">
     <div><h3>À Biganos, une rencontre au service de nos territoires</h3><p style="margin:0;color:var(--ink-soft)"><b>Dimanche 8 novembre</b> · Le Tour de France de <b>La Marche à suivre</b> fait étape chez nous.</p>
     <div class="when"><span><b>13h30</b>Départ de la marche, 27 rue Henri Fabre</span><span><b>16h30 – 19h</b>Rencontre à la Serre Ô Délices, 71 chemin de Pardies</span><span>🥗 <b>Auberge espagnole</b> : un plat ou une boisson à partager</span></div>
     <div class="ev-l"><a class="evb g" href="https://facebook.com/events/s/la-marche-a-suivre/1438003731372309/" target="_blank" rel="noopener">Je participe</a><a class="evb o" href="https://lamarcheasuivre.net" target="_blank" rel="noopener">La Marche à suivre</a></div></div></div>`));
+  add(h('p',{class:'grp-h rv'},'🌐 Le réseau'));
   add(fold('f-med','🌟 Devenez médiateur territorial','3 gestes pour faire bouger votre territoire',[h('div',null,`
     <p style="margin:0 0 12px;font-size:17px">Et si c'était <b>vous</b> qui faisiez bouger votre territoire ? <b>3 gestes</b> suffisent :</p>
     <div class="med3"><div><i>1</i><span><b>Lister les acteurs</b> de son territoire ou de sa filière</span></div><div><i>2</i><span>Les <b>sonder</b> sur l'importance d'une <b>bonne organisation</b></span></div><div><i>3</i><span>Les <b>inviter à débattre</b></span></div></div>
@@ -1603,8 +1614,6 @@ function renderHome(){
     <p style="margin:12px 0 10px;line-height:1.6">Ensuite, chacun choisit sa place : <b>suivre</b>, <b>participer</b> ou <b>animer</b> les échanges et le développement des projets. Envie d'aller plus loin ? Développez de <b>nouvelles compétences</b> :</p>
     <div class="team"><div class="tm"><b>🧠 Intelligence collective</b><span>et animation</span></div><div class="tm"><b>🔍 Analyse</b><span>des besoins et des ressources</span></div><div class="tm"><b>🛠️ Co-construction</b><span>de projets et de feuilles de route</span></div><div class="tm"><b>🗳️ Votations</b><span>et évaluations</span></div><div class="tm"><b>📣 Communication</b><span>et cartographie</span></div></div>
     <p style="margin:14px 0 0"><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur territorial')}">🚀 Je me lance</a></p>`)]));
-  add(fold('f-docs','📚 Les documents','Dossiers, plans et kits pratiques',[docsNode()]));
-  add(fold('f-soon','✨ Bientôt','Jeu, film, interviews, débats, appli, formation…',[soonNode()]));
   add(h('section',{class:'site-sec rv', id:'contact'},`<div class="ct"><h2 class="site-h" style="color:var(--cream);justify-content:center">✉️ Contact</h2><p>Une <b>question</b>, une envie d'<b>agir</b> ou de <b>soutenir le projet</b> ? Écrivez-nous.</p>
     <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Un médiateur vous répond <b>personnellement</b> : tout commence par <b>un échange</b>.</small><div class="socials"><p>Suivez Othman et la Géomédiation</p><div class="so-row">${SOCIALS.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join('')}</div></div></div>`));
   add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
@@ -1947,8 +1956,23 @@ function airy(){ document.querySelectorAll('#cardRoot .doc-art p, #cardRoot .lvl
   p.innerHTML=parts.map(x=>`<span class="s">${x}</span>`).join(''); p.classList.add('airy'); }); }
 new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{childList:true,subtree:true}); airy();
 
-document.querySelectorAll('.sitenav a[data-to]').forEach(a=>a.onclick=e=>{ e.preventDefault(); const id=a.dataset.to; if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } if(id==='reseau'){ go('dream','reseau'); scrollTo({top:0,behavior:'smooth'}); return; } const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };
-  if(state.view!=='home'){ go('home'); setTimeout(goTo,350); } else goTo(); });
+const MENU={
+  agir:[['step3','🚀 Par où commencer ?','Choisissez un sujet, 2 minutes'],['f-accomp','🧭 Faire le point','Votre auto-évaluation en 1 minute'],['@plan-mobilite.html#sondage','💭 Le quiz','5 questions pour donner votre avis']],
+  comprendre:[['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-docs','📚 Les documents','Dossiers, plans et kits pratiques'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']],
+  accomp:[['f-offres','💼 Nos accompagnements','Diagnostic, atelier, accompagnement sur mesure'],['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous']],
+  reseau:[['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire']]};
+function navGo(id){ const sn=$('subnav'); sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(b=>b.setAttribute('aria-expanded','false'));
+  if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } if(id==='reseau'){ go('dream','reseau'); scrollTo({top:0,behavior:'smooth'}); return; }
+  const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };
+  if(state.view!=='home'){ go('home'); setTimeout(goTo,350); } else goTo(); }
+document.querySelectorAll('.sitenav a[data-to]').forEach(a=>a.onclick=e=>{ e.preventDefault(); navGo(a.dataset.to); });
+document.querySelectorAll('.sitenav .nv').forEach(b=>b.onclick=()=>{ const sn=$('subnav'); const open=b.getAttribute('aria-expanded')==='true';
+  document.querySelectorAll('.sitenav .nv').forEach(x=>x.setAttribute('aria-expanded','false'));
+  if(open){ sn.hidden=true; return; } b.setAttribute('aria-expanded','true'); sn.innerHTML='';
+  MENU[b.dataset.g].forEach(([id,t,sub])=>{ const ext=id[0]==='@'; const a=h('a',{href:ext?id.slice(1):'#'},`<span>${t}</span><small>${sub}</small>`); if(!ext) a.onclick=e=>{ e.preventDefault(); navGo(id); }; sn.appendChild(a); });
+  sn.hidden=false; });
+document.addEventListener('click',e=>{ const sn=$('subnav'); if(!sn.hidden && !e.target.closest('.subnav,.sitenav')){ sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(x=>x.setAttribute('aria-expanded','false')); } });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ const sn=$('subnav'); if(!sn.hidden){ sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(x=>x.setAttribute('aria-expanded','false')); } } });
 const rvIO=('IntersectionObserver' in window)? new IntersectionObserver(es=>es.forEach(x=>{ if(x.isIntersecting){ x.target.classList.add('in'); rvIO.unobserve(x.target);} }),{threshold:.12}) : null;
 new MutationObserver(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'))).observe(document.getElementById('cardRoot'),{childList:true,subtree:true});
 document.querySelectorAll('.rv').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'));

@@ -73,17 +73,8 @@ td:first-child{font-weight:700;color:var(--forest-dark)} .law td:first-child{fon
 <div class="wrap">
   <div class="top"><span>GÉOMÉDIATION</span><a href="./">← Retour au site</a></div>
 
-  <section class="card sd" id="sondage">
-    <div class="kicker">Avant de commencer · 1 minute</div>
-    <h2>Et vous, qu'en pensez-vous ?</h2>
-    <p>Quelques affirmations : choisissez la réponse qui vous parle. <b>Il n'y a pas de mauvaise réponse.</b></p>
-    <div class="prog"><i id="prog"></i></div>
-    <div id="qs"></div>
-    <div class="thanks" id="thanks">Merci ! Vos avis s'ajoutent à <a href="./#recap" style="color:var(--forest-dark)">votre fiche acteur</a>. Et maintenant, place au concret 👇</div>
-    <button class="open-plan" id="openPlan" onclick="openPlan()">📄 Découvrir le plan mobilité <small>Bordeaux-Mériadeck 2030 · exemple de plan de développement</small></button>
-  </section>
 
-  <section class="card" id="plan" hidden>
+  <section class="card" id="plan">
     <div class="kicker">Bordeaux-Mériadeck 2030 · Exemple de plan de développement territorial</div>
     <h1>Se déplacer <em>facilement, partout</em>, en toute sécurité</h1>
     <p class="lead">De chez soi à sa destination, <b>chaque trajet est sécurisé, fluide et efficace</b>, pour tous les usagers de l'espace public.</p>
@@ -162,7 +153,7 @@ td:first-child{font-weight:700;color:var(--forest-dark)} .law td:first-child{fon
     </div></details>
   </section>
 
-  <section class="cta" id="planCta" hidden>
+  <section class="cta" id="planCta">
     <h2>Envie de construire ce plan avec nous ?</h2>
     <p>Habitant, association, élu, entreprise, scientifique ou média : <b>chacun a sa place</b> dans la concertation.</p>
     <a class="btn btn-gold" href="./#agir">🚀 Je participe</a>
@@ -172,30 +163,6 @@ td:first-child{font-weight:700;color:var(--forest-dark)} .law td:first-child{fon
 </div>
 
 <script>
-const STORE='geomediation_reves_v1';
-const QS=[
- {k:'orga', q:"Si notre société était mieux organisée, aurions-nous moins de problèmes et un accès plus facile aux solutions ?", short:"Une société mieux organisée", o:["Oui, sans aucun doute","Oui, en partie","Non, je ne crois pas","Je ne sais pas"], fb:"Vous êtes nombreux à le penser. Bonne nouvelle : l'organisation, ça s'apprend."},
- {k:'riches', q:"Les plus fortunés ont-ils intérêt à ce que notre modèle économique change ?", short:"Les plus fortunés et le changement", o:["Non : ils ont trop à perdre (immobilier, terres, placements en bourse)","Oui, mais aucun autre modèle crédible ne leur est proposé : alors ils protègent ce qu'ils ont","Je ne sais pas"], fb:"Un nouveau modèle économique, construit ensemble et gagnant pour tous, peut rassembler bien au-delà des clivages."},
- {k:'produire', q:"Pour mieux vivre, faut-il produire près de chez nous ce dont nous avons besoin ?", sub:"Pour vendre, il faut des prix compétitifs, face à la Chine notamment. La solution : produire ensemble, en plus grande quantité, pour baisser les coûts (les économies d'échelle). Une région peut lancer ce plan dès aujourd'hui, puis inspirer le pays et le monde.", short:"Produire près de chez nous", o:["Oui, c'est la clé","Oui, mais pas pour tout","Non","À débattre"], fb:"C'est tout l'esprit du plan de développement territorial : découvrez-en un exemple juste après le quiz."},
- {k:'psycho', q:"Notre façon de penser, façonnée par notre environnement, influence-t-elle tout ce que nous vivons ?", short:"Façon de penser et environnement", o:["Oui","En partie","Non"], fb:"Prendre soin de soi et de son environnement, en même temps : c'est le cœur du parcours « Mon organisation personnelle »."},
- {k:'affectif', q:"Pour vous, se sentir bien, c'est plutôt…", short:"Se sentir bien", o:["Trouver son bien-être à l'extérieur : argent, relations, sport, loisirs…","Trouver son équilibre intérieur, entre douceur et fermeté : accepter la réalité telle qu'elle est, et savoir qu'on peut toujours l'améliorer","Un peu des deux"], fb:"Cet amour de soi et de la vie permet de profiter de tous les plaisirs sans dépendance, avec moins de risques et de problèmes."}
-];
-function load(){ try{ return JSON.parse(localStorage.getItem(STORE)||'null')||{}; }catch(e){ return {}; } }
-function store(sd){ try{ const s=load(); s.sondage=sd; localStorage.setItem(STORE,JSON.stringify(s)); }catch(e){} }
-let sd=(load().sondage)||{};
-const box=document.getElementById('qs');
-function paint(){
-  box.innerHTML='';
-  QS.forEach((x,i)=>{ const ans=sd[x.k]&&sd[x.k].r; const d=document.createElement('div'); d.className='q'+(ans?' done':'');
-    d.innerHTML='<div class="qt">'+(i+1)+'. '+x.q+(x.sub?'<small>'+x.sub+'</small>':'')+'</div>';
-    const o=document.createElement('div'); o.className='opts';
-    x.o.forEach(t=>{ const b=document.createElement('button'); b.textContent=t; if(ans===t) b.className='on'; b.onclick=()=>{ sd[x.k]={q:x.short, r:t}; store(sd); paint(); }; o.appendChild(b); });
-    d.appendChild(o); const fb=document.createElement('div'); fb.className='fb'; fb.textContent='💡 '+x.fb; d.appendChild(fb); box.appendChild(d); });
-  const n=QS.filter(x=>sd[x.k]).length; document.getElementById('prog').style.width=Math.round(100*n/QS.length)+'%';
-  document.getElementById('thanks').className='thanks'+(n===QS.length?' on':'');
-}
-paint();
-function openPlan(){ document.getElementById('plan').hidden=false; document.getElementById('planCta').hidden=false; document.getElementById('openPlan').classList.add('hide'); document.getElementById('plan').scrollIntoView({behavior:'smooth',block:'start'}); }
 </script>
 </body>
 </html>

@@ -716,6 +716,7 @@
   .subnav[hidden]{display:none;}
   .aud{margin:26px 0 6px;} .aud-r{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px;} .aud-p{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;} .aud-p p{margin:0 0 10px;line-height:1.55;} .aud-l{display:flex;flex-wrap:wrap;gap:8px;} .aud-l a{font:700 14px var(--body);color:var(--forest-dark);background:rgba(201,162,39,.18);border-radius:999px;padding:8px 14px;text-decoration:none;}
   .enj-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;} .enj-c{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:border-color .2s,background .2s;} .enj-c:hover{border-color:var(--gold);} .enj-c.on{border-color:var(--forest);background:#EEF3EC;} .enj-c>b{font-size:16px;background:none;padding:0;} .enj-c span{font-size:14.5px;line-height:1.5;} .enj-c em{font-style:normal;font:700 13px var(--body);color:var(--forest);margin-top:4px;}
+  .enj-q{margin:16px 0 0;background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;font:700 17px/1.45 var(--display,inherit);} .enj-q b{color:var(--gold);background:none;} .enj-q cite{display:block;font:500 12.5px var(--body);opacity:.8;margin-top:6px;font-style:normal;} .enj-q cite a{color:var(--cream);} .enj-q span{display:block;font:600 14px var(--body);margin-top:8px;} .enj-q span b{color:var(--gold);}
   .faq-i{border-bottom:1px solid var(--line);padding:12px 2px;} .faq-i summary{font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:10px;} .faq-i summary::after{content:'+';color:var(--gold);font-weight:800;} .faq-i[open] summary::after{content:'−';} .faq-i p{margin:8px 0 0;line-height:1.6;}
   .grp-h{font:800 13px var(--body); letter-spacing:.12em; text-transform:uppercase; color:var(--clay); margin:34px 4px 10px;}
   .subnav a{display:flex; flex-direction:column; gap:2px; color:var(--cream); text-decoration:none; background:rgba(255,255,255,.08); border-radius:14px; padding:10px 14px; font:700 14px var(--body); flex:1 1 180px;}
@@ -1159,7 +1160,7 @@ const SOON=[
   ['🎓','La formation',"Devenir médiateur, avec une formation qui vise la certification <b>Qualiopi</b>."]];
 const OFFRES=[
   ['🔍','Le diagnostic organisationnel',"On évalue les <b>forces</b> et les <b>faiblesses</b> de votre organisation."],
-  ['🎓','L\'atelier de sensibilisation',"Un temps collectif, ludique et concret, pour <b>mieux s'organiser ensemble</b>."],
+  ['🎓','L\'atelier de sensibilisation',"Un temps collectif, ludique et concret, pour <b>apprendre à s'organiser ensemble</b>."],
   ['🤝','L\'accompagnement personnalisé',"Un <b>médiateur</b> pour vous orienter, un <b>réseau de professionnels</b> pour vous accompagner au plus proche de <b>vos besoins</b> et de <b>vos objectifs</b>."]];
 const CIBLES=[['🙋','un individu'],['🏡','une famille'],['💼','une entreprise'],['🏭','une filière'],['🗺️','un territoire']];
 function OF(){ const o=state.offres||(state.offres={}); if(!Array.isArray(o.sel)) o.sel=[]; return o; }
@@ -1167,7 +1168,7 @@ const AUD=[
  ['🙋','Un citoyen',"Faire le point sur votre vie, donner votre avis et <b>agir près de chez vous</b>.",[['🚀 Je commence','#step3'],['💭 Le quiz','@plan-mobilite.html#sondage'],['🌐 Rejoindre le réseau','!reseau']]],
  ['💼','Une entreprise',"Mieux organiser l'équipe et trouver des <b>partenaires</b> sur votre territoire et dans votre filière.",[['💼 Mon parcours entreprise','!entreprise'],['💼 Nos accompagnements','#f-offres'],['🤝 Médiateurs & pros','#f-pros']]],
  ['🤝','Une association',"Relier les acteurs, <b>co-organiser des débats</b> et porter des projets communs.",[['🗣️ Le kit débat','%debat'],['🌐 Rejoindre le réseau','!reseau'],['🤝 Médiateurs & pros','#f-pros']]],
- ['🏛️','Un élu, une collectivité',"Concerter habitants et acteurs, bâtir un <b>plan de développement territorial</b> approuvé et évalué par les citoyens.",[['🧭 Le plan régional','%region'],['💼 Nos accompagnements','#f-offres'],['🗣️ Le kit débat','%debat']]],
+ ['🏛️','Un élu, une collectivité',"Associer habitants et acteurs <b>dès le départ</b> : moins de blocages, et un <b>plan de développement territorial</b> approuvé et évalué par les citoyens.",[['🧭 Le plan régional','%region'],['💼 Nos accompagnements','#f-offres'],['🗣️ Le kit débat','%debat']]],
  ['🔬','Un chercheur, un média',"Analyser, documenter et <b>faire connaître les solutions</b> qui marchent.",[['📊 Le comparatif des méthodes','%comparatif'],['📚 Les documents','#f-docs'],['✉️ Nous écrire','#contact']]]];
 function audGo(t){ const c=t[0], v=t.slice(1); if(c==='@'){ location.href=v; return; } if(c==='%'){ openDoc(v); return; } if(c==='!'){ go('dream',v); return; }
   const el=document.getElementById(v); if(el){ if(el.tagName==='DETAILS') el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }
@@ -1190,10 +1191,11 @@ function enjeuxNode(){ const w=h('div',{class:'enj'}); if(!Array.isArray(state.e
     const paint=()=>{ const on=state.enjeux.includes(t); c.classList.toggle('on',on); c.setAttribute('aria-pressed',on); c.querySelector('em').textContent=on?'💚 Ça me tient à cœur':'＋ Ça me tient à cœur'; };
     const tog=()=>{ state.enjeux=state.enjeux.includes(t)?state.enjeux.filter(x=>x!==t):state.enjeux.concat(t); paint(); save(); };
     c.onclick=tog; c.onkeydown=ev=>{ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); tog(); } }; paint(); g.appendChild(c); });
-  w.appendChild(g); w.appendChild(h('p',{class:'of-pv'},'📇 Vos choix s\'ajoutent à <b>votre fiche</b>, sur votre appareil.')); return w; }
+  w.appendChild(g); w.appendChild(h('blockquote',{class:'enj-q'},'« Il n\'existe pas de crise de l\'envie de participer, mais <b>du comment</b>. »<cite>Carole Zielinski, <a href="https://www.banquedesterritoires.fr/participation-citoyenne-il-nexiste-pas-de-crise-de-lengagement-mais-du-comment" target="_blank" rel="noopener">Banque des Territoires</a></cite><span>Le <b>comment</b>, c\'est justement notre méthode.</span>'));
+  w.appendChild(h('p',{class:'of-pv'},'📇 Vos choix s\'ajoutent à <b>votre fiche</b>, sur votre appareil.')); return w; }
 const FAQ=[["C'est pour qui ?","Pour tout le monde : un <b>individu</b>, une <b>famille</b>, une <b>entreprise</b>, une <b>filière</b>, un <b>territoire</b>. La méthode s'adapte à chaque échelle."],
  ["Combien ça coûte ?","Le site, la fiche et le quiz sont <b>libres d'accès</b>. Les accompagnements s'adaptent à <b>vos besoins</b> et à <b>vos objectifs</b> : tout commence par un échange."],
- ["Les médiateurs sont-ils indépendants ?","Oui. Ils ne défendent <b>aucun camp</b> : ils réunissent les acteurs, animent les échanges et mettent en lumière les solutions."],
+ ["Les médiateurs sont-ils indépendants ?","Oui. Ils ne défendent <b>aucun camp</b> : ils réunissent les acteurs, animent les échanges et mettent en lumière les solutions. Ils assurent aussi la <b>continuité des projets</b>, au-delà des changements d'équipe."],
  ["Médiateur ou professionnel, quelle différence ?","Le <b>médiateur</b> réunit et relie les acteurs. Le <b>professionnel</b> apporte une compétence précise : géographie, gouvernance, numérique, santé…"],
  ["Mes réponses sont-elles protégées ?","Oui : elles restent <b>sur votre appareil</b>. Rien n'est envoyé sans votre accord, et vous pouvez tout effacer à tout moment."],
  ["Comment devenir médiateur ?","Trois gestes : <b>lister</b> les acteurs autour de vous, les <b>sonder</b> sur l'importance d'une bonne organisation, puis les <b>inviter à débattre</b>."]];

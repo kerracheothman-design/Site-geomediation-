@@ -717,6 +717,8 @@
   .subnav[hidden]{display:none;}
   .aud{margin:26px 0 6px;} .aud-r{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px;} .aud-p{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;} .aud-p p{margin:0 0 10px;line-height:1.55;} .aud-l{display:flex;flex-wrap:wrap;gap:8px;} .aud-l a{font:700 14px var(--body);color:var(--forest-dark);background:rgba(201,162,39,.18);border-radius:999px;padding:8px 14px;text-decoration:none;}
   .enj-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;} .enj-c{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:border-color .2s,background .2s;} .enj-c:hover{border-color:var(--gold);} .enj-c.on{border-color:var(--forest);background:#EEF3EC;} .enj-c>b{font-size:16px;background:none;padding:0;} .enj-c span{font-size:14.5px;line-height:1.5;} .enj-c em{font-style:normal;font:700 13px var(--body);color:var(--forest);margin-top:4px;}
+  .med-q{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:12px 16px;margin:12px 0 0;} .med-q p{margin:4px 0;line-height:1.55;font-size:15px;}
+  .hero-k{font:800 13px var(--body);letter-spacing:.06em;color:var(--clay);margin:0 0 8px;}
   .hl{margin:22px 0 8px;} .hl-t{font:800 22px/1.3 var(--display,inherit);margin:0 0 14px;color:var(--forest-dark);} .hl-t b{color:var(--clay);background:none;padding:0;} .hl-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;} .hl-c{border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;} .hl-c b{font-size:16.5px;background:none;padding:0;} .hl-c small{font-size:14px;line-height:1.5;opacity:.9;} .hl-k{font:800 12px var(--body);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;} .hl-new{background:var(--forest);color:var(--cream);} .hl-new .hl-k{color:var(--gold);} .hl-new b{color:var(--cream);} .hl-old{background:var(--paper);border:1.5px solid var(--line);} .hl-old .hl-k{color:var(--clay);} .hl-old small b{color:inherit;font-size:inherit;} .hl-more{display:inline-block;margin-top:10px;font-weight:800;color:var(--forest-dark);}
   .enj-l{margin:0 0 6px;line-height:1.6;} .enj-h{font:800 16px var(--body);margin:18px 0 10px;} .enj-plan{background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;} .enj-plan>b{font-size:17px;color:var(--gold);background:none;padding:0;} .enj-plan ul{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px;} .enj-plan li{background:rgba(255,255,255,.08);border-radius:12px;padding:9px 12px;font-size:15px;} .enj-plan b{background:none;color:var(--cream);} .enj-plan p{margin:6px 0 12px;line-height:1.55;} .enj-plan p b{color:var(--gold);}
   .enj-q{margin:16px 0 0;background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;font:700 17px/1.45 var(--display,inherit);} .enj-q b{color:var(--gold);background:none;} .enj-q cite{display:block;font:500 12.5px var(--body);opacity:.8;margin-top:6px;font-style:normal;} .enj-q cite a{color:var(--cream);} .enj-q span{display:block;font:600 14px var(--body);margin-top:8px;} .enj-q span b{color:var(--gold);}
@@ -1261,6 +1263,16 @@ const FAQ=[["C'est pour qui ?","Pour tout le monde : un <b>individu</b>, une <b>
  ["Mes réponses sont-elles protégées ?","Oui : elles restent <b>sur votre appareil</b>. Rien n'est envoyé sans votre accord, et vous pouvez tout effacer à tout moment."],
  ["Comment devenir médiateur ?","Trois gestes : <b>lister</b> les acteurs autour de vous, les <b>sonder</b> sur l'importance d'une bonne organisation, puis les <b>inviter à débattre</b>."]];
 function faqNode(){ const w=h('div',{class:'faq'}); FAQ.forEach(([q,r])=>{ const d=h('details',{class:'faq-i'}); d.innerHTML=`<summary>${q}</summary><p>${r}</p>`; w.appendChild(d); }); return w; }
+const NOMS=['Géomédiation','Géoconnexion','Géorganisation'];
+function nomNode(){ const w=h('div',{class:'nom'}); const N=state.nom||(state.nom={});
+  w.appendChild(h('p',{style:'margin:0 0 12px'},"On a osé se poser la question 😊 <b>Quel nom vous parle le plus ?</b>"));
+  const row=h('div',{class:'of-cib'}); const other=h('input',{class:'of-ta',type:'text',placeholder:'Votre proposition…','aria-label':'Votre proposition de nom',style:'margin-top:10px'}); other.value=N.autre||'';
+  const paint=()=>{ row.querySelectorAll('button').forEach(b=>{ const on=b.dataset.n===N.choix; b.classList.toggle('active',on); b.setAttribute('aria-pressed',on); }); other.style.display=N.choix==='Autre'?'block':'none'; upd(); };
+  NOMS.concat('Autre').forEach(n=>{ const b=h('button',{class:'chip',type:'button','data-n':n},n==='Autre'?'✏️ Autre idée':n); b.onclick=()=>{ N.choix=N.choix===n?null:n; save(); paint(); }; row.appendChild(b); });
+  other.oninput=()=>{ N.autre=other.value; upd(); };
+  const a=h('a',{class:'evb g',style:'margin-top:14px'},'📨 Envoyer mon avis');
+  const upd=()=>{ const v=N.choix==='Autre'?((N.autre||'').trim()||'(ma proposition)'):(N.choix||'…'); a.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Mon avis sur le nom')+'&body='+encodeURIComponent('Bonjour,\n\nLe nom qui me parle le plus : '+v+'\n\nMerci !'); };
+  w.append(row,other,a); w.appendChild(h('p',{class:'of-pv'},'📇 Votre avis s\'ajoute aussi à <b>votre fiche</b>.')); paint(); return w; }
 function offresNode(){ const w=h('div',{class:'offres'}); const O=OF();
   w.appendChild(h('p',{class:'of-st'},"<i>1</i> <span>Vous êtes :</span>"));
   const row=h('div',{class:'of-cib'});
@@ -1589,6 +1601,7 @@ function prosNode(){
 function openPros(tab){ const go2=()=>{ const el=document.getElementById('f-pros'); if(el){ el.open=true; if(tab){ const t=el.querySelector(`.dir-tab[data-t="${tab}"]`); if(t) t.click(); } el.scrollIntoView({behavior:'smooth',block:'start'}); } }; if(state.view!=='home'){ go('home'); setTimeout(go2,350); } else go2(); }
 function fold(id,t,sub,nodes){ const d=h('details',{class:'fold rv',id}); d.innerHTML=`<summary><span class="fd-t">${t}</span><span class="fd-s">${sub}</span></summary>`; const b=h('div',{class:'fd-b'}); nodes.forEach(n=>b.appendChild(n)); d.appendChild(b); return d; }
 function renderHome(){
+  add(h('p',{class:'hero-k'},'🌍 Sauver sa région pour sauver le monde'));
   add(h('h1',{class:'dream-h1'},"Chacun peut <em>participer</em> à améliorer <em>l'organisation</em> de notre société."));
   add(h('p',{class:'hero-lead'},"Et si nos <b>problématiques</b>, individuelles et collectives, dépendaient d'abord de <b>notre façon de nous organiser</b> ?"));
   { const cta=h('div',{class:'hero-cta'}); cta.append(h('button',{class:'btn btn-gold', onclick:()=>{ const el=$('step3'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'🚀 Je commence <small>2 minutes</small>'), h('a',{class:'btn btn-soft', href:'plan-mobilite.html#sondage'},'💭 Le quiz')); add(cta);
@@ -1645,12 +1658,14 @@ function renderHome(){
   add(h('p',{class:'grp-h rv'},'🌐 S\'engager'));
   add(fold('f-med','🌟 Devenez médiateur territorial','3 gestes pour faire bouger votre territoire',[h('div',null,`
     <p style="margin:0 0 12px;font-size:17px">Et si c'était <b>vous</b> qui faisiez bouger votre territoire ? <b>3 gestes</b> suffisent :</p>
-    <div class="med3"><div><i>1</i><span><b>Lister les acteurs</b> de son territoire ou de sa filière</span></div><div><i>2</i><span>Les <b>sonder</b> sur l'importance d'une <b>bonne organisation</b></span></div><div><i>3</i><span>Les <b>inviter à débattre</b></span></div></div>
+    <div class="med3"><div><i>1</i><span><b>Lister les acteurs</b> de son territoire ou de sa filière : citoyens, entreprises, collectivités, associations, médias, scientifiques</span></div><div><i>2</i><span>Les <b>sonder</b> sur l'importance d'une <b>bonne organisation</b></span></div><div><i>3</i><span>Les <b>inviter à débattre</b></span></div></div>
+    <div class="med-q"><p>💬 <b>Les 2 questions à poser</b></p><p>1. Voyez-vous le lien entre nos problèmes et <b>la façon dont notre société est organisée</b> ?</p><p>2. Êtes-vous d'accord qu'une bonne organisation, c'est <b>analyser les besoins et les ressources</b>, <b>co-créer des projets</b>, puis les faire <b>approuver et évaluer</b> par les citoyens concernés ?</p></div>
     <p class="med-ex">🔧 Pas besoin d'être mécanicien pour réunir celui qui a une <b>panne</b> et celui qui sait <b>réparer</b>. Le médiateur crée la <b>rencontre</b> : c'est là que tout commence.</p>
     <p style="margin:12px 0 10px;line-height:1.6">Ensuite, chacun choisit sa place : <b>suivre</b>, <b>participer</b> ou <b>animer</b> les échanges et le développement des projets. Envie d'aller plus loin ? Développez de <b>nouvelles compétences</b> :</p>
     <div class="team"><div class="tm"><b>🧠 Intelligence collective</b><span>et animation</span></div><div class="tm"><b>🔍 Analyse</b><span>des besoins et des ressources</span></div><div class="tm"><b>🛠️ Co-construction</b><span>de projets et de feuilles de route</span></div><div class="tm"><b>🗳️ Votations</b><span>et évaluations</span></div><div class="tm"><b>📣 Communication</b><span>et cartographie</span></div></div>
     <p style="margin:14px 0 0"><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur territorial')}">🚀 Je me lance</a></p>`)]));
   add(fold('f-soon','✨ Bientôt','Jeu, film, interviews, débats, appli, formation…',[soonNode()]));
+  add(fold('f-nom','🗳️ Et si on changeait de nom ?','Géomédiation, Géoconnexion, Géorganisation… votre avis',[nomNode()]));
   add(h('section',{class:'site-sec rv', id:'contact'},`<div class="ct"><h2 class="site-h" style="color:var(--cream);justify-content:center">✉️ Contact</h2><p>Une <b>question</b>, une envie d'<b>agir</b> ou de <b>soutenir le projet</b> ? Écrivez-nous.</p>
     <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Un médiateur vous répond <b>personnellement</b> : tout commence par <b>un échange</b>.</small><div class="socials"><p>Suivez Othman et la Géomédiation</p><div class="so-row">${SOCIALS.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join('')}</div></div></div>`));
   add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
@@ -1823,6 +1838,7 @@ function recapItems(){
   (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
   Object.values(state.sondage||{}).forEach(x=>{ if(x&&x.r) push('💭 Mes avis', x.q+' : '+x.r); });
   (state.enjeux||[]).forEach(x=>push('🌍 Mes enjeux', x));
+  { const N=state.nom||{}; const v=N.choix==='Autre'?(N.autre||'').trim():N.choix; if(v) push('🗳️ Mon avis sur le nom', v); }
   { const O=state.offres||{}; if(O.cible) push('💼 Mon accompagnement', 'Pour '+O.cible); (O.sel||[]).forEach(x=>push('💼 Mon accompagnement', 'Ça m\'intéresse : '+x)); if((O.msg||'').trim()) push('💼 Mon accompagnement', 'Mon objectif ou ma question : '+O.msg.trim()); }
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.t; const push=(g,t)=>it.push({id:g+'|'+t,g,t,dk:d.k});
@@ -1858,7 +1874,7 @@ function renderRecap(){
   const items=recapItems();
   if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Choisissez d'abord ce que vous souhaitez améliorer\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }
   else {
-  const own=items.filter(x=>!['👤 Mes coordonnées','💼 Mon accompagnement','🌍 Mes enjeux'].includes(x.g));
+  const own=items.filter(x=>!['👤 Mes coordonnées','💼 Mon accompagnement','🌍 Mes enjeux','🗳️ Mon avis sur le nom'].includes(x.g));
   const started=DREAMS.filter(d=>items.some(x=>x.dk===d.k));
   const nObj=items.filter(x=>/objectifs/i.test(x.g)||/^Mes objectifs/.test(x.t)).length;
   const hero=h('div',{class:'rc-hero'}); hero.appendChild(h('div',{class:'rc-hero-t'},'Vous êtes en marche 🚀'));
@@ -1998,7 +2014,7 @@ const MENU={
   decouvrir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-enjeux','🌍 Les enjeux','Des solutions partout… sauf deux'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-docs','📚 Les documents','Dossiers, plans et kits pratiques'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
   point:[['step3','🚀 Par où commencer ?','Choisissez un sujet, 2 minutes'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['@plan-mobilite.html#sondage','💭 Le quiz','5 questions pour donner votre avis']],
   accomp:[['f-offres','💼 Nos accompagnements','Diagnostic, atelier, accompagnement personnalisé'],['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous']],
-  engager:[['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']]};
+  engager:[['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…'],['f-nom','🗳️ Le nom','Votre avis compte']]};
 function navGo(id){ const sn=$('subnav'); sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(b=>b.setAttribute('aria-expanded','false'));
   if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } if(id==='reseau'){ go('dream','reseau'); scrollTo({top:0,behavior:'smooth'}); return; }
   const goTo=()=>{ const el=document.getElementById(id); if(el&&el.tagName==='DETAILS') el.open=true; if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); };

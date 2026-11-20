@@ -371,7 +371,7 @@
   .hero-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 20px;} .hero-stats div{background:var(--paper); border:1.5px solid var(--line); border-radius:14px; padding:10px 6px; text-align:center; font-size:12.5px; line-height:1.3; color:var(--ink-soft);}
   .card .hero-stats b{display:block; font:800 24px var(--display); color:var(--clay); background:none; padding:0;}
   .how-go{cursor:pointer;} .how-go:hover{border-color:var(--gold);}
-  .of-sm{background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;font-size:15px;line-height:1.5;} .of-sm>b{font-size:18px;color:var(--gold);background:none;padding:0;} .of-sm span b{color:var(--cream);background:none;} .of-cib{display:flex;flex-wrap:wrap;gap:8px;} .of-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;} .of-c{position:relative;background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px 14px 58px;display:flex;flex-direction:column;gap:4px;} .of-c i{position:absolute;left:14px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--forest-dark);font:800 15px var(--body);font-style:normal;display:flex;align-items:center;justify-content:center;} .of-c>b{font-size:16.5px;background:none;padding:0;} .of-c span{font-size:14.5px;line-height:1.5;} .offres .evb small{font-weight:600;opacity:.8;}
+  .of-sm{background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;font-size:15px;line-height:1.5;} .of-sm>b{font-size:18px;color:var(--gold);background:none;padding:0;} .of-sm span b{color:var(--cream);background:none;} .of-cib{display:flex;flex-wrap:wrap;gap:8px;} .of-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;} .of-c{position:relative;background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px 14px 58px;display:flex;flex-direction:column;gap:4px;} .of-c i{position:absolute;left:14px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--forest-dark);font:800 15px var(--body);font-style:normal;display:flex;align-items:center;justify-content:center;} .of-c>b{font-size:16.5px;background:none;padding:0;} .of-c span{font-size:14.5px;line-height:1.5;} .offres .evb small{font-weight:600;opacity:.8;} .of-st{display:flex;align-items:center;gap:10px;margin:18px 0 10px;} .of-st>i{flex:0 0 28px;height:28px;border-radius:50%;background:var(--gold);color:var(--forest-dark);font:800 14px var(--body);font-style:normal;display:flex;align-items:center;justify-content:center;} .of-st small{opacity:.7;} .of-c{padding:14px 16px !important;cursor:pointer;transition:border-color .2s,background .2s;} .of-c:hover{border-color:var(--gold);} .of-c.on{border-color:var(--forest);background:#EEF3EC;} .of-c em{font-style:normal;font:700 13px var(--body);color:var(--forest);margin-top:4px;} .of-ta{width:100%;box-sizing:border-box;font:15px/1.5 var(--body);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--paper);resize:vertical;} .of-ct{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;} .of-ct button.evb{background:none;cursor:pointer;font-family:inherit;} .of-pv{font-size:13px;opacity:.75;margin:12px 0 0;}
   .soon-g{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px;} .soon-c{background:var(--paper); border:1.5px solid var(--line); border-radius:16px; padding:14px 16px; display:flex; flex-direction:column; gap:4px; cursor:pointer; transition:border-color .2s, background .2s;} .soon-c:hover{border-color:var(--gold);} .soon-c.on{border-color:var(--forest); background:#EEF3EC;} .soon-c>b{font-size:16px; background:none; padding:0;} .soon-c i{font-size:13px; color:var(--clay); font-style:italic;} .soon-c span{font-size:14.5px; line-height:1.5;} .soon-ok{font-style:normal; font-size:13px; font-weight:700; color:var(--forest); margin-top:4px;} .soon-kit{font-size:13.5px; color:var(--clay); margin-top:2px;} .soon-btn small{font-weight:600; opacity:.8;}
   .docs .ex-doc{margin-top:8px;} .doc-art{background:var(--paper); border:1.5px solid var(--line); border-radius:18px; padding:16px 18px; margin-top:6px;} .doc-art p{line-height:1.6;} .doc-art .place{margin:4px 0;}
   .cmp-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:10px -4px; border-radius:12px;} .cmp{border-collapse:collapse; font-size:12.5px; min-width:640px; width:100%;}
@@ -1219,20 +1219,30 @@ const OFFRES=[
   ['🎓','L\'atelier de sensibilisation',"Un temps collectif, ludique et concret, pour <b>mieux s'organiser ensemble</b>."],
   ['🤝','L\'accompagnement personnalisé',"Un médiateur à vos côtés, jusqu'à la <b>réussite de vos projets</b>."]];
 const CIBLES=[['🙋','un individu'],['🏡','une famille'],['💼','une entreprise'],['🏭','une filière'],['🗺️','un territoire']];
-function offresNode(){ const w=h('div',{class:'offres'}); let cible=null;
+function OF(){ const o=state.offres||(state.offres={}); if(!Array.isArray(o.sel)) o.sel=[]; return o; }
+function offresNode(){ const w=h('div',{class:'offres'}); const O=OF();
   w.appendChild(h('div',{class:'of-sm'},"<b>✂️ 100 % sur mesure</b><span>Chaque situation est unique : on construit <b>la formule qui vous ressemble</b>.</span>"));
-  w.appendChild(h('p',{style:'margin:16px 0 10px'},"Vous êtes :"));
+  w.appendChild(h('p',{class:'of-st'},"<i>1</i> <span>Vous êtes :</span>"));
   const row=h('div',{class:'of-cib'});
-  CIBLES.forEach(([e,t])=>{ const b=h('button',{class:'chip','aria-pressed':'false'},e+' '+t.replace(/^une? /,'').replace(/^./,c=>c.toUpperCase())); b.onclick=()=>{ cible=cible===t?null:t; row.querySelectorAll('button').forEach(x=>{ const on=x===b&&cible; x.classList.toggle('active',!!on); x.setAttribute('aria-pressed',!!on); }); upd(); }; row.appendChild(b); });
-  w.appendChild(row);
-  w.appendChild(h('p',{style:'margin:18px 0 10px'},"Trois outils, <b>à la carte</b> ou en <b>parcours complet</b> :"));
+  const paintC=()=>row.querySelectorAll('button').forEach(x=>{ const on=x.dataset.c===O.cible; x.classList.toggle('active',on); x.setAttribute('aria-pressed',on); });
+  CIBLES.forEach(([e,t])=>{ const b=h('button',{class:'chip','data-c':t},e+' '+t.replace(/^une? /,'').replace(/^./,c=>c.toUpperCase())); b.onclick=()=>{ O.cible=O.cible===t?null:t; paintC(); save(); upd(); }; row.appendChild(b); });
+  w.appendChild(row); paintC();
+  w.appendChild(h('p',{class:'of-st'},"<i>2</i> <span>Ce qui vous intéresse, <b>à la carte</b> ou en <b>parcours complet</b> :</span>"));
   const g=h('div',{class:'of-g'});
-  OFFRES.forEach(([e,t,d],i)=>{ g.appendChild(h('div',{class:'of-c'},`<i>${i+1}</i><b>${e} ${t}</b><span>${d}</span>`)); });
+  OFFRES.forEach(([e,t,d])=>{ const c=h('div',{class:'of-c',role:'button',tabindex:'0'},`<b>${e} ${t}</b><span>${d}</span><em></em>`);
+    const paint=()=>{ const on=O.sel.includes(t); c.classList.toggle('on',on); c.setAttribute('aria-pressed',on); c.querySelector('em').textContent=on?'✅ Ça m\'intéresse':'＋ Ça m\'intéresse'; };
+    const tog=()=>{ O.sel=O.sel.includes(t)?O.sel.filter(x=>x!==t):O.sel.concat(t); paint(); save(); upd(); };
+    c.onclick=tog; c.onkeydown=ev=>{ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); tog(); } }; paint(); g.appendChild(c); });
   w.appendChild(g);
-  w.appendChild(h('p',{style:'margin:18px 0 10px'},"Tout commence par <b>un échange</b> 👇"));
-  const a=h('a',{class:'evb g'}); const upd=()=>{ a.innerHTML='💬 Parlons de votre projet';
-    a.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Accompagnement sur mesure'+(cible?' pour '+cible:''))+'&body='+encodeURIComponent('Bonjour,\n\nJe souhaite échanger sur un accompagnement'+(cible?' pour '+cible:'')+'.\n\nMa situation en quelques mots :\n\n\nMerci !'); };
-  w.appendChild(a); upd(); return w; }
+  w.appendChild(h('p',{class:'of-st'},"<i>3</i> <span>Votre objectif ou votre question <small>(facultatif)</small></span>"));
+  const ta=h('textarea',{class:'of-ta',rows:'3',placeholder:'Ex. : mieux organiser notre équipe, lancer un projet dans mon quartier…','aria-label':'Votre objectif ou votre question'}); ta.value=O.msg||''; ta.oninput=()=>{ O.msg=ta.value; upd(); };
+  w.appendChild(ta);
+  const ct=h('div',{class:'of-ct'}); const a=h('a',{class:'evb g'},'💬 Parlons de votre projet'); const fi=h('button',{class:'evb o',type:'button'},'📇 Garder dans ma fiche');
+  fi.onclick=()=>{ save(); go('recap'); };
+  const upd=()=>{ const l=O.sel; a.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Accompagnement sur mesure'+(O.cible?' pour '+O.cible:''))+'&body='+encodeURIComponent('Bonjour,\n\nJe souhaite échanger sur un accompagnement'+(O.cible?' pour '+O.cible:'')+'.'+(l.length?'\n\nCe qui m\'intéresse :\n'+l.map(x=>'- '+x).join('\n'):'')+'\n\nMon objectif ou ma question :\n'+((O.msg||'').trim()||'…')+'\n\nMerci !'); };
+  ct.append(a,fi); w.appendChild(ct);
+  w.appendChild(h('p',{class:'of-pv'},'🔒 Vos choix restent <b>sur votre appareil</b>, dans votre fiche : vous seul décidez de les partager.'));
+  upd(); return w; }
 function soonNode(){ const w=h('div',{class:'soon'}); const sel=new Set();
   w.appendChild(h('p',{style:'margin:0 0 12px'},"De nouveaux outils arrivent pour <b>passer à l'action</b>, en famille, entre voisins ou en équipe. <b>Touchez ceux qui vous intéressent</b> 👇"));
   const g=h('div',{class:'soon-g'}); const btn=h('a',{class:'evb g soon-btn'});
@@ -1766,6 +1776,7 @@ function recapItems(){
   if(state.depart) push('🧭 Mon point de départ', state.depart);
   (state.objs||[]).forEach(o=>push('🎯 Mes objectifs', o.t+' · '+o.c.replace(/^\S+\s/,'')));
   Object.values(state.sondage||{}).forEach(x=>{ if(x&&x.r) push('💭 Mes avis', x.q+' : '+x.r); });
+  { const O=state.offres||{}; if(O.cible) push('💼 Mon accompagnement', 'Pour '+O.cible); (O.sel||[]).forEach(x=>push('💼 Mon accompagnement', 'Ça m\'intéresse : '+x)); if((O.msg||'').trim()) push('💼 Mon accompagnement', 'Mon objectif ou ma question : '+O.msg.trim()); }
   const T=state.test||{}; if(SPHERES.some(x=>T[x.k])) push('🧭 Mon test d\'organisation', SPHERES.map(x=>x.n+' '+(T[x.k]||0)+'/5').join(', '));
   DREAMS.forEach(d=>{ const a=state.a[d.k]||{}; const g=d.e+' '+d.t; const push=(g,t)=>it.push({id:g+'|'+t,g,t,dk:d.k});
     const ENG=['idees','reseau'].includes(d.k); if(ENG){ const role=a.role||a.degre; const th=a.domaine||[]; const ec=(a.echelle||[]).map(e=>e==='Monde'?e:((a.lieux||{})[e]?e+' ('+a.lieux[e]+')':e+' (territoire à préciser)'));
@@ -1800,7 +1811,7 @@ function renderRecap(){
   const items=recapItems();
   if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Choisissez d'abord ce que vous souhaitez améliorer\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }
   else {
-  const own=items.filter(x=>x.g!=='👤 Mes coordonnées');
+  const own=items.filter(x=>x.g!=='👤 Mes coordonnées'&&x.g!=='💼 Mon accompagnement');
   const started=DREAMS.filter(d=>items.some(x=>x.dk===d.k));
   const nObj=items.filter(x=>/objectifs/i.test(x.g)||/^Mes objectifs/.test(x.t)).length;
   const hero=h('div',{class:'rc-hero'}); hero.appendChild(h('div',{class:'rc-hero-t'},'Vous êtes en marche 🚀'));
@@ -1812,6 +1823,7 @@ function renderRecap(){
     {ok:hasC, t:'👤 Ajouter mes coordonnées', go:()=>{ const el=$('rc-contact'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); }},
     {ok:nObj>0, t:'🎯 Fixer un objectif', go:()=>openSheet('obj')},
     {ok:started.length>0, t:'🧭 Lancer un parcours', go:()=>{ go('home'); setTimeout(()=>{ const el=$('agir'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},
+    {ok:!!((state.offres||{}).cible||((state.offres||{}).sel||[]).length), t:'💼 Choisir mon accompagnement', go:()=>{ go('home'); setTimeout(()=>{ const el=$('f-offres'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } },150); }},
     {ok:SPHERES.some(x=>T[x.k]), t:'📊 Faire mon auto-évaluation', go:()=>{ state.optOpen=true; go('home'); setTimeout(()=>{ const el=document.querySelector('.test'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },150); }}];
   const unnamed=DREAMS.find(d=>{ const a=state.a[d.k]||{}; return (a.echelle||[]).some(e=>e!=='Monde' && !((a.lieux||{})[e]||'').trim()); });
   if(unnamed) crit.push({ok:false, t:'📍 Préciser mon ou mes territoires', go:()=>{ go('dream',unnamed.k); setTimeout(()=>openLevel(unnamed,1),80); }});

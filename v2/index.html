@@ -802,6 +802,46 @@
   .pro{display:flex; flex-direction:column; gap:1px; background:var(--cream); border-radius:10px; padding:8px 12px; margin:0 0 6px;} .pro b{font-size:14.5px; color:var(--forest-dark); background:none !important; padding:0 !important;} .pro span{font-size:13px; color:var(--ink-soft);}
   .pros-cta{margin-top:16px; background:#FFF7DD; border:1.5px solid var(--gold); border-radius:14px; padding:14px; text-align:center;} .pros-cta p{margin:0 0 10px;}
 
+
+  /* ===== Annuaire du réseau (v2) ===== */
+  .dir{--dk:#1F3329; --tx:#2B2A22; --mu:#5E5845; --cl:#8E4A33;}
+  .dir b{background:none !important; padding:0 !important;}
+  .dir-lead{font-size:15.5px; line-height:1.5; color:var(--tx); margin:0 0 14px;}
+  .dir-why{background:#FFF7DD; border-left:5px solid var(--gold); border-radius:12px; padding:12px 14px; margin:0 0 16px;}
+  .dir-why p{margin:0; font-size:14.5px; line-height:1.5; color:var(--tx);} .dir-why p + p{margin-top:8px;} .dir-why b{color:var(--dk);}
+  .dir-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 16px; padding:0; list-style:none; counter-reset:st;}
+  .dir-steps li{counter-increment:st; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:10px 8px; text-align:center; font-size:12.5px; line-height:1.3; color:var(--tx); font-weight:600;}
+  .dir-steps li::before{content:counter(st); display:flex; align-items:center; justify-content:center; width:26px; height:26px; margin:0 auto 6px; border-radius:50%; background:var(--dk); color:#fff; font:800 13px var(--display);}
+  .dir-tabs{display:flex; gap:4px; background:var(--cream-dark); border-radius:14px; padding:4px; margin:0 0 14px;}
+  .dir-tab{flex:1; white-space:nowrap; border:0; border-radius:11px; padding:11px 6px; font:800 13.5px var(--body); color:var(--mu); background:transparent; cursor:pointer;}
+  .dir-tab[aria-selected="true"]{background:#fff; color:var(--dk); box-shadow:0 1px 4px rgba(31,51,41,.15);}
+  .dir-tab small{display:inline-block; margin-left:4px; font-size:12px; font-weight:700; color:var(--mu);}
+  .dir-chips{display:flex; gap:6px; overflow-x:auto; padding:2px 2px 10px; margin:0 0 6px; scrollbar-width:none;} .dir-chips::-webkit-scrollbar{display:none;}
+  .dir-chip{flex:none; border:1.5px solid var(--line); background:#fff; color:var(--dk); border-radius:999px; padding:8px 13px; font:700 13px var(--body); cursor:pointer; white-space:nowrap;}
+  .dir-chip[aria-pressed="true"]{background:var(--dk); border-color:var(--dk); color:#fff;}
+  .dir-list{display:flex; flex-direction:column; gap:10px;}
+  .dir-card{display:flex; gap:12px; align-items:flex-start; background:#fff; border:1.5px solid var(--line); border-radius:16px; padding:14px; text-decoration:none; color:var(--tx);}
+  a.dir-card:active, a.dir-card:hover{border-color:var(--dk);}
+  .dir-av{flex:none; width:44px; height:44px; border-radius:50%; background:var(--dk); color:#fff; display:flex; align-items:center; justify-content:center; font:800 15px var(--display); letter-spacing:.02em;}
+  .dir-av.alt{background:#E9DFC6; color:var(--dk);}
+  .dir-bd{flex:1; min-width:0; display:flex; flex-direction:column; gap:3px;}
+  .dir-tag{align-self:flex-start; font:800 11.5px var(--body); color:var(--dk); background:#F3E7BF; border-radius:999px; padding:3px 9px;}
+  .dir-nm{font:800 16px var(--display); color:var(--dk); line-height:1.2;}
+  .dir-org{font-size:13px; font-weight:700; color:var(--cl);}
+  .dir-ds{font-size:13.5px; line-height:1.45; color:var(--tx);}
+  .dir-for{font-size:12.5px; color:var(--mu);}
+  .dir-lk{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;}
+  .dir-lk a{font:700 12.5px var(--body); color:var(--dk); background:var(--cream); border:1.5px solid var(--line); border-radius:999px; padding:5px 11px; text-decoration:none;}
+  .hs-go{cursor:pointer;} .hs-go:hover{border-color:var(--forest) !important;}
+  .dir-card[hidden],.dir-pane[hidden]{display:none !important;}
+  .dir-go{flex:none; align-self:center; font:800 18px var(--body); color:var(--dk);}
+  .dir-cta{margin-top:18px; background:var(--dk); border-radius:18px; padding:18px 16px; text-align:center; color:#fff;}
+  .dir-cta p{margin:0 0 12px; font-size:15px; line-height:1.45; color:#fff;} .dir-cta p b{color:#F3D77A;}
+  .dir-cta .row{display:flex; flex-direction:column; gap:8px;}
+  .dir-cta a{display:block; border-radius:12px; padding:12px; font:800 14.5px var(--body); text-decoration:none;}
+  .dir-cta a.pri{background:#E0C15C; color:var(--dk);} .dir-cta a.sec{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.55);}
+  @media (max-width:380px){ .dir-steps li{font-size:11.5px;} }
+
   p.airy .s{display:block;} p.airy .s + .s{margin-top:8px;}
 </style>
 </head>
@@ -1083,7 +1123,8 @@ const COLLAB_GROUPS = [
     ["Adrien Biassin","Approche sensible et territoriale des dynamiques humaines",{org:"Docteur en histoire économique, auteur", d:"Résilience des territoires, risques d'effondrement et politiques de transition, en livres et en conférences.", pour:"Élus, chercheurs, grand public", l:[LK('🌐 Site','https://www.adrien-biassin.fr/livres')]}]]},
   {label:"Intelligence collective & gouvernance", e:"🧠", m:[
     ["Nicolas Gros de Seta","Alignement avec les cadres internationaux (ODD)",{org:"Gouvernance systémique", d:"Conçoit des cadres de gouvernance pour piloter les transformations complexes des politiques publiques et de la transition écologique.", pour:"Institutions, collectivités", l:[LK('in LinkedIn','https://nl.linkedin.com/in/nicolas-gros-de-seta-685997134')]}],
-    ["Yvan Schallenberger","Méthodes de coopération et facilitation",{org:"Présence Active", d:"Gouvernance partagée, facilitation et organisations vivantes : des milliers de personnes formées.", pour:"Équipes, associations, entreprises", l:[LK('🌐 Site','https://presence-active.org/'),LK('in LinkedIn','https://ch.linkedin.com/in/schallenberger-yvan-84a47b61')]}]]},
+    ["Yvan Schallenberger","Méthodes de coopération et facilitation",{org:"Présence Active", d:"Gouvernance partagée, facilitation et organisations vivantes : des milliers de personnes formées.", pour:"Équipes, associations, entreprises", l:[LK('🌐 Site','https://presence-active.org/'),LK('in LinkedIn','https://ch.linkedin.com/in/schallenberger-yvan-84a47b61')]}],
+    ["Pierre Piront","Éthicratie : la démocratie éthique",{org:"Institut Arkemia", d:"Auteur d'« Ethicratia ». Place l'éthique au cœur des décisions, avec l'intelligence collective et l'IA au service de l'humain.", pour:"Institutions, entreprises, citoyens", l:[LK('🌐 Site','https://arkemia.org/'),LK('in LinkedIn','https://be.linkedin.com/in/pierre-piront-4b628266')]}]]},
   {label:"Numérique & open source", e:"💻", m:[
     ["Yannick Audubert","Outils numériques de coordination",{org:"Architecte IA et open source", d:"Des outils numériques ouverts pour coordonner les acteurs locaux, et un regard de directeur des systèmes d'information.", pour:"Organisations, collectivités", l:[LK('🌐 Site','https://yannick-audubert-consultant.vercel.app/'),LK('in LinkedIn','https://fr.linkedin.com/in/yannick-audubert-15377128')]}],
     ["Ymanda","Informatique et gestion communale",{org:"La Commune 2.0 · Géomanette sur YouTube", d:"Des cartes ouvertes des communes et de leurs localités, comme celle de la Centrafrique (183 communes, 4 139 localités), et des vidéos pour comprendre la gestion communale.", pour:"Communes, élus, citoyens", l:[LK('🗺️ La carte','https://www.la-commune-2-point-zero.org/rca-carte-localites/'),LK('▶ YouTube','https://www.youtube.com/results?search_query=G%C3%A9omanette')]}],
@@ -1141,6 +1182,31 @@ const TERR_DOCS = [
         <a class="ex-doc" href="plan-mobilite.html">📄 <span><b>Ouvrir le plan mobilité</b><small>Exemple de plan de développement territorial</small></span><i>→</i></a>`},
 ];
 const DOCS = [
+  {k:'legitime', e:'🤔', t:'Pourquoi personne ne se sent légitime de proposer une meilleure organisation territoriale ?', s:"Une science existe, tout le monde la souhaite… et personne ne s'en saisit", html:()=>`<p><b>Un constat simple.</b> Aucun acteur, aucun outil, aucune filière, aucun territoire ne s'inscrit dans un <b>plan de développement territorial concerté</b>.</p>
+<p>C'est pourtant la seule méthode pour rendre toute initiative <b>viable et pérenne</b>.</p>
+<p><b>Le paradoxe.</b> Une science met en avant la nécessité d'un tel dispositif, dans l'intérêt de tous. Tout le monde aimerait qu'un <b>système intelligent</b> soit mis en place.</p>
+<p>Mais personne ne se sent légitime de le faire. Alors, faute d'organisation, chacun tire la couverture à soi.</p>
+<p><b>1. La complémentarité oubliée.</b> Il existe de très nombreux acteurs de la transition. Aucun n'a de stratégie pour mettre en avant la <b>complémentarité des outils</b> proposés.</p>
+<p>C'est pourtant ce qui augmenterait l'efficacité des accompagnements et la visibilité du réseau de la transition.</p>
+<p><b>2. La région oubliée.</b> Personne n'a compris l'importance d'une <b>région</b> pour porter ce plan. Sinon, on aurait posé une question simple aux habitants :</p>
+<p><i>« Est-il possible que notre région produise intelligemment ce dont la population a besoin ? »</i></p>
+<p>On se serait alors rendu compte que la région et la <b>résilience territoriale systémique</b> sont une particularité de Bordeaux et du Sud-Ouest.</p>
+<p><b>3. La posture de médiateur oubliée.</b> Il est assez simple de vérifier qui a cette posture de <b>médiateur territorial</b>, comme pouvait l'avoir <b>Bernard Charbonneau</b>.</p>
+<p>Dans les années 1970, l'État confie l'aménagement du littoral à la <b>MIACA</b>. Son schéma de 1972 est jugé arbitraire, et les associations se mobilisent.</p>
+<p>Le 6 juillet 1973, Charbonneau et Jacques Ellul lancent le <b>Comité de défense de la côte aquitaine</b>. Son orientation : l'<b>autogestion</b>. Sa mission : informer les habitants des enjeux, réunir les personnes concernées, et inciter la population à <b>définir elle-même son type de développement</b>.</p>
+<p>Le comité essaime en <b>comités locaux</b> : Capbreton, Bassin d'Arcachon, Lacanau, Nord-Médoc. Face à cette mobilisation, la MIACA ouvre une vaste concertation avec les associations : une première !</p>
+<p>Deux avancées en sortent : penser l'aménagement <b>au-delà de chaque commune</b>, et se concerter <b>bien en amont</b> des projets.</p>
+<p><b>Le vrai rôle du médiateur.</b> Charbonneau n'a pas été le coach, l'arbitre ou l'animateur du dispositif. Il a lancé la dynamique, puis il s'est effacé, pour que les acteurs deviennent autonomes dans leur propre gestion.</p>
+<p>La preuve : on l'a oublié, pendant et après. Alors que c'est lui qui a eu l'initiative.</p>
+<p>Un dispositif unique et exceptionnel dans une région industrielle. Mais des bénévoles, sans outils, face aux professionnels de l'État, finissent par s'essouffler. En 1988, la MIACA disparaît, les associations perdent leurs interlocuteurs, et la région ne reprend pas le flambeau.</p>
+<p><b>Une histoire si importante, et pourtant si peu connue.</b></p>
+<p><b>Ce qui manquait : le numérique.</b> Sans outils informatiques, la concertation devient chronophage et incertaine, dans un monde en perpétuelle fluctuation.</p>
+<p>C'est aussi pourquoi le <b>Rojava</b> n'a pas pu organiser de référendum : tout le monde n'avait pas accès à un outil démocratique, numérique et rapide, pour établir officiellement la volonté du peuple et faire respecter le droit international, en l'occurrence l'<b>autodétermination des peuples</b>.</p>
+<p><b>Aujourd'hui, les outils existent.</b> La Géomédiation relie une méthode, des médiateurs et une plateforme, pour que chaque territoire puisse enfin s'organiser.</p>
+<p><b>Comment vérifier ?</b> C'est simple : par un <b>sondage auprès de tous les acteurs</b>. Il suffit de regarder si quelqu'un a organisé un tel sondage en 15 ans.</p>
+<p><b>Je l'ai vérifié. Et j'ai vérifié que personne ne l'a vérifié.</b></p>
+<p class="small">Othman Kerrache, géographe, médiateur territorial indépendant</p>
+<p class="small">Sources : Timothée Duverger, <a href="https://www.persee.fr/doc/anami_0003-4398_2014_num_126_287_8726" target="_blank" rel="noopener">« La praxis écologique de Bernard Charbonneau : une défense de la Côte aquitaine dans les années 1970 »</a>, Annales du Midi, 2014 · <a href="https://books.openedition.org/pumi/25891" target="_blank" rel="noopener">« La construction d'une économie touristique sur la Côte Aquitaine », chapitre 6</a>, Presses universitaires du Midi · <a href="https://www.sepanso.org/wp-content/uploads/2025/12/son_178-complet.pdf" target="_blank" rel="noopener">« L'aménagement de la côte aquitaine, de la MIACA à nos jours »</a>, Sud-Ouest Nature n°178, SEPANSO.</p>`},
   {k:'region', e:'🧭', t:'Tome 1 · Le plan régional', s:'Pourquoi une région, et pourquoi le Sud-Ouest', html:()=>{ const x=TERR_DOCS[0].html; return typeof x==='function'?x():x; }},
   {k:'meriadeck', e:'🏙️', t:'Tome 2 · Bordeaux-Mériadeck 2030', s:'La suite du plan régional : 5 domaines, un même quartier', html:()=>{ const x=TERR_DOCS[1].html; return typeof x==='function'?x():x; }},
   {k:'mobilite', e:'🚲', t:'Plan mobilité', s:'Exemple de plan de développement territorial', href:'plan-mobilite.html'},
@@ -1340,7 +1406,7 @@ const DREAMS = [
         <p><b>2 · Le rythme de croisière.</b> Des acteurs formés partout, un outil coopératif accessible à tous, des services mutualisés, des échelles et des pratiques qui se complètent. La vie de chacun devient plus simple.</p>
         <p><b>Deux voies pour devenir médiateur :</b> généraliste, pour orchestrer l'ensemble, ou spécialisé dans une thématique, en se formant directement au sein de l'équipe, sans passer par l'université.</p>`},
       {sum:"+ Et si vous deveniez médiateur territorial ?", html:`<p>Et si c'était <b>vous</b> qui faisiez bouger votre territoire\u00a0? <b>Listez les acteurs</b> de votre territoire ou de votre filière, <b>sondez-les</b> sur l'importance d'une <b>bonne organisation</b>, puis <b>invitez-les à débattre</b>. Pas besoin d'être mécanicien pour réunir celui qui a une panne et celui qui sait réparer\u00a0: le médiateur crée la <b>rencontre</b>.</p><p>Ensuite, chacun choisit sa place\u00a0: <b>suivre</b>, <b>participer</b> ou <b>animer</b>. Envie d'aller plus loin\u00a0? Développez de nouvelles compétences\u00a0: <b>intelligence collective</b>, analyse des <b>besoins</b> et des <b>ressources</b>, <b>co-construction</b> de projets, <b>votations</b>, <b>évaluations</b>, <b>communication</b> et cartographie.</p>`},
-      {sum:"+ L'équipe, pôle par pôle", html:()=>COLLAB_GROUPS.map(g=>`<p style="margin:12px 0 4px"><b>${g.e} ${g.label}</b></p>${g.m.map(([n,r])=>`<div class="place"><b>${n}</b> · ${r}</div>`).join('')}`).join('')},
+      {sum:"+ Les professionnels du réseau, pôle par pôle", html:()=>dirTeam()},
       {sum:"+ Qui est à l'origine du réseau ?", html:`<p>Depuis 2000, <b>Othman Kerrache</b> explore les liens entre psychologie, gouvernance et écologie humaine. Il est nourri d'une double culture (allemande par sa mère, algérienne par son père) et d'un parcours marqué par le sport, les voyages et la philosophie. Convaincu que la politique, c'est <b>organiser la coopération</b>, il crée la Géomédiation en 2010.</p><p>📬 ${'geomediation@live.fr'}</p>`}],
      fields:[{k:'transiscope', type:'toggle', label:"Je suis déjà sur <a href=\"https://transiscope.gogocarto.fr/map#/carte/@46.33,2.50,5z?cat=all\" target=\"_blank\" rel=\"noopener\">Transiscope</a>, la carte des acteurs de la transition (ou sur une autre carte)"},
              {k:'inscrire', type:'toggle', label:"Je veux <b>inscrire ma structure</b> ou mon projet dans le réseau"}]}
@@ -1544,15 +1610,32 @@ function pickBtn(k,i,title,sub){ const d=DREAMS.find(x=>x.k===k), p=progressOf(k
   const sug=state.reco===k&&SPHERES.some(x=>(state.test||{})[x.k]);
   return h('button',{class:'pick p'+i+(sug?' suggest':''), 'data-k':k, onclick:()=>go('dream',k)},
     `<span class="pick-e">${d.e}</span><span class="pick-b"><b>${title||d.pick}</b><small>${sub||d.sub}</small><span class="pick-p"><span class="dots" aria-label="Niveau ${p.lv} sur ${p.max}">${dots}</span>${p.lv>=p.max?'✓ Tout exploré':p.lv?'Continuer →':'Commencer →'}</span></span><em class="reco-tag">👉 Conseillé</em>`); }
-function prosNode(){ const w=h('div',null,medNode()+`<p class="pros-i" style="margin-top:16px">Des <b>professionnels</b> en ${COLLAB_GROUPS.length} pôles pour accompagner les <b>humains</b>, les <b>entreprises</b>, les <b>filières</b> et les <b>territoires</b>.</p>`+COLLAB_GROUPS.map(g=>`<div class="pole"><p class="pole-h">${g.e} ${g.label}</p>${g.m.map(([n,r,x])=>`<div class="pro"><b>${n}</b>${x&&x.org?`<i class="pro-o">${x.org}</i>`:''}<span>${x&&x.d?x.d:r}</span>${x&&x.pour?`<span class="pro-p">👥 Pour : ${x.pour}</span>`:''}${x&&x.l&&x.l.length?`<span class="pro-l">${x.l.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</span>`:''}</div>`).join('')}</div>`).join('')+`<div class="pros-cta"><p><b>Envie d'animer ?</b> Des <b>compétences</b> pour accompagner ?</p><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Rejoindre les professionnels du réseau')}">🤝 Je rejoins les professionnels</a></div>`); return w; }
-function openPros(){ const go2=()=>{ const el=document.getElementById('f-pros'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }; if(state.view!=='home'){ go('home'); setTimeout(go2,350); } else go2(); }
+const dirIni=n=>n.replace(/[^A-Za-zÀ-ÿ' -]/g,'').split(/[\s-]+/).filter(Boolean).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+function dirMed([r,n,o,u]){ return `<a class="dir-card" href="${u}" target="_blank" rel="noopener"><span class="dir-av">${dirIni(n)}</span><span class="dir-bd"><span class="dir-tag">📍 ${r}</span><span class="dir-nm">${n}</span><span class="dir-org">${o}</span></span><span class="dir-go" aria-hidden="true">→</span></a>`; }
+function dirPro([n,r,x],g,gi){ return `<div class="dir-card" data-g="${gi}"><span class="dir-av alt">${dirIni(n)}</span><span class="dir-bd"><span class="dir-tag">${g.e} ${g.label}</span><span class="dir-nm">${n}</span>${x&&x.org?`<span class="dir-org">${x.org}</span>`:''}<span class="dir-ds">${x&&x.d?x.d:r}</span>${x&&x.pour?`<span class="dir-for">👥 Pour : ${x.pour}</span>`:''}${x&&x.l&&x.l.length?`<span class="dir-lk">${x.l.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</span>`:''}</span></div>`; }
+function dirTeam(){ return `<div class="dir"><div class="dir-list">${COLLAB_GROUPS.map((g,gi)=>g.m.map(m=>dirPro(m,g,gi)).join('')).join('')}</div></div>`; }
+function prosNode(){
+  const nPros=COLLAB_GROUPS.reduce((t,g)=>t+g.m.length,0);
+  const w=h('div',{class:'dir'});
+  w.innerHTML=`<p class="dir-lead">Des <b>médiateurs</b> dans chaque région, des <b>professionnels</b> dans tous les domaines.</p>
+  <div class="dir-why"><p><b>Avoir de beaux projets, c'est très positif.</b> Mais sans reconnaître notre <b>responsabilité</b> dans la dégradation continue de notre société, malgré des solutions dans presque tous les domaines, on ne pourra pas réellement la faire avancer.</p><p>Porter des solutions chacun de son côté, c'est chronophage, avec un impact limité, visible par peu.</p><p>Or toutes les solutions portées par les acteurs de la transition sont <b>complémentaires</b>.</p><p>Il suffit de soutenir des <b>équipes de co-pilotage</b> : un genre de syndicat multi-acteurs, multi-thèmes, multi-échelles. Il valorise vos activités, tout en soutenant une <b>modification profonde de l'organisation de nos territoires</b>.</p><p>Pour lancer la dynamique : quelques <b>médiateurs par thème</b>, soit <b>20 à 30 dans une région pilote</b>.</p></div>
+  <ol class="dir-steps"><li>Je contacte le médiateur de ma région</li><li>Il m'oriente vers les bons acteurs</li><li>On avance ensemble</li></ol>
+  <div class="dir-tabs" role="tablist"><button class="dir-tab" role="tab" data-t="med" aria-selected="true">🧭 Médiateurs<small>${MEDIATEURS.length}</small></button><button class="dir-tab" role="tab" data-t="pro" aria-selected="false">🤝 Professionnels<small>${nPros}</small></button></div>
+  <div class="dir-pane" data-p="med"><div class="dir-list">${MEDIATEURS.map(dirMed).join('')}</div></div>
+  <div class="dir-pane" data-p="pro" hidden><div class="dir-chips">${['Tous',...COLLAB_GROUPS.map(g=>g.e+' '+g.label)].map((l,i)=>`<button class="dir-chip" data-g="${i-1}" aria-pressed="${i===0}">${l}</button>`).join('')}</div>
+  <div class="dir-list">${COLLAB_GROUPS.map((g,gi)=>g.m.map(m=>dirPro(m,g,gi)).join('')).join('')}</div></div>
+  <div class="dir-cta"><p>Votre région n'a pas encore de médiateur&nbsp;? Vous avez des <b>compétences</b> à partager&nbsp;?</p><div class="row"><a class="pri" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur dans ma région')}">🧭 Je deviens médiateur de ma région</a><a class="sec" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Rejoindre les professionnels du réseau')}">🤝 Je rejoins les professionnels</a></div></div>`;
+  w.querySelectorAll('.dir-tab').forEach(t=>t.onclick=()=>{ w.querySelectorAll('.dir-tab').forEach(x=>x.setAttribute('aria-selected',x===t)); w.querySelectorAll('.dir-pane').forEach(p=>p.hidden=p.dataset.p!==t.dataset.t); });
+  w.querySelectorAll('.dir-chip').forEach(c=>c.onclick=()=>{ w.querySelectorAll('.dir-chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); const g=c.dataset.g; w.querySelectorAll('.dir-pane[data-p="pro"] .dir-card').forEach(k=>k.hidden=!(g==='-1'||k.dataset.g===g)); });
+  return w; }
+function openPros(tab){ const go2=()=>{ const el=document.getElementById('f-pros'); if(el){ el.open=true; if(tab){ const t=el.querySelector(`.dir-tab[data-t="${tab}"]`); if(t) t.click(); } el.scrollIntoView({behavior:'smooth',block:'start'}); } }; if(state.view!=='home'){ go('home'); setTimeout(go2,350); } else go2(); }
 function fold(id,t,sub,nodes){ const d=h('details',{class:'fold rv',id}); d.innerHTML=`<summary><span class="fd-t">${t}</span><span class="fd-s">${sub}</span></summary>`; const b=h('div',{class:'fd-b'}); nodes.forEach(n=>b.appendChild(n)); d.appendChild(b); return d; }
 function renderHome(){
   add(h('p',{class:'hero-k'},'🌍 Sauver sa région pour sauver le monde'));
   add(h('h1',{class:'dream-h1'},"Et si on améliorait <em>ensemble</em> l'organisation de <em>nos territoires</em>\u00a0?"));
   add(h('p',{class:'hero-lead'},"Vous êtes-vous déjà demandé si nos problèmes avaient une origine commune\u00a0: <b>l'organisation de notre société</b>, qui peut générer des <b>tensions</b> ou rendre difficile <b>l'accès aux solutions</b>\u00a0?"));
   { const cta=h('div',{class:'hero-cta'}); cta.append(h('button',{class:'btn btn-gold', onclick:()=>{ const el=$('step3'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }},'🚀 Je commence <small>2 minutes</small>'), h('button',{class:'btn btn-soft', onclick:()=>{ const d=$('f-quiz'); if(d){ d.open=true; d.scrollIntoView({behavior:'smooth',block:'start'}); } }},'💭 Le quiz')); add(cta);
-    add(h('div',{class:'hero-stats'},`<div><b>${MEDIATEURS.length}</b>médiateurs en région</div><div><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div>`)); }
+    add(h('div',{class:'hero-stats'},`<div class="hs-go" data-t="med" role="button" tabindex="0"><b>${MEDIATEURS.length}</b>médiateurs en région</div><div class="hs-go" data-t="pro" role="button" tabindex="0"><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div>`)); }
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="../video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="../video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   { const hl=h('section',{class:'hl rv',id:'hl'}); hl.innerHTML=`<p class="hl-t">Ici, on met en lumière <b>ce qui n'existe pas encore</b>… et <b>ce qui existe</b>, de manière intelligente.</p>
     <div class="hl-g"><div class="hl-c hl-new"><span class="hl-k">✨ Ce qui n'existe pas encore</span><b>🗺️ La simplification de la géographie</b><b>☯️ L'équilibre affectif</b><small>Yin et yang, féminin et masculin</small></div>
@@ -1602,7 +1685,7 @@ function renderHome(){
   const mk=h('div',{class:'missing'});
   mk.innerHTML=`<p class="mk-t">Comment bien organiser <b>un territoire</b> sans <b>une équipe</b> de <b>médiateurs indépendants</b>, capables d'animer les échanges entre tous <b>ses acteurs</b> ?</p><p><b>Chaque citoyen peut les soutenir</b> et faire vivre une <b>méthode d'organisation</b> adaptable à chaque échelle de notre existence : soi, sa famille, son travail, son quartier, sa commune, sa région…</p>`;
   add(mk);
-  add(fold('f-pros','🤝 Être accompagné','Les médiateurs de votre région et les professionnels du réseau',[prosNode()]));
+  add(fold('f-pros','🤝 Médiateurs & pros','Le réseau qui vous accompagne, près de chez vous',[prosNode()]));
   if(Date.now() < Date.parse('2026-11-08T19:00:00+01:00')) add(h('section',{class:'site-sec rv', id:'events'},`<h2 class="site-h">📅 Prochain rendez-vous</h2>
     <div class="ev"><img src="../social/biganos-8-novembre-v2-4x5.jpg" alt="Affiche : À Biganos, une rencontre au service de nos territoires, dimanche 8 novembre">
     <div><h3>À Biganos, une rencontre au service de nos territoires</h3><p style="margin:0;color:var(--ink-soft)"><b>Dimanche 8 novembre</b> · Le Tour de France de <b>La Marche à suivre</b> fait étape chez nous.</p>
@@ -1982,6 +2065,7 @@ const rvIO=('IntersectionObserver' in window)? new IntersectionObserver(es=>es.f
 new MutationObserver(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'))).observe(document.getElementById('cardRoot'),{childList:true,subtree:true});
 document.querySelectorAll('.rv').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'));
 
+document.addEventListener('click',e=>{ const g=e.target.closest('.hs-go'); if(g){ e.preventDefault(); openPros(g.dataset.t); } });
 </script>
 
 </body>

@@ -1379,7 +1379,7 @@ const DREAMS = [
   ]},
   {k:'maison', e:'🏡', cat:'Famille & proches', defi:"Posez LA question au prochain repas, et notez les idées de chacun.", pick:"Mon organisation familiale", sub:"Avec mes proches : couple, enfants, colocation", dream:"une <b>vie de famille</b> encore plus <b>harmonieuse</b>", t:"Mon organisation familiale", levels:[
     L1({qui:'à vos proches', intro:"Une famille bien organisée\u00a0: des <b>repas</b>, des <b>tâches</b> et un <b>budget</b> bien répartis, et plus de <b>temps libre</b>. <b>Posez la question à vos proches\u00a0: «\u00a0Envie d'une meilleure organisation\u00a0?\u00a0»</b> Ensuite, chacun <b>propose ses idées</b>, et l'on retient <b>ensemble</b> celles qui font l'unanimité.",
-        extra:[{k:'cercle', type:'chips', label:'Avec qui\u00a0?', opts:['En couple','Avec les enfants','En famille élargie','En colocation']},
+        extra:[{k:'cercle', type:'chips', label:'Avec qui\u00a0?', opts:['En couple','Avec les enfants','Avec les grands-parents, oncles, cousins…','En colocation']},
                {k:'sujets', type:'chips', label:'Sur quels sujets\u00a0?', opts:['Repas','Tâches du quotidien','Budget','Agenda','Loisirs','Vacances']}],
         labA:'Les idées à proposer', labR:'Ce que chacun peut apporter'}),
     L2('en famille', 'Une idée à mettre en place ensemble'),
@@ -1677,7 +1677,7 @@ function renderHome(){
   const l1=h('div',{class:'picks', id:'agir'}); l1.append(pickBtn('idees',0));
   g1.appendChild(l1); add(g1);
   const g2=h('div',{class:'eg'}); g2.appendChild(h('p',{class:'eg-h'},'🏡 Dans votre vie'));
-  const l2=h('div',{class:'picks'}); l2.append(pickBtn('entreprise',0,'Avec mes collaborateurs'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, famille élargie'), pickBtn('pensee',2,'Pour moi'));
+  const l2=h('div',{class:'picks'}); l2.append(pickBtn('entreprise',0,'Avec mes collaborateurs'), pickBtn('maison',1,'Avec mes proches','Couple, enfants, colocation, grands-parents…'), pickBtn('pensee',2,'Pour moi'));
   g2.appendChild(l2); add(g2);
   add(fold('f-accomp','📊 Mon auto-évaluation','En 1 minute, et un médiateur pour vous orienter',F2));
   add(fold('f-quiz','💭 Le quiz','5 questions pour donner votre avis',[quizNode()]));

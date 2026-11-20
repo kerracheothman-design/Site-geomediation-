@@ -717,6 +717,7 @@
   .subnav[hidden]{display:none;}
   .aud{margin:26px 0 6px;} .aud-r{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px;} .aud-p{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;} .aud-p p{margin:0 0 10px;line-height:1.55;} .aud-l{display:flex;flex-wrap:wrap;gap:8px;} .aud-l a{font:700 14px var(--body);color:var(--forest-dark);background:rgba(201,162,39,.18);border-radius:999px;padding:8px 14px;text-decoration:none;}
   .enj-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;} .enj-c{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:border-color .2s,background .2s;} .enj-c:hover{border-color:var(--gold);} .enj-c.on{border-color:var(--forest);background:#EEF3EC;} .enj-c>b{font-size:16px;background:none;padding:0;} .enj-c span{font-size:14.5px;line-height:1.5;} .enj-c em{font-style:normal;font:700 13px var(--body);color:var(--forest);margin-top:4px;}
+  .enj-l{margin:0 0 6px;line-height:1.6;} .enj-h{font:800 16px var(--body);margin:18px 0 10px;} .enj-plan{background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;} .enj-plan>b{font-size:17px;color:var(--gold);background:none;padding:0;} .enj-plan ul{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px;} .enj-plan li{background:rgba(255,255,255,.08);border-radius:12px;padding:9px 12px;font-size:15px;} .enj-plan b{background:none;color:var(--cream);} .enj-plan p{margin:6px 0 12px;line-height:1.55;} .enj-plan p b{color:var(--gold);}
   .enj-q{margin:16px 0 0;background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;font:700 17px/1.45 var(--display,inherit);} .enj-q b{color:var(--gold);background:none;} .enj-q cite{display:block;font:500 12.5px var(--body);opacity:.8;margin-top:6px;font-style:normal;} .enj-q cite a{color:var(--cream);} .enj-q span{display:block;font:600 14px var(--body);margin-top:8px;} .enj-q span b{color:var(--gold);}
   .faq-i{border-bottom:1px solid var(--line);padding:12px 2px;} .faq-i summary{font-weight:800;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:10px;} .faq-i summary::after{content:'+';color:var(--gold);font-weight:800;} .faq-i[open] summary::after{content:'−';} .faq-i p{margin:8px 0 0;line-height:1.6;}
   .grp-h{font:800 13px var(--body); letter-spacing:.12em; text-transform:uppercase; color:var(--clay); margin:34px 4px 10px;}
@@ -1244,21 +1245,14 @@ function audNode(){ const w=h('section',{class:'aud rv',id:'vous'}); w.appendChi
     const [e,t,d,L]=AUD[cur]; pan.innerHTML=`<p>${d}</p>`; const l=h('div',{class:'aud-l'}); L.forEach(([n,u])=>{ const a=h('a',{href:u[0]==='@'?u.slice(1):'#'},n+' →'); if(u[0]!=='@') a.onclick=ev=>{ ev.preventDefault(); audGo(u); }; l.appendChild(a); }); pan.appendChild(l); };
   AUD.forEach(([e,t],i)=>{ const b=h('button',{class:'chip',type:'button'},e+' '+t); b.onclick=()=>{ cur=i; paint(); }; row.appendChild(b); });
   w.append(row,pan); paint(); return w; }
-const ENJEUX=[['🌱','Transition écologique',"Produire, se déplacer, se loger autrement : ça se décide mieux ensemble."],
- ['🗳️','Confiance démocratique',"Donner à chacun une vraie place dans les décisions qui le concernent."],
- ['🤝','Lien social',"Recréer des rencontres entre voisins, générations et métiers."],
- ['💼','Emploi & économie locale',"Produire près de chez nous ce dont nous avons besoin."],
- ['🧠','Bien-être',"Moins de stress quand chacun sait qui fait quoi, et pourquoi."],
- ['🛡️','Résilience',"Des territoires prêts à faire face aux crises : climat, énergie, santé."]];
-function enjeuxNode(){ const w=h('div',{class:'enj'}); if(!Array.isArray(state.enjeux)) state.enjeux=[];
-  w.appendChild(h('p',{style:'margin:0 0 12px'},"Et si les grands défis de notre époque demandaient d'abord de <b>s'organiser ensemble</b>\u00a0? <b>Lesquels vous tiennent à cœur\u00a0?</b>"));
-  const g=h('div',{class:'enj-g'});
-  ENJEUX.forEach(([e,t,d])=>{ const c=h('div',{class:'enj-c',role:'button',tabindex:'0'},`<b>${e} ${t}</b><span>${d}</span><em></em>`);
-    const paint=()=>{ const on=state.enjeux.includes(t); c.classList.toggle('on',on); c.setAttribute('aria-pressed',on); c.querySelector('em').textContent=on?'💚 Ça me tient à cœur':'＋ Ça me tient à cœur'; };
-    const tog=()=>{ state.enjeux=state.enjeux.includes(t)?state.enjeux.filter(x=>x!==t):state.enjeux.concat(t); paint(); save(); };
-    c.onclick=tog; c.onkeydown=ev=>{ if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); tog(); } }; paint(); g.appendChild(c); });
-  w.appendChild(g); w.appendChild(h('blockquote',{class:'enj-q'},'« Il n\'existe pas de crise de l\'envie de participer, mais <b>du comment</b>. »<cite>Carole Zielinski, <a href="https://www.banquedesterritoires.fr/participation-citoyenne-il-nexiste-pas-de-crise-de-lengagement-mais-du-comment" target="_blank" rel="noopener">Banque des Territoires</a></cite><span>Le <b>comment</b>, c\'est justement notre méthode.</span>'));
-  w.appendChild(h('p',{class:'of-pv'},'📇 Vos choix s\'ajoutent à <b>votre fiche</b>, sur votre appareil.')); return w; }
+function enjeuxNode(){ const w=h('div',{class:'enj'});
+  w.appendChild(h('p',{class:'enj-l'},"Énergie, alimentation, mobilité, santé, éducation, économie… <b>Des solutions existent dans tous les domaines.</b>"));
+  w.appendChild(h('p',{class:'enj-h'},'Sauf deux 👇'));
+  w.appendChild(h('div',{class:'enj-g'},`<div class="enj-c"><b>🗺️ La simplification de la géographie</b><span>Une organisation des territoires <b>claire et lisible</b> par tous.</span></div><div class="enj-c"><b>☯️ L'équilibre affectif</b><span>Yin et yang, <b>féminin et masculin</b> : l'équilibre qui nous relie.</span></div>`));
+  w.appendChild(h('p',{class:'enj-h'},'Et un plan pour valoriser toutes les solutions 👇'));
+  const p=h('div',{class:'enj-plan'},`<b>🧭 Le plan de développement territorial régional</b><ul><li>⚖️ Des <b>économies d'échelle</b></li><li>🎯 Un <b>marché intentionnel</b></li><li>📅 Une gestion à <b>court, moyen et long terme</b></li><li>🧪 L'<b>expérimentation de dispositifs de transition</b> dans tous les domaines</li></ul><p>Pourquoi la région ? C'est <b>plus facile à mettre en place</b> qu'au niveau national… pour <b>inspirer le niveau national</b>.</p>`);
+  const a=h('a',{href:'#',class:'evb g'},'📖 Découvrir le plan régional'); a.onclick=e=>{ e.preventDefault(); openDoc('region'); }; p.appendChild(a);
+  w.appendChild(p); return w; }
 const FAQ=[["C'est pour qui ?","Pour tout le monde : un <b>individu</b>, une <b>famille</b>, une <b>entreprise</b>, une <b>filière</b>, un <b>territoire</b>. La méthode s'adapte à chaque échelle."],
  ["Combien ça coûte ?","Le site, la fiche et le quiz sont <b>libres d'accès</b>. Les accompagnements s'adaptent à <b>vos besoins</b> et à <b>vos objectifs</b> : tout commence par un échange."],
  ["Les médiateurs sont-ils indépendants ?","Oui. Ils ne défendent <b>aucun camp</b> : ils réunissent les acteurs, animent les échanges et mettent en lumière les solutions. Ils assurent aussi la <b>continuité des projets</b>, au-delà des changements d'équipe."],
@@ -1614,7 +1608,7 @@ function renderHome(){
   ar.append(h('a',{class:'mail-btn', href:'mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent("Demande d'accompagnement personnalisé")},'✉️ Contacter un médiateur'), h('button',{class:'btn btn-soft', onclick:()=>go('dream','pensee')},'📖 En savoir plus'), h('button',{class:'btn btn-soft', onclick:()=>go('recap')},'📇 Ma fiche acteur'));
   ac.appendChild(ar); F2.push(ac);
   F2.push(h('button',{class:'btn btn-soft', style:'margin-top:12px', onclick:openPros},'👥 Voir les professionnels du réseau'));
-  add(fold('f-enjeux','🌍 Les enjeux','Pourquoi s\'organiser ensemble, aujourd\'hui\u00a0?',[enjeuxNode()]));
+  add(fold('f-enjeux','🌍 Les enjeux','Des solutions dans tous les domaines… sauf deux',[enjeuxNode()]));
   add(fold('f-method','🔁 La méthode en 7 étapes','Le toboggan de la coopération',[me])); wireSlide();
   add(fold('f-docs','📚 Les documents','Dossiers, plans et kits pratiques',[docsNode()]));
   const bc=h('div',{class:'bonus-card', role:'button', tabindex:'0'});
@@ -1996,7 +1990,7 @@ function airy(){ document.querySelectorAll('#cardRoot .doc-art p, #cardRoot .lvl
 new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{childList:true,subtree:true}); airy();
 
 const MENU={
-  decouvrir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-enjeux','🌍 Les enjeux','Pourquoi s\'organiser ensemble'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-docs','📚 Les documents','Dossiers, plans et kits pratiques'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
+  decouvrir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-enjeux','🌍 Les enjeux','Des solutions partout… sauf deux'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-docs','📚 Les documents','Dossiers, plans et kits pratiques'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
   point:[['step3','🚀 Par où commencer ?','Choisissez un sujet, 2 minutes'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['@plan-mobilite.html#sondage','💭 Le quiz','5 questions pour donner votre avis']],
   accomp:[['f-offres','💼 Nos accompagnements','Diagnostic, atelier, accompagnement personnalisé'],['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous']],
   engager:[['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']]};

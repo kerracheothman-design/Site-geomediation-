@@ -1473,10 +1473,9 @@ const DREAMS = [
      fields:[]}
   ]},
   {k:'reseau', e:'🌐', cat:'Réseau', defi:"Invitez un contact à découvrir le réseau, avec le message tout prêt du niveau 2.", star:true, dream:"rejoindre un <b>réseau commun</b> qui facilite la coopération entre les <b>échelles</b>, les <b>thématiques</b> et les <b>acteurs</b>", t:"Pour une meilleure organisation de notre société", pick:"Rejoindre le réseau", levels:[
-    {intro:"En plus de vos <b>thématiques respectives</b>, notre réseau vous permet de vous rapprocher d'acteurs qui ont, comme vous, une <b>approche systémique et opérationnelle</b>. Objectif : <b>accompagner au mieux la transition</b> de nos territoires.",
+    {intro:"En plus de vos <b>thématiques respectives</b>, notre réseau vous permet de vous rapprocher d'acteurs qui ont, comme vous, une <b>approche systémique et opérationnelle</b>. Objectif : <b>accompagner au mieux la transition</b> de nos territoires. <br>📍 Votre territoire et vos thèmes&nbsp;? <a href=\"#\" onclick=\"go('dream','idees');setTimeout(()=>openLevel(DREAMS.find(x=>x.k==='idees'),1),80);return false\">Ils se choisissent ici, une seule fois →</a>",
      fields:[{k:'acteur', type:'cardsN', label:'Vous êtes… (plusieurs réponses possibles)', opts:ACTEURS},
-             {k:'echelle', type:'scales', label:'À quelle échelle aimeriez-vous agir\u00a0? <span class="q-hint">Précisez votre ou vos territoires : on vous met en relation avec les bons acteurs.</span>'},
-             {k:'domaine', type:'chips', label:'Sur quelles thématiques\u00a0?', opts:THEMES.map(t=>t.e+' '+t.n)}, TEMOIGNAGE]},
+             TEMOIGNAGE]},
     {name:"Je m'implique", intro:"Une seule <b>mission</b> suffit pour démarrer.",
      fields:[{k:'degre', type:'cards1', label:"Comment aimeriez-vous vous impliquer\u00a0?", opts:DEGRES},
              {k:'missions', type:'cardsN', label:'Les missions qui vous parlent', opts:MISSIONS},

@@ -765,6 +765,14 @@
   .fs-b{margin-top:6px;font:800 12.5px var(--body,inherit);background:var(--gold);color:var(--forest-dark);border:0;border-radius:999px;padding:6px 12px;cursor:pointer;}
   .fs-dots{display:inline-flex;gap:3px;vertical-align:middle;margin-right:4px;} .fs-dots i{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--gold);} .fs-dots i.on{background:var(--gold);}
   .inl{margin:10px 0 4px;border:2px solid var(--gold);border-radius:18px;padding:8px;background:var(--cream);scroll-margin-top:10px;} .inl>.fold,.inl>div{margin:0;} .inl-x{display:block;margin:0 0 8px auto;font:800 13px var(--body,inherit);background:var(--forest);color:var(--cream);border:0;border-radius:999px;padding:7px 14px;cursor:pointer;}
+  .rc-priv2{margin:0 0 14px;font-size:12.5px;font-weight:700;color:var(--ink-soft,inherit);}
+  .rc-intro{margin:-4px 0 12px;font-size:16px;line-height:1.5;color:var(--forest-dark);}
+  .an{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;overflow:hidden;margin:0 0 16px;box-shadow:0 6px 20px rgba(31,51,41,.07);}
+  .an-h{background:var(--clay);color:#fff;font:800 17px var(--display,inherit);padding:13px 16px;} .an-h small{display:block;font:600 12.5px var(--body,inherit);opacity:.9;margin-top:2px;}
+  .an-tag{padding:14px 16px 4px;} .an-t{font:800 14.5px var(--body,inherit);color:var(--forest-dark);margin:0 0 8px;}
+  .an-tl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;} .an-tl span{display:flex;flex-direction:column;gap:1px;background:var(--cream);border:1.5px dashed var(--line);border-radius:12px;padding:8px 10px;font-size:18px;} .an-tl span.ok{border-style:solid;border-color:var(--gold);} .an-tl small{font:700 11px var(--body,inherit);text-transform:uppercase;letter-spacing:.06em;color:var(--clay);} .an-tl b{font:700 13.5px/1.3 var(--body,inherit);color:var(--forest-dark);background:none;padding:0;} .an-tl span:not(.ok) b{color:var(--ink-soft,#777);font-weight:600;font-style:italic;}
+  .an-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;padding:12px 16px;} .an-c{border-radius:14px;padding:12px 14px;} .an-c.f{background:rgba(47,74,59,.08);} .an-c.p{background:rgba(212,168,42,.14);} .an-c ul{margin:0;padding:0 0 0 2px;list-style:none;font-size:13.5px;line-height:1.45;} .an-c li{margin:4px 0;} .an-e{margin:0;font-size:13px;color:var(--ink-soft,inherit);font-style:italic;}
+  .an-n{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;background:var(--forest);color:var(--cream);padding:12px 16px;} .an-n span{font:800 14.5px var(--body,inherit);} .an-n .btn{padding:8px 14px;font-size:13.5px;}
   .hero-more{display:inline-block;margin:2px 0 0;font-weight:800;color:var(--clay);}
   .hl{margin:22px 0 8px;} .hl-t{font:800 22px/1.3 var(--display,inherit);margin:0 0 14px;color:var(--forest-dark);} .hl-t b{color:var(--clay);background:none;padding:0;} .hl-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;} .hl-c{border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;} .hl-c b{font-size:16.5px;background:none;padding:0;} .hl-c small{font-size:14px;line-height:1.5;opacity:.9;} .hl-k{font:800 12px var(--body);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;} .hl-new{background:var(--forest);color:var(--cream);} .hl-new .hl-k{color:var(--gold);} .hl-new b{color:var(--cream);} .hl-old{background:var(--paper);border:1.5px solid var(--line);} .hl-old .hl-k{color:var(--clay);} .hl-old small b{color:inherit;font-size:inherit;} .hl-more{display:inline-block;margin-top:10px;font-weight:800;color:var(--forest-dark);}
   .enj-l{margin:0 0 6px;line-height:1.6;} .enj-h{font:800 16px var(--body);margin:18px 0 10px;} .enj-plan{background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;} .enj-plan>b{font-size:17px;color:var(--gold);background:none;padding:0;} .enj-plan ul{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px;} .enj-plan li{background:rgba(255,255,255,.08);border-radius:12px;padding:9px 12px;font-size:15px;} .enj-plan b{background:none;color:var(--cream);} .enj-plan li small{opacity:.75;font-size:12.5px;} .enj-plan ul.so{margin:6px 0 8px;} .enj-plan ul.so li{background:rgba(255,255,255,.06);} .enj-plan p{margin:6px 0 12px;line-height:1.55;} .enj-plan p b{color:var(--gold);}
@@ -1702,16 +1710,6 @@ function renderHome(){
     <div class="mp-r"><span class="gn">3</span><div><p class="mp-t">Soutenez une bonne organisation de votre territoire</p>
       <div class="mp-2"><button data-t="video"><b>🎥 Partagez votre vidéo</b><small>Quelques mots pour dire pourquoi vous la soutenez</small></button><button data-t="etiquette"><b>🙋 Suivez, participez ou animez</b><small>Les échanges dans votre filière ou votre territoire</small></button></div></div></div>
     <div class="mp-n"><p class="mp-t">🤝 Le réseau, près de chez vous</p><div class="hero-stats"><div class="hs-go" data-t="med" role="button" tabindex="0"><b>${MEDIATEURS.length}</b>médiateurs en région</div><div class="hs-go" data-t="pro" role="button" tabindex="0"><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div class="hs-go" data-t="pro" role="button" tabindex="0"><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div></div></div>
-    <details class="mp-syn"><summary>📋 Le tableau de synthèse</summary>
-      <table><tbody>
-      <tr><th>🗺️ Le domaine principal</th><td><b>L'organisation de la société</b><br>Quartier, commune, région</td></tr>
-      <tr><th>🧩 Les domaines liés</th><td>🧠 Moi · 🏡 Mon foyer · 💼 Mon travail</td></tr>
-      <tr><th>🎯 Vos choix</th><td>Une <b>thématique</b>, une <b>échelle</b>… et un <b>rôle</b>&nbsp;: suivre, participer ou animer</td></tr>
-      <tr><th>🧭 Pour avancer</th><td><b>En autonomie</b>, avec la méthode<br><b>Accompagné</b>, par notre association&nbsp;: ateliers de sensibilisation, accompagnement personnalisé</td></tr>
-      <tr><th>➕ En plus</th><td>Vos questions · le quiz · la formation</td></tr>
-      <tr><th>🌍 Pour soutenir</th><td>Partager votre vidéo · suivre, participer ou animer les échanges</td></tr>
-      <tr><th>📇 Dans tous les cas</th><td>Votre <b>fiche acteur</b>&nbsp;: faire le point, en toute confidentialité</td></tr>
-      </tbody></table><a class="mp-dl" href="../docs/comment-ca-marche.pdf" download>📥 Télécharger la fiche récapitulative (PDF)</a></details>
     <div class="mp-f"><p><b>📇 Dans tous les cas, l'accès à votre fiche acteur</b><br>Pour faire le point sur votre situation, personnelle ou collective… et votre envie d'agir sur votre environnement.</p>
       <small>🔒 Vous seul y avez accès · 💾 Enregistrée automatiquement · 📤 À partager à qui vous voulez</small>
       <button class="btn btn-gold" type="button" data-t="fiche">📇 Accéder à votre fiche</button></div>`);
@@ -2021,12 +2019,31 @@ function synNode(){ const w=h('div',{class:'fs'}); w.appendChild(h('div',{class:
   const C=state.contact||{}; const hasC=!!((C.nom||'').trim()||(C.mail||'').trim()||(C.tel||'').trim());
   row('👤 Mes coordonnées', hasC?'Renseignées':'Facultatif, pour être recontacté', hasC?null:['Ajouter →',()=>{ const el=$('rc-contact'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); else home('contact')(); }], hasC);
   w.appendChild(tb); return w; }
+function analyseNode(){ const w=h('div',{class:'an'}); w.appendChild(h('div',{class:'an-h'},'🔎 Mon analyse <small>Ce que vos réponses disent de vous</small>'));
+  const A=state.a.idees||{}, R=state.a.reseau||{}; const th=[...new Set((A.domaine||[]).concat(R.domaine||[]))]; const ec=[...new Set((A.echelle||[]).concat(R.echelle||[]))].map(e=>{ const l=(A.lieux||{})[e]||(R.lieux||{})[e]; return l?e+' · '+l:e; });
+  const role=(A.role||A.degre||R.role||R.degre||''); const C=state.contact||{};
+  const tag=[ ['🛠️','Ma compétence',(C.structure||'').trim()], ['🧩','Mon domaine',th.join(', ')], ['📍','Mon territoire',ec.join(', ')||(C.lieu||'').trim()], ['🙋','Mon rôle',role.replace(/^\S+\s/,'')] ];
+  const tg=h('div',{class:'an-tag'}); tg.appendChild(h('p',{class:'an-t'},'🏷️ Mon étiquette'));
+  const tl=h('div',{class:'an-tl'}); tag.forEach(([e,l,v])=>tl.appendChild(h('span',{class:v?'ok':''},`${e} <small>${l}</small><b>${v?esc(v):'à définir'}</b>`))); tg.appendChild(tl); w.appendChild(tg);
+  const T=state.test||{}; const fort=[], prog=[];
+  DREAMS.filter(d=>['idees','pensee','maison','entreprise'].includes(d.k)).forEach(d=>{ const p=progressOf(d.k); if(p.lv) fort.push(`${d.e} ${({idees:'L\'organisation de la société',pensee:'Moi',maison:'Mon foyer',entreprise:'Mon travail'})[d.k]} : niveau ${p.lv}/${p.max}`); });
+  SPHERES.forEach(s0=>{ const s=Object.assign({},s0,{n:({travail:'Mon travail',famille:'Mon foyer',soi:'Moi'})[s0.k]||s0.n}); const v=T[s.k]||0; if(v>=4) fort.push(`${s.e} ${s.n} : bien organisé (${v}/5)`); else if(v>0&&v<=2) prog.push(`${s.e} ${s.n} : ${v}/5, et si on commençait par là&nbsp;?`); });
+  const nObj=(state.objs||[]).length+DREAMS.filter(d=>(state.a[d.k]||{}).obj).length; if(nObj) fort.push(`🎯 ${nObj} objectif${nObj>1?'s':''} fixé${nObj>1?'s':''}`);
+  if(!progressOf('idees').lv) prog.push('🗺️ L\'organisation de la société : le domaine qui relie tous les autres');
+  if(!role) prog.push('🙋 Votre rôle : suivre, participer ou animer&nbsp;?');
+  if(!nObj) prog.push('🎯 Un premier objectif, même tout petit');
+  const col=(t,L,cls,empty)=>{ const c=h('div',{class:'an-c '+cls}); c.appendChild(h('p',{class:'an-t'},t)); c.appendChild(L.length?h('ul',null,L.map(x=>'<li>'+x+'</li>').join('')):h('p',{class:'an-e'},empty)); return c; };
+  const g=h('div',{class:'an-g'}); g.append(col('💪 Mes points forts',fort,'f','Ils apparaîtront ici, au fil de vos réponses.'), col('🌱 Mes pistes',prog.slice(0,3),'p','Bravo, rien à signaler&nbsp;!')); w.appendChild(g);
+  const nx = !progressOf('idees').lv ? ['Découvrir l\'organisation de la société',()=>go('dream','idees')] : !role ? ['Choisir mon rôle',()=>go('dream','idees')] : !nObj ? ['Fixer un objectif',()=>openSheet('obj')] : !((state.offres||{}).sel||[]).length ? ['Découvrir les accompagnements',()=>{ go('home'); setTimeout(()=>{ const el=$('f-offres'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } },150); }] : ['Contacter un médiateur',()=>{ location.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Ma fiche acteur'); }];
+  const n=h('div',{class:'an-n'}); n.appendChild(h('span',null,'👉 Ma prochaine étape')); const b=h('button',{class:'btn btn-gold',type:'button'},nx[0]+' →'); b.onclick=nx[1]; n.appendChild(b); w.appendChild(n);
+  return w; }
 function renderRecap(){
   confetti();
   state.sendTo = state.sendTo||'med';
-  add(h('div',{class:'kicker'},'Ma fiche acteur'));
   add(h('h2',null,'📇 Ma fiche acteur'));
-  add(h('ul',{class:'rc-priv'},'<li>🔒 Vous seul y avez accès</li><li>✏️ Modifiable quand vous voulez</li><li>💾 Enregistrée automatiquement</li><li>📤 À exporter et partager</li>'));
+  add(h('p',{class:'rc-intro'},'Votre situation en un coup d\'œil… et l\'impact que vous voulez avoir autour de vous.'));
+  add(h('p',{class:'rc-priv2'},'🔒 Vous seul y avez accès · ✏️ Modifiable · 💾 Enregistrée automatiquement · 📤 À partager'));
+  add(analyseNode());
   add(synNode());
   const items=recapItems();
   if(!items.length){ add(h('p',{class:'lead'},"Votre fiche se remplit au fil de vos réponses. Choisissez d'abord ce que vous souhaitez améliorer\u00a0!")); add(h('button',{class:'btn btn-primary', onclick:()=>{ go('home'); setTimeout(()=>{ const el=$('principe'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },120); }},'🚀 Je passe à l\'action →')); }

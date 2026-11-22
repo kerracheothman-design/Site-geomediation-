@@ -1690,7 +1690,7 @@ function prosNode(){
   const nPros=COLLAB_GROUPS.reduce((t,g)=>t+g.m.length,0);
   const w=h('div',{class:'dir'});
   w.innerHTML=`<p class="dir-lead">Des <b>médiateurs</b> dans chaque région, des <b>professionnels</b> dans tous les domaines.</p>
-  <div class="dir-why"><p><b>De belles initiatives se développent partout.</b> Et pourtant, la société continue de se dégrader, <b>à tous les niveaux</b>.</p><p>Sans prendre la casquette de <b>médiateur territorial</b> pour valoriser le <b>passage à l'échelle</b> de nos initiatives, comment avoir un <b>vrai impact sur la société</b>\u00a0?</p><p>Porter des solutions chacun de son côté, c'est épuisant, pour un impact limité et peu visible.</p><p>Pourtant, toutes nos solutions sont <b>complémentaires</b>.</p><p>Il suffit de soutenir des <b>équipes de co-pilotage</b> : une sorte de syndicat multi-acteurs, multi-thèmes, multi-échelles. Il valorise vos activités, tout en soutenant une <b>transformation profonde de l'organisation de nos territoires</b>.</p><p>Pour lancer la dynamique : quelques <b>médiateurs par thème</b>, soit <b>20 à 30 dans une région pilote</b> :</p><ul class="dir-pil"><li>🏛️ <b>une dizaine</b> dans le département de la capitale régionale ;</li><li>🗺️ <b>les autres</b> répartis dans les différents départements ;</li><li>🏘️ puis la même logique <b>par bassin de vie</b> et <b>par commune</b>.</li></ul><p>Partout, le même duo : des <b>compétences utiles et techniques</b>, et la <b>médiation</b> pour faciliter la coopération.</p></div>
+  <div class="dir-why"><p><b>De belles initiatives se développent partout.</b> Et pourtant, la société continue de se dégrader, <b>à tous les niveaux</b>.</p><p>Pour donner plus de poids à nos initiatives, et si chacun prenait aussi la casquette de <b>médiateur territorial</b>\u00a0?</p><p>Porter des solutions chacun de son côté, c'est épuisant, pour un impact limité et peu visible.</p><p>Pourtant, toutes nos solutions sont <b>complémentaires</b>.</p><p>Pourquoi ne pas soutenir des <b>équipes de co-pilotage</b>&nbsp;: une sorte de syndicat multi-acteurs, multi-thèmes, multi-échelles&nbsp;? De quoi valoriser vos activités… tout en faisant évoluer en profondeur <b>l'organisation de nos territoires</b>.</p><p>Pour lancer la dynamique : quelques <b>médiateurs par thème</b>, soit <b>20 à 30 dans une région pilote</b> :</p><ul class="dir-pil"><li>🏛️ <b>une dizaine</b> dans le département de la capitale régionale ;</li><li>🗺️ <b>les autres</b> répartis dans les différents départements ;</li><li>🏘️ puis la même logique <b>par bassin de vie</b> et <b>par commune</b>.</li></ul><p>Partout, le même duo : des <b>compétences utiles et techniques</b>, et la <b>médiation</b> pour faciliter la coopération.</p></div>
   <ol class="dir-steps"><li>Je contacte le médiateur de ma région</li><li>Il m'oriente vers les bons acteurs</li><li>On avance ensemble</li></ol>
   <div class="dir-tabs" role="tablist"><button class="dir-tab" role="tab" data-t="med" aria-selected="true">🧭 Médiateurs<small>${MEDIATEURS.length}</small></button><button class="dir-tab" role="tab" data-t="pro" aria-selected="false">🤝 Professionnels<small>${nPros}</small></button></div>
   <div class="dir-pane" data-p="med"><div class="dir-list">${MEDIATEURS.map(dirMed).join('')}</div></div>
@@ -1705,7 +1705,7 @@ function fold(id,t,sub,nodes){ const d=h('details',{class:'fold rv',id}); d.inne
 function renderHome(){
   add(h('p',{class:'hero-k'},'🌍 Sauver sa région pour sauver le monde'));
   add(h('h1',{class:'dream-h1'},"Et si on améliorait <em>ensemble</em> l'organisation de <em>nos territoires</em>\u00a0?"));
-  add(h('p',{class:'hero-lead'},"Nos problèmes, individuels comme collectifs, viendraient-ils toutes d'une même source\u00a0: <b>l'organisation de notre société</b>\u00a0?"));
+  add(h('p',{class:'hero-lead'},"Nos problèmes, individuels comme collectifs, viendraient-ils de <b>l'organisation de notre société</b>\u00a0?"));
   { const m=h('a',{href:'#',class:'hero-more'},'En savoir plus →'); m.onclick=e=>{ e.preventDefault(); inlineShow(m,'f-enjeux'); }; add(m); }
   { const mp=h('section',{class:'mp rv in',id:'principe'},`<p class="mp-h">Comment ça marche&nbsp;?</p>
     <div class="mp-r"><span class="gn">1</span><div><p class="mp-t">Choisissez un <b>domaine</b></p>
@@ -1766,7 +1766,7 @@ function renderHome(){
   bc.onclick=e=>{ if(state.bonusOpen && !(e.target.classList&&e.target.classList.contains('bc-close'))) return; state.bonusOpen=!state.bonusOpen; save(); paintB(); };
   bc.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); state.bonusOpen=!state.bonusOpen; save(); paintB(); } };
   paintB(); add(bc);
-  add(h('p',{class:'grp-h rv',id:'g-agir'},`<span class="gt">🚀 Agir<small>Sur votre existence, votre famille, votre entreprise, votre territoire… avec des ateliers personnalisés</small></span>`));
+  add(h('p',{class:'grp-h rv',id:'g-agir'},`<span class="gt">🚀 Agir<small>Pour vous, votre famille, votre entreprise, votre territoire… avec des ateliers personnalisés</small></span>`));
   add(h('section',{class:'soi rv',id:'soi'},`<p class="soi-t">Prendre soin de soi… <b>et de la société&nbsp;?</b></p>
     <div class="soi-g"><div class="soi-c"><span>🙋</span><p>Difficile de se sentir concerné par l'organisation de la société quand on a déjà du mal à <b>s'organiser soi-même</b>…</p></div>
     <div class="soi-x" aria-hidden="true">⇄</div>
@@ -1920,7 +1920,7 @@ function renderLegal(){
 function printBilan(sel, mode){
   const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   let g=null, cur=null, body='';
-  const close=()=>{ if(g===null) return; body+='</ul>'; if(cur){ const n=nextStep(cur); if(n) body+='<div class="next"><span>'+(n.done?'🏆 Bravo, champion !':'🚀 Et si vous alliez plus loin ?')+'</span>'+(n.done?'Vous avez tout exploré. <b>Inspirez votre entourage</b> !':'Débloquez le <b>niveau '+(n.lv+1)+' · '+esc(n.nextName)+'</b> en 2 minutes sur le site.')+(n.defi?'<br><small>🎯 <b>Le défi de la semaine</b> : '+esc(n.defi)+'</small>':'')+'</div>'; } body+='</section>'; };
+  const close=()=>{ if(g===null) return; body+='</ul>'; if(cur){ const n=nextStep(cur); if(n) body+='<div class="next"><span>'+(n.done?'🏆 Parcours terminé, bravo !':'🚀 Et si vous alliez plus loin ?')+'</span>'+(n.done?'Vous avez tout exploré. <b>Inspirez votre entourage</b> !':'Débloquez le <b>niveau '+(n.lv+1)+' · '+esc(n.nextName)+'</b> en 2 minutes sur le site.')+(n.defi?'<br><small>🎯 <b>Le défi de la semaine</b> : '+esc(n.defi)+'</small>':'')+'</div>'; } body+='</section>'; };
   sel.forEach(x=>{ if(x.g!==g){ close(); g=x.g; cur=x.dk||null; const n=cur?nextStep(cur):null;
       body+='<section'+(/objectifs/i.test(x.g)&&!cur?' class="obj"':'')+'><h2>'+esc(x.g)+(n?'<small>Niveau '+n.lv+' / '+n.max+'</small>':'')+'</h2>'+(n?'<div class="bar"><i style="width:'+Math.round(100*n.lv/n.max)+'%"></i></div>':'')+'<ul>'; }
     body+='<li>'+esc(x.t)+'</li>'; });
@@ -2020,7 +2020,6 @@ function synNode(){ const w=h('div',{class:'fs'}); w.appendChild(h('div',{class:
   const nAv=Object.values(state.sondage||{}).filter(x=>x&&x.r).length;
   row('💭 Mes avis', nAv?`${nAv} réponse${nAv>1?'s':''} au quiz`:'Le quiz, en 5 questions', nAv?null:['Le quiz →',home('f-quiz',1)], nAv>0);
   sec('🌍 Mon soutien au territoire');
-  row('🙋 Les échanges', role?({Suivre:'Je suis les échanges',Participer:'Je participe aux échanges',Animer:'J\'anime les échanges'}[role.replace(/^\S+\s/,'')]||esc(role)):'Suivre, participer ou animer ?', role?null:['Choisir →',()=>go('dream','idees')], !!role);
   row('🎥 Ma vidéo', 'Quelques mots pour dire pourquoi vous soutenez une bonne organisation', ['Partager →',()=>{ location.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Ma vidéo de soutien'); }], false);
   const C=state.contact||{}; const hasC=!!((C.nom||'').trim()||(C.mail||'').trim()||(C.tel||'').trim());
   row('👤 Mes coordonnées', hasC?'Renseignées':'Facultatif, pour être recontacté', hasC?null:['Ajouter →',()=>{ const el=$('rc-contact'); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); else home('contact')(); }], hasC);
@@ -2037,7 +2036,7 @@ function analyseNode(){ const w=h('div',{class:'an'}); w.appendChild(h('div',{cl
   const nObj=(state.objs||[]).length+DREAMS.filter(d=>(state.a[d.k]||{}).obj).length; if(nObj) fort.push(`🎯 ${nObj} objectif${nObj>1?'s':''} fixé${nObj>1?'s':''}`);
   if(!progressOf('idees').lv) prog.push('🗺️ L\'organisation de la société : le domaine qui relie tous les autres');
   if(!role) prog.push('🙋 Votre rôle : suivre, participer ou animer&nbsp;?');
-  if(!nObj) prog.push('🎯 Un premier objectif, même tout petit');
+  if(!nObj) prog.push('🎯 Un premier objectif, simple et concret');
   const col=(t,L,cls,empty)=>{ const c=h('div',{class:'an-c '+cls}); c.appendChild(h('p',{class:'an-t'},t)); c.appendChild(L.length?h('ul',null,L.map(x=>'<li>'+x+'</li>').join('')):h('p',{class:'an-e'},empty)); return c; };
   const g=h('div',{class:'an-g'}); g.append(col('💪 Mes points forts',fort,'f','Ils apparaîtront ici, au fil de vos réponses.'), col('🌱 Mes pistes',prog.slice(0,3),'p','Bravo, rien à signaler&nbsp;!')); w.appendChild(g);
   const nx = !progressOf('idees').lv ? ['Découvrir l\'organisation de la société',()=>go('dream','idees')] : !role ? ['Choisir mon rôle',()=>go('dream','idees')] : !nObj ? ['Fixer un objectif',()=>openSheet('obj')] : !((state.offres||{}).sel||[]).length ? ['Découvrir les accompagnements',()=>{ go('home'); setTimeout(()=>{ const el=$('f-offres'); if(el){ el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } },150); }] : ['Contacter un médiateur',()=>{ location.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Ma fiche acteur'); }];
@@ -2092,7 +2091,7 @@ function renderRecap(){
     c.appendChild(h('div',{class:'rc-h'},esc(G.g)+(n?'<small>'+(n.done?'🏆 Terminé':'Niveau '+n.lv+' / '+n.max)+'</small>':'')));
     if(n) c.appendChild(h('div',{class:'rc-bar'},'<i style="width:'+Math.round(100*n.lv/n.max)+'%"></i>'));
     G.list.forEach(x=>{ const lab=h('label',{class:'send-item'}); const cb=h('input',{type:'checkbox'}); cb.checked=state.sendSel[x.id]!==false; cb.onchange=()=>{ state.sendSel[x.id]=cb.checked; save(); }; lab.append(cb, h('span',null,esc(x.t))); c.appendChild(lab); });
-    if(n){ const nx=h('div',{class:'rc-next'}); nx.appendChild(h('span',null,n.done?'🏆 Bravo, champion !':'🚀 Et si vous alliez plus loin ?'));
+    if(n){ const nx=h('div',{class:'rc-next'}); nx.appendChild(h('span',null,n.done?'🏆 Parcours terminé, bravo !':'🚀 Et si vous alliez plus loin ?'));
       nx.appendChild(h('div',null, n.done?'Vous avez tout exploré. <b>Inspirez votre entourage</b> : partagez votre expérience !':'Débloquez le <b>niveau '+(n.lv+1)+' · '+esc(n.nextName)+'</b> en 2 minutes.'));
       if(n.defi) nx.appendChild(h('div',{class:'rc-defi'},'🎯 <b>Le défi de la semaine</b> : '+esc(n.defi)));
       if(!n.done) nx.appendChild(h('button',{class:'btn btn-primary', style:'padding:7px 14px;font-size:13px;margin-top:8px', onclick:()=>{ const d=n.d; go('dream',d.k); setTimeout(()=>openLevel(d,n.lv+1),80); }},'J\'y vais →'));

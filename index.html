@@ -765,6 +765,7 @@
   .fs-t tr:not(.fs-s) th{border-left:4px solid transparent;} .fs-t tr.on th{border-left-color:var(--forest);} .fs-t tr.on .fs-v::before{content:'✓ ';color:var(--forest);font-weight:900;} .fs-v{display:block;color:var(--ink-soft,inherit);} .fs-v b{background:none;padding:0;color:var(--forest-dark);}
   .fs-b{margin-top:6px;font:800 12.5px var(--body,inherit);background:var(--gold);color:var(--forest-dark);border:0;border-radius:999px;padding:6px 12px;cursor:pointer;}
   .fs-dots{display:inline-flex;gap:3px;vertical-align:middle;margin-right:4px;} .fs-dots i{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--gold);} .fs-dots i.on{background:var(--gold);}
+  .inl{margin:10px 0 4px;border:2px solid var(--gold);border-radius:18px;padding:8px;background:var(--cream);scroll-margin-top:10px;} .inl>.fold,.inl>div{margin:0;} .inl-x{display:block;margin:0 0 8px auto;font:800 13px var(--body,inherit);background:var(--forest);color:var(--cream);border:0;border-radius:999px;padding:7px 14px;cursor:pointer;}
   .hero-more{display:inline-block;margin:2px 0 0;font-weight:800;color:var(--clay);}
   .hl{margin:22px 0 8px;} .hl-t{font:800 22px/1.3 var(--display,inherit);margin:0 0 14px;color:var(--forest-dark);} .hl-t b{color:var(--clay);background:none;padding:0;} .hl-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;} .hl-c{border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;} .hl-c b{font-size:16.5px;background:none;padding:0;} .hl-c small{font-size:14px;line-height:1.5;opacity:.9;} .hl-k{font:800 12px var(--body);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;} .hl-new{background:var(--forest);color:var(--cream);} .hl-new .hl-k{color:var(--gold);} .hl-new b{color:var(--cream);} .hl-old{background:var(--paper);border:1.5px solid var(--line);} .hl-old .hl-k{color:var(--clay);} .hl-old small b{color:inherit;font-size:inherit;} .hl-more{display:inline-block;margin-top:10px;font-weight:800;color:var(--forest-dark);}
   .enj-l{margin:0 0 6px;line-height:1.6;} .enj-h{font:800 16px var(--body);margin:18px 0 10px;} .enj-plan{background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;} .enj-plan>b{font-size:17px;color:var(--gold);background:none;padding:0;} .enj-plan ul{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px;} .enj-plan li{background:rgba(255,255,255,.08);border-radius:12px;padding:9px 12px;font-size:15px;} .enj-plan b{background:none;color:var(--cream);} .enj-plan li small{opacity:.75;font-size:12.5px;} .enj-plan ul.so{margin:6px 0 8px;} .enj-plan ul.so li{background:rgba(255,255,255,.06);} .enj-plan p{margin:6px 0 12px;line-height:1.55;} .enj-plan p b{color:var(--gold);}
@@ -1688,7 +1689,7 @@ function renderHome(){
   add(h('p',{class:'hero-k'},'🌍 Sauver sa région pour sauver le monde'));
   add(h('h1',{class:'dream-h1'},"Et si on améliorait <em>ensemble</em> l'organisation de <em>nos territoires</em>\u00a0?"));
   add(h('p',{class:'hero-lead'},"Nos difficultés, individuelles comme collectives, viendraient-elles toutes d'une même source\u00a0: <b>l'organisation de notre société</b>\u00a0?"));
-  { const m=h('a',{href:'#',class:'hero-more'},'En savoir plus →'); m.onclick=e=>{ e.preventDefault(); const d=$('f-enjeux'); if(d){ d.open=true; d.scrollIntoView({behavior:'smooth',block:'start'}); } }; add(m); }
+  { const m=h('a',{href:'#',class:'hero-more'},'En savoir plus →'); m.onclick=e=>{ e.preventDefault(); inlineShow(m,'f-enjeux'); }; add(m); }
   { const mp=h('section',{class:'mp rv in',id:'principe'},`<p class="mp-h">Comment ça marche&nbsp;?</p>
     <div class="mp-r"><span class="gn">1</span><div><p class="mp-t">Choisissez un <b>domaine</b> de votre existence</p>
       <button class="dm-big" data-d="idees"><span class="dm-e">🗺️</span><span class="dm-b"><b>L'organisation de la société</b><small>Le domaine qui relie tous les autres&nbsp;: une gestion territoriale accessible à tous, pour la <b>prospérité collective</b>.</small><em>Mon quartier, ma commune, ma région →</em></span></button>
@@ -1719,7 +1720,7 @@ function renderHome(){
       if(k==='ask'){ location.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Ma question'); return; }
       if(k==='video'){ location.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Ma vidéo de soutien')+'&body='+encodeURIComponent("Bonjour,\n\nVoici ma vidéo (ou son lien) pour soutenir une bonne organisation de notre territoire :\n\n"); return; }
       if(k==='fiche'){ go('recap'); return; }
-      const el=$(k); if(!el) return; if(el.tagName==='DETAILS') el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); });
+      inlineShow(b,k); });
     add(mp); }
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
   add(h('p',{class:'grp-h rv',id:'g-decouvrir'},`<span class="gt">💡 Découvrir<small>L'organisation de la société&nbsp;: enjeux, méthode, dossiers</small></span>`));
@@ -2183,7 +2184,16 @@ function focusOn(id){ const t=document.getElementById(id); if(!t) return; const 
   if(g){ const tabs=h('div',{class:'fx-tabs'}); MENU[g].forEach(([i,t])=>{ const a=h('button',{class:'fx-tab'+(i===s.id?' on':''),type:'button'},t); a.onclick=()=>navGo(i); tabs.appendChild(a); }); bar.appendChild(tabs); }
   root.prepend(bar); root.classList.add('focus'); }
 { const siv=Element.prototype.scrollIntoView; Element.prototype.scrollIntoView=function(o){ if(root.classList.contains('focus') && root.contains(this) && !this.closest('#fxBar')){ let c=this; while(c.parentElement!==root) c=c.parentElement; if(!c.classList.contains('fx') && !c.id.startsWith('contact') && !KEEP_CLS.some(k=>c.classList.contains(k))){ const s=segStart(this); if(s){ focusOn(s.id); scrollTo({top:0,behavior:'smooth'}); return; } unfocus(); } } return siv.call(this,o); }; }
-function navGo(id){ const sn=$('subnav'); sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(b=>b.setAttribute('aria-expanded','false'));
+/* Ouvrir une rubrique sur place, juste sous le cadre cliqué, puis la remettre à sa place */
+function restoreInl(){ const c=document.querySelector('.inl'); if(!c) return; if(c._ph && c._ph.parentNode) c._ph.replaceWith(c._el); c.remove(); }
+function inlineShow(b,k){ const el=$(k); if(!el) return; const cur=document.querySelector('.inl'); if(cur){ const same=cur.dataset.k===k; const back=cur._a; restoreInl(); if(same){ if(back) back.scrollIntoView({behavior:'smooth',block:'nearest'}); return; } }
+  const ph=document.createComment('inl'); el.parentNode.insertBefore(ph,el);
+  const box=h('div',{class:'inl','data-k':k}); const x=h('button',{class:'inl-x',type:'button'},'✕ Fermer');
+  const a=b.closest('.dm-links,.mp-2,.mp-s,.hero-more,.hero-stats')||b;
+  x.onclick=()=>{ restoreInl(); a.scrollIntoView({behavior:'smooth',block:'center'}); };
+  box.append(x,el); box._ph=ph; box._el=el; box._a=a; if(el.tagName==='DETAILS') el.open=true; el.classList.add('in');
+  a.after(box); setTimeout(()=>box.scrollIntoView({behavior:'smooth',block:'start'}),30); }
+function navGo(id){ restoreInl(); const sn=$('subnav'); sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(b=>b.setAttribute('aria-expanded','false'));
   if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } if(id==='reseau'){ go('dream','reseau'); scrollTo({top:0,behavior:'smooth'}); return; }
   const goTo=()=>{ const el=document.getElementById(id); if(!el) return; if(segStart(el)){ focusOn(id); scrollTo({top:0,behavior:'smooth'}); return; } unfocus(); if(el.tagName==='DETAILS') el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); };
   if(state.view!=='home'){ go('home'); setTimeout(goTo,350); } else goTo(); }
@@ -2199,7 +2209,7 @@ const rvIO=('IntersectionObserver' in window)? new IntersectionObserver(es=>es.f
 new MutationObserver(()=>document.querySelectorAll('.rv:not(.in)').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'))).observe(document.getElementById('cardRoot'),{childList:true,subtree:true});
 document.querySelectorAll('.rv').forEach(el=>rvIO?rvIO.observe(el):el.classList.add('in'));
 
-document.addEventListener('click',e=>{ const g=e.target.closest('.hs-go'); if(g){ e.preventDefault(); openPros(g.dataset.t); } });
+document.addEventListener('click',e=>{ const g=e.target.closest('.hs-go'); if(g){ e.preventDefault(); if(g.closest('#principe')){ const cur=document.querySelector('.inl'); if(!(cur&&cur.dataset.k==='f-pros')) inlineShow(g.closest('.hero-stats'),'f-pros'); const t=document.querySelector(`#f-pros .dir-tab[data-t="${g.dataset.t}"]`); if(t) t.click(); return; } openPros(g.dataset.t); } });
 </script>
 
 </body>

@@ -775,6 +775,10 @@
   .an-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;padding:12px 16px;} .an-c{border-radius:14px;padding:12px 14px;} .an-c.f{background:rgba(47,74,59,.08);} .an-c.p{background:rgba(212,168,42,.14);} .an-c ul{margin:0;padding:0 0 0 2px;list-style:none;font-size:13.5px;line-height:1.45;} .an-c li{margin:4px 0;} .an-e{margin:0;font-size:13px;color:var(--ink-soft,inherit);font-style:italic;}
   .an-n{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;background:var(--forest);color:var(--cream);padding:12px 16px;} .an-n span{font:800 14.5px var(--body,inherit);} .an-n .btn{padding:8px 14px;font-size:13.5px;}
   .dm-sup{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 0;} .dm-sup span{font-size:13px;font-weight:700;color:var(--clay);} .dm-sup a{font:700 13px var(--body,inherit);color:var(--cream);background:var(--clay);border-radius:999px;padding:6px 11px;text-decoration:none;}
+  #cardRoot[data-tab="accueil"]>[data-tab]:not([data-tab="accueil"]):not([data-tab="all"]){display:none!important;} #cardRoot[data-tab="decouvrir"]>[data-tab]:not([data-tab="decouvrir"]):not([data-tab="all"]){display:none!important;} #cardRoot[data-tab="agir"]>[data-tab]:not([data-tab="agir"]):not([data-tab="all"]){display:none!important;} #cardRoot[data-tab="reseau"]>[data-tab]:not([data-tab="reseau"]):not([data-tab="all"]){display:none!important;} #cardRoot[data-tab="contact"]>[data-tab]:not([data-tab="contact"]):not([data-tab="all"]){display:none!important;} 
+  .tab-sub{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 14px;padding-bottom:2px;} .tab-sub[hidden]{display:none!important;} .tab-chip{flex:none;font:700 13.5px var(--body,inherit);background:var(--paper);color:var(--forest-dark);border:1.5px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer;} .tab-chip:hover{border-color:var(--gold);}
+  .sitenav .nv.on{background:var(--cream)!important;color:var(--forest-dark);opacity:1;}
+  #cardRoot[data-tab] .grp-h{margin-top:4px;}
   .hero-more{display:inline-block;margin:2px 0 0;font-weight:800;color:var(--clay);}
   .hl{margin:22px 0 8px;} .hl-t{font:800 22px/1.3 var(--display,inherit);margin:0 0 14px;color:var(--forest-dark);} .hl-t b{color:var(--clay);background:none;padding:0;} .hl-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;} .hl-c{border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;} .hl-c b{font-size:16.5px;background:none;padding:0;} .hl-c small{font-size:14px;line-height:1.5;opacity:.9;} .hl-k{font:800 12px var(--body);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;} .hl-new{background:var(--forest);color:var(--cream);} .hl-new .hl-k{color:var(--gold);} .hl-new b{color:var(--cream);} .hl-old{background:var(--paper);border:1.5px solid var(--line);} .hl-old .hl-k{color:var(--clay);} .hl-old small b{color:inherit;font-size:inherit;} .hl-more{display:inline-block;margin-top:10px;font-weight:800;color:var(--forest-dark);}
   .enj-l{margin:0 0 6px;line-height:1.6;} .enj-h{font:800 16px var(--body);margin:18px 0 10px;} .enj-plan{background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;} .enj-plan>b{font-size:17px;color:var(--gold);background:none;padding:0;} .enj-plan ul{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px;} .enj-plan li{background:rgba(255,255,255,.08);border-radius:12px;padding:9px 12px;font-size:15px;} .enj-plan b{background:none;color:var(--cream);} .enj-plan li small{opacity:.75;font-size:12.5px;} .enj-plan ul.so{margin:6px 0 8px;} .enj-plan ul.so li{background:rgba(255,255,255,.06);} .enj-plan p{margin:6px 0 12px;line-height:1.55;} .enj-plan p b{color:var(--gold);}
@@ -913,7 +917,7 @@
 <div class="shell">
   <div class="top">
     <button class="brand" id="brandBtn"><span class="brand-name">GÉOMÉDIATION</span><span class="brand-tag">Inspirée de la géographie, science de l'organisation des territoires</span></button>
-    <nav class="sitenav" aria-label="Menu"><button type="button" class="nv" data-g="decouvrir" aria-expanded="false">💡 Découvrir <i>▾</i></button><button type="button" class="nv" data-g="agir" aria-expanded="false">🚀 Agir <i>▾</i></button><button type="button" class="nv" data-g="reseau" aria-expanded="false">🌐 Intégrer le réseau <i>▾</i></button><a href="#" data-to="contact" aria-label="Contact" title="Contact">✉️<span class="nt"> Contact</span></a><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a></nav><div class="subnav" id="subnav" hidden></div><div class="top-right"><span id="homeSlot" class="slot"></span></div>
+    <nav class="sitenav" aria-label="Menu"><button type="button" class="nv" data-tab="accueil">🏠 Accueil</button><button type="button" class="nv" data-tab="decouvrir">💡 Découvrir</button><button type="button" class="nv" data-tab="agir">🚀 Agir</button><button type="button" class="nv" data-tab="reseau">🌐 Réseau</button><button type="button" class="nv" data-tab="contact">✉️ Contact</button><a href="#" data-to="recap" class="nav-fiche">📇 Ma fiche</a></nav><div class="subnav" id="subnav" hidden></div><div class="top-right"><span id="homeSlot" class="slot"></span></div>
   </div>
   <main class="card" id="cardRoot"></main>
 </div>
@@ -1110,6 +1114,7 @@ function confetti(){
 
 /* ================= OUTILS ================= */
 const root = document.getElementById('cardRoot');
+const TABS=[['accueil',null],['decouvrir','g-decouvrir'],['agir','g-agir'],['reseau','g-reseau'],['contact','f-faq']];
 const $ = id => document.getElementById(id);
 function h(tag, attrs, html){
   const e=document.createElement(tag);
@@ -2162,19 +2167,20 @@ function render(){
   ({home:renderHome, dream:renderDream, recap:renderRecap, legal:renderLegal, doc:renderDoc}[state.view]||renderHome)();
   if(state.view!=='home') add(h('p',{class:'small center', style:'margin-top:18px'}, `💬 ${state.view==='dream'?'':"Une question, une remarque\u00a0? "}Écrivez au médiateur à tout moment\u00a0: <a href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Géomédiation : ma question')}" style="color:var(--clay);font-weight:700">${CONTACT_MAIL}</a>`));
   add(h('p',{class:'legal-links'},'<a href="#" id="legalLink">Mentions légales · Confidentialité · Cookies</a>')); const ll=$('legalLink'); if(ll) ll.onclick=e=>{ e.preventDefault(); go('legal'); };
+  if(state.view==='home'){ tagTabs(); showTab(state.tab||'accueil',true); } else delete root.dataset.tab;
   save();
 }
-$('brandBtn').onclick=()=>go('home');
+$('brandBtn').onclick=()=>{ state.tab='accueil'; go('home'); };
 { const fh=h('button',{class:'fab-home', id:'fabHome', 'aria-label':'Retour au menu principal', onclick:()=>go('home')},'🏠 Menu'); fh.style.display=state.view==='home'?'none':'flex'; document.body.appendChild(fh); }
 document.addEventListener('focusin',e=>{ if(/^(TEXTAREA|INPUT)$/.test(e.target.tagName)&&!['range','checkbox'].includes(e.target.type)) document.body.classList.add('typing'); });
 document.addEventListener('focusout',()=>document.body.classList.remove('typing'));
 { const f=h('button',{class:'fab', 'aria-label':'Noter un objectif ou poser une question', onclick:()=>openSheet()},'<span>🎯</span><span class="fab-t">Objectif ·</span><span>💬</span><span class="fab-t">Question</span>'); document.body.appendChild(f);
   const top=()=>state.view==='home' && scrollY<520; window.fabTop=()=>f.classList.toggle('fab-away', top()); fabTop();
   let st; addEventListener('scroll',()=>{ f.classList.add('fab-away'); clearTimeout(st); st=setTimeout(()=>{ if(!top()) f.classList.remove('fab-away'); },900); },{passive:true}); }
+{ const t=location.hash.slice(1); state.tab=TABS.some(x=>x[0]===t)?t:'accueil'; }
 if(location.hash==='#recap') state.view='recap';
 render();
-if(location.hash==='#agir'){ setTimeout(()=>{ const el=$('principe'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },300); }
-if(/^#(recap|agir)$/.test(location.hash)) history.replaceState(null,'',location.href.split('#')[0]);
+if(/^#(recap)$/.test(location.hash)) history.replaceState(null,'',location.href.split('#')[0]);
 
 function airy(){ document.querySelectorAll('#cardRoot .doc-art p, #cardRoot .lvl p, #cardRoot .lvl-intro, #cardRoot .fd-b p, #cardRoot .more-box p, #cardRoot details p, #cardRoot .accomp p').forEach(p=>{
   if(p.dataset.airy||p.closest('.how,.pq,.tm,.pro,.med3,.todo,.fld-label')) return; p.dataset.airy='1';
@@ -2183,9 +2189,9 @@ function airy(){ document.querySelectorAll('#cardRoot .doc-art p, #cardRoot .lvl
   p.innerHTML=parts.map(x=>`<span class="s">${x}</span>`).join(''); p.classList.add('airy'); }); }
 new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{childList:true,subtree:true}); airy();
 
-const MENU={
+var MENU={
   decouvrir:[['f-enjeux','🌍 Les enjeux','Une gestion territoriale accessible à tous'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-docs','📚 Les dossiers','Dossiers, plans et kits pratiques'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
-  agir:[['principe','🚀 Par où commencer ?','Votre domaine, votre façon d\'avancer'],['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-offres','💼 Nos accompagnements','Diagnostic, atelier personnalisé, devis'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['f-quiz','💭 Le quiz','5 questions pour donner votre avis']],
+  agir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-offres','💼 Nos accompagnements','Diagnostic, atelier personnalisé, devis'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['f-quiz','💭 Le quiz','5 questions pour donner votre avis']],
   reseau:[['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous'],['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']]};
 /* Mode « une rubrique à la fois » : depuis le menu, on n'affiche que la rubrique choisie */
 const KEEP_CLS=['bon-endroit','legal-links'];
@@ -2199,7 +2205,7 @@ function focusOn(id){ const t=document.getElementById(id); if(!t) return; const 
   const back=h('button',{class:'fx-back',type:'button'},'← Tout le site'); back.onclick=()=>{ unfocus(); scrollTo({top:0,behavior:'smooth'}); }; bar.appendChild(back);
   if(g){ const tabs=h('div',{class:'fx-tabs'}); MENU[g].forEach(([i,t])=>{ const a=h('button',{class:'fx-tab'+(i===s.id?' on':''),type:'button'},t); a.onclick=()=>navGo(i); tabs.appendChild(a); }); bar.appendChild(tabs); }
   root.prepend(bar); root.classList.add('focus'); }
-{ const siv=Element.prototype.scrollIntoView; Element.prototype.scrollIntoView=function(o){ if(root.classList.contains('focus') && root.contains(this) && !this.closest('#fxBar')){ let c=this; while(c.parentElement!==root) c=c.parentElement; if(!c.classList.contains('fx') && !c.id.startsWith('contact') && !KEEP_CLS.some(k=>c.classList.contains(k))){ const s=segStart(this); if(s){ focusOn(s.id); scrollTo({top:0,behavior:'smooth'}); return; } unfocus(); } } return siv.call(this,o); }; }
+{ const siv=Element.prototype.scrollIntoView; Element.prototype.scrollIntoView=function(o){ if(root.dataset.tab && root.contains(this)){ const t=tabOf(this); if(t && t!=='all' && t!==root.dataset.tab){ showTab(t,true); } } return siv.call(this,o); }; }
 /* Ouvrir une rubrique sur place, juste sous le cadre cliqué, puis la remettre à sa place */
 function restoreInl(){ const c=document.querySelector('.inl'); if(!c) return; if(c._ph && c._ph.parentNode) c._ph.replaceWith(c._el); c.remove(); }
 function inlineShow(b,k){ const el=$(k); if(!el) return; const cur=document.querySelector('.inl'); if(cur){ const same=cur.dataset.k===k; const back=cur._a; restoreInl(); if(same){ if(back) back.scrollIntoView({behavior:'smooth',block:'nearest'}); return; } }
@@ -2209,16 +2215,24 @@ function inlineShow(b,k){ const el=$(k); if(!el) return; const cur=document.quer
   x.onclick=()=>{ restoreInl(); a.scrollIntoView({behavior:'smooth',block:'center'}); };
   box.append(x,el); box._ph=ph; box._el=el; box._a=a; if(el.tagName==='DETAILS') el.open=true; el.classList.add('in');
   a.after(box); setTimeout(()=>box.scrollIntoView({behavior:'smooth',block:'start'}),30); }
-function navGo(id){ restoreInl(); const sn=$('subnav'); sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(b=>b.setAttribute('aria-expanded','false'));
+/* ================= ONGLETS ================= */
+function tagTabs(){ let cur='accueil'; [...root.children].forEach(c=>{ const t=TABS.find(x=>x[1]&&x[1]===c.id); if(t) cur=t[0]; c.dataset.tab=(c.classList.contains('bon-endroit')||c.classList.contains('legal-links')||c.id==='tabSub')?'all':cur; }); }
+function tabOf(el){ let c=el; while(c&&c.parentElement!==root) c=c.parentElement; return c?c.dataset.tab:null; }
+function paintSub(t){ let s=$('tabSub'); if(!s){ s=h('div',{class:'tab-sub',id:'tabSub'}); s.dataset.tab='all'; root.prepend(s); } s.innerHTML=''; const L=(typeof MENU!=='undefined'&&MENU)?MENU[t]:null; s.hidden=!L;
+  if(L) L.forEach(([id,lab])=>{ const b=h('button',{type:'button',class:'tab-chip'},lab); b.onclick=()=>navGo(id); s.appendChild(b); }); }
+function showTab(t,quiet){ if(!TABS.some(x=>x[0]===t)) t='accueil'; state.tab=t; if(state.view!=='home'){ go('home'); return; }
+  restoreInl(); root.dataset.tab=t; paintSub(t);
+  document.querySelectorAll('.sitenav .nv').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
+  const want=t==='accueil'?location.pathname+location.search:'#'+t; if(!quiet && (location.pathname+location.search+location.hash)!==want && !(t==='accueil'&&!location.hash)) history.pushState(null,'',want);
+  if(!quiet) scrollTo({top:0,behavior:'smooth'}); save(); }
+addEventListener('popstate',()=>{ const t=location.hash.slice(1)||'accueil'; if(TABS.some(x=>x[0]===t)){ if(state.view!=='home'){ state.tab=t; state.view='home'; render(); } else showTab(t,true); } });
+function navGo(id){ restoreInl(); const sn=$('subnav'); if(sn) sn.hidden=true;
   if(id==='recap'){ go('recap'); scrollTo({top:0,behavior:'smooth'}); return; } if(id==='reseau'){ go('dream','reseau'); scrollTo({top:0,behavior:'smooth'}); return; }
-  const goTo=()=>{ const el=document.getElementById(id); if(!el) return; if(segStart(el)){ focusOn(id); scrollTo({top:0,behavior:'smooth'}); return; } unfocus(); if(el.tagName==='DETAILS') el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); };
+  const goTo=()=>{ const el=document.getElementById(id); if(!el) return; const t=tabOf(el); if(t&&t!=='all'&&t!==root.dataset.tab) showTab(t,true); if(el.tagName==='DETAILS') el.open=true; el.classList.add('in'); el.scrollIntoView({behavior:'smooth',block:'start'}); };
   if(state.view!=='home'){ go('home'); setTimeout(goTo,350); } else goTo(); }
+document.querySelectorAll('.sitenav .nv').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+if(state.view==='home') showTab(state.tab||'accueil',true);
 document.querySelectorAll('.sitenav a[data-to]').forEach(a=>a.onclick=e=>{ e.preventDefault(); navGo(a.dataset.to); });
-document.querySelectorAll('.sitenav .nv').forEach(b=>b.onclick=()=>{ const sn=$('subnav'); const open=b.getAttribute('aria-expanded')==='true';
-  document.querySelectorAll('.sitenav .nv').forEach(x=>x.setAttribute('aria-expanded','false'));
-  if(open){ sn.hidden=true; return; } b.setAttribute('aria-expanded','true'); sn.innerHTML='';
-  MENU[b.dataset.g].forEach(([id,t,sub])=>{ const ext=id[0]==='@'; const a=h('a',{href:ext?id.slice(1):'#'},`<span>${t}</span><small>${sub}</small>`); if(!ext) a.onclick=e=>{ e.preventDefault(); navGo(id); }; sn.appendChild(a); });
-  sn.hidden=false; });
 document.addEventListener('click',e=>{ const sn=$('subnav'); if(!sn.hidden && !e.target.closest('.subnav,.sitenav')){ sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(x=>x.setAttribute('aria-expanded','false')); } });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ const sn=$('subnav'); if(!sn.hidden){ sn.hidden=true; document.querySelectorAll('.sitenav .nv').forEach(x=>x.setAttribute('aria-expanded','false')); } } });
 const rvIO=('IntersectionObserver' in window)? new IntersectionObserver(es=>es.forEach(x=>{ if(x.isIntersecting){ x.target.classList.add('in'); rvIO.unobserve(x.target);} }),{threshold:.12}) : null;

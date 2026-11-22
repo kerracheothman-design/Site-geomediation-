@@ -774,6 +774,7 @@
   .an-tl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;} .an-tl span{display:flex;flex-direction:column;gap:1px;background:var(--cream);border:1.5px dashed var(--line);border-radius:12px;padding:8px 10px;font-size:18px;} .an-tl span.ok{border-style:solid;border-color:var(--gold);} .an-tl small{font:700 11px var(--body,inherit);text-transform:uppercase;letter-spacing:.06em;color:var(--clay);} .an-tl b{font:700 13.5px/1.3 var(--body,inherit);color:var(--forest-dark);background:none;padding:0;} .an-tl span:not(.ok) b{color:var(--ink-soft,#777);font-weight:600;font-style:italic;}
   .an-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;padding:12px 16px;} .an-c{border-radius:14px;padding:12px 14px;} .an-c.f{background:rgba(47,74,59,.08);} .an-c.p{background:rgba(212,168,42,.14);} .an-c ul{margin:0;padding:0 0 0 2px;list-style:none;font-size:13.5px;line-height:1.45;} .an-c li{margin:4px 0;} .an-e{margin:0;font-size:13px;color:var(--ink-soft,inherit);font-style:italic;}
   .an-n{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;background:var(--forest);color:var(--cream);padding:12px 16px;} .an-n span{font:800 14.5px var(--body,inherit);} .an-n .btn{padding:8px 14px;font-size:13.5px;}
+  .dm-sup{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 0;} .dm-sup span{font-size:13px;font-weight:700;color:var(--clay);} .dm-sup a{font:700 13px var(--body,inherit);color:var(--cream);background:var(--clay);border-radius:999px;padding:6px 11px;text-decoration:none;}
   .hero-more{display:inline-block;margin:2px 0 0;font-weight:800;color:var(--clay);}
   .hl{margin:22px 0 8px;} .hl-t{font:800 22px/1.3 var(--display,inherit);margin:0 0 14px;color:var(--forest-dark);} .hl-t b{color:var(--clay);background:none;padding:0;} .hl-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;} .hl-c{border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;} .hl-c b{font-size:16.5px;background:none;padding:0;} .hl-c small{font-size:14px;line-height:1.5;opacity:.9;} .hl-k{font:800 12px var(--body);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;} .hl-new{background:var(--forest);color:var(--cream);} .hl-new .hl-k{color:var(--gold);} .hl-new b{color:var(--cream);} .hl-old{background:var(--paper);border:1.5px solid var(--line);} .hl-old .hl-k{color:var(--clay);} .hl-old small b{color:inherit;font-size:inherit;} .hl-more{display:inline-block;margin-top:10px;font-weight:800;color:var(--forest-dark);}
   .enj-l{margin:0 0 6px;line-height:1.6;} .enj-h{font:800 16px var(--body);margin:18px 0 10px;} .enj-plan{background:var(--forest);color:var(--cream);border-radius:18px;padding:16px 18px;} .enj-plan>b{font-size:17px;color:var(--gold);background:none;padding:0;} .enj-plan ul{list-style:none;padding:0;margin:10px 0;display:grid;gap:8px;} .enj-plan li{background:rgba(255,255,255,.08);border-radius:12px;padding:9px 12px;font-size:15px;} .enj-plan b{background:none;color:var(--cream);} .enj-plan li small{opacity:.75;font-size:12.5px;} .enj-plan ul.so{margin:6px 0 8px;} .enj-plan ul.so li{background:rgba(255,255,255,.06);} .enj-plan p{margin:6px 0 12px;line-height:1.55;} .enj-plan p b{color:var(--gold);}
@@ -1699,19 +1700,17 @@ function renderHome(){
   add(h('p',{class:'hero-lead'},"Nos problèmes, individuels comme collectifs, viendraient-ils toutes d'une même source\u00a0: <b>l'organisation de notre société</b>\u00a0?"));
   { const m=h('a',{href:'#',class:'hero-more'},'En savoir plus →'); m.onclick=e=>{ e.preventDefault(); inlineShow(m,'f-enjeux'); }; add(m); }
   { const mp=h('section',{class:'mp rv in',id:'principe'},`<p class="mp-h">Comment ça marche&nbsp;?</p>
-    <div class="mp-r"><span class="gn">1</span><div><p class="mp-t">Choisissez un <b>domaine</b> de votre existence</p>
-      <button class="dm-big" data-d="idees"><span class="dm-e">🗺️</span><span class="dm-b"><b>L'organisation de la société</b><small>Le domaine qui relie tous les autres&nbsp;: une gestion territoriale accessible à tous, pour la <b>prospérité collective</b>.</small><em>Mon quartier, ma commune, ma région →</em></span></button>
-      <div class="dm-links"><a href="#" data-t="f-enjeux">🌍 Les enjeux</a><a href="#" data-t="f-method">🔁 La méthode</a><a href="#" data-t="f-docs">📚 Les dossiers</a></div>
+    <div class="mp-r"><span class="gn">1</span><div><p class="mp-t">Choisissez un <b>domaine</b></p>
+      <button class="dm-big" data-d="idees"><span class="dm-e">🗺️</span><span class="dm-b"><b>L'organisation de la société</b><small>Le domaine qui relie tous les autres.</small><em>Mon quartier, ma commune, ma région →</em></span></button>
+      <div class="dm-links"><a href="#" data-t="f-enjeux">🌍 Les enjeux</a><a href="#" data-t="f-docs">📚 Les dossiers</a></div>
+      <div class="dm-sup"><span>Et pour la soutenir&nbsp;:</span><a href="#" data-t="video">🎥 Partager ma vidéo</a><a href="#" data-t="etiquette">🙋 Suivre, participer, animer</a></div>
       <p class="dm-and">…et, en lien avec elle&nbsp;:</p>
-      <div class="dm-sm"><button data-d="pensee"><b>🧠 Moi</b><small>L'équilibre féminin-masculin, pour la paix intérieure</small></button><button data-d="maison"><b>🏡 Mon foyer</b><small>Famille, couple, colocation</small></button><button data-d="entreprise"><b>💼 Mon travail</b><small>Entreprise, association</small></button></div></div></div>
+      <div class="dm-sm"><button data-d="pensee"><b>🧠 Moi</b><small>La paix intérieure</small></button><button data-d="maison"><b>🏡 Mon foyer</b><small>Famille, couple</small></button><button data-d="entreprise"><b>💼 Mon travail</b><small>Entreprise, asso</small></button></div></div></div>
     <div class="mp-r"><span class="gn">2</span><div><p class="mp-t">Avancez à votre façon</p>
-      <div class="mp-2"><button data-t="f-method"><b>🧭 En autonomie</b><small>Avec notre méthode, librement</small></button><button data-t="f-offres"><b>🤝 Accompagné</b><small>Notre association propose des ateliers de sensibilisation et un accompagnement personnalisé</small></button></div>
+      <div class="mp-2"><button data-t="f-method"><b>🧭 En autonomie</b><small>Avec notre méthode</small></button><button data-t="f-offres"><b>🤝 Accompagné</b><small>Ateliers et accompagnement personnalisé, par notre association</small></button></div>
       <p class="mp-s">Et aussi&nbsp;: <a href="#" data-t="ask">vos questions</a> · <a href="#" data-t="f-quiz">le quiz</a> · <a href="#" data-t="f-soon">la formation</a></p></div></div>
-    <div class="mp-r"><span class="gn">3</span><div><p class="mp-t">Soutenez une bonne organisation de votre territoire</p>
-      <div class="mp-2"><button data-t="video"><b>🎥 Partagez votre vidéo</b><small>Quelques mots pour dire pourquoi vous la soutenez</small></button><button data-t="etiquette"><b>🙋 Suivez, participez ou animez</b><small>Les échanges dans votre filière ou votre territoire</small></button></div></div></div>
     <div class="mp-n"><p class="mp-t">🤝 Le réseau, près de chez vous</p><div class="hero-stats"><div class="hs-go" data-t="med" role="button" tabindex="0"><b>${MEDIATEURS.length}</b>médiateurs en région</div><div class="hs-go" data-t="pro" role="button" tabindex="0"><b>${COLLAB_GROUPS.reduce((n,g)=>n+g.m.length,0)}</b>professionnels engagés</div><div class="hs-go" data-t="pro" role="button" tabindex="0"><b>${COLLAB_GROUPS.length}</b>pôles de compétences</div></div></div>
-    <div class="mp-f"><p><b>📇 Dans tous les cas, l'accès à votre fiche acteur</b><br>Pour faire le point sur votre situation, personnelle ou collective… et votre envie d'agir sur votre environnement.</p>
-      <small>🔒 Vous seul y avez accès · 💾 Enregistrée automatiquement · 📤 À partager à qui vous voulez</small>
+    <div class="mp-f"><p><b>📇 Votre fiche acteur</b><br>Faites le point, en toute confidentialité.</p>
       <button class="btn btn-gold" type="button" data-t="fiche">📇 Accéder à votre fiche</button></div>`);
     mp.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>go('dream',b.dataset.d));
     mp.querySelectorAll('[data-t]').forEach(b=>b.onclick=e=>{ e.preventDefault(); const k=b.dataset.t;
@@ -2013,7 +2012,7 @@ function synNode(){ const w=h('div',{class:'fs'}); w.appendChild(h('div',{class:
   row('🎯 Mes objectifs', nObj?`${nObj} objectif${nObj>1?'s':''} fixé${nObj>1?'s':''}`:'Aucun pour l\'instant', ['+ Ajouter',()=>openSheet('obj')], nObj>0);
   const nAv=Object.values(state.sondage||{}).filter(x=>x&&x.r).length;
   row('💭 Mes avis', nAv?`${nAv} réponse${nAv>1?'s':''} au quiz`:'Le quiz, en 5 questions', nAv?null:['Le quiz →',home('f-quiz',1)], nAv>0);
-  sec('3 · Mon soutien');
+  sec('🌍 Mon soutien au territoire');
   row('🙋 Les échanges', role?({Suivre:'Je suis les échanges',Participer:'Je participe aux échanges',Animer:'J\'anime les échanges'}[role.replace(/^\S+\s/,'')]||esc(role)):'Suivre, participer ou animer ?', role?null:['Choisir →',()=>go('dream','idees')], !!role);
   row('🎥 Ma vidéo', 'Quelques mots pour dire pourquoi vous soutenez une bonne organisation', ['Partager →',()=>{ location.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Ma vidéo de soutien'); }], false);
   const C=state.contact||{}; const hasC=!!((C.nom||'').trim()||(C.mail||'').trim()||(C.tel||'').trim());
@@ -2186,7 +2185,7 @@ new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{ch
 
 const MENU={
   decouvrir:[['f-enjeux','🌍 Les enjeux','Une gestion territoriale accessible à tous'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-docs','📚 Les dossiers','Dossiers, plans et kits pratiques'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
-  agir:[['principe','🚀 Par où commencer ?','Votre niveau, votre façon d\'avancer'],['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-offres','💼 Nos accompagnements','Diagnostic, atelier personnalisé, devis'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['f-quiz','💭 Le quiz','5 questions pour donner votre avis']],
+  agir:[['principe','🚀 Par où commencer ?','Votre domaine, votre façon d\'avancer'],['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-offres','💼 Nos accompagnements','Diagnostic, atelier personnalisé, devis'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['f-quiz','💭 Le quiz','5 questions pour donner votre avis']],
   reseau:[['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous'],['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']]};
 /* Mode « une rubrique à la fois » : depuis le menu, on n'affiche que la rubrique choisie */
 const KEEP_CLS=['bon-endroit','legal-links'];
@@ -2206,7 +2205,7 @@ function restoreInl(){ const c=document.querySelector('.inl'); if(!c) return; if
 function inlineShow(b,k){ const el=$(k); if(!el) return; const cur=document.querySelector('.inl'); if(cur){ const same=cur.dataset.k===k; const back=cur._a; restoreInl(); if(same){ if(back) back.scrollIntoView({behavior:'smooth',block:'nearest'}); return; } }
   const ph=document.createComment('inl'); el.parentNode.insertBefore(ph,el);
   const box=h('div',{class:'inl','data-k':k}); const x=h('button',{class:'inl-x',type:'button'},'✕ Fermer');
-  const a=b.closest('.dm-links,.mp-2,.mp-s,.hero-more,.hero-stats')||b;
+  const a=b.closest('.dm-links,.dm-sup,.mp-2,.mp-s,.hero-more,.hero-stats')||b;
   x.onclick=()=>{ restoreInl(); a.scrollIntoView({behavior:'smooth',block:'center'}); };
   box.append(x,el); box._ph=ph; box._el=el; box._a=a; if(el.tagName==='DETAILS') el.open=true; el.classList.add('in');
   a.after(box); setTimeout(()=>box.scrollIntoView({behavior:'smooth',block:'start'}),30); }

@@ -1331,9 +1331,10 @@ const AUD=[
  ['💼','Une entreprise',"Mieux organiser l'équipe et trouver des <b>partenaires</b> sur votre territoire et dans votre filière.",[['💼 Mon parcours entreprise','!entreprise'],['💼 Nos accompagnements','#f-offres'],['🤝 Médiateurs & pros','#f-pros']]],
  ['🤝','Une association',"Relier les acteurs, <b>co-organiser des débats</b> et porter des projets communs.",[['🗣️ Le kit débat','%debat'],['🌐 Rejoindre le réseau','!reseau'],['🤝 Médiateurs & pros','#f-pros']]],
  ['🏛️','Un élu, une collectivité',"Associer habitants et acteurs <b>dès le départ</b> : moins de blocages, et un <b>plan de développement territorial</b> approuvé et évalué par les citoyens.",[['🧭 Le plan régional','%region'],['💼 Nos accompagnements','#f-offres'],['🗣️ Le kit débat','%debat']]],
- ['🔬','Un chercheur, un média',"Analyser, documenter et <b>faire connaître les solutions</b> qui marchent.",[['📊 Le comparatif des méthodes','%comparatif'],['📚 Les documents','#f-docs'],['✉️ Nous écrire','#contact']]]];
+ ['🔬','Un scientifique',"Analyser, évaluer et <b>éclairer les décisions</b> par la connaissance.",[['📊 Le comparatif des méthodes','%comparatif'],['📚 Les dossiers','#f-docs'],['✉️ Nous écrire','#contact']]],
+ ['📣','Un média',"Informer, raconter et <b>faire connaître les solutions</b> qui marchent.",[['🎙️ Interviews et reportages','#f-soon'],['📚 Les dossiers','#f-docs'],['✉️ Nous écrire','#contact']]]];
 function audGo(t){ const c=t[0], v=t.slice(1); if(c==='@'){ location.href=v; return; } if(c==='%'){ openDoc(v); return; } if(c==='!'){ go('dream',v); return; }
-  const el=document.getElementById(v); if(el){ if(el.tagName==='DETAILS') el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); } }
+  navGo(v); }
 function audNode(){ const w=h('section',{class:'aud rv',id:'vous'}); w.appendChild(h('p',{class:'how-h'},'Vous êtes…'));
   const row=h('div',{class:'aud-r'}); const pan=h('div',{class:'aud-p'}); let cur=0;
   const paint=()=>{ row.querySelectorAll('button').forEach((b,i)=>{ b.classList.toggle('active',i===cur); b.setAttribute('aria-pressed',i===cur); });
@@ -2221,7 +2222,7 @@ new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{ch
 
 var MENU={
   decouvrir:[['f-enjeux','🌍 Les enjeux','Comment définir une bonne organisation ?'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
-  agir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-offres','💼 Nos accompagnements','Diagnostic, atelier personnalisé, devis'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['f-quiz','💭 Le quiz','5 questions pour donner votre avis']],
+  agir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, scientifique, média'],['f-offres','💼 Nos accompagnements','Diagnostic, atelier personnalisé, devis'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['f-quiz','💭 Le quiz','5 questions pour donner votre avis']],
   reseau:[['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous'],['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']]};
 /* Mode « une rubrique à la fois » : depuis le menu, on n'affiche que la rubrique choisie */
 const KEEP_CLS=['bon-endroit','legal-links'];

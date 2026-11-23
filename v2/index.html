@@ -1344,7 +1344,7 @@ function enjeuxNode(){ const w=h('div',{class:'enj'});
 <p>Et si le Sud-Ouest accueillait la <b>première concertation intégrale</b> d'une région d'un pays industrialisé&nbsp;?</p>`);
   const a=h('a',{href:'#',class:'evb g'},'📖 Découvrir le plan régional'); a.onclick=e=>{ e.preventDefault(); openDoc('region'); }; p.appendChild(a);
   w.appendChild(p);
-  const ax=h('div',{class:'annexe',id:'f-docs'}); ax.appendChild(h('p',{class:'annexe-h'},'📎 En annexe&nbsp;: <b>les dossiers</b><small>Plans, études et kits pour aller plus loin</small>')); ax.appendChild(docsNode()); w.appendChild(ax);
+  const ax=h('div',{class:'annexe',id:'f-docs'}); ax.appendChild(h('p',{class:'annexe-h'},'📎 En annexe&nbsp;: <b>les dossiers</b><small>Plans, études et kits pratiques</small>')); ax.appendChild(docsNode()); w.appendChild(ax);
   return w; }
 const FAQ=[["C'est pour qui ?","Pour tout le monde : un <b>individu</b>, une <b>famille</b>, une <b>entreprise</b>, une <b>filière</b>, un <b>territoire</b>. La méthode s'adapte à chaque échelle."],
  ["Combien ça coûte ?","Le site, la fiche et le quiz sont <b>gratuits</b>. Les accompagnements s'adaptent à <b>vos besoins</b> et à <b>vos objectifs</b> : tout commence par un échange."],
@@ -1444,7 +1444,7 @@ const DREAMS = [
      fields:[{k:'evalEch', type:'stepsEvalMulti', src:'echelle'}, {k:'projet', type:'area', label:'Une idée de projet\u00a0?'}], details:[STEPS_DETAIL]},
     {parts:[{h:"L'aménagement du territoire, c'est quoi\u00a0?", p:"C'est la partie <b>opérationnelle</b> de la géographie. Il étudie comment améliorer la manière dont on prend les décisions. Objectif : répartir équitablement les <b>populations</b>, les <b>activités</b> et les <b>services</b>, et répondre de manière <b>durable</b> aux besoins de chacun."}, {p:"Toutes les échelles se complètent : aucune ne prime sur les autres. La <b>région</b> peut servir de tremplin : suffisamment petite pour se réunir facilement, suffisamment grande pour porter un vrai <b>plan de développement économique</b> cohérent. Et le <b>Sud-Ouest</b> a les atouts pour inspirer une telle <b>transition organisationnelle et démocratique</b>. Ses atouts : sa <b>culture girondine</b>, son <b>bassin hydrographique</b> et son potentiel d'<b>économies d'échelle</b>. De quoi proposer des prix raisonnables tout en restant compétitifs. Et pour simplifier le quotidien : <b>mutualiser les services</b> des 5 grands domaines dans un même quartier."}],
      details:[
-      {sum:"+ Les dossiers à consulter", html:`<p><b>Pour aller plus loin.</b> Plans régionaux, études, frise des géographes, exemple suisse, kits pratiques&nbsp;: tout est réuni en annexe des enjeux.</p><a class="ex-doc" href="#" onclick="openDocs();return false">📚 <span><b>Ouvrir les dossiers</b><small>Plans, études et kits</small></span><i>→</i></a>`},
+      {sum:"+ Les dossiers à consulter", html:`<p><b>En annexe des enjeux.</b> Plans régionaux, études, frise des géographes, exemple suisse, kits pratiques.</p><a class="ex-doc" href="#" onclick="openDocs();return false">📚 <span><b>Ouvrir les dossiers</b><small>Plans, études et kits</small></span><i>→</i></a>`},
       {sum:"+ Le déploiement en 6 étapes, et 2 gestes pour se lancer", html:`<p><b>Les 6 étapes du déploiement</b></p><ol class="steps6"><li>Structurer les acteurs de la transition</li><li>Sonder et échanger, pour créer la confiance</li><li>Co-construire la feuille de route de chaque filière, à court, moyen et long terme, et les accorder entre elles</li><li>Les faire valider par les institutions et les citoyens</li><li>Expérimenter et évaluer</li><li>Inspirer d'autres territoires, en France et ailleurs</li></ol>
         <p><b>Geste 1 : participer à l'organisation d'échanges</b> avec les acteurs de votre territoire.</p>
         <p><b>Geste 2 : une vidéo d'une minute</b>, par exemple : « J'ai compris que tout est lié. Je m'implique chez moi et au travail, et je soutiens les médiateurs territoriaux pour qu'ils préparent et animent cette concertation. » À partager avec les médiateurs, vos proches et vos collaborateurs !</p>`}],
@@ -1814,7 +1814,7 @@ function renderHome(){
         <div class="med3"><div><i>1</i><span><b>Lister les acteurs</b> de son territoire ou de sa filière : citoyens, entreprises, collectivités, associations, médias, scientifiques</span></div><div><i>2</i><span>Les <b>sonder</b> sur l'importance d'une <b>bonne organisation</b></span></div><div><i>3</i><span>Les <b>inviter à débattre</b></span></div></div>
     <div class="med-q"><p>💬 <b>Les 2 questions à poser</b></p><p>1. Voyez-vous le lien entre nos problèmes et <b>la façon dont notre société est organisée</b> ?</p><p>2. Êtes-vous d'accord qu'une bonne organisation, c'est <b>analyser les besoins et les ressources</b>, <b>co-créer des projets</b>, puis les faire <b>approuver et évaluer</b> par les citoyens concernés ?</p></div>
     <p class="med-ex">🔧 Pas besoin d'être mécanicien pour réunir celui qui a une <b>panne</b> et celui qui sait <b>réparer</b>. Le médiateur crée la <b>rencontre</b> : c'est là que tout commence.</p>
-    <p style="margin:12px 0 10px;line-height:1.6">Ensuite, chacun choisit sa place : <b>suivre</b>, <b>participer</b> ou <b>animer</b> les échanges et le développement des projets. Envie d'aller plus loin ? Développez de <b>nouvelles compétences</b> :</p>
+    <p style="margin:12px 0 10px;line-height:1.6">Ensuite, chacun choisit sa place : <b>suivre</b>, <b>participer</b> ou <b>animer</b> les échanges et le développement des projets. Et pour progresser, de <b>nouvelles compétences</b> à développer&nbsp;:</p>
     <div class="team"><div class="tm"><b>🧠 Intelligence collective</b><span>et animation</span></div><div class="tm"><b>🔍 Analyse</b><span>des besoins et des ressources</span></div><div class="tm"><b>🛠️ Co-construction</b><span>de projets et de feuilles de route</span></div><div class="tm"><b>🗳️ Votations</b><span>et évaluations</span></div><div class="tm"><b>📣 Communication</b><span>et cartographie</span></div></div>
     <p style="margin:14px 0 0"><a class="evb g" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Devenir médiateur territorial')}">🚀 Je me lance</a></p>`)]));
   add(fold('f-soon','✨ Bientôt','Jeu, film, interviews, débats, appli, formation…',[soonNode()]));
@@ -1911,7 +1911,7 @@ function renderDream(){
   }
   wires.forEach(f=>f());
   const others=[...PICKS,'reseau'].map(k=>DREAMS.find(x=>x.k===k)).filter(x=>x.k!==d.k);
-  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'✨ Envie d\'aller plus loin\u00a0?'));
+  if(others.length){ const ex=h('div',{class:'explore'}); ex.appendChild(h('p',{class:'explore-h'},'✨ Les autres domaines'));
     const L=LINKS[d.k]||{}; const g=h('div',{class:'link-list'}); others.forEach(x=>{ const done=answered(x.k); g.appendChild(h('button',{class:'link-btn', onclick:()=>go('dream',x.k)},`<span class="lk-e">${x.e}</span><span class="lk-t"><b>${x.pick||x.t}${done?' ✓':''}</b><small>${L[x.k]||''}</small></span><i>→</i>`)); });
     ex.appendChild(g); add(ex); }
   const n=h('div',{class:'nav'});
@@ -1941,7 +1941,7 @@ function renderLegal(){
 function printBilan(sel, mode){
   const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   let g=null, cur=null, body='';
-  const close=()=>{ if(g===null) return; body+='</ul>'; if(cur){ const n=nextStep(cur); if(n) body+='<div class="next"><span>'+(n.done?'🏆 Parcours terminé, bravo !':'🚀 Et si vous alliez plus loin ?')+'</span>'+(n.done?'Vous avez tout exploré. <b>Inspirez votre entourage</b> !':'Débloquez le <b>niveau '+(n.lv+1)+' · '+esc(n.nextName)+'</b> en 2 minutes sur le site.')+(n.defi?'<br><small>🎯 <b>Le défi de la semaine</b> : '+esc(n.defi)+'</small>':'')+'</div>'; } body+='</section>'; };
+  const close=()=>{ if(g===null) return; body+='</ul>'; if(cur){ const n=nextStep(cur); if(n) body+='<div class="next"><span>'+(n.done?'🏆 Parcours terminé, bravo !':'🚀 Et la suite ?')+'</span>'+(n.done?'Vous avez tout exploré. <b>Inspirez votre entourage</b> !':'Débloquez le <b>niveau '+(n.lv+1)+' · '+esc(n.nextName)+'</b> en 2 minutes sur le site.')+(n.defi?'<br><small>🎯 <b>Le défi de la semaine</b> : '+esc(n.defi)+'</small>':'')+'</div>'; } body+='</section>'; };
   sel.forEach(x=>{ if(x.g!==g){ close(); g=x.g; cur=x.dk||null; const n=cur?nextStep(cur):null;
       body+='<section'+(/objectifs/i.test(x.g)&&!cur?' class="obj"':'')+'><h2>'+esc(x.g)+(n?'<small>Niveau '+n.lv+' / '+n.max+'</small>':'')+'</h2>'+(n?'<div class="bar"><i style="width:'+Math.round(100*n.lv/n.max)+'%"></i></div>':'')+'<ul>'; }
     body+='<li>'+esc(x.t)+'</li>'; });
@@ -2112,7 +2112,7 @@ function renderRecap(){
     c.appendChild(h('div',{class:'rc-h'},esc(G.g)+(n?'<small>'+(n.done?'🏆 Terminé':'Niveau '+n.lv+' / '+n.max)+'</small>':'')));
     if(n) c.appendChild(h('div',{class:'rc-bar'},'<i style="width:'+Math.round(100*n.lv/n.max)+'%"></i>'));
     G.list.forEach(x=>{ const lab=h('label',{class:'send-item'}); const cb=h('input',{type:'checkbox'}); cb.checked=state.sendSel[x.id]!==false; cb.onchange=()=>{ state.sendSel[x.id]=cb.checked; save(); }; lab.append(cb, h('span',null,esc(x.t))); c.appendChild(lab); });
-    if(n){ const nx=h('div',{class:'rc-next'}); nx.appendChild(h('span',null,n.done?'🏆 Parcours terminé, bravo !':'🚀 Et si vous alliez plus loin ?'));
+    if(n){ const nx=h('div',{class:'rc-next'}); nx.appendChild(h('span',null,n.done?'🏆 Parcours terminé, bravo !':'🚀 Et la suite ?'));
       nx.appendChild(h('div',null, n.done?'Vous avez tout exploré. <b>Inspirez votre entourage</b> : partagez votre expérience !':'Débloquez le <b>niveau '+(n.lv+1)+' · '+esc(n.nextName)+'</b> en 2 minutes.'));
       if(n.defi) nx.appendChild(h('div',{class:'rc-defi'},'🎯 <b>Le défi de la semaine</b> : '+esc(n.defi)));
       if(!n.done) nx.appendChild(h('button',{class:'btn btn-primary', style:'padding:7px 14px;font-size:13px;margin-top:8px', onclick:()=>{ const d=n.d; go('dream',d.k); setTimeout(()=>openLevel(d,n.lv+1),80); }},'J\'y vais →'));

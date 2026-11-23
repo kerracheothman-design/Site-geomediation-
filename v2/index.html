@@ -1336,9 +1336,9 @@ function audNode(){ const w=h('section',{class:'aud rv',id:'vous'}); w.appendChi
   AUD.forEach(([e,t],i)=>{ const b=h('button',{class:'chip',type:'button'},e+' '+t); b.onclick=()=>{ cur=i; paint(); }; row.appendChild(b); });
   w.append(row,pan); paint(); return w; }
 function enjeuxNode(){ const w=h('div',{class:'enj'});
-  w.appendChild(h('p',{class:'enj-l'},"Énergie, alimentation, mobilité, santé… Et si toutes ces initiatives avançaient <b>ensemble</b>, plutôt que chacune de son côté\u00a0?"));
-  w.appendChild(h('div',{class:'enj-g'},`<div class="enj-c"><b>🗺️ Une gestion territoriale accessible à tous</b><span>Pour la <b>prospérité collective</b>, chacun participe aux sujets qui le concernent&nbsp;: on <b>analyse les besoins</b>, puis on <b>organise la capacité d'y répondre</b>, en répartissant équitablement les investissements.</span></div>`));
-  w.appendChild(h('p',{class:'enj-h'},'Comment les relier\u00a0? 👇'));
+  w.appendChild(h('p',{class:'enj-l'},"Énergie, alimentation, finance, santé… Comment les acteurs de chaque filière peuvent-ils <b>mieux coopérer</b>\u00a0? Et <b>mieux investir</b>, pour répondre au mieux aux besoins des citoyens\u00a0?"));
+  w.appendChild(h('div',{class:'enj-g'},`<div class="enj-c"><b>🤝 Une bonne organisation, c'est…</b><span>Chacun participe aux sujets qui le concernent. On <b>analyse les besoins</b>, puis on <b>organise la capacité d'y répondre</b>, en répartissant équitablement les investissements. Pour la <b>prospérité collective</b>.</span></div>`));
+  w.appendChild(h('p',{class:'enj-h'},'Comment s\'y prendre\u00a0? 👇'));
   const p=h('div',{class:'enj-plan'},`<b>🧭 Le plan de développement territorial</b><ul><li>⚖️ On <b>produit ensemble</b>, en plus grande quantité, pour des prix justes <small>(les économies d'échelle)</small></li><li>🎯 Les besoins des habitants sont <b>bien mieux identifiés</b>, et les producteurs s'organisent <small>(le marché intentionnel)</small></li><li>📅 On pense à <b>demain, à 10 ans et à 30 ans</b></li><li>🧪 On <b>teste</b> de nouvelles solutions, dans tous les domaines</li></ul><p><b>Pourquoi la région&nbsp;?</b> Assez grande pour produire et mutualiser, assez proche pour que chacun participe&nbsp;: on peut <b>agir vite</b>… et inspirer le pays.</p>
 <p><b>Pourquoi le Sud-Ouest&nbsp;?</b></p><ul class="so"><li>🌾 La 1<sup>re</sup> région agricole de France, le 1<sup>er</sup> vignoble, près d'un cinquième des terres en bio en Occitanie</li><li>🌲 D'immenses forêts, un pôle aéronautique et spatial de niveau mondial</li><li>👥 Plus de 12 millions d'habitants&nbsp;: la taille d'un pays européen</li><li>🍽️ Et pourtant, moins de 2&nbsp;% de ce qu'on mange à Bordeaux vient de son aire périurbaine</li></ul>
 <p>Et si le Sud-Ouest accueillait la <b>première concertation intégrale</b> d'une région d'un pays industrialisé&nbsp;?</p>`);
@@ -1758,7 +1758,7 @@ function renderHome(){
       b.onclick=()=>{ if(t[0]==='%'){ openDoc(t.slice(1)); return; } const el=$(t.replace('#','')); if(!el) return; if(t[0]!=='#') el.open=true; el.scrollIntoView({behavior:'smooth',block:'start'}); };
       g.appendChild(b); });
     s.appendChild(g); add(s); }
-  add(fold('f-enjeux','🌍 Les enjeux','Pourquoi une gestion territoriale accessible à tous\u00a0?',[enjeuxNode()]));
+  add(fold('f-enjeux','🌍 Les enjeux','Comment définir une bonne organisation\u00a0?',[enjeuxNode()]));
   const me=h('div',{class:'method'});
   me.innerHTML=`<p class="me-q">« La politique, c'est organiser des <b>débats</b>, <b>co-construire</b> avec les acteurs de son territoire, <b>voter</b>, <b>évaluer</b>, <b>réajuster</b>… et <b>célébrer</b>&nbsp;! »</p><div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
   const F2=[h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'), testBlock()];
@@ -2212,7 +2212,7 @@ function airy(){ document.querySelectorAll('#cardRoot .doc-art p, #cardRoot .lvl
 new MutationObserver(()=>airy()).observe(document.getElementById('cardRoot'),{childList:true,subtree:true}); airy();
 
 var MENU={
-  decouvrir:[['f-enjeux','🌍 Les enjeux','Une gestion territoriale accessible à tous'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
+  decouvrir:[['f-enjeux','🌍 Les enjeux','Comment définir une bonne organisation ?'],['f-method','🔁 La méthode','Les 7 étapes de la coopération'],['f-faq','❓ Questions fréquentes','Pour qui, combien, indépendance…']],
   agir:[['vous','🧭 Vous êtes…','Citoyen, entreprise, association, élu, chercheur'],['f-offres','💼 Nos accompagnements','Diagnostic, atelier personnalisé, devis'],['f-accomp','📊 Mon auto-évaluation','En 1 minute'],['f-quiz','💭 Le quiz','5 questions pour donner votre avis']],
   reseau:[['f-pros','🤝 Médiateurs & pros','Le réseau près de chez vous'],['reseau','🌐 Rejoindre le réseau','Chacun a sa place'],['f-med','🌟 Devenir médiateur','3 gestes pour faire bouger votre territoire'],['f-soon','✨ Bientôt','Jeu, film, appli, formation…']]};
 /* Mode « une rubrique à la fois » : depuis le menu, on n'affiche que la rubrique choisie */

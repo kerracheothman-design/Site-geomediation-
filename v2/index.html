@@ -1729,6 +1729,7 @@ function renderHome(){
   { const rj=h('section',{class:'px rv in',id:'rejoindre'},`<p class="px-h">🤝 Avec notre équipe, vous pouvez…</p><ol class="rj-l"><li><span>1</span><div><b>Poser vos questions</b><small>Un médiateur vous répond, personnellement.</small></div><button data-a="ask">Écrire →</button></li><li><span>2</span><div><b>Bénéficier d'un accompagnement personnalisé</b><small>Ateliers, diagnostic, accompagnement.</small></div><button data-a="f-offres">Découvrir →</button></li><li><span>3</span><div><b>Valoriser vos compétences</b><small>En rejoignant les équipes de médiateurs et de professionnels.</small></div><button data-a="join">Je rejoins →</button></li></ol>`);
     rj.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ const k=b.dataset.a; if(k==='ask'){ location.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Ma question'); return; } if(k==='join'){ location.href='mailto:'+CONTACT_MAIL+'?subject='+encodeURIComponent('Je rejoins les équipes'); return; } navGo(k); }); add(rj); }
   const vw=h('figure',{class:'intro-video'}); vw.innerHTML='<video controls playsinline preload="none" poster="../video-affiche.jpg" aria-label="La Géomédiation en une minute"><source src="../video-geomediation.mp4" type="video/mp4"></video>'; add(vw);
+  add(h('div',{class:'rv in'},'<p class="me-q">« La politique, c\'est organiser des <b>débats</b>, <b>co-construire</b> avec les acteurs de son territoire, <b>voter</b>, <b>évaluer</b>, <b>réajuster</b>… et <b>célébrer</b>&nbsp;! »</p>'));
   { const mp=h('section',{class:'mp rv in',id:'principe'},`<p class="mp-h">Comment ça marche&nbsp;?</p>
     <div class="mp-r"><span class="gn">1</span><div><p class="mp-t">Choisissez un <b>domaine</b></p>
       <button class="dm-big" data-d="idees"><span class="dm-e">🗺️</span><span class="dm-b"><b>L'organisation de la société</b><small>Le domaine qui relie tous les autres.</small><em>Mon quartier, ma commune, ma région →</em></span></button>
@@ -1768,7 +1769,7 @@ function renderHome(){
     s.appendChild(g); add(s); }
   add(fold('f-enjeux','🌍 Les enjeux','Comment définir une bonne organisation\u00a0?',[enjeuxNode()]));
   const me=h('div',{class:'method'});
-  me.innerHTML=`<p class="me-q">« La politique, c'est organiser des <b>débats</b>, <b>co-construire</b> avec les acteurs de son territoire, <b>voter</b>, <b>évaluer</b>, <b>réajuster</b>… et <b>célébrer</b>&nbsp;! »</p><div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
+  me.innerHTML=`<div class="visual">${stairsSVG()}</div><details class="more-box"><summary>${STEPS_DETAIL.sum}</summary>${STEPS_DETAIL.html()}</details>`;
   const F2=[h('div',{class:'me-test'},'<p class="mt-h">🧭 Et vous, où en êtes-vous\u00a0?</p>'), testBlock()];
   const ac=h('div',{class:'accomp'});
   ac.innerHTML=`<p>Un <b>médiateur</b> vous aide à définir vos objectifs, puis vous oriente <b>selon vos aspirations</b> vers les professionnels et les partenaires adaptés. Vous savez toujours <b>ce que devient votre contribution</b>.</p>`;

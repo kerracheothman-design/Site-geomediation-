@@ -1824,7 +1824,7 @@ function renderHome(){
   add(h('section',{class:'site-sec rv', id:'contact'},`<div class="ct"><h2 class="site-h" style="color:var(--cream);justify-content:center">✉️ Contact</h2><p>Une <b>question</b>, une envie d'<b>agir</b> ou de <b>soutenir le projet</b> ? Écrivez-nous.</p>
     <div class="ct-b"><a class="c1" href="mailto:${CONTACT_MAIL}">✉️ Contacter un médiateur</a><a class="c2" href="mailto:${CONTACT_MAIL}?subject=${encodeURIComponent('Soutenir Géomédiation')}">💚 Faire un don</a></div><small>Un médiateur vous répond <b>personnellement</b> : tout commence par <b>un échange</b>.</small><div id="ct-nom"></div><div class="socials"><p>Suivez Othman et la Géomédiation</p><div class="so-row">${SOCIALS.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join('')}</div></div></div>`));  { const slot=$('ct-nom'); if(slot) slot.appendChild(nomNode()); }
 
-  add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Nous façonnons <em>ce qui nous façonne.</em>'));
+  add(h('p',{class:'bon-endroit', style:'margin-top:24px'},'Notre environnement nous façonne <em>autant que nous le façonnons.</em>'));
 }
 
 /* ================= UNE PORTE D'ENTRÉE ================= */
